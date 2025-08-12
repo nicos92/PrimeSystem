@@ -28,6 +28,7 @@ namespace PrimeSystem.UI
         // Instanciar los Servicios y los repositorios en el constructor
         public ServiceLocator()
         {
+            // Instanciar los repositorios
         }
 
     }

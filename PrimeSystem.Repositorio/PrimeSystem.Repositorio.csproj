@@ -1,9 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="System.Data.OleDb" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PrimeSystem.Modelo\PrimeSystem.Modelo.csproj" />
     <ProjectReference Include="..\PrimeSystem.Contrato\PrimeSystem.Contrato.csproj" />
     <ProjectReference Include="..\PrimeSystem.Utilidades\PrimeSystem.Utilidades.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositorios\" />
   </ItemGroup>
 
   <PropertyGroup>
