@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Modelo.Entidades
 {
-    public class H_Movimientos
+    public class HMovimientos
     {
         public int Id_Historico { get; set; }
         public int Id_Usuario { get; set; }
@@ -16,9 +16,9 @@ namespace PrimeSystem.Modelo.Entidades
         public decimal Reg_Antes { get; set; }
         public decimal Reg_Despues { get; set; }
         public DateTime Fecha_Hora { get; set; }
-        public H_Movimientos()
+        public HMovimientos()
         {
-            
+
         }
     }
 }

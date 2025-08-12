@@ -6,10 +6,10 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IHComprasRepository
     {
-        Result<List<H_Compras>> GetAll();
-        Result<H_Compras> GetById(int id);
-        Result<H_Compras> Add(H_Compras compra);
-        Result<H_Compras> Update(H_Compras compra);
+        Result<List<HCompras>> GetAll();
+        Result<HCompras> GetById(int id);
+        Result<HCompras> Add(HCompras compra);
+        Result<HCompras> Update(HCompras compra);
         Result<bool> Delete(int id);
     }
 }

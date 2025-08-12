@@ -6,10 +6,10 @@ namespace PrimeSystem.Contrato.Servicios
 {
     public interface IHVentasDetalleService
     {
-        Result<List<H_Ventas_Detalle>> GetAll();
-        Result<H_Ventas_Detalle> GetById(int id);
-        Result<H_Ventas_Detalle> Add(H_Ventas_Detalle detalle);
-        Result<H_Ventas_Detalle> Update(H_Ventas_Detalle detalle);
+        Result<List<HVentasDetalle>> GetAll();
+        Result<HVentasDetalle> GetById(int id);
+        Result<HVentasDetalle> Add(HVentasDetalle detalle);
+        Result<HVentasDetalle> Update(HVentasDetalle detalle);
         Result<bool> Delete(int id);
     }
 }

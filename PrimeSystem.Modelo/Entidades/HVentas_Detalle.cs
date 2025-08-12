@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Modelo.Entidades
 {
-    public class H_Ventas_Detalle
+    public class HVentasDetalle
     {
         public int Id_Det_Remito { get; set; }
         public int Id_Remito { get; set; }
@@ -16,7 +16,7 @@ namespace PrimeSystem.Modelo.Entidades
         public int Cant { get; set; }
         public double P_X_Cant { get; set; }
 
-        public H_Ventas_Detalle() { }
+        public HVentasDetalle() { }
     }
 
 }

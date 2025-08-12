@@ -6,10 +6,10 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IHMovimientosRepository
     {
-        Result<List<H_Movimientos>> GetAll();
-        Result<H_Movimientos> GetById(int id);
-        Result<H_Movimientos> Add(H_Movimientos movimiento);
-        Result<H_Movimientos> Update(H_Movimientos movimiento);
+        Result<List<HMovimientos>> GetAll();
+        Result<HMovimientos> GetById(int id);
+        Result<HMovimientos> Add(HMovimientos movimiento);
+        Result<HMovimientos> Update(HMovimientos movimiento);
         Result<bool> Delete(int id);
     }
 }

@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Modelo.Entidades
 {
-    public class H_Ventas
+    public class HCompras
     {
         public int Id_Remito { get; set; }
         public int Cod_Usuario { get; set; }
         public DateTime Fecha_Hora { get; set; }
-        public int Id_Cliente { get; set; }
-        public double Subtotal { get; set; }
-        public double Descu { get; set; }
-        public double Total { get; set; }
-
-        public H_Ventas() { }
+        public int Id_Proveedor { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal Descuento { get; set; }
+        public decimal Total { get; set; }
     }
-
 }

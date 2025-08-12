@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Modelo.Entidades
 {
-    public class In_Out_Varios
+    public class InOutVarios
     {
         public int Id_Movimiento { get; set; }
         public int Cod_Usuario { get; set; }
@@ -14,9 +14,9 @@ namespace PrimeSystem.Modelo.Entidades
         public string? Detalle { get; set; }
         public decimal Monto { get; set; }
         public DateTime Fecha { get; set; }
-        public In_Out_Varios()
+        public InOutVarios()
         {
-            
+
         }
     }
 }
