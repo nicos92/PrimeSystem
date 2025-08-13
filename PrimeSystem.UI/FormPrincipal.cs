@@ -16,30 +16,45 @@ public partial class FormPrincipal : Form
 
     private void FormPrincipal_Load(object sender, EventArgs e)
     {
-        try
-        {
-            var resultado =  _articulosService.GetAll();
+        //try
+        //{
 
-            this.Invoke((MethodInvoker)delegate
-            {
-                if (resultado.IsSuccess)
-                {
-                    //_bindingSource.DataSource = resultado.Value;
-                    dataGridView1.DataSource = resultado.Value;
-                }
-                else
-                {
-                    MessageBox.Show(resultado.Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            this.Invoke((MethodInvoker)delegate
-            {
-                MessageBox.Show($"Error al cargar artículos: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            });
-        }
+        //    Task.Run(() =>
+        //    {
+        //        var resultado = _articulosService.GetAll();
+        //        this.Invoke((MethodInvoker)delegate
+        //        {
+        //            if (resultado.IsSuccess)
+        //            {
+        //                dataGridView1.DataSource = resultado.Value;
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show(resultado.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            }
+        //        });
+        //    });
+        //}
+        //catch (ArgumentNullException ex)
+        //{ 
+        //    MessageBox.Show($"Error al cargar artículos: {ex.Message}", "Error UI",
+        //        MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //}
+        //catch (Exception ex)
+        //{
+        //    MessageBox.Show($"Error al cargar artículos: {ex.Message}", "Error UI",
+        //        MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //}
+        // GRISES AZULADOS
+//        236, 239, 241
+//207, 216, 220
+//176, 190, 197
+//144, 164, 174
+//120, 144, 156
+//96, 125, 139
+//84, 110, 122
+//69, 90, 100
+//55, 71, 79
+//38, 50, 56
     }
 }
