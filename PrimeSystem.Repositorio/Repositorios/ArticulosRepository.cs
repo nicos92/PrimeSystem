@@ -84,8 +84,8 @@ namespace PrimeSystem.Repositorio.Repositorios
                     Articulos articulo = new Articulos
                     {
                         Id_Articulo = reader.GetInt32(0),
-                        Cod_Articulo = reader.GetInt32(1),
-                        Art_Desc = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Cod_Articulo = reader.GetString(1),
+                        Art_Desc = reader.GetString(2),
                         Cod_Categoria = reader.GetInt32(3),
                         Cod_Subcat = reader.GetInt32(4),
                         Id_Proveedor = reader.GetInt32(5)
@@ -115,7 +115,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                     Articulos articulo = new Articulos
                     {
                         Id_Articulo = (int)reader.GetInt32(0),
-                        Cod_Articulo = reader.GetInt32(1),
+                        Cod_Articulo = reader.GetString(1),
                         Art_Desc = reader.GetString(2),
                         Cod_Categoria = reader.GetInt32(3),
                         Cod_Subcat = reader.GetInt32(4),

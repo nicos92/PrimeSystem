@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeSystem.Contrato", "Pri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeSystem.UI", "PrimeSystem.UI\PrimeSystem.UI.csproj", "{781530DC-EC7E-43FE-8B13-1FF7CB1954EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeSystem.Arranque", "PrimeSystem.Arranque\PrimeSystem.Arranque.csproj", "{B154C1CE-BAAB-4F4D-955F-8399A859EC84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{781530DC-EC7E-43FE-8B13-1FF7CB1954EF}.Release|x64.Build.0 = Release|Any CPU
 		{781530DC-EC7E-43FE-8B13-1FF7CB1954EF}.Release|x86.ActiveCfg = Release|Any CPU
 		{781530DC-EC7E-43FE-8B13-1FF7CB1954EF}.Release|x86.Build.0 = Release|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Debug|x64.Build.0 = Debug|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Debug|x86.Build.0 = Debug|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Release|x64.ActiveCfg = Release|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Release|x64.Build.0 = Release|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Release|x86.ActiveCfg = Release|Any CPU
+		{B154C1CE-BAAB-4F4D-955F-8399A859EC84}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
