@@ -29,7 +29,7 @@ partial class FormPrincipal
     private void InitializeComponent()
     {
         PanelMenu = new Panel();
-        button7 = new Button();
+        BtnModEstadoContable = new Button();
         BtnModProveedores = new Button();
         BtnModUsuarios = new Button();
         BtnModClientes = new Button();
@@ -48,7 +48,7 @@ partial class FormPrincipal
         // PanelMenu
         // 
         PanelMenu.BackColor = Color.FromArgb(38, 50, 56);
-        PanelMenu.Controls.Add(button7);
+        PanelMenu.Controls.Add(BtnModEstadoContable);
         PanelMenu.Controls.Add(BtnModProveedores);
         PanelMenu.Controls.Add(BtnModUsuarios);
         PanelMenu.Controls.Add(BtnModClientes);
@@ -61,21 +61,21 @@ partial class FormPrincipal
         PanelMenu.Size = new Size(216, 461);
         PanelMenu.TabIndex = 0;
         // 
-        // button7
+        // BtnModEstadoContable
         // 
-        button7.Dock = DockStyle.Top;
-        button7.FlatAppearance.BorderSize = 0;
-        button7.FlatStyle = FlatStyle.Flat;
-        button7.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        button7.ForeColor = Color.FromArgb(207, 216, 220);
-        button7.Location = new Point(0, 384);
-        button7.Name = "button7";
-        button7.Size = new Size(216, 64);
-        button7.TabIndex = 6;
-        button7.Text = "Estado Contable";
-        button7.TextAlign = ContentAlignment.MiddleLeft;
-        button7.UseVisualStyleBackColor = true;
-        button7.Click += ElejirModulo;
+        BtnModEstadoContable.Dock = DockStyle.Top;
+        BtnModEstadoContable.FlatAppearance.BorderSize = 0;
+        BtnModEstadoContable.FlatStyle = FlatStyle.Flat;
+        BtnModEstadoContable.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModEstadoContable.ForeColor = Color.FromArgb(207, 216, 220);
+        BtnModEstadoContable.Location = new Point(0, 384);
+        BtnModEstadoContable.Name = "BtnModEstadoContable";
+        BtnModEstadoContable.Size = new Size(216, 64);
+        BtnModEstadoContable.TabIndex = 6;
+        BtnModEstadoContable.Text = "Estado Contable";
+        BtnModEstadoContable.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModEstadoContable.UseVisualStyleBackColor = true;
+        BtnModEstadoContable.Click += ElejirModulo;
         // 
         // BtnModProveedores
         // 
@@ -229,7 +229,7 @@ partial class FormPrincipal
 
     private Panel PanelMenu;
     private Panel PanelFondoMenu;
-    private Button button7;
+    private Button BtnModEstadoContable;
     private Button BtnModProveedores;
     private Button BtnModUsuarios;
     private Button BtnModClientes;

@@ -11,6 +11,7 @@ using PrimeSystem.UI.Compras;
 using PrimeSystem.UI.Clientes;
 using PrimeSystem.UI.Usuarios;
 using PrimeSystem.UI.Proveedores;
+using PrimeSystem.UI.EstadoContable;
 namespace PrimeSystem.UI;
 
 public partial class FormPrincipal : Form
@@ -70,6 +71,7 @@ public partial class FormPrincipal : Form
         BtnModClientes.Tag = typeof(FormClientes);
         BtnModUsuarios.Tag = typeof(FormUsuarios);
         BtnModProveedores.Tag = typeof(FormProveedores);
+        BtnModEstadoContable.Tag = typeof(FormEstadoContable);
     }
 
     private void SeleccionarForm(Type tipoForm)
