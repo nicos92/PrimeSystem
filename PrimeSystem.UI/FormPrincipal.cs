@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using PrimeSystem.UI.Compras;
 namespace PrimeSystem.UI;
 
 public partial class FormPrincipal : Form
@@ -62,6 +63,7 @@ public partial class FormPrincipal : Form
     private void ConfigurarBtnsMenu()
     {
         BtnModVentas.Tag = typeof(FormVentas);
+        BtnModCompras.Tag = typeof(FormCompras);
     }
 
     private void SeleccionarForm(Type tipoForm)

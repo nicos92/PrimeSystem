@@ -24,10 +24,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Compras\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>

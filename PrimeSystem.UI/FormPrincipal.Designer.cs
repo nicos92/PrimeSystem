@@ -33,7 +33,7 @@ partial class FormPrincipal
         button6 = new Button();
         button5 = new Button();
         button4 = new Button();
-        button3 = new Button();
+        BtnModCompras = new Button();
         BtnModVentas = new Button();
         panel1 = new Panel();
         panel2 = new Panel();
@@ -52,7 +52,7 @@ partial class FormPrincipal
         PanelMenu.Controls.Add(button6);
         PanelMenu.Controls.Add(button5);
         PanelMenu.Controls.Add(button4);
-        PanelMenu.Controls.Add(button3);
+        PanelMenu.Controls.Add(BtnModCompras);
         PanelMenu.Controls.Add(BtnModVentas);
         PanelMenu.Controls.Add(panel1);
         PanelMenu.Dock = DockStyle.Fill;
@@ -125,21 +125,21 @@ partial class FormPrincipal
         button4.UseVisualStyleBackColor = true;
         button4.Click += ElejirModulo;
         // 
-        // button3
+        // BtnModCompras
         // 
-        button3.Dock = DockStyle.Top;
-        button3.FlatAppearance.BorderSize = 0;
-        button3.FlatStyle = FlatStyle.Flat;
-        button3.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        button3.ForeColor = Color.FromArgb(207, 216, 220);
-        button3.Location = new Point(0, 128);
-        button3.Name = "button3";
-        button3.Size = new Size(216, 64);
-        button3.TabIndex = 2;
-        button3.Text = "Compras";
-        button3.TextAlign = ContentAlignment.MiddleLeft;
-        button3.UseVisualStyleBackColor = true;
-        button3.Click += ElejirModulo;
+        BtnModCompras.Dock = DockStyle.Top;
+        BtnModCompras.FlatAppearance.BorderSize = 0;
+        BtnModCompras.FlatStyle = FlatStyle.Flat;
+        BtnModCompras.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModCompras.ForeColor = Color.FromArgb(207, 216, 220);
+        BtnModCompras.Location = new Point(0, 128);
+        BtnModCompras.Name = "BtnModCompras";
+        BtnModCompras.Size = new Size(216, 64);
+        BtnModCompras.TabIndex = 2;
+        BtnModCompras.Text = "Compras";
+        BtnModCompras.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModCompras.UseVisualStyleBackColor = true;
+        BtnModCompras.Click += ElejirModulo;
         // 
         // BtnModVentas
         // 
@@ -233,7 +233,7 @@ partial class FormPrincipal
     private Button button6;
     private Button button5;
     private Button button4;
-    private Button button3;
+    private Button BtnModCompras;
     private Button BtnModVentas;
     private Panel panel1;
     private Label label1;
