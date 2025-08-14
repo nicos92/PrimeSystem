@@ -32,7 +32,7 @@ partial class FormPrincipal
         button7 = new Button();
         button6 = new Button();
         button5 = new Button();
-        button4 = new Button();
+        BtnModClientes = new Button();
         BtnModCompras = new Button();
         BtnModVentas = new Button();
         panel1 = new Panel();
@@ -51,7 +51,7 @@ partial class FormPrincipal
         PanelMenu.Controls.Add(button7);
         PanelMenu.Controls.Add(button6);
         PanelMenu.Controls.Add(button5);
-        PanelMenu.Controls.Add(button4);
+        PanelMenu.Controls.Add(BtnModClientes);
         PanelMenu.Controls.Add(BtnModCompras);
         PanelMenu.Controls.Add(BtnModVentas);
         PanelMenu.Controls.Add(panel1);
@@ -109,21 +109,21 @@ partial class FormPrincipal
         button5.UseVisualStyleBackColor = true;
         button5.Click += ElejirModulo;
         // 
-        // button4
+        // BtnModClientes
         // 
-        button4.Dock = DockStyle.Top;
-        button4.FlatAppearance.BorderSize = 0;
-        button4.FlatStyle = FlatStyle.Flat;
-        button4.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        button4.ForeColor = Color.FromArgb(207, 216, 220);
-        button4.Location = new Point(0, 192);
-        button4.Name = "button4";
-        button4.Size = new Size(216, 64);
-        button4.TabIndex = 3;
-        button4.Text = "Clientes";
-        button4.TextAlign = ContentAlignment.MiddleLeft;
-        button4.UseVisualStyleBackColor = true;
-        button4.Click += ElejirModulo;
+        BtnModClientes.Dock = DockStyle.Top;
+        BtnModClientes.FlatAppearance.BorderSize = 0;
+        BtnModClientes.FlatStyle = FlatStyle.Flat;
+        BtnModClientes.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModClientes.ForeColor = Color.FromArgb(207, 216, 220);
+        BtnModClientes.Location = new Point(0, 192);
+        BtnModClientes.Name = "BtnModClientes";
+        BtnModClientes.Size = new Size(216, 64);
+        BtnModClientes.TabIndex = 3;
+        BtnModClientes.Text = "Clientes";
+        BtnModClientes.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModClientes.UseVisualStyleBackColor = true;
+        BtnModClientes.Click += ElejirModulo;
         // 
         // BtnModCompras
         // 
@@ -232,7 +232,7 @@ partial class FormPrincipal
     private Button button7;
     private Button button6;
     private Button button5;
-    private Button button4;
+    private Button BtnModClientes;
     private Button BtnModCompras;
     private Button BtnModVentas;
     private Panel panel1;

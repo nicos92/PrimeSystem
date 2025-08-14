@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using PrimeSystem.UI.Compras;
+using PrimeSystem.UI.Clientes;
 namespace PrimeSystem.UI;
 
 public partial class FormPrincipal : Form
@@ -64,6 +65,7 @@ public partial class FormPrincipal : Form
     {
         BtnModVentas.Tag = typeof(FormVentas);
         BtnModCompras.Tag = typeof(FormCompras);
+        BtnModClientes.Tag = typeof(FormClientes);
     }
 
     private void SeleccionarForm(Type tipoForm)

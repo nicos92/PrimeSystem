@@ -4,6 +4,7 @@ using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Repositorio.Repositorios;
 using PrimeSystem.Servicio.Implementaciones;
 using PrimeSystem.UI;
+using PrimeSystem.UI.Clientes;
 using PrimeSystem.UI.Compras;
 using PrimeSystem.UI.Ventas;
 
@@ -40,6 +41,7 @@ static class Program
         services.AddTransient<FormPrincipal>();     // Este Form estaría en PrimeSystem.UI
         services.AddTransient<FormVentas>();        // Este Form estaría en PrimeSystem.UI.Ventas
         services.AddTransient<FormCompras>();       // Este Form estaría en PrimeSystem.UI.Compras
+        services.AddTransient<FormClientes>();      // Este Form estaría en PrimeSystem.UI.Clientes
 
         // Registrar servicios (ejemplo)
         // services.AddScoped<IClienteService, ClienteService>();
