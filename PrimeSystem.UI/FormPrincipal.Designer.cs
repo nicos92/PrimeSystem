@@ -30,7 +30,7 @@ partial class FormPrincipal
     {
         PanelMenu = new Panel();
         button7 = new Button();
-        button6 = new Button();
+        BtnModProveedores = new Button();
         BtnModUsuarios = new Button();
         BtnModClientes = new Button();
         BtnModCompras = new Button();
@@ -49,7 +49,7 @@ partial class FormPrincipal
         // 
         PanelMenu.BackColor = Color.FromArgb(38, 50, 56);
         PanelMenu.Controls.Add(button7);
-        PanelMenu.Controls.Add(button6);
+        PanelMenu.Controls.Add(BtnModProveedores);
         PanelMenu.Controls.Add(BtnModUsuarios);
         PanelMenu.Controls.Add(BtnModClientes);
         PanelMenu.Controls.Add(BtnModCompras);
@@ -77,21 +77,21 @@ partial class FormPrincipal
         button7.UseVisualStyleBackColor = true;
         button7.Click += ElejirModulo;
         // 
-        // button6
+        // BtnModProveedores
         // 
-        button6.Dock = DockStyle.Top;
-        button6.FlatAppearance.BorderSize = 0;
-        button6.FlatStyle = FlatStyle.Flat;
-        button6.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        button6.ForeColor = Color.FromArgb(207, 216, 220);
-        button6.Location = new Point(0, 320);
-        button6.Name = "button6";
-        button6.Size = new Size(216, 64);
-        button6.TabIndex = 5;
-        button6.Text = "Proveedores";
-        button6.TextAlign = ContentAlignment.MiddleLeft;
-        button6.UseVisualStyleBackColor = true;
-        button6.Click += ElejirModulo;
+        BtnModProveedores.Dock = DockStyle.Top;
+        BtnModProveedores.FlatAppearance.BorderSize = 0;
+        BtnModProveedores.FlatStyle = FlatStyle.Flat;
+        BtnModProveedores.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModProveedores.ForeColor = Color.FromArgb(207, 216, 220);
+        BtnModProveedores.Location = new Point(0, 320);
+        BtnModProveedores.Name = "BtnModProveedores";
+        BtnModProveedores.Size = new Size(216, 64);
+        BtnModProveedores.TabIndex = 5;
+        BtnModProveedores.Text = "Proveedores";
+        BtnModProveedores.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModProveedores.UseVisualStyleBackColor = true;
+        BtnModProveedores.Click += ElejirModulo;
         // 
         // BtnModUsuarios
         // 
@@ -230,7 +230,7 @@ partial class FormPrincipal
     private Panel PanelMenu;
     private Panel PanelFondoMenu;
     private Button button7;
-    private Button button6;
+    private Button BtnModProveedores;
     private Button BtnModUsuarios;
     private Button BtnModClientes;
     private Button BtnModCompras;
