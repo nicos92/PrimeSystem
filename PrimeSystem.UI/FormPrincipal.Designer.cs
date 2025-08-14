@@ -31,7 +31,7 @@ partial class FormPrincipal
         PanelMenu = new Panel();
         button7 = new Button();
         button6 = new Button();
-        button5 = new Button();
+        BtnModUsuarios = new Button();
         BtnModClientes = new Button();
         BtnModCompras = new Button();
         BtnModVentas = new Button();
@@ -50,7 +50,7 @@ partial class FormPrincipal
         PanelMenu.BackColor = Color.FromArgb(38, 50, 56);
         PanelMenu.Controls.Add(button7);
         PanelMenu.Controls.Add(button6);
-        PanelMenu.Controls.Add(button5);
+        PanelMenu.Controls.Add(BtnModUsuarios);
         PanelMenu.Controls.Add(BtnModClientes);
         PanelMenu.Controls.Add(BtnModCompras);
         PanelMenu.Controls.Add(BtnModVentas);
@@ -93,21 +93,21 @@ partial class FormPrincipal
         button6.UseVisualStyleBackColor = true;
         button6.Click += ElejirModulo;
         // 
-        // button5
+        // BtnModUsuarios
         // 
-        button5.Dock = DockStyle.Top;
-        button5.FlatAppearance.BorderSize = 0;
-        button5.FlatStyle = FlatStyle.Flat;
-        button5.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        button5.ForeColor = Color.FromArgb(207, 216, 220);
-        button5.Location = new Point(0, 256);
-        button5.Name = "button5";
-        button5.Size = new Size(216, 64);
-        button5.TabIndex = 4;
-        button5.Text = "Usuarios";
-        button5.TextAlign = ContentAlignment.MiddleLeft;
-        button5.UseVisualStyleBackColor = true;
-        button5.Click += ElejirModulo;
+        BtnModUsuarios.Dock = DockStyle.Top;
+        BtnModUsuarios.FlatAppearance.BorderSize = 0;
+        BtnModUsuarios.FlatStyle = FlatStyle.Flat;
+        BtnModUsuarios.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModUsuarios.ForeColor = Color.FromArgb(207, 216, 220);
+        BtnModUsuarios.Location = new Point(0, 256);
+        BtnModUsuarios.Name = "BtnModUsuarios";
+        BtnModUsuarios.Size = new Size(216, 64);
+        BtnModUsuarios.TabIndex = 4;
+        BtnModUsuarios.Text = "Usuarios";
+        BtnModUsuarios.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModUsuarios.UseVisualStyleBackColor = true;
+        BtnModUsuarios.Click += ElejirModulo;
         // 
         // BtnModClientes
         // 
@@ -231,7 +231,7 @@ partial class FormPrincipal
     private Panel PanelFondoMenu;
     private Button button7;
     private Button button6;
-    private Button button5;
+    private Button BtnModUsuarios;
     private Button BtnModClientes;
     private Button BtnModCompras;
     private Button BtnModVentas;
