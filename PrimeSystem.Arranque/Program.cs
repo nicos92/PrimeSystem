@@ -4,6 +4,7 @@ using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Repositorio.Repositorios;
 using PrimeSystem.Servicio.Implementaciones;
 using PrimeSystem.UI;
+using PrimeSystem.UI.Ventas;
 
 namespace PrimeSystem.Arranque;
 
@@ -34,8 +35,9 @@ static class Program
     private static void ConfigureServices(ServiceCollection services)
     {
         // Registrar formularios
-        services.AddTransient<FormArranque>();
-        services.AddTransient<FormPrincipal>();  // Este estaría en WinFormsApp.UI
+        services.AddTransient<FormArranque>();      // Este Form estaría en PrimeSystem.Arranque
+        services.AddTransient<FormPrincipal>();     // Este Form estaría en PrimeSystem.UI
+        services.AddTransient<FormVentas>();        // Este Form estaría en PrimeSystem.UI.Ventas
 
         // Registrar servicios (ejemplo)
         // services.AddScoped<IClienteService, ClienteService>();

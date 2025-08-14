@@ -1,7 +1,6 @@
 
 using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Contrato.Servicios;
-using PrimeSystem.Repositorio.Repositorios;
 using PrimeSystem.Servicio.Implementaciones;
 
 namespace PrimeSystem.UI;

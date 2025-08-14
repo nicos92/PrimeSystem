@@ -1,12 +1,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using PrimeSystem.UI;
+using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.Arranque;
 
 public partial class FormArranque : Form
 {
-    public FormArranque()
+    private readonly IServiceProvider _serviceProvider;
+    public FormArranque(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
         InitializeComponent();
     }
 
@@ -15,7 +18,8 @@ public partial class FormArranque : Form
     private async void Form1_Load(object sender, EventArgs e)
     {
 
-
+        LblBienvenido.ForeColor = PaletaGrisA.Gris100;
+        LblCargando.ForeColor = PaletaGrisA.Gris150;
 
         //Thread.Sleep(1000);
         var progress = new Progress<int>(percent =>
@@ -29,8 +33,8 @@ public partial class FormArranque : Form
 
             if (_formHijo == null || _formHijo.IsDisposed)
             {
-                PanelPrincipal.Visible = false;
-                FormPrincipal _formHijo = Program.ServiceProvider.GetRequiredService<FormPrincipal>();
+                // Aca llamo al formulario principal que esta en PrimeSystem.UI
+                Form _formHijo = _serviceProvider.GetRequiredService<FormPrincipal>();
                 _formHijo.Closed += (s, e) =>
                 {
                     this.Close();

@@ -9,7 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeSystem.Repositorio\PrimeSystem.Repositorio.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PrimeSystem.Servicio\PrimeSystem.Servicio.csproj" />
     <ProjectReference Include="..\PrimeSystem.Contrato\PrimeSystem.Contrato.csproj" />
     <ProjectReference Include="..\PrimeSystem.Utilidades\PrimeSystem.Utilidades.csproj" />
@@ -19,6 +22,10 @@
     <None Update="basedatos.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Compras\" />
   </ItemGroup>
 
   <PropertyGroup>
