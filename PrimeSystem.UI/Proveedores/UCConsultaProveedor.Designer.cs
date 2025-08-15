@@ -33,7 +33,7 @@
             // UCConsultaProveedor
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = Color.FromArgb(55, 71, 79);
+            BackColor = Color.FromArgb(232, 224, 232);
             Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = Color.FromArgb(236, 239, 241);
             Margin = new Padding(5);

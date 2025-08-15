@@ -8,38 +8,66 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.UI.Proveedores
 {
     public partial class FormProveedores : Form
     {
+        private Button _btnActual;
         private IServiceProvider _serviceProvider;
         public FormProveedores(IServiceProvider serviceProvider)
         {
 
             _serviceProvider = serviceProvider;
             InitializeComponent();
+            _btnActual = BtnOpcionIngresar; // Inicializar con el botón de Ingresar
         }
 
         private void FormProveedores_Load(object sender, EventArgs e)
         {
-            UCIngresoProveedores ip = new UCIngresoProveedores();
-            ip.Dock = DockStyle.Fill;
-            PanelMedio.Controls.Add(ip);
+            ConFigBtns();
+            SeleccionarUC(typeof(UCIngresoProveedores));
 
+        }
+
+        private void SeleccionarUC(Type tipoForm)
+        {
+            // Cerrar el formulario actual si existe
+            PanelMedio.Controls.Clear();
+
+            // Crear el formulario usando el tipo proporcionado en el Tag del botón
+            if (tipoForm != null && typeof(UserControl).IsAssignableFrom(tipoForm))
+            {
+                UserControl uc = (UserControl)_serviceProvider.GetRequiredService(tipoForm);
+
+                uc.Dock = DockStyle.Fill;
+                PanelMedio.Controls.Add(uc);
+            }
         }
 
         private void ConFigBtns()
         {
             BtnOpcionIngresar.Tag = typeof(UCIngresoProveedores);
+            BtnOpcionConsultar.Tag = typeof(UCConsultaProveedor);
         }
 
         private void BtnOpcionIngresar_Click(object sender, EventArgs e)
         {
-            UCIngresoProveedores ip = _serviceProvider.GetRequiredService<UCIngresoProveedores>();
-            ip.Dock = DockStyle.Fill;
-            PanelMedio.Controls.Clear();
-            PanelMedio.Controls.Add(ip);
+            Button btn = (Button)sender;
+            if (_btnActual.Tag == btn.Tag)
+            {
+                return;
+            }
+            btn.BackColor=AppColors.PrimaryContainer;
+            btn.ForeColor = AppColors.OnPrimaryContainer;
+            btn.FlatAppearance.BorderColor = AppColors.Primary;
+
+            _btnActual.FlatAppearance.BorderColor = AppColors.OnSecondary;
+            _btnActual.BackColor = AppColors.SecondaryContainer;
+            _btnActual.ForeColor = AppColors.OnSecondaryContainer;
+            SeleccionarUC(btn.Tag as Type);
+            _btnActual = btn;
         }
     }
 }

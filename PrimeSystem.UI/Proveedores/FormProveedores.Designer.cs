@@ -30,7 +30,7 @@
         {
             PanelOpcion = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            BtnConsultar = new Button();
+            BtnOpcionConsultar = new Button();
             BtnOpcionIngresar = new Button();
             PanelMedio = new Panel();
             PanelOpcion.SuspendLayout();
@@ -51,7 +51,7 @@
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(BtnConsultar, 1, 0);
+            tableLayoutPanel2.Controls.Add(BtnOpcionConsultar, 1, 0);
             tableLayoutPanel2.Controls.Add(BtnOpcionIngresar, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
@@ -61,21 +61,22 @@
             tableLayoutPanel2.Size = new Size(644, 64);
             tableLayoutPanel2.TabIndex = 1;
             // 
-            // BtnConsultar
+            // BtnOpcionConsultar
             // 
-            BtnConsultar.BackColor = Color.FromArgb(78, 66, 86);
-            BtnConsultar.Dock = DockStyle.Fill;
-            BtnConsultar.FlatAppearance.BorderColor = Color.FromArgb(96, 125, 139);
-            BtnConsultar.FlatStyle = FlatStyle.Flat;
-            BtnConsultar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnConsultar.ForeColor = Color.FromArgb(238, 221, 245);
-            BtnConsultar.Location = new Point(322, 0);
-            BtnConsultar.Margin = new Padding(0);
-            BtnConsultar.Name = "BtnConsultar";
-            BtnConsultar.Size = new Size(322, 64);
-            BtnConsultar.TabIndex = 1;
-            BtnConsultar.Text = "Consultar";
-            BtnConsultar.UseVisualStyleBackColor = false;
+            BtnOpcionConsultar.BackColor = Color.FromArgb(78, 66, 86);
+            BtnOpcionConsultar.Dock = DockStyle.Fill;
+            BtnOpcionConsultar.FlatAppearance.BorderColor = Color.FromArgb(96, 125, 139);
+            BtnOpcionConsultar.FlatStyle = FlatStyle.Flat;
+            BtnOpcionConsultar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnOpcionConsultar.ForeColor = Color.FromArgb(238, 221, 245);
+            BtnOpcionConsultar.Location = new Point(322, 0);
+            BtnOpcionConsultar.Margin = new Padding(0);
+            BtnOpcionConsultar.Name = "BtnOpcionConsultar";
+            BtnOpcionConsultar.Size = new Size(322, 64);
+            BtnOpcionConsultar.TabIndex = 1;
+            BtnOpcionConsultar.Text = "Consultar";
+            BtnOpcionConsultar.UseVisualStyleBackColor = false;
+            BtnOpcionConsultar.Click += BtnOpcionIngresar_Click;
             // 
             // BtnOpcionIngresar
             // 
@@ -124,7 +125,7 @@
         #endregion
         private Panel PanelOpcion;
         private TableLayoutPanel tableLayoutPanel2;
-        private Button BtnConsultar;
+        private Button BtnOpcionConsultar;
         private Button BtnOpcionIngresar;
         private Panel PanelMedio;
     }

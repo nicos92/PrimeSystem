@@ -48,6 +48,7 @@ static class Program
         services.AddTransient<FormUsuarios>();      // Este Form estaría en PrimeSystem.UI.Usuarios
         services.AddTransient<FormProveedores>();  // Este Form estaría en PrimeSystem.UI.Proveedores
         services.AddTransient<UCIngresoProveedores>(); // Este UserControl estaría en PrimeSystem.UI.Proveedores
+        services.AddTransient<UCConsultaProveedor>();   // Este UserControl estaría en PrimeSystem.UI.Proveedores
         services.AddTransient<FormEstadoContable>(); // Este Form estaría en PrimeSystem.UI.EstadoContable
 
         // Registrar servicios (ejemplo)
