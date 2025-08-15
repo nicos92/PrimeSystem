@@ -100,12 +100,12 @@ public partial class FormPrincipal : Form
         {
             return;
         }
-        _btnActivo.BackColor = PaletaGrisA.Gris500;
+        _btnActivo.BackColor = PaletaGrisA.Gris450;
         _btnActivo.ForeColor = PaletaGrisA.Gris100;
 
         if (sender is Button btn)
         {
-            btn.BackColor = PaletaGrisA.Gris450;
+            btn.BackColor = PaletaGrisA.Gris400;
             btn.ForeColor = PaletaGrisA.Gris50;
             _btnActivo = btn;
 

@@ -48,7 +48,7 @@ partial class FormPrincipal
         // PanelMenu
         // 
         PanelMenu.AutoScroll = true;
-        PanelMenu.BackColor = Color.FromArgb(38, 50, 56);
+        PanelMenu.BackColor = Color.FromArgb(55, 71, 79);
         PanelMenu.Controls.Add(BtnModEstadoContable);
         PanelMenu.Controls.Add(BtnModProveedores);
         PanelMenu.Controls.Add(BtnModUsuarios);
@@ -59,7 +59,7 @@ partial class FormPrincipal
         PanelMenu.Dock = DockStyle.Fill;
         PanelMenu.Location = new Point(0, 0);
         PanelMenu.Name = "PanelMenu";
-        PanelMenu.Size = new Size(216, 461);
+        PanelMenu.Size = new Size(216, 511);
         PanelMenu.TabIndex = 0;
         // 
         // BtnModEstadoContable
@@ -144,7 +144,7 @@ partial class FormPrincipal
         // 
         // BtnModVentas
         // 
-        BtnModVentas.BackColor = Color.FromArgb(55, 71, 79);
+        BtnModVentas.BackColor = Color.FromArgb(69, 90, 100);
         BtnModVentas.Dock = DockStyle.Top;
         BtnModVentas.FlatAppearance.BorderSize = 0;
         BtnModVentas.FlatStyle = FlatStyle.Flat;
@@ -161,7 +161,7 @@ partial class FormPrincipal
         // 
         // panel1
         // 
-        panel1.BackColor = Color.FromArgb(84, 110, 122);
+        panel1.BackColor = Color.FromArgb(69, 90, 100);
         panel1.Controls.Add(panel2);
         panel1.Dock = DockStyle.Top;
         panel1.Location = new Point(0, 0);
@@ -172,7 +172,7 @@ partial class FormPrincipal
         // 
         // panel2
         // 
-        panel2.BackColor = Color.FromArgb(38, 50, 56);
+        panel2.BackColor = Color.FromArgb(55, 71, 79);
         panel2.Controls.Add(label1);
         panel2.Dock = DockStyle.Fill;
         panel2.Location = new Point(0, 0);
@@ -182,7 +182,7 @@ partial class FormPrincipal
         // 
         // label1
         // 
-        label1.BackColor = Color.Transparent;
+        label1.BackColor = Color.FromArgb(55, 71, 79);
         label1.Dock = DockStyle.Fill;
         label1.Font = new Font("Segoe UI Black", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
         label1.ForeColor = Color.FromArgb(236, 239, 241);
@@ -195,25 +195,25 @@ partial class FormPrincipal
         // 
         // PanelFondoMenu
         // 
-        PanelFondoMenu.BackColor = Color.FromArgb(55, 71, 79);
+        PanelFondoMenu.BackColor = Color.FromArgb(69, 90, 100);
         PanelFondoMenu.Controls.Add(PanelMenu);
         PanelFondoMenu.Dock = DockStyle.Left;
         PanelFondoMenu.Location = new Point(0, 0);
         PanelFondoMenu.Name = "PanelFondoMenu";
         PanelFondoMenu.Padding = new Padding(0, 0, 4, 0);
-        PanelFondoMenu.Size = new Size(220, 461);
+        PanelFondoMenu.Size = new Size(220, 511);
         PanelFondoMenu.TabIndex = 1;
         // 
         // FormPrincipal
         // 
         AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(242, 242, 242);
-        ClientSize = new Size(784, 461);
+        ClientSize = new Size(864, 511);
         Controls.Add(PanelFondoMenu);
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
         ForeColor = Color.FromArgb(33, 33, 33);
         IsMdiContainer = true;
-        MinimumSize = new Size(800, 500);
+        MinimumSize = new Size(880, 550);
         Name = "FormPrincipal";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Prime System";
