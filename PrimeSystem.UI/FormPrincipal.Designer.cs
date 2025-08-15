@@ -47,6 +47,7 @@ partial class FormPrincipal
         // 
         // PanelMenu
         // 
+        PanelMenu.AutoScroll = true;
         PanelMenu.BackColor = Color.FromArgb(38, 50, 56);
         PanelMenu.Controls.Add(BtnModEstadoContable);
         PanelMenu.Controls.Add(BtnModProveedores);

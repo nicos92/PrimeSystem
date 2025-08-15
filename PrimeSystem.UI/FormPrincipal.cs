@@ -113,6 +113,7 @@ public partial class FormPrincipal : Form
             if (btn.Tag is Type tipoForm)
             {
                 SeleccionarForm(tipoForm);
+                this.Text = "Prime System - " + _btnActivo.Text;
             }
         }
     }

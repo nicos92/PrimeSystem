@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace PrimeSystem.UI.Proveedores
 {
-    public partial class FormProveedores: Form
+    public partial class FormProveedores : Form
     {
         public FormProveedores()
         {
             InitializeComponent();
+        }
+
+        private void FormProveedores_Load(object sender, EventArgs e)
+        {
+            UCIngresoProveedores ip = new UCIngresoProveedores();
+            ip.Dock = DockStyle.Fill;
+            PanelMedio.Controls.Add(ip);
+
         }
     }
 }
