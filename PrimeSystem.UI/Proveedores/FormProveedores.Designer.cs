@@ -63,26 +63,28 @@
             // 
             // BtnConsultar
             // 
+            BtnConsultar.BackColor = Color.FromArgb(78, 66, 86);
             BtnConsultar.Dock = DockStyle.Fill;
             BtnConsultar.FlatAppearance.BorderColor = Color.FromArgb(96, 125, 139);
             BtnConsultar.FlatStyle = FlatStyle.Flat;
             BtnConsultar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnConsultar.ForeColor = Color.FromArgb(207, 216, 220);
+            BtnConsultar.ForeColor = Color.FromArgb(238, 221, 245);
             BtnConsultar.Location = new Point(322, 0);
             BtnConsultar.Margin = new Padding(0);
             BtnConsultar.Name = "BtnConsultar";
             BtnConsultar.Size = new Size(322, 64);
             BtnConsultar.TabIndex = 1;
             BtnConsultar.Text = "Consultar";
-            BtnConsultar.UseVisualStyleBackColor = true;
+            BtnConsultar.UseVisualStyleBackColor = false;
             // 
             // BtnOpcionIngresar
             // 
-            BtnOpcionIngresar.BackColor = Color.FromArgb(69, 90, 100);
+            BtnOpcionIngresar.BackColor = Color.FromArgb(88, 58, 111);
             BtnOpcionIngresar.Dock = DockStyle.Fill;
-            BtnOpcionIngresar.FlatAppearance.BorderColor = Color.FromArgb(236, 239, 241);
+            BtnOpcionIngresar.FlatAppearance.BorderColor = Color.FromArgb(242, 218, 255);
             BtnOpcionIngresar.FlatStyle = FlatStyle.Flat;
             BtnOpcionIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnOpcionIngresar.ForeColor = Color.FromArgb(242, 218, 255);
             BtnOpcionIngresar.Location = new Point(0, 0);
             BtnOpcionIngresar.Margin = new Padding(0);
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
@@ -94,6 +96,7 @@
             // 
             // PanelMedio
             // 
+            PanelMedio.BackColor = Color.FromArgb(22, 18, 23);
             PanelMedio.Dock = DockStyle.Fill;
             PanelMedio.Location = new Point(0, 64);
             PanelMedio.Name = "PanelMedio";

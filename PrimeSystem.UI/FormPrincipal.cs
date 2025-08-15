@@ -100,13 +100,13 @@ public partial class FormPrincipal : Form
         {
             return;
         }
-        _btnActivo.BackColor = PaletaGrisA.Gris450;
-        _btnActivo.ForeColor = PaletaGrisA.Gris100;
+        _btnActivo.BackColor = AppColors.OnPrimary;
+        _btnActivo.ForeColor = AppColors.Primary;
 
         if (sender is Button btn)
         {
-            btn.BackColor = PaletaGrisA.Gris400;
-            btn.ForeColor = PaletaGrisA.Gris50;
+            btn.BackColor = AppColors.PrimaryContainer;
+            btn.ForeColor = AppColors.OnPrimaryContainer;
             _btnActivo = btn;
 
             // Obtener el tipo del formulario desde el Tag del botón

@@ -45,11 +45,11 @@
             // FormCompras
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = Color.FromArgb(55, 71, 79);
+            BackColor = Color.FromArgb(222, 184, 247);
             ClientSize = new Size(560, 457);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ForeColor = Color.FromArgb(236, 239, 241);
+            ForeColor = Color.FromArgb(64, 35, 87);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormCompras";
             StartPosition = FormStartPosition.CenterScreen;

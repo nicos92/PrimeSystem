@@ -36,7 +36,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(176, 190, 197);
+            label1.ForeColor = Color.FromArgb(64, 35, 87);
             label1.Location = new Point(150, 177);
             label1.Name = "label1";
             label1.Size = new Size(237, 86);
@@ -46,7 +46,7 @@
             // FormVentas
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = Color.FromArgb(55, 71, 79);
+            BackColor = Color.FromArgb(222, 184, 247);
             ClientSize = new Size(560, 457);
             Controls.Add(label1);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);

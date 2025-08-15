@@ -44,10 +44,10 @@
             // FormUsuarios
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = Color.FromArgb(55, 71, 79);
+            BackColor = Color.FromArgb(222, 184, 247);
             ClientSize = new Size(560, 457);
             Controls.Add(label1);
-            ForeColor = Color.FromArgb(236, 239, 241);
+            ForeColor = Color.FromArgb(64, 35, 87);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormUsuarios";
             Text = "FormUsuarios";
