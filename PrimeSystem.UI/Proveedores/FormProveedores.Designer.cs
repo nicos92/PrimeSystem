@@ -32,7 +32,7 @@ namespace PrimeSystem.UI.Proveedores
         {
             PanelOpcion = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            BtnOpcionConsultar = new Button();
+            BtnOpcionEditar = new Button();
             BtnOpcionIngresar = new Button();
             PanelMedio = new Panel();
             PanelOpcion.SuspendLayout();
@@ -53,7 +53,7 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(BtnOpcionConsultar, 1, 0);
+            tableLayoutPanel2.Controls.Add(BtnOpcionEditar, 1, 0);
             tableLayoutPanel2.Controls.Add(BtnOpcionIngresar, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(0, 0);
@@ -63,31 +63,31 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel2.Size = new Size(644, 64);
             tableLayoutPanel2.TabIndex = 1;
             // 
-            // BtnOpcionConsultar
+            // BtnOpcionEditar
             // 
-            BtnOpcionConsultar.BackColor = AppColorsBlue.Secondary;
-            BtnOpcionConsultar.Dock = DockStyle.Fill;
-            BtnOpcionConsultar.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
-            BtnOpcionConsultar.FlatStyle = FlatStyle.Flat;
-            BtnOpcionConsultar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnOpcionConsultar.ForeColor = AppColorsBlue.OnSecondary;
-            BtnOpcionConsultar.Location = new Point(322, 0);
-            BtnOpcionConsultar.Margin = new Padding(0);
-            BtnOpcionConsultar.Name = "BtnOpcionConsultar";
-            BtnOpcionConsultar.Size = new Size(322, 64);
-            BtnOpcionConsultar.TabIndex = 1;
-            BtnOpcionConsultar.Text = "Consultar";
-            BtnOpcionConsultar.UseVisualStyleBackColor = false;
-            BtnOpcionConsultar.Click += BtnOpcionIngresar_Click;
+            BtnOpcionEditar.BackColor = Color.FromArgb(83, 96, 108);
+            BtnOpcionEditar.Dock = DockStyle.Fill;
+            BtnOpcionEditar.FlatAppearance.BorderColor = Color.FromArgb(59, 72, 84);
+            BtnOpcionEditar.FlatStyle = FlatStyle.Flat;
+            BtnOpcionEditar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnOpcionEditar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnOpcionEditar.Location = new Point(322, 0);
+            BtnOpcionEditar.Margin = new Padding(0);
+            BtnOpcionEditar.Name = "BtnOpcionEditar";
+            BtnOpcionEditar.Size = new Size(322, 64);
+            BtnOpcionEditar.TabIndex = 1;
+            BtnOpcionEditar.Text = "Editar";
+            BtnOpcionEditar.UseVisualStyleBackColor = false;
+            BtnOpcionEditar.Click += BtnOpcionIngresar_Click;
             // 
             // BtnOpcionIngresar
             // 
-            BtnOpcionIngresar.BackColor =AppColorsBlue.Primary;
+            BtnOpcionIngresar.BackColor = Color.FromArgb(7, 100, 147);
             BtnOpcionIngresar.Dock = DockStyle.Fill;
-            BtnOpcionIngresar.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
+            BtnOpcionIngresar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
             BtnOpcionIngresar.FlatStyle = FlatStyle.Flat;
             BtnOpcionIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnOpcionIngresar.ForeColor = AppColorsBlue.OnPrimary;
+            BtnOpcionIngresar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnOpcionIngresar.Location = new Point(0, 0);
             BtnOpcionIngresar.Margin = new Padding(0);
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
@@ -99,7 +99,7 @@ namespace PrimeSystem.UI.Proveedores
             // 
             // PanelMedio
             // 
-            PanelMedio.BackColor = AppColorsBlue.SurfaceDim;
+            PanelMedio.BackColor = Color.FromArgb(218, 218, 220);
             PanelMedio.Dock = DockStyle.Fill;
             PanelMedio.Location = new Point(0, 64);
             PanelMedio.Name = "PanelMedio";
@@ -109,12 +109,12 @@ namespace PrimeSystem.UI.Proveedores
             // FormProveedores
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = AppColorsBlue.Background;
+            BackColor = Color.FromArgb(249, 249, 251);
             ClientSize = new Size(644, 511);
             Controls.Add(PanelMedio);
             Controls.Add(PanelOpcion);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ForeColor = AppColorsBlue.OnBackground;
+            ForeColor = Color.FromArgb(26, 28, 30);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormProveedores";
             Text = "FormProveedores";
@@ -127,7 +127,7 @@ namespace PrimeSystem.UI.Proveedores
         #endregion
         private Panel PanelOpcion;
         private TableLayoutPanel tableLayoutPanel2;
-        private Button BtnOpcionConsultar;
+        private Button BtnOpcionEditar;
         private Button BtnOpcionIngresar;
         private Panel PanelMedio;
     }

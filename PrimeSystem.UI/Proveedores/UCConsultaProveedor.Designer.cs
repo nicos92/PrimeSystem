@@ -31,9 +31,9 @@ namespace PrimeSystem.UI.Proveedores
         private void InitializeComponent()
         {
             PanelLista = new Panel();
-            panel1 = new Panel();
             ListBProveedores = new ListBox();
             LblLista = new Label();
+            panel1 = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
             tableLayoutPanel1 = new TableLayoutPanel();
             TxtEmail = new TextBox();
@@ -46,9 +46,9 @@ namespace PrimeSystem.UI.Proveedores
             TxtNombre = new TextBox();
             TxtProveedor = new TextBox();
             TxtCuit = new TextBox();
-            BtnEliminar = new Button();
-            BtnGuardar = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
+            BtnGuardar = new Button();
+            BtnEliminar = new Button();
             PanelLista.SuspendLayout();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -58,29 +58,20 @@ namespace PrimeSystem.UI.Proveedores
             // 
             // PanelLista
             // 
+            PanelLista.BackColor = Color.FromArgb(218, 218, 220);
             PanelLista.Controls.Add(ListBProveedores);
             PanelLista.Controls.Add(LblLista);
-           PanelLista.BackColor = AppColorsBlue.SurfaceDim;
-            PanelLista.Dock = DockStyle.Right;
-            PanelLista.Location = new Point(444, 0);
+            PanelLista.Dock = DockStyle.Left;
+            PanelLista.Location = new Point(0, 0);
             PanelLista.Name = "PanelLista";
             PanelLista.Padding = new Padding(0, 16, 0, 16);
             PanelLista.Size = new Size(200, 463);
             PanelLista.TabIndex = 0;
             // 
-            // panel1
-            // 
-            panel1.Controls.Add(tableLayoutPanel4);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(444, 463);
-            panel1.TabIndex = 1;
-            // 
             // ListBProveedores
             // 
+            ListBProveedores.BackColor = Color.FromArgb(249, 249, 251);
             ListBProveedores.Dock = DockStyle.Fill;
-            ListBProveedores.BackColor = AppColorsBlue.SurfaceBright;
             ListBProveedores.FormattingEnabled = true;
             ListBProveedores.Location = new Point(0, 37);
             ListBProveedores.Name = "ListBProveedores";
@@ -97,6 +88,15 @@ namespace PrimeSystem.UI.Proveedores
             LblLista.TabIndex = 1;
             LblLista.Text = "Lista de Proveedores";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(tableLayoutPanel4);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(200, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(444, 463);
+            panel1.TabIndex = 1;
             // 
             // tableLayoutPanel4
             // 
@@ -272,38 +272,6 @@ namespace PrimeSystem.UI.Proveedores
             TxtCuit.Size = new Size(277, 29);
             TxtCuit.TabIndex = 5;
             // 
-            // BtnEliminar
-            // 
-            BtnEliminar.Anchor = AnchorStyles.None;
-            BtnEliminar.BackColor = AppColorsBlue.Error;
-            BtnEliminar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
-            BtnEliminar.FlatStyle = FlatStyle.Flat;
-            BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnEliminar.ForeColor = AppColorsBlue.OnError;
-            BtnEliminar.Location = new Point(183, 26);
-            BtnEliminar.Margin = new Padding(0);
-            BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(48, 48);
-            BtnEliminar.TabIndex = 1;
-            BtnEliminar.Text = "E";
-            BtnEliminar.UseVisualStyleBackColor = false;
-            // 
-            // BtnGuardar
-            // 
-            BtnGuardar.Anchor = AnchorStyles.None;
-            BtnGuardar.BackColor = AppColorsBlue.Tertiary;
-            BtnGuardar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
-            BtnGuardar.FlatStyle = FlatStyle.Flat;
-            BtnGuardar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnGuardar.ForeColor = AppColorsBlue.OnTertiary;
-            BtnGuardar.Location = new Point(10, 26);
-            BtnGuardar.Margin = new Padding(0);
-            BtnGuardar.Name = "BtnGuardar";
-            BtnGuardar.Size = new Size(117, 48);
-            BtnGuardar.TabIndex = 10;
-            BtnGuardar.Text = "Guardar";
-            BtnGuardar.UseVisualStyleBackColor = false;
-            // 
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.ColumnCount = 2;
@@ -320,6 +288,38 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel2.Size = new Size(277, 100);
             tableLayoutPanel2.TabIndex = 11;
             // 
+            // BtnGuardar
+            // 
+            BtnGuardar.Anchor = AnchorStyles.None;
+            BtnGuardar.BackColor = Color.FromArgb(101, 89, 119);
+            BtnGuardar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnGuardar.FlatStyle = FlatStyle.Flat;
+            BtnGuardar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnGuardar.Location = new Point(10, 26);
+            BtnGuardar.Margin = new Padding(0);
+            BtnGuardar.Name = "BtnGuardar";
+            BtnGuardar.Size = new Size(117, 48);
+            BtnGuardar.TabIndex = 10;
+            BtnGuardar.Text = "Guardar";
+            BtnGuardar.UseVisualStyleBackColor = false;
+            // 
+            // BtnEliminar
+            // 
+            BtnEliminar.Anchor = AnchorStyles.None;
+            BtnEliminar.BackColor = Color.FromArgb(186, 26, 26);
+            BtnEliminar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnEliminar.FlatStyle = FlatStyle.Flat;
+            BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnEliminar.Location = new Point(183, 26);
+            BtnEliminar.Margin = new Padding(0);
+            BtnEliminar.Name = "BtnEliminar";
+            BtnEliminar.Size = new Size(48, 48);
+            BtnEliminar.TabIndex = 1;
+            BtnEliminar.Text = "E";
+            BtnEliminar.UseVisualStyleBackColor = false;
+            // 
             // UCConsultaProveedor
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -331,6 +331,7 @@ namespace PrimeSystem.UI.Proveedores
             Margin = new Padding(5);
             Name = "UCConsultaProveedor";
             Size = new Size(644, 463);
+            Load += UCConsultaProveedor_Load;
             PanelLista.ResumeLayout(false);
             panel1.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);

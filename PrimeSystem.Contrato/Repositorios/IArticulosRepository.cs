@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IArticulosRepository
     {
-        Result<List<Articulos>> GetAll();
+        Task<Result<List<Articulos>>> GetAll();
         Result<Articulos> GetById(int id);
         Result<Articulos> Add(Articulos articulo);
         Result<Articulos> Update(Articulos articulo);

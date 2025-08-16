@@ -15,9 +15,9 @@ namespace PrimeSystem.Servicio.Implementaciones
             _repo = repo;
         }
 
-        public Result<List<Articulos>> GetAll()
+        public async Task<Result<List<Articulos>>> GetAll()
         {
-            return _repo.GetAll();
+            return await _repo.GetAll();
         }
 
         public Result<Articulos> GetById(int id)

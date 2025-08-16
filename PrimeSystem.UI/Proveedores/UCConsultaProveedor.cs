@@ -7,14 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PrimeSystem.Contrato.Servicios;
 
 namespace PrimeSystem.UI.Proveedores
 {
-    public partial class UCConsultaProveedor: UserControl
+    public partial class UCConsultaProveedor : UserControl
     {
-        public UCConsultaProveedor()
+        private IArticulosService _articulosService;
+        public UCConsultaProveedor(IArticulosService articulosService)
         {
+            _articulosService = articulosService;
             InitializeComponent();
+        }
+
+        private async void UCConsultaProveedor_Load(object sender, EventArgs e)
+        {
+
+            var datos = await _articulosService.GetAll();
+            this.Invoke((MethodInvoker)(()=>
+            {
+                if (datos.IsSuccess)
+                {
+                    ListBProveedores.DisplayMember = "Art_Desc";
+                    ListBProveedores.DataSource = datos.Value.ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show(datos.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }));
         }
     }
 }

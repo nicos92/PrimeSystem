@@ -49,7 +49,7 @@ namespace PrimeSystem.UI.Proveedores
         private void ConFigBtns()
         {
             BtnOpcionIngresar.Tag = typeof(UCIngresoProveedores);
-            BtnOpcionConsultar.Tag = typeof(UCConsultaProveedor);
+            BtnOpcionEditar.Tag = typeof(UCConsultaProveedor);
         }
 
         private void BtnOpcionIngresar_Click(object sender, EventArgs e)

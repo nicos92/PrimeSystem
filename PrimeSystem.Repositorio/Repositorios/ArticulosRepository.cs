@@ -70,16 +70,16 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public Result<List<Articulos>> GetAll()
+        public async Task<Result<List<Articulos>>> GetAll()
         {
             try
             {
                 List<Articulos> articulos = new List<Articulos>();
                 using var conn = Conexion();
                 using var cmd = new OleDbCommand("SELECT Id_Articulo, Cod_Articulo, Art_Desc, Cod_Categoria, Cod_Subcat, Id_Proveedor FROM Articulos", conn);
-                conn.Open();
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                await conn.OpenAsync();
+                using var reader = await cmd.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
                 {
                     Articulos articulo = new Articulos
                     {
