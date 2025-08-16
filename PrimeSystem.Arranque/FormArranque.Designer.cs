@@ -42,7 +42,7 @@ partial class FormArranque
         LblBienvenido.Anchor = AnchorStyles.None;
         LblBienvenido.AutoSize = true;
         LblBienvenido.Font = new Font("Segoe UI", 72F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        LblBienvenido.ForeColor = Color.FromArgb(222, 184, 247);
+        LblBienvenido.ForeColor = Color.FromArgb(242, 218, 255);
         LblBienvenido.Location = new Point(21, 44);
         LblBienvenido.Name = "LblBienvenido";
         LblBienvenido.Size = new Size(739, 256);
@@ -52,7 +52,7 @@ partial class FormArranque
         // 
         // PanelPrincipal
         // 
-        PanelPrincipal.BackColor = Color.FromArgb(64, 35, 87);
+        PanelPrincipal.BackColor = Color.FromArgb(88, 58, 111);
         PanelPrincipal.Controls.Add(ProgressBar);
         PanelPrincipal.Controls.Add(LblCargando);
         PanelPrincipal.Controls.Add(LblBienvenido);

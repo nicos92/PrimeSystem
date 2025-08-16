@@ -59,7 +59,7 @@ namespace PrimeSystem.UI.Proveedores
             {
                 return;
             }
-            btn.BackColor=AppColors.PrimaryContainer;
+            btn.BackColor=AppColors.InversePrimary;
             btn.ForeColor = AppColors.OnPrimaryContainer;
             btn.FlatAppearance.BorderColor = AppColors.Primary;
 

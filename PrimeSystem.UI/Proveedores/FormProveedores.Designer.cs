@@ -80,7 +80,7 @@
             // 
             // BtnOpcionIngresar
             // 
-            BtnOpcionIngresar.BackColor = Color.FromArgb(88, 58, 111);
+            BtnOpcionIngresar.BackColor = Color.FromArgb(113, 81, 136);
             BtnOpcionIngresar.Dock = DockStyle.Fill;
             BtnOpcionIngresar.FlatAppearance.BorderColor = Color.FromArgb(242, 218, 255);
             BtnOpcionIngresar.FlatStyle = FlatStyle.Flat;

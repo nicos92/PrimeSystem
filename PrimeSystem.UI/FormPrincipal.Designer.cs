@@ -48,7 +48,7 @@ partial class FormPrincipal
         // PanelMenu
         // 
         PanelMenu.AutoScroll = true;
-        PanelMenu.BackColor = Color.FromArgb(64, 35, 87);
+        PanelMenu.BackColor = Color.FromArgb(88, 58, 111);
         PanelMenu.Controls.Add(BtnModEstadoContable);
         PanelMenu.Controls.Add(BtnModProveedores);
         PanelMenu.Controls.Add(BtnModUsuarios);
@@ -69,7 +69,7 @@ partial class FormPrincipal
         BtnModEstadoContable.FlatAppearance.BorderSize = 0;
         BtnModEstadoContable.FlatStyle = FlatStyle.Flat;
         BtnModEstadoContable.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        BtnModEstadoContable.ForeColor = Color.FromArgb(222, 184, 247);
+        BtnModEstadoContable.ForeColor = Color.FromArgb(242, 218, 255);
         BtnModEstadoContable.Location = new Point(0, 384);
         BtnModEstadoContable.Name = "BtnModEstadoContable";
         BtnModEstadoContable.Size = new Size(216, 64);
@@ -85,7 +85,7 @@ partial class FormPrincipal
         BtnModProveedores.FlatAppearance.BorderSize = 0;
         BtnModProveedores.FlatStyle = FlatStyle.Flat;
         BtnModProveedores.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        BtnModProveedores.ForeColor = Color.FromArgb(222, 184, 247);
+        BtnModProveedores.ForeColor = Color.FromArgb(242, 218, 255);
         BtnModProveedores.Location = new Point(0, 320);
         BtnModProveedores.Name = "BtnModProveedores";
         BtnModProveedores.Size = new Size(216, 64);
@@ -101,7 +101,7 @@ partial class FormPrincipal
         BtnModUsuarios.FlatAppearance.BorderSize = 0;
         BtnModUsuarios.FlatStyle = FlatStyle.Flat;
         BtnModUsuarios.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        BtnModUsuarios.ForeColor = Color.FromArgb(222, 184, 247);
+        BtnModUsuarios.ForeColor = Color.FromArgb(242, 218, 255);
         BtnModUsuarios.Location = new Point(0, 256);
         BtnModUsuarios.Name = "BtnModUsuarios";
         BtnModUsuarios.Size = new Size(216, 64);
@@ -117,7 +117,7 @@ partial class FormPrincipal
         BtnModClientes.FlatAppearance.BorderSize = 0;
         BtnModClientes.FlatStyle = FlatStyle.Flat;
         BtnModClientes.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        BtnModClientes.ForeColor = Color.FromArgb(222, 184, 247);
+        BtnModClientes.ForeColor = Color.FromArgb(242, 218, 255);
         BtnModClientes.Location = new Point(0, 192);
         BtnModClientes.Name = "BtnModClientes";
         BtnModClientes.Size = new Size(216, 64);
@@ -133,7 +133,7 @@ partial class FormPrincipal
         BtnModCompras.FlatAppearance.BorderSize = 0;
         BtnModCompras.FlatStyle = FlatStyle.Flat;
         BtnModCompras.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        BtnModCompras.ForeColor = Color.FromArgb(222, 184, 247);
+        BtnModCompras.ForeColor = Color.FromArgb(242, 218, 255);
         BtnModCompras.Location = new Point(0, 128);
         BtnModCompras.Name = "BtnModCompras";
         BtnModCompras.Size = new Size(216, 64);
@@ -145,7 +145,7 @@ partial class FormPrincipal
         // 
         // BtnModVentas
         // 
-        BtnModVentas.BackColor = Color.FromArgb(88, 58, 111);
+        BtnModVentas.BackColor = Color.FromArgb(113, 81, 136);
         BtnModVentas.Dock = DockStyle.Top;
         BtnModVentas.FlatAppearance.BorderSize = 0;
         BtnModVentas.FlatStyle = FlatStyle.Flat;
@@ -196,7 +196,7 @@ partial class FormPrincipal
         // 
         // PanelFondoMenu
         // 
-        PanelFondoMenu.BackColor = Color.FromArgb(88, 58, 111);
+        PanelFondoMenu.BackColor = Color.FromArgb(222, 184, 247);
         PanelFondoMenu.Controls.Add(PanelMenu);
         PanelFondoMenu.Dock = DockStyle.Left;
         PanelFondoMenu.Location = new Point(0, 0);
