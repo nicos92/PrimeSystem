@@ -1,4 +1,6 @@
-﻿namespace PrimeSystem.Arranque;
+﻿using PrimeSystem.Utilidades;
+
+namespace PrimeSystem.Arranque;
 
 partial class FormArranque
 {
@@ -42,7 +44,7 @@ partial class FormArranque
         LblBienvenido.Anchor = AnchorStyles.None;
         LblBienvenido.AutoSize = true;
         LblBienvenido.Font = new Font("Segoe UI", 72F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        LblBienvenido.ForeColor = Color.FromArgb(242, 218, 255);
+        LblBienvenido.ForeColor = AppColorsBlue.OnPrimary;
         LblBienvenido.Location = new Point(21, 44);
         LblBienvenido.Name = "LblBienvenido";
         LblBienvenido.Size = new Size(739, 256);
@@ -52,7 +54,7 @@ partial class FormArranque
         // 
         // PanelPrincipal
         // 
-        PanelPrincipal.BackColor = Color.FromArgb(88, 58, 111);
+        PanelPrincipal.BackColor = AppColorsBlue.Primary;
         PanelPrincipal.Controls.Add(ProgressBar);
         PanelPrincipal.Controls.Add(LblCargando);
         PanelPrincipal.Controls.Add(LblBienvenido);
@@ -69,13 +71,14 @@ partial class FormArranque
         ProgressBar.Name = "ProgressBar";
         ProgressBar.Size = new Size(796, 23);
         ProgressBar.TabIndex = 2;
+        ProgressBar.BackColor = AppColorsBlue.PrimaryContainer;
         // 
         // LblCargando
         // 
         LblCargando.Anchor = AnchorStyles.None;
         LblCargando.AutoSize = true;
         LblCargando.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        LblCargando.ForeColor = Color.FromArgb(210, 193, 217);
+        LblCargando.ForeColor = AppColorsBlue.Secondary;
         LblCargando.Location = new Point(107, 407);
         LblCargando.Name = "LblCargando";
         LblCargando.Size = new Size(166, 45);
@@ -85,7 +88,7 @@ partial class FormArranque
         // 
         // panel1
         // 
-        panel1.BackColor = Color.FromArgb(222, 184, 247);
+        panel1.BackColor = AppColorsBlue.InversePrimary;
         panel1.Controls.Add(PanelPrincipal);
         panel1.Dock = DockStyle.Fill;
         panel1.Location = new Point(0, 0);
@@ -97,11 +100,11 @@ partial class FormArranque
         // FormArranque
         // 
         AutoScaleMode = AutoScaleMode.None;
-        BackColor = Color.FromArgb(242, 242, 242);
+        BackColor = AppColorsBlue.Background;
         ClientSize = new Size(800, 500);
         Controls.Add(panel1);
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        ForeColor = Color.FromArgb(33, 33, 33);
+        ForeColor = AppColorsBlue.OnBackground;
         FormBorderStyle = FormBorderStyle.None;
         Name = "FormArranque";
         StartPosition = FormStartPosition.CenterScreen;

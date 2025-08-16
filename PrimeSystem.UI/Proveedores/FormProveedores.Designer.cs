@@ -1,4 +1,6 @@
-﻿namespace PrimeSystem.UI.Proveedores
+﻿using PrimeSystem.Utilidades;
+
+namespace PrimeSystem.UI.Proveedores
 {
     partial class FormProveedores
     {
@@ -63,12 +65,12 @@
             // 
             // BtnOpcionConsultar
             // 
-            BtnOpcionConsultar.BackColor = Color.FromArgb(78, 66, 86);
+            BtnOpcionConsultar.BackColor = AppColorsBlue.Secondary;
             BtnOpcionConsultar.Dock = DockStyle.Fill;
-            BtnOpcionConsultar.FlatAppearance.BorderColor = Color.FromArgb(96, 125, 139);
+            BtnOpcionConsultar.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
             BtnOpcionConsultar.FlatStyle = FlatStyle.Flat;
             BtnOpcionConsultar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnOpcionConsultar.ForeColor = Color.FromArgb(238, 221, 245);
+            BtnOpcionConsultar.ForeColor = AppColorsBlue.OnSecondary;
             BtnOpcionConsultar.Location = new Point(322, 0);
             BtnOpcionConsultar.Margin = new Padding(0);
             BtnOpcionConsultar.Name = "BtnOpcionConsultar";
@@ -80,12 +82,12 @@
             // 
             // BtnOpcionIngresar
             // 
-            BtnOpcionIngresar.BackColor = Color.FromArgb(113, 81, 136);
+            BtnOpcionIngresar.BackColor =AppColorsBlue.Primary;
             BtnOpcionIngresar.Dock = DockStyle.Fill;
-            BtnOpcionIngresar.FlatAppearance.BorderColor = Color.FromArgb(242, 218, 255);
+            BtnOpcionIngresar.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
             BtnOpcionIngresar.FlatStyle = FlatStyle.Flat;
             BtnOpcionIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnOpcionIngresar.ForeColor = Color.FromArgb(242, 218, 255);
+            BtnOpcionIngresar.ForeColor = AppColorsBlue.OnPrimary;
             BtnOpcionIngresar.Location = new Point(0, 0);
             BtnOpcionIngresar.Margin = new Padding(0);
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
@@ -97,7 +99,7 @@
             // 
             // PanelMedio
             // 
-            PanelMedio.BackColor = Color.FromArgb(22, 18, 23);
+            PanelMedio.BackColor = AppColorsBlue.SurfaceDim;
             PanelMedio.Dock = DockStyle.Fill;
             PanelMedio.Location = new Point(0, 64);
             PanelMedio.Name = "PanelMedio";
@@ -107,12 +109,12 @@
             // FormProveedores
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = Color.FromArgb(55, 71, 79);
+            BackColor = AppColorsBlue.Background;
             ClientSize = new Size(644, 511);
             Controls.Add(PanelMedio);
             Controls.Add(PanelOpcion);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ForeColor = Color.FromArgb(236, 239, 241);
+            ForeColor = AppColorsBlue.OnBackground;
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormProveedores";
             Text = "FormProveedores";

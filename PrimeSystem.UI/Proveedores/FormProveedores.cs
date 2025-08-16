@@ -59,13 +59,13 @@ namespace PrimeSystem.UI.Proveedores
             {
                 return;
             }
-            btn.BackColor=AppColors.InversePrimary;
-            btn.ForeColor = AppColors.OnPrimaryContainer;
-            btn.FlatAppearance.BorderColor = AppColors.Primary;
+            btn.BackColor=AppColorsBlue.Primary;
+            btn.ForeColor = AppColorsBlue.OnPrimary;
+            btn.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
 
-            _btnActual.FlatAppearance.BorderColor = AppColors.OnSecondary;
-            _btnActual.BackColor = AppColors.SecondaryContainer;
-            _btnActual.ForeColor = AppColors.OnSecondaryContainer;
+            _btnActual.BackColor = AppColorsBlue.Secondary;
+            _btnActual.ForeColor = AppColorsBlue.OnSecondary;
+            _btnActual.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
             SeleccionarUC(btn.Tag as Type);
             _btnActual = btn;
         }

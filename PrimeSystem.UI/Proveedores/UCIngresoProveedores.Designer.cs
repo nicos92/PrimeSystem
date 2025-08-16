@@ -1,4 +1,6 @@
-﻿namespace PrimeSystem.UI.Proveedores
+﻿using PrimeSystem.Utilidades;
+
+namespace PrimeSystem.UI.Proveedores
 {
     partial class UCIngresoProveedores
     {
@@ -50,11 +52,11 @@
             // BtnIngresar
             // 
             BtnIngresar.Anchor = AnchorStyles.None;
-            BtnIngresar.BackColor = Color.FromArgb(88, 58, 111);
-            BtnIngresar.FlatAppearance.BorderColor = Color.FromArgb(222, 184, 247);
+            BtnIngresar.BackColor = AppColorsBlue.Primary;
+            BtnIngresar.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
             BtnIngresar.FlatStyle = FlatStyle.Flat;
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnIngresar.ForeColor = Color.FromArgb(242, 218, 255);
+            BtnIngresar.ForeColor = AppColorsBlue.OnPrimary;
             BtnIngresar.Location = new Point(174, 304);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
@@ -75,7 +77,7 @@
             // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.BackColor = Color.FromArgb(205, 195, 206);
+            tableLayoutPanel4.BackColor = AppColorsBlue.SurfaceDim;
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.Controls.Add(tableLayoutPanel1, 0, 0);
@@ -91,7 +93,7 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.None;
-            tableLayoutPanel1.BackColor = Color.FromArgb(232, 224, 232);
+            tableLayoutPanel1.BackColor = AppColorsBlue.SurfaceBright;
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
@@ -107,7 +109,7 @@
             tableLayoutPanel1.Controls.Add(TxtProveedor, 1, 2);
             tableLayoutPanel1.Controls.Add(TxtCuit, 1, 1);
             tableLayoutPanel1.Controls.Add(BtnIngresar, 1, 6);
-            tableLayoutPanel1.ForeColor = Color.FromArgb(236, 239, 241);
+            tableLayoutPanel1.ForeColor = AppColorsBlue.OnSurface;
             tableLayoutPanel1.Location = new Point(51, 41);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 8;
@@ -125,9 +127,9 @@
             // TxtEmail
             // 
             TxtEmail.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtEmail.BackColor = Color.FromArgb(238, 221, 245);
+            TxtEmail.BackColor = AppColorsBlue.SurfaceContainer;
             TxtEmail.Font = new Font("Segoe UI", 12F);
-            TxtEmail.ForeColor = Color.FromArgb(78, 66, 86);
+            TxtEmail.ForeColor = AppColorsBlue.OnSurface;
             TxtEmail.Location = new Point(111, 235);
             TxtEmail.MaxLength = 11;
             TxtEmail.Name = "TxtEmail";
@@ -139,7 +141,6 @@
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.ForeColor = Color.FromArgb(22, 18, 23);
             label1.Location = new Point(54, 239);
             label1.Name = "label1";
             label1.Size = new Size(51, 21);
@@ -151,7 +152,6 @@
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.ForeColor = Color.FromArgb(22, 18, 23);
             label3.Location = new Point(71, 188);
             label3.Name = "label3";
             label3.Size = new Size(34, 21);
@@ -163,7 +163,6 @@
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.ForeColor = Color.FromArgb(22, 18, 23);
             label4.Location = new Point(34, 137);
             label4.Name = "label4";
             label4.Size = new Size(71, 21);
@@ -175,7 +174,6 @@
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.ForeColor = Color.FromArgb(22, 18, 23);
             label2.Location = new Point(20, 86);
             label2.Name = "label2";
             label2.Size = new Size(85, 21);
@@ -187,7 +185,6 @@
             LblCuit.Anchor = AnchorStyles.Right;
             LblCuit.AutoSize = true;
             LblCuit.Font = new Font("Segoe UI", 12F);
-            LblCuit.ForeColor = Color.FromArgb(22, 18, 23);
             LblCuit.Location = new Point(59, 35);
             LblCuit.Name = "LblCuit";
             LblCuit.Size = new Size(46, 21);
@@ -197,9 +194,9 @@
             // TxtTel
             // 
             TxtTel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtTel.BackColor = Color.FromArgb(238, 221, 245);
             TxtTel.Font = new Font("Segoe UI", 12F);
-            TxtTel.ForeColor = Color.FromArgb(78, 66, 86);
+            TxtTel.BackColor = AppColorsBlue.SurfaceContainer;
+            TxtTel.ForeColor = AppColorsBlue.OnSurface;
             TxtTel.Location = new Point(111, 184);
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
@@ -209,9 +206,9 @@
             // TxtNombre
             // 
             TxtNombre.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtNombre.BackColor = Color.FromArgb(238, 221, 245);
             TxtNombre.Font = new Font("Segoe UI", 12F);
-            TxtNombre.ForeColor = Color.FromArgb(78, 66, 86);
+            TxtNombre.BackColor = AppColorsBlue.SurfaceContainer;
+            TxtNombre.ForeColor = AppColorsBlue.OnSurface;
             TxtNombre.Location = new Point(111, 133);
             TxtNombre.MaxLength = 11;
             TxtNombre.Name = "TxtNombre";
@@ -221,9 +218,9 @@
             // TxtProveedor
             // 
             TxtProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtProveedor.BackColor = Color.FromArgb(238, 221, 245);
             TxtProveedor.Font = new Font("Segoe UI", 12F);
-            TxtProveedor.ForeColor = Color.FromArgb(78, 66, 86);
+            TxtProveedor.BackColor = AppColorsBlue.SurfaceContainer;
+            TxtProveedor.ForeColor = AppColorsBlue.OnSurface;
             TxtProveedor.Location = new Point(111, 82);
             TxtProveedor.MaxLength = 11;
             TxtProveedor.Name = "TxtProveedor";
@@ -233,9 +230,9 @@
             // TxtCuit
             // 
             TxtCuit.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtCuit.BackColor = Color.FromArgb(238, 221, 245);
             TxtCuit.Font = new Font("Segoe UI", 12F);
-            TxtCuit.ForeColor = Color.FromArgb(78, 66, 86);
+            TxtCuit.BackColor = AppColorsBlue.SurfaceContainer;
+            TxtCuit.ForeColor = AppColorsBlue.OnSurface;
             TxtCuit.Location = new Point(111, 31);
             TxtCuit.MaxLength = 11;
             TxtCuit.Name = "TxtCuit";

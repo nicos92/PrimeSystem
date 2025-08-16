@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Utilidades
 {
-    public static class AppColors
+    public static class AppColorsPurple
     {
         // Primary Colors
         public static readonly Color Primary = Color.FromArgb(222, 184, 247);
