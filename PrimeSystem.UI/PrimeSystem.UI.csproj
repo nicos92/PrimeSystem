@@ -2,6 +2,12 @@
 
   <ItemGroup>
     <Compile Remove="NewClass.cs" />
+    <Compile Remove="Usuarios\UCConsultarUsuarios.cs" />
+    <Compile Remove="Usuarios\UCConsultarUsuarios.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Usuarios\UCConsultarUsuarios.resx" />
   </ItemGroup>
 
   <ItemGroup>

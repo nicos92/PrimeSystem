@@ -14,6 +14,7 @@ namespace PrimeSystem.Servicio.Implementaciones
         {
             _repo = repo;
         }
+       
 
         public async Task<Result<List<Articulos>>> GetAll()
         {

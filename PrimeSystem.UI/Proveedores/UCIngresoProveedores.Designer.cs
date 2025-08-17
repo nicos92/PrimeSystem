@@ -52,11 +52,11 @@ namespace PrimeSystem.UI.Proveedores
             // BtnIngresar
             // 
             BtnIngresar.Anchor = AnchorStyles.None;
-            BtnIngresar.BackColor = AppColorsBlue.Primary;
-            BtnIngresar.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
+            BtnIngresar.BackColor = Color.FromArgb(7, 100, 147);
+            BtnIngresar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
             BtnIngresar.FlatStyle = FlatStyle.Flat;
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnIngresar.ForeColor = AppColorsBlue.OnPrimary;
+            BtnIngresar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnIngresar.Location = new Point(174, 304);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
@@ -72,12 +72,12 @@ namespace PrimeSystem.UI.Proveedores
             PanelForm.Dock = DockStyle.Fill;
             PanelForm.Location = new Point(0, 0);
             PanelForm.Name = "PanelForm";
-            PanelForm.Size = new Size(644, 463);
+            PanelForm.Size = new Size(724, 497);
             PanelForm.TabIndex = 2;
             // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.BackColor = AppColorsBlue.SurfaceDim;
+            tableLayoutPanel4.BackColor = Color.FromArgb(218, 218, 220);
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.Controls.Add(tableLayoutPanel1, 0, 0);
@@ -87,13 +87,13 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(644, 463);
+            tableLayoutPanel4.Size = new Size(724, 497);
             tableLayoutPanel4.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.None;
-            tableLayoutPanel1.BackColor = AppColorsBlue.SurfaceBright;
+            tableLayoutPanel1.BackColor = Color.FromArgb(249, 249, 251);
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
@@ -109,8 +109,8 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel1.Controls.Add(TxtProveedor, 1, 2);
             tableLayoutPanel1.Controls.Add(TxtCuit, 1, 1);
             tableLayoutPanel1.Controls.Add(BtnIngresar, 1, 6);
-            tableLayoutPanel1.ForeColor = AppColorsBlue.OnSurface;
-            tableLayoutPanel1.Location = new Point(51, 41);
+            tableLayoutPanel1.ForeColor = Color.FromArgb(26, 28, 30);
+            tableLayoutPanel1.Location = new Point(91, 58);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 8;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -127,9 +127,9 @@ namespace PrimeSystem.UI.Proveedores
             // TxtEmail
             // 
             TxtEmail.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtEmail.BackColor = AppColorsBlue.SurfaceContainer;
+            TxtEmail.BackColor = Color.FromArgb(238, 237, 240);
             TxtEmail.Font = new Font("Segoe UI", 12F);
-            TxtEmail.ForeColor = AppColorsBlue.OnSurface;
+            TxtEmail.ForeColor = Color.FromArgb(26, 28, 30);
             TxtEmail.Location = new Point(111, 235);
             TxtEmail.MaxLength = 11;
             TxtEmail.Name = "TxtEmail";
@@ -194,9 +194,9 @@ namespace PrimeSystem.UI.Proveedores
             // TxtTel
             // 
             TxtTel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtTel.BackColor = Color.FromArgb(238, 237, 240);
             TxtTel.Font = new Font("Segoe UI", 12F);
-            TxtTel.BackColor = AppColorsBlue.SurfaceContainer;
-            TxtTel.ForeColor = AppColorsBlue.OnSurface;
+            TxtTel.ForeColor = Color.FromArgb(26, 28, 30);
             TxtTel.Location = new Point(111, 184);
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
@@ -206,9 +206,9 @@ namespace PrimeSystem.UI.Proveedores
             // TxtNombre
             // 
             TxtNombre.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtNombre.BackColor = Color.FromArgb(238, 237, 240);
             TxtNombre.Font = new Font("Segoe UI", 12F);
-            TxtNombre.BackColor = AppColorsBlue.SurfaceContainer;
-            TxtNombre.ForeColor = AppColorsBlue.OnSurface;
+            TxtNombre.ForeColor = Color.FromArgb(26, 28, 30);
             TxtNombre.Location = new Point(111, 133);
             TxtNombre.MaxLength = 11;
             TxtNombre.Name = "TxtNombre";
@@ -218,9 +218,9 @@ namespace PrimeSystem.UI.Proveedores
             // TxtProveedor
             // 
             TxtProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtProveedor.BackColor = Color.FromArgb(238, 237, 240);
             TxtProveedor.Font = new Font("Segoe UI", 12F);
-            TxtProveedor.BackColor = AppColorsBlue.SurfaceContainer;
-            TxtProveedor.ForeColor = AppColorsBlue.OnSurface;
+            TxtProveedor.ForeColor = Color.FromArgb(26, 28, 30);
             TxtProveedor.Location = new Point(111, 82);
             TxtProveedor.MaxLength = 11;
             TxtProveedor.Name = "TxtProveedor";
@@ -230,9 +230,9 @@ namespace PrimeSystem.UI.Proveedores
             // TxtCuit
             // 
             TxtCuit.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtCuit.BackColor = Color.FromArgb(238, 237, 240);
             TxtCuit.Font = new Font("Segoe UI", 12F);
-            TxtCuit.BackColor = AppColorsBlue.SurfaceContainer;
-            TxtCuit.ForeColor = AppColorsBlue.OnSurface;
+            TxtCuit.ForeColor = Color.FromArgb(26, 28, 30);
             TxtCuit.Location = new Point(111, 31);
             TxtCuit.MaxLength = 11;
             TxtCuit.Name = "TxtCuit";
@@ -248,7 +248,7 @@ namespace PrimeSystem.UI.Proveedores
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = Color.FromArgb(236, 239, 241);
             Name = "UCIngresoProveedores";
-            Size = new Size(644, 463);
+            Size = new Size(724, 497);
             PanelForm.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);

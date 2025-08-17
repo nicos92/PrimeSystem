@@ -13,7 +13,7 @@ public partial class FormArranque : Form
         InitializeComponent();
     }
 
-    private readonly Form? _formHijo;
+    private Form? _formHijo;
 
     private async void Form1_Load(object sender, EventArgs e)
     {
@@ -21,7 +21,6 @@ public partial class FormArranque : Form
         LblBienvenido.ForeColor = PaletaGrisA.Gris100;
         LblCargando.ForeColor = PaletaGrisA.Gris150;
 
-        //Thread.Sleep(1000);
         var progress = new Progress<int>(percent =>
         {
             ProgressBar.Value = percent;
@@ -34,12 +33,11 @@ public partial class FormArranque : Form
             if (_formHijo == null || _formHijo.IsDisposed)
             {
                 // Aca llamo al formulario principal que esta en PrimeSystem.UI
-                Form _formHijo = _serviceProvider.GetRequiredService<FormPrincipal>();
+                _formHijo = _serviceProvider.GetRequiredService<FormPrincipal>();
                 _formHijo.Closed += (s, e) =>
                 {
                     this.Close();
                 };
-                //_formHijo.MdiParent = this;
                 _formHijo.Dock = DockStyle.Fill;
                 _formHijo.Show();
                 this.Hide();
@@ -74,8 +72,5 @@ public partial class FormArranque : Form
         }
     }
 
-    private void PanelPrincipal_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
+    
 }

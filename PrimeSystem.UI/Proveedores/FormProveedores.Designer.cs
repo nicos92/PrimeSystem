@@ -45,7 +45,7 @@ namespace PrimeSystem.UI.Proveedores
             PanelOpcion.Dock = DockStyle.Top;
             PanelOpcion.Location = new Point(0, 0);
             PanelOpcion.Name = "PanelOpcion";
-            PanelOpcion.Size = new Size(644, 64);
+            PanelOpcion.Size = new Size(724, 64);
             PanelOpcion.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -60,7 +60,7 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(644, 64);
+            tableLayoutPanel2.Size = new Size(724, 64);
             tableLayoutPanel2.TabIndex = 1;
             // 
             // BtnOpcionEditar
@@ -71,10 +71,10 @@ namespace PrimeSystem.UI.Proveedores
             BtnOpcionEditar.FlatStyle = FlatStyle.Flat;
             BtnOpcionEditar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnOpcionEditar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnOpcionEditar.Location = new Point(322, 0);
+            BtnOpcionEditar.Location = new Point(362, 0);
             BtnOpcionEditar.Margin = new Padding(0);
             BtnOpcionEditar.Name = "BtnOpcionEditar";
-            BtnOpcionEditar.Size = new Size(322, 64);
+            BtnOpcionEditar.Size = new Size(362, 64);
             BtnOpcionEditar.TabIndex = 1;
             BtnOpcionEditar.Text = "Editar";
             BtnOpcionEditar.UseVisualStyleBackColor = false;
@@ -91,7 +91,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnOpcionIngresar.Location = new Point(0, 0);
             BtnOpcionIngresar.Margin = new Padding(0);
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
-            BtnOpcionIngresar.Size = new Size(322, 64);
+            BtnOpcionIngresar.Size = new Size(362, 64);
             BtnOpcionIngresar.TabIndex = 0;
             BtnOpcionIngresar.Text = "Ingresar";
             BtnOpcionIngresar.UseVisualStyleBackColor = false;
@@ -103,14 +103,14 @@ namespace PrimeSystem.UI.Proveedores
             PanelMedio.Dock = DockStyle.Fill;
             PanelMedio.Location = new Point(0, 64);
             PanelMedio.Name = "PanelMedio";
-            PanelMedio.Size = new Size(644, 447);
+            PanelMedio.Size = new Size(724, 497);
             PanelMedio.TabIndex = 6;
             // 
             // FormProveedores
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(249, 249, 251);
-            ClientSize = new Size(644, 511);
+            ClientSize = new Size(724, 561);
             Controls.Add(PanelMedio);
             Controls.Add(PanelOpcion);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);

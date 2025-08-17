@@ -62,7 +62,7 @@ partial class FormPrincipal
         PanelMenu.ForeColor = Color.FromArgb(255, 255, 255);
         PanelMenu.Location = new Point(0, 0);
         PanelMenu.Name = "PanelMenu";
-        PanelMenu.Size = new Size(219, 511);
+        PanelMenu.Size = new Size(219, 561);
         PanelMenu.TabIndex = 0;
         // 
         // BtnModEstadoContable
@@ -198,19 +198,19 @@ partial class FormPrincipal
         PanelFondoMenu.Location = new Point(0, 0);
         PanelFondoMenu.Name = "PanelFondoMenu";
         PanelFondoMenu.Padding = new Padding(0, 0, 1, 0);
-        PanelFondoMenu.Size = new Size(220, 511);
+        PanelFondoMenu.Size = new Size(220, 561);
         PanelFondoMenu.TabIndex = 1;
         // 
         // FormPrincipal
         // 
         AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(249, 249, 251);
-        ClientSize = new Size(864, 511);
+        ClientSize = new Size(944, 561);
         Controls.Add(PanelFondoMenu);
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
         ForeColor = Color.FromArgb(26, 28, 30);
         IsMdiContainer = true;
-        MinimumSize = new Size(880, 550);
+        MinimumSize = new Size(960, 600);
         Name = "FormPrincipal";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Prime System";

@@ -13,7 +13,7 @@ namespace PrimeSystem.UI.Proveedores
 {
     public partial class UCConsultaProveedor : UserControl
     {
-        private IArticulosService _articulosService;
+        private readonly IArticulosService _articulosService;
         public UCConsultaProveedor(IArticulosService articulosService)
         {
             _articulosService = articulosService;
@@ -24,19 +24,18 @@ namespace PrimeSystem.UI.Proveedores
         {
 
             var datos = await _articulosService.GetAll();
-            this.Invoke((MethodInvoker)(()=>
-            {
-                if (datos.IsSuccess)
-                {
-                    ListBProveedores.DisplayMember = "Art_Desc";
-                    ListBProveedores.DataSource = datos.Value.ToList();
 
-                }
-                else
-                {
-                    MessageBox.Show(datos.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }));
+            if (datos.IsSuccess)
+            {
+                ListBProveedores.DisplayMember = "Art_Desc";
+                ListBProveedores.DataSource = datos.Value.ToList();
+
+            }
+            else
+            {
+                MessageBox.Show(datos.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

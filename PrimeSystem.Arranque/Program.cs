@@ -42,13 +42,21 @@ static class Program
         // Registrar formularios
         services.AddTransient<FormArranque>();      // Este Form estaría en PrimeSystem.Arranque
         services.AddTransient<FormPrincipal>();     // Este Form estaría en PrimeSystem.UI
+
         services.AddTransient<FormVentas>();        // Este Form estaría en PrimeSystem.UI.Ventas
+
         services.AddTransient<FormCompras>();       // Este Form estaría en PrimeSystem.UI.Compras
+
         services.AddTransient<FormClientes>();      // Este Form estaría en PrimeSystem.UI.Clientes
+
         services.AddTransient<FormUsuarios>();      // Este Form estaría en PrimeSystem.UI.Usuarios
+        services.AddTransient<USConsultaUsuario>(); // Este UserControl estaría en PrimeSystem.UI.Usuarios
+        services.AddTransient<UCIngresoUsuarios>(); // Este UserControl estaría en PrimeSystem.UI.Usuarios
+
         services.AddTransient<FormProveedores>();  // Este Form estaría en PrimeSystem.UI.Proveedores
         services.AddTransient<UCIngresoProveedores>(); // Este UserControl estaría en PrimeSystem.UI.Proveedores
         services.AddTransient<UCConsultaProveedor>();   // Este UserControl estaría en PrimeSystem.UI.Proveedores
+
         services.AddTransient<FormEstadoContable>(); // Este Form estaría en PrimeSystem.UI.EstadoContable
 
         // Registrar servicios (ejemplo)
