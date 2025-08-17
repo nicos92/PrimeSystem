@@ -71,12 +71,15 @@ partial class FormPrincipal
         BtnModEstadoContable.FlatAppearance.BorderSize = 0;
         BtnModEstadoContable.FlatStyle = FlatStyle.Flat;
         BtnModEstadoContable.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModEstadoContable.Image = Properties.Resources.charts;
+        BtnModEstadoContable.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModEstadoContable.Location = new Point(0, 384);
         BtnModEstadoContable.Name = "BtnModEstadoContable";
         BtnModEstadoContable.Size = new Size(219, 64);
         BtnModEstadoContable.TabIndex = 6;
         BtnModEstadoContable.Text = "Estado Contable";
         BtnModEstadoContable.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModEstadoContable.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnModEstadoContable.UseVisualStyleBackColor = true;
         BtnModEstadoContable.Click += ElejirModulo;
         // 
@@ -86,12 +89,15 @@ partial class FormPrincipal
         BtnModProveedores.FlatAppearance.BorderSize = 0;
         BtnModProveedores.FlatStyle = FlatStyle.Flat;
         BtnModProveedores.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModProveedores.Image = Properties.Resources.proveedores;
+        BtnModProveedores.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModProveedores.Location = new Point(0, 320);
         BtnModProveedores.Name = "BtnModProveedores";
         BtnModProveedores.Size = new Size(219, 64);
         BtnModProveedores.TabIndex = 5;
         BtnModProveedores.Text = "Proveedores";
         BtnModProveedores.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModProveedores.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnModProveedores.UseVisualStyleBackColor = true;
         BtnModProveedores.Click += ElejirModulo;
         // 
@@ -101,12 +107,15 @@ partial class FormPrincipal
         BtnModUsuarios.FlatAppearance.BorderSize = 0;
         BtnModUsuarios.FlatStyle = FlatStyle.Flat;
         BtnModUsuarios.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModUsuarios.Image = Properties.Resources.users2;
+        BtnModUsuarios.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModUsuarios.Location = new Point(0, 256);
         BtnModUsuarios.Name = "BtnModUsuarios";
         BtnModUsuarios.Size = new Size(219, 64);
         BtnModUsuarios.TabIndex = 4;
         BtnModUsuarios.Text = "Usuarios";
         BtnModUsuarios.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnModUsuarios.UseVisualStyleBackColor = true;
         BtnModUsuarios.Click += ElejirModulo;
         // 
@@ -116,12 +125,15 @@ partial class FormPrincipal
         BtnModClientes.FlatAppearance.BorderSize = 0;
         BtnModClientes.FlatStyle = FlatStyle.Flat;
         BtnModClientes.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModClientes.Image = Properties.Resources.clientes;
+        BtnModClientes.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModClientes.Location = new Point(0, 192);
         BtnModClientes.Name = "BtnModClientes";
         BtnModClientes.Size = new Size(219, 64);
         BtnModClientes.TabIndex = 3;
         BtnModClientes.Text = "Clientes";
         BtnModClientes.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModClientes.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnModClientes.UseVisualStyleBackColor = true;
         BtnModClientes.Click += ElejirModulo;
         // 
@@ -131,12 +143,15 @@ partial class FormPrincipal
         BtnModCompras.FlatAppearance.BorderSize = 0;
         BtnModCompras.FlatStyle = FlatStyle.Flat;
         BtnModCompras.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModCompras.Image = Properties.Resources.compra;
+        BtnModCompras.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModCompras.Location = new Point(0, 128);
         BtnModCompras.Name = "BtnModCompras";
         BtnModCompras.Size = new Size(219, 64);
         BtnModCompras.TabIndex = 2;
         BtnModCompras.Text = "Compras";
         BtnModCompras.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModCompras.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnModCompras.UseVisualStyleBackColor = true;
         BtnModCompras.Click += ElejirModulo;
         // 
@@ -147,12 +162,15 @@ partial class FormPrincipal
         BtnModVentas.FlatAppearance.BorderSize = 0;
         BtnModVentas.FlatStyle = FlatStyle.Flat;
         BtnModVentas.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModVentas.Image = Properties.Resources.venta;
+        BtnModVentas.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModVentas.Location = new Point(0, 64);
         BtnModVentas.Name = "BtnModVentas";
         BtnModVentas.Size = new Size(219, 64);
         BtnModVentas.TabIndex = 1;
         BtnModVentas.Text = "Ventas";
         BtnModVentas.TextAlign = ContentAlignment.MiddleLeft;
+        BtnModVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
         BtnModVentas.UseVisualStyleBackColor = false;
         BtnModVentas.Click += ElejirModulo;
         // 

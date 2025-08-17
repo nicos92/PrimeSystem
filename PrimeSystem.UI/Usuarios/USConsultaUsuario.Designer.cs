@@ -32,7 +32,7 @@ namespace PrimeSystem.UI.Usuarios
         {
             PanelMedio = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            TLPFormUsuario = new TableLayoutPanel();
             TxtEmail = new TextBox();
             label1 = new Label();
             label3 = new Label();
@@ -54,7 +54,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelMedio.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
+            TLPFormUsuario.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             PanelLista.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -74,7 +74,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel4.BackColor = Color.FromArgb(218, 218, 220);
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Controls.Add(tableLayoutPanel1, 0, 0);
+            tableLayoutPanel4.Controls.Add(TLPFormUsuario, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(0, 0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -84,51 +84,51 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel4.Size = new Size(429, 491);
             tableLayoutPanel4.TabIndex = 2;
             // 
-            // tableLayoutPanel1
+            // TLPFormUsuario
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.None;
-            tableLayoutPanel1.BackColor = Color.FromArgb(249, 249, 251);
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22.83105F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64.84018F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.5570774F));
-            tableLayoutPanel1.Controls.Add(TxtEmail, 1, 5);
-            tableLayoutPanel1.Controls.Add(label1, 0, 5);
-            tableLayoutPanel1.Controls.Add(label3, 0, 4);
-            tableLayoutPanel1.Controls.Add(LblCuit, 0, 1);
-            tableLayoutPanel1.Controls.Add(TxtTel, 1, 4);
-            tableLayoutPanel1.Controls.Add(TxtApellido, 1, 3);
-            tableLayoutPanel1.Controls.Add(TxtNombre, 1, 2);
-            tableLayoutPanel1.Controls.Add(TxtDni, 1, 1);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 7);
-            tableLayoutPanel1.Controls.Add(label4, 0, 2);
-            tableLayoutPanel1.Controls.Add(label2, 0, 3);
-            tableLayoutPanel1.Controls.Add(label5, 0, 6);
-            tableLayoutPanel1.Controls.Add(CMBTipoUsuario, 1, 6);
-            tableLayoutPanel1.ForeColor = Color.FromArgb(26, 28, 30);
-            tableLayoutPanel1.Location = new Point(3, 55);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 8;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(423, 381);
-            tableLayoutPanel1.TabIndex = 0;
+            TLPFormUsuario.Anchor = AnchorStyles.None;
+            TLPFormUsuario.BackColor = Color.FromArgb(249, 249, 251);
+            TLPFormUsuario.ColumnCount = 3;
+            TLPFormUsuario.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22.83105F));
+            TLPFormUsuario.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 64.84018F));
+            TLPFormUsuario.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.5570774F));
+            TLPFormUsuario.Controls.Add(TxtEmail, 1, 5);
+            TLPFormUsuario.Controls.Add(label1, 0, 5);
+            TLPFormUsuario.Controls.Add(label3, 0, 4);
+            TLPFormUsuario.Controls.Add(LblCuit, 0, 1);
+            TLPFormUsuario.Controls.Add(TxtTel, 1, 4);
+            TLPFormUsuario.Controls.Add(TxtApellido, 1, 3);
+            TLPFormUsuario.Controls.Add(TxtNombre, 1, 2);
+            TLPFormUsuario.Controls.Add(TxtDni, 1, 1);
+            TLPFormUsuario.Controls.Add(tableLayoutPanel2, 1, 7);
+            TLPFormUsuario.Controls.Add(label4, 0, 2);
+            TLPFormUsuario.Controls.Add(label2, 0, 3);
+            TLPFormUsuario.Controls.Add(label5, 0, 6);
+            TLPFormUsuario.Controls.Add(CMBTipoUsuario, 1, 6);
+            TLPFormUsuario.ForeColor = Color.FromArgb(26, 28, 30);
+            TLPFormUsuario.Location = new Point(3, 55);
+            TLPFormUsuario.Name = "TLPFormUsuario";
+            TLPFormUsuario.RowCount = 8;
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            TLPFormUsuario.Size = new Size(423, 381);
+            TLPFormUsuario.TabIndex = 0;
             // 
             // TxtEmail
             // 
@@ -246,12 +246,16 @@ namespace PrimeSystem.UI.Usuarios
             BtnGuardar.FlatStyle = FlatStyle.Flat;
             BtnGuardar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnGuardar.Location = new Point(8, 0);
+            BtnGuardar.Image = Properties.Resources.guardar;
+            BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
+            BtnGuardar.Location = new Point(0, 0);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
-            BtnGuardar.Size = new Size(117, 48);
+            BtnGuardar.Size = new Size(133, 48);
             BtnGuardar.TabIndex = 10;
             BtnGuardar.Text = "Guardar";
+            BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
+            BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
             // 
             // BtnEliminar
@@ -262,12 +266,12 @@ namespace PrimeSystem.UI.Usuarios
             BtnEliminar.FlatStyle = FlatStyle.Flat;
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnEliminar.Image = Properties.Resources.trash;
             BtnEliminar.Location = new Point(176, 0);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
             BtnEliminar.TabIndex = 1;
-            BtnEliminar.Text = "E";
             BtnEliminar.UseVisualStyleBackColor = false;
             // 
             // label4
@@ -376,8 +380,8 @@ namespace PrimeSystem.UI.Usuarios
             Size = new Size(724, 497);
             PanelMedio.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            TLPFormUsuario.ResumeLayout(false);
+            TLPFormUsuario.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             PanelLista.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
@@ -388,7 +392,7 @@ namespace PrimeSystem.UI.Usuarios
 
         private Panel PanelMedio;
         private TableLayoutPanel tableLayoutPanel4;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel TLPFormUsuario;
         private TextBox TxtEmail;
         private Label label1;
         private Label label3;

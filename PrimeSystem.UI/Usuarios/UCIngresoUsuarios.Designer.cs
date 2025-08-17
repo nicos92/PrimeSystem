@@ -252,7 +252,7 @@ namespace PrimeSystem.UI.Usuarios
             CMBTipoUsuario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(93, 274);
+            CMBTipoUsuario.Location = new Point(93, 277);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
             CMBTipoUsuario.Size = new Size(397, 29);
             CMBTipoUsuario.TabIndex = 13;
@@ -265,12 +265,14 @@ namespace PrimeSystem.UI.Usuarios
             BtnIngresar.FlatStyle = FlatStyle.Flat;
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnIngresar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnIngresar.Image = Properties.Resources.ingresar;
             BtnIngresar.Location = new Point(195, 321);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(192, 48);
             BtnIngresar.TabIndex = 14;
             BtnIngresar.Text = "INGRESAR";
+            BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
             // 
             // UCIngresoUsuarios

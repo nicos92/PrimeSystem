@@ -78,12 +78,16 @@
             BtnOpcionEditar.FlatStyle = FlatStyle.Flat;
             BtnOpcionEditar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnOpcionEditar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnOpcionEditar.Image = Properties.Resources.pen;
+            BtnOpcionEditar.ImageAlign = ContentAlignment.MiddleLeft;
             BtnOpcionEditar.Location = new Point(362, 0);
             BtnOpcionEditar.Margin = new Padding(0);
             BtnOpcionEditar.Name = "BtnOpcionEditar";
             BtnOpcionEditar.Size = new Size(362, 64);
             BtnOpcionEditar.TabIndex = 1;
             BtnOpcionEditar.Text = "Editar";
+            BtnOpcionEditar.TextAlign = ContentAlignment.MiddleRight;
+            BtnOpcionEditar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnOpcionEditar.UseVisualStyleBackColor = false;
             BtnOpcionEditar.Click += BtnOpcionIngresar_Click;
             // 
@@ -95,12 +99,16 @@
             BtnOpcionIngresar.FlatStyle = FlatStyle.Flat;
             BtnOpcionIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnOpcionIngresar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnOpcionIngresar.Image = Properties.Resources.ingresar;
+            BtnOpcionIngresar.ImageAlign = ContentAlignment.MiddleLeft;
             BtnOpcionIngresar.Location = new Point(0, 0);
             BtnOpcionIngresar.Margin = new Padding(0);
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
             BtnOpcionIngresar.Size = new Size(362, 64);
             BtnOpcionIngresar.TabIndex = 0;
             BtnOpcionIngresar.Text = "Ingresar";
+            BtnOpcionIngresar.TextAlign = ContentAlignment.MiddleRight;
+            BtnOpcionIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnOpcionIngresar.UseVisualStyleBackColor = false;
             BtnOpcionIngresar.Click += BtnOpcionIngresar_Click;
             // 

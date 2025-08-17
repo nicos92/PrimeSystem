@@ -298,12 +298,16 @@ namespace PrimeSystem.UI.Proveedores
             BtnGuardar.FlatStyle = FlatStyle.Flat;
             BtnGuardar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnGuardar.Location = new Point(8, 26);
+            BtnGuardar.Image = Properties.Resources.guardar;
+            BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
+            BtnGuardar.Location = new Point(0, 26);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
-            BtnGuardar.Size = new Size(117, 48);
+            BtnGuardar.Size = new Size(133, 48);
             BtnGuardar.TabIndex = 10;
             BtnGuardar.Text = "Guardar";
+            BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
+            BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
             // 
             // BtnEliminar
@@ -314,12 +318,12 @@ namespace PrimeSystem.UI.Proveedores
             BtnEliminar.FlatStyle = FlatStyle.Flat;
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnEliminar.Image = Properties.Resources.trash;
             BtnEliminar.Location = new Point(176, 26);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
             BtnEliminar.TabIndex = 1;
-            BtnEliminar.Text = "E";
             BtnEliminar.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel3

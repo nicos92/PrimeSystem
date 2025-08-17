@@ -57,6 +57,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnIngresar.FlatStyle = FlatStyle.Flat;
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnIngresar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnIngresar.Image = Properties.Resources.ingresar;
             BtnIngresar.Location = new Point(174, 304);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
@@ -64,6 +65,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnIngresar.Size = new Size(192, 48);
             BtnIngresar.TabIndex = 1;
             BtnIngresar.Text = "INGRESAR";
+            BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
             // 
             // PanelForm
