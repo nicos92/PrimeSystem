@@ -13,12 +13,61 @@ namespace PrimeSystem.Repositorio.Repositorios
     {
         public Result<HVentas> Add(HVentas venta)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using OleDbConnection conexion = Conexion();
+                using OleDbCommand cmd = new OleDbCommand("INSERT INTO HVentas (Cod_Usuario, Fecha_Hora, Id_Cliente, Subtotal, Descu, Total) VALUES (@Cod_Usuario, @Fecha_Hora, @Id_Cliente, @Subtotal, @Descu, @Total)", conexion);
+                cmd.Parameters.AddWithValue("@Cod_Usuario", venta.Cod_Usuario);
+                cmd.Parameters.AddWithValue("@Fecha_Hora", venta.Fecha_Hora);
+                cmd.Parameters.AddWithValue("@Id_Cliente", venta.Id_Cliente);
+                cmd.Parameters.AddWithValue("@Subtotal", venta.Subtotal);
+                cmd.Parameters.AddWithValue("@Descu", venta.Descu);
+                cmd.Parameters.AddWithValue("@Total", venta.Total);
+                conexion.Open();
+                int resultado = cmd.ExecuteNonQuery();
+                if (resultado > 0)
+                {
+                    return Result<HVentas>.Success(venta);
+                }
+                else
+                {
+                    return Result<HVentas>.Failure("No se pudo agregar la venta.");
+                }
+            }catch (OleDbException ex)
+            {
+                return Result<HVentas>.Failure($"Error al agregar la venta: {ex.Message}");
+            }
+            catch (System.Exception ex)
+            {
+                return Result<HVentas>.Failure($"Error inesperado al agregar la venta: {ex.Message}");
+            }
         }
 
         public Result<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using OleDbConnection conexion = Conexion();
+                using OleDbCommand cmd = new OleDbCommand("DELETE FROM HVentas WHERE Id_Remito = @Id_Remito", conexion);
+                cmd.Parameters.AddWithValue("@Id_Remito", id);
+                conexion.Open();
+                int resultado = cmd.ExecuteNonQuery();
+                if (resultado > 0)
+                {
+                    return Result<bool>.Success(true);
+                }
+                else
+                {
+                    return Result<bool>.Failure("No se pudo eliminar la venta.");
+                }
+            }catch (OleDbException ex)
+            {
+                return Result<bool>.Failure($"Error al eliminar la venta: {ex.Message}");
+            }
+            catch (System.Exception ex)
+            {
+                return Result<bool>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
+            }
         }
 
         public Result<List<HVentas>> GetAll()
@@ -52,6 +101,10 @@ namespace PrimeSystem.Repositorio.Repositorios
             catch (OleDbException ex)
             {
                 return Result<List<HVentas>>.Failure($"Error al obtener ventas: {ex.Message}");
+            }
+            catch (System.Exception ex)
+            {
+                return Result<bool>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
             }
         }
 
@@ -89,12 +142,44 @@ namespace PrimeSystem.Repositorio.Repositorios
             catch (OleDbException ex)
             {
                 return Result<HVentas>.Failure($"Error al obtener venta");
-			}
+            }
+            catch (System.Exception ex)
+            {
+                return Result<bool>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
+            }
         }
 
         public Result<HVentas> Update(HVentas venta)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using OleDbConnection conexion = Conexion();
+                using OleDbCommand cmd = new OleDbCommand("UPDATE HVentas SET Cod_Usuario = @Cod_Usuario, Fecha_Hora = @Fecha_Hora, Id_Cliente = @Id_Cliente, Subtotal = @Subtotal, Descu = @Descu, Total = @Total WHERE Id_Remito = @Id_Remito", conexion);
+                cmd.Parameters.AddWithValue("@Cod_Usuario", venta.Cod_Usuario);
+                cmd.Parameters.AddWithValue("@Fecha_Hora", venta.Fecha_Hora);
+                cmd.Parameters.AddWithValue("@Id_Cliente", venta.Id_Cliente);
+                cmd.Parameters.AddWithValue("@Subtotal", venta.Subtotal);
+                cmd.Parameters.AddWithValue("@Descu", venta.Descu);
+                cmd.Parameters.AddWithValue("@Total", venta.Total);
+                cmd.Parameters.AddWithValue("@Id_Remito", venta.Id_Remito);
+                conexion.Open();
+                int resultado = cmd.ExecuteNonQuery();
+                if (resultado > 0)
+                {
+                    return Result<HVentas>.Success(venta);
+                }
+                else
+                {
+                    return Result<HVentas>.Failure("No se pudo actualizar la venta.");
+                }
+            }catch (OleDbException ex)
+            {
+                return Result<HVentas>.Failure($"Error al actualizar la venta: {ex.Message}");
+            }
+            catch (System.Exception ex)
+            {
+                return Result<HVentas>.Failure($"Error inesperado al actualizar la venta: {ex.Message}");
+            }
         }
     }
 }
