@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IHVentasDetalleRepository
     {
-        Result<List<HVentasDetalle>> GetAll();
+        Task<Result<List<HVentasDetalle>>> GetAll();
         Result<HVentasDetalle> GetById(int id);
         Result<HVentasDetalle> Add(HVentasDetalle detalle);
         Result<HVentasDetalle> Update(HVentasDetalle detalle);

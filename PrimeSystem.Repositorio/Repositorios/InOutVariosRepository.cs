@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Modelo.Entidades;
@@ -8,26 +10,27 @@ using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.Repositorio.Repositorios
 {
-    public class InOutVariosRepository : IInOutVariosRepository
+    [SupportedOSPlatform("windows")]
+    public class InOutVariosRepository : BaseRepositorio, IInOutVariosRepository
     {
-        public Result<InOutVarios> Add(InOutVarios entity)
+        public Result<InOutVarios> Add(InOutVarios item)
         {
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("INSERT INTO InOutVarios (" +
+                using OleDbCommand cmd = new("INSERT INTO InOutVarios (" +
                     "Cod_Usuario, Tipo, Detalle, Monto, Fecha) " +
                     "VALUES (@Cod_Usuario, @Tipo, @Detalle, @Monto, @Fecha)", conn);
-                cmd.Parameters.AddWithValue("@Cod_Usuario", entity.Cod_Usuario);
-                cmd.Parameters.AddWithValue("@Tipo", entity.Tipo);
-                cmd.Parameters.AddWithValue("@Detalle", entity.Detalle);
-                cmd.Parameters.AddWithValue("@Monto", entity.Monto);
-                cmd.Parameters.AddWithValue("@Fecha", entity.Fecha);
+                cmd.Parameters.AddWithValue("@Cod_Usuario", item.Cod_Usuario);
+                cmd.Parameters.AddWithValue("@Tipo", item.Tipo);
+                cmd.Parameters.AddWithValue("@Detalle", item.Detalle);
+                cmd.Parameters.AddWithValue("@Monto", item.Monto);
+                cmd.Parameters.AddWithValue("@Fecha", item.Fecha);
                 conn.Open();
                 int inserts = cmd.ExecuteNonQuery();
                 if (inserts > 0)
                 {
-                    return Result<InOutVarios>.Success(entity);
+                    return Result<InOutVarios>.Success(item);
                 }
                 else
                 {
@@ -49,7 +52,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("DELETE FROM InOutVarios WHERE Id_Movimiento = @Id_Movimiento", conn);
+                using OleDbCommand cmd = new("DELETE FROM InOutVarios WHERE Id_Movimiento = @Id_Movimiento", conn);
                 cmd.Parameters.AddWithValue("@Id_Movimiento", id);
                 conn.Open();
                 int deletes = cmd.ExecuteNonQuery();
@@ -77,13 +80,13 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM InOutVarios", conn);
+                using OleDbCommand cmd = new("SELECT Id_Movimiento, Cod_Usuario, Tipo, Detalle, Monto, Fecha FROM InOutVarios", conn);
                 conn.Open();
                 using OleDbDataReader reader = cmd.ExecuteReader();
-                List<InOutVarios> movimientos = new List<InOutVarios>();
+                List<InOutVarios> movimientos = [];
                 while (reader.Read())
                 {
-                    InOutVarios movimiento = new InOutVarios
+                    InOutVarios movimiento = new()
                     {
                         Id_Movimiento = reader.GetInt32(0),
                         Cod_Usuario = reader.GetInt32(1),
@@ -111,7 +114,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM InOutVarios WHERE Id_Movimiento = @Id_Movimiento", conn);
+                using OleDbCommand cmd = new("SELECT Id_Movimiento, Cod_Usuario, Tipo, Detalle, Monto, Fecha  FROM InOutVarios WHERE Id_Movimiento = @Id_Movimiento", conn);
                 cmd.Parameters.AddWithValue("@Id_Movimiento", id);
                 conn.Open();
                 using OleDbDataReader reader = cmd.ExecuteReader();
@@ -143,29 +146,29 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
         
-        public Result<InOutVarios> Update(InOutVarios entity)
+        public Result<InOutVarios> Update(InOutVarios item)
         {
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("UPDATE InOutVarios SET " +
+                using OleDbCommand cmd = new("UPDATE InOutVarios SET " +
                     "Cod_Usuario = @Cod_Usuario, " +
                     "Tipo = @Tipo, " +
                     "Detalle = @Detalle, " +
                     "Monto = @Monto, " +
                     "Fecha = @Fecha " +
                     "WHERE Id_Movimiento = @Id_Movimiento", conn);
-                cmd.Parameters.AddWithValue("@Cod_Usuario", entity.Cod_Usuario);
-                cmd.Parameters.AddWithValue("@Tipo", entity.Tipo);
-                cmd.Parameters.AddWithValue("@Detalle", entity.Detalle);
-                cmd.Parameters.AddWithValue("@Monto", entity.Monto);
-                cmd.Parameters.AddWithValue("@Fecha", entity.Fecha);
-                cmd.Parameters.AddWithValue("@Id_Movimiento", entity.Id_Movimiento);
+                cmd.Parameters.AddWithValue("@Cod_Usuario", item.Cod_Usuario);
+                cmd.Parameters.AddWithValue("@Tipo", item.Tipo);
+                cmd.Parameters.AddWithValue("@Detalle", item.Detalle);
+                cmd.Parameters.AddWithValue("@Monto", item.Monto);
+                cmd.Parameters.AddWithValue("@Fecha", item.Fecha);
+                cmd.Parameters.AddWithValue("@Id_Movimiento", item.Id_Movimiento);
                 conn.Open();
                 int updates = cmd.ExecuteNonQuery();
                 if (updates > 0)
                 {
-                    return Result<InOutVarios>.Success(entity);
+                    return Result<InOutVarios>.Success(item);
                 }
                 else
                 {

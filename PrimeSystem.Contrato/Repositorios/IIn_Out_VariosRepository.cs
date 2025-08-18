@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IInOutVariosRepository
     {
-        Result<List<InOutVarios>> GetAll();
+        Task<Result<List<InOutVarios>>> GetAll();
         Result<InOutVarios> GetById(int id);
         Result<InOutVarios> Add(InOutVarios item);
         Result<InOutVarios> Update(InOutVarios item);

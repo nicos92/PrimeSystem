@@ -78,22 +78,20 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("SELECT Id_Remito,Cod_Usuario,Fecha_Hora,Id_Cliente,Subtotal,Total FROM HVentas", conexion))
-                    using (var reader = cmd.ExecuteReader())
+                    using var cmd = new OleDbCommand("SELECT Id_Remito,Cod_Usuario,Fecha_Hora,Id_Cliente,Subtotal,Total FROM HVentas", conexion);
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        ventas.Add(new HVentas
                         {
-                            ventas.Add(new HVentas
-                            {
-                                Id_Remito = reader.GetInt32(0),
-                                Cod_Usuario = reader.GetInt32(1),
-                                Fecha_Hora = reader.GetDateTime(2),
-                                Id_Cliente = reader.GetInt32(3),
-                                Subtotal = reader.GetDouble(4),
-                                Descu = reader.GetDouble(5),
-                                Total = reader.GetDouble(6)
-                            });
-                        }
+                            Id_Remito = reader.GetInt32(0),
+                            Cod_Usuario = reader.GetInt32(1),
+                            Fecha_Hora = reader.GetDateTime(2),
+                            Id_Cliente = reader.GetInt32(3),
+                            Subtotal = reader.GetDouble(4),
+                            Descu = reader.GetDouble(5),
+                            Total = reader.GetDouble(6)
+                        });
                     }
                 }
                 return Result<List<HVentas>>.Success(ventas);
@@ -104,7 +102,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
             catch (System.Exception ex)
             {
-                return Result<bool>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
+                return Result<List<HVentas>>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
             }
         }
 
@@ -115,37 +113,33 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("SELECT Id_Remito,Cod_Usuario,Fecha_Hora,Id_Cliente,Subtotal,Total FROM HVentas WHERE Id_Remito = @id", conexion))
+                    using var cmd = new OleDbCommand("SELECT Id_Remito,Cod_Usuario,Fecha_Hora,Id_Cliente,Subtotal,Total FROM HVentas WHERE Id_Remito = @id", conexion);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using var reader = cmd.ExecuteReader();
+                    if (reader.Read())
                     {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        using (var reader = cmd.ExecuteReader())
+                        var venta = new HVentas
                         {
-                            if (reader.Read())
-                            {
-                                var venta = new HVentas
-                                {
-                                    Id_Remito = reader.GetInt32(0),
-                                    Cod_Usuario = reader.GetInt32(1),
-                                    Fecha_Hora = reader.GetDateTime(2),
-                                    Id_Cliente = reader.GetInt32(3),
-                                    Subtotal = reader.GetDouble(4),
-                                    Descu = reader.GetDouble(5),
-                                    Total = reader.GetDouble(6)
-                                };
-                                return Result<HVentas>.Success(venta);
-                            }
-                        }
+                            Id_Remito = reader.GetInt32(0),
+                            Cod_Usuario = reader.GetInt32(1),
+                            Fecha_Hora = reader.GetDateTime(2),
+                            Id_Cliente = reader.GetInt32(3),
+                            Subtotal = reader.GetDouble(4),
+                            Descu = reader.GetDouble(5),
+                            Total = reader.GetDouble(6)
+                        };
+                        return Result<HVentas>.Success(venta);
                     }
                 }
                 return Result<HVentas>.Failure("Venta no encontrada");
             }
             catch (OleDbException ex)
             {
-                return Result<HVentas>.Failure($"Error al obtener venta");
+                return Result<HVentas>.Failure($"Error al obtener venta { ex.Message}");
             }
             catch (System.Exception ex)
             {
-                return Result<bool>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
+                return Result<HVentas>.Failure($"Error inesperado al eliminar la venta: {ex.Message}");
             }
         }
 

@@ -16,20 +16,18 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 var categorias = new List<Categorias>();
-                using (var conexion = Conexion())
+                using (OleDbConnection conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("SELECT * FROM Categorias", conexion))
-                    using (var reader = cmd.ExecuteReader())
+                    using var cmd = new OleDbCommand("SELECT Id_Categoria, Categoria FROM Categorias", conexion);
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        categorias.Add(new Categorias
                         {
-                            categorias.Add(new Categorias
-                            {
-                                Id_categoria = reader.GetInt32("Id_categoria"),
-                                Categoria = reader.IsDBNull("Categoria") ? null : reader.GetString("Categoria")
-                            });
-                        }
+                            Id_categoria = reader.GetInt32(0),
+                            Categoria = reader.GetString(1)
+                        });
                     }
                 }
                 return Result<List<Categorias>>.Success(categorias);
@@ -47,21 +45,17 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("SELECT * FROM Categorias WHERE Id_categoria = ?", conexion))
+                    using var cmd = new OleDbCommand("SELECT  Id_Categoria, Categoria FROM Categorias WHERE Id_categoria = ?", conexion);
+                    cmd.Parameters.AddWithValue("?", id);
+                    using var reader = cmd.ExecuteReader();
+                    if (reader.Read())
                     {
-                        cmd.Parameters.AddWithValue("?", id);
-                        using (var reader = cmd.ExecuteReader())
+                        var categoria = new Categorias
                         {
-                            if (reader.Read())
-                            {
-                                var categoria = new Categorias
-                                {
-                                    Id_categoria = reader.GetInt32("Id_categoria"),
-                                    Categoria = reader.IsDBNull("Categoria") ? null : reader.GetString("Categoria")
-                                };
-                                return Result<Categorias>.Success(categoria);
-                            }
-                        }
+                            Id_categoria = reader.GetInt32(0),
+                            Categoria = reader.GetString(1)
+                        };
+                        return Result<Categorias>.Success(categoria);
                     }
                 }
                 return Result<Categorias>.Failure("Categoría no encontrada");
@@ -79,19 +73,15 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand(
-                        "INSERT INTO Categorias (Categoria) VALUES (?)", conexion))
-                    {
-                        cmd.Parameters.AddWithValue("?", categoria.Categoria);
-                        cmd.ExecuteNonQuery();
-                        
-                        // Obtener el ID de la categoría insertada
-                        using (var cmdId = new OleDbCommand("SELECT @@IDENTITY", conexion))
-                        {
-                            var newId = Convert.ToInt32(cmdId.ExecuteScalar());
-                            categoria.Id_categoria = newId;
-                        }
-                    }
+                    using var cmd = new OleDbCommand(
+                        "INSERT INTO Categorias (Categoria) VALUES (?)", conexion);
+                    cmd.Parameters.AddWithValue("?", categoria.Categoria);
+                    cmd.ExecuteNonQuery();
+
+                    // Obtener el ID de la categoría insertada
+                    using var cmdId = new OleDbCommand("SELECT @@IDENTITY", conexion);
+                    var newId = Convert.ToInt32(cmdId.ExecuteScalar());
+                    categoria.Id_categoria = newId;
                 }
                 return Result<Categorias>.Success(categoria);
             }
@@ -105,25 +95,21 @@ namespace PrimeSystem.Repositorio.Repositorios
         {
             try
             {
-                using (var conexion = Conexion())
+                using var conexion = Conexion();
+                conexion.Open();
+                using var cmd = new OleDbCommand(
+                    "UPDATE Categorias SET Categoria = ? WHERE Id_categoria = ?", conexion);
+                cmd.Parameters.AddWithValue("?", categoria.Categoria);
+                cmd.Parameters.AddWithValue("?", categoria.Id_categoria);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
                 {
-                    conexion.Open();
-                    using (var cmd = new OleDbCommand(
-                        "UPDATE Categorias SET Categoria = ? WHERE Id_categoria = ?", conexion))
-                    {
-                        cmd.Parameters.AddWithValue("?", categoria.Categoria);
-                        cmd.Parameters.AddWithValue("?", categoria.Id_categoria);
-                        
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            return Result<Categorias>.Success(categoria);
-                        }
-                        else
-                        {
-                            return Result<Categorias>.Failure("No se encontró la categoría a actualizar");
-                        }
-                    }
+                    return Result<Categorias>.Success(categoria);
+                }
+                else
+                {
+                    return Result<Categorias>.Failure("No se encontró la categoría a actualizar");
                 }
             }
             catch (Exception ex)
@@ -136,23 +122,19 @@ namespace PrimeSystem.Repositorio.Repositorios
         {
             try
             {
-                using (var conexion = Conexion())
+                using var conexion = Conexion();
+                conexion.Open();
+                using var cmd = new OleDbCommand("DELETE FROM Categorias WHERE Id_categoria = ?", conexion);
+                cmd.Parameters.AddWithValue("?", id);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
                 {
-                    conexion.Open();
-                    using (var cmd = new OleDbCommand("DELETE FROM Categorias WHERE Id_categoria = ?", conexion))
-                    {
-                        cmd.Parameters.AddWithValue("?", id);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        
-                        if (rowsAffected > 0)
-                        {
-                            return Result<bool>.Success(true);
-                        }
-                        else
-                        {
-                            return Result<bool>.Failure("No se encontró la categoría a eliminar");
-                        }
-                    }
+                    return Result<bool>.Success(true);
+                }
+                else
+                {
+                    return Result<bool>.Failure("No se encontró la categoría a eliminar");
                 }
             }
             catch (Exception ex)

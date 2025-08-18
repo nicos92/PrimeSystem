@@ -15,7 +15,7 @@ namespace PrimeSystem.Servicio.Implementaciones
             _repo = repo;
         }
 
-        public Result<List<HVentasDetalle>> GetAll() => _repo.GetAll();
+        public async Task<Result<List<HVentasDetalle>>> GetAll() => await _repo.GetAll();
         public Result<HVentasDetalle> GetById(int id) => _repo.GetById(id);
         public Result<HVentasDetalle> Add(HVentasDetalle detalle) => _repo.Add(detalle);
         public Result<HVentasDetalle> Update(HVentasDetalle detalle) => _repo.Update(detalle);
