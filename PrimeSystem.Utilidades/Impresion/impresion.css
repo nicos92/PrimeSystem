@@ -102,7 +102,6 @@ hr {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 2rem;
     /* espacio entre ambos */
     width: 100%;
 }
@@ -214,6 +213,21 @@ hr {
     font-size: var(--fs-lg);
 }
 
+.boton-imprimir {
+    padding: 1rem 1rem;
+    font-size: var(--fs-base);
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton-imprimir:hover {
+    background-color: #0056b3;
+}
+
 @media print {
 
     /* Mostrar la tabla tradicional */
@@ -257,5 +271,9 @@ hr {
     /* Quitar overflow en contenedores para impresión */
     .contenedor {
         overflow: visible !important;
+    }
+
+    .contenedor-imp {
+        display: none !important;
     }
 }
