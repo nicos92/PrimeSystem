@@ -15,7 +15,7 @@ namespace PrimeSystem.Servicio.Implementaciones
             _repo = repo;
         }
 
-        public Result<List<Proveedores>> GetAll() => _repo.GetAll();
+        public Task<Result<List<Proveedores>>> GetAll() => await _repo.GetAll();
         public Result<Proveedores> GetById(int id) => _repo.GetById(id);
         public Result<Proveedores> Add(Proveedores proveedor) => _repo.Add(proveedor);
         public Result<Proveedores> Update(Proveedores proveedor) => _repo.Update(proveedor);

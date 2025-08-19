@@ -20,6 +20,7 @@
 body {
     padding: clamp(8px, 2vw, 16px);
     width: 100%;
+    min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     background: rgb(255, 255, 255);
     color: rgb(26, 28, 30);
@@ -27,11 +28,12 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    border: 1px solid rgb(26, 28, 30);
 }
 
 .contenedor-principal {
     width: clamp(300px, 90vw, 800px);   
+    min-height: 100%;
     border: 1px solid rgb(26, 28, 30);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
