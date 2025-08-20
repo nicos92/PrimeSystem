@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Servicios
 {
     public interface IUsuariosService
     {
-        Result<List<Usuarios>> GetAll();
+        Task<Result<List<Usuarios>>> GetAll();
         Result<Usuarios> GetById(int id);
         Result<Usuarios> Add(Usuarios usuario);
         Result<Usuarios> Update(Usuarios usuario);
