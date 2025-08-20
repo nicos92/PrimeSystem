@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.OleDb;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Modelo.Entidades;
@@ -8,7 +11,8 @@ using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.Repositorio.Repositorios
 {
-    public class UsuariosTipoRepository : BaseRepositorio, IUsuariosRepository
+    [SupportedOSPlatform("windows")]
+    public class UsuariosTipoRepository : BaseRepositorio, IUsuariosTipoRepository
     {
         public Result<Usuarios_Tipo> Add(Usuarios_Tipo tipo)
         {
@@ -31,6 +35,8 @@ namespace PrimeSystem.Repositorio.Repositorios
                 return Result<Usuarios_Tipo>.Failure($"Error inesperado al insertar el tipo de usuario: {ex.Message}");
             }
         }
+
+       
 
         public Result<bool> Delete(int id)
         {
@@ -60,7 +66,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using OleDbConnection conn = Conexion();
                 using OleDbCommand cmd = new OleDbCommand("SELECT Id_Usuario_Tipo, Tipo, Descripcion FROM Usuarios_Tipo", conn);
                 await conn.OpenAsync();
-                using OleDbDataReader reader = await cmd.ExecuteReaderasync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
                 List<Usuarios_Tipo> tipos = new List<Usuarios_Tipo>();
                 while (await reader.ReadAsync())
                 {
@@ -136,5 +142,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 return Result<Usuarios_Tipo>.Failure($"Error inesperado al actualizar el tipo de usuario: {ex.Message}");
             }
         }
+
+    
     }
 }

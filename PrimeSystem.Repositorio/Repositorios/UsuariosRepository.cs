@@ -1,22 +1,27 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.OleDb;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.Repositorio.Repositorios
 {
+    [SupportedOSPlatform("windows")]
     public class UsuariosRepository : BaseRepositorio, IUsuariosRepository
     {
         public async Task<Result<List<Usuarios>>> GetAll()
         {
             try
             {
-                using OleDbConnectio conn = Conexion();
+                using OleDbConnection conn = Conexion();
                 using OleDbCommand cmd = new OleDbCommand("SELECT Id_Usuario, DNI, Nombre, Apellido, Tel, Mail, Id_Tipo FROM Usuarios", conn);
                 await conn.OpenAsync();
-                using OleDbDataReader reader = await cmd.ExecuteReaderAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
                 List<Usuarios> usuarios = new List<Usuarios>();
                 while (await reader.ReadAsync())
                 {
@@ -32,7 +37,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                     };
                     usuarios.Add(usuario);
                 }
-                return new Result<List<Usuarios>>(usuarios);
+                return Result<List<Usuarios>>.Success(usuarios);
             }
             catch (OleDbException ex)
             {
@@ -65,7 +70,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                         Mail = reader.IsDBNull(5) ? null : reader.GetString(5),
                         Id_Tipo = reader.GetInt32(6)
                     };
-                    return new Result<Usuarios>(usuario);
+                    return Result<Usuarios>.Success(usuario);
                 }
                 return Result<Usuarios>.Failure("Usuario no encontrado");
             }
@@ -95,7 +100,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 int rowsAffected = cmd.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    return new Result<Usuarios>(usuario);
+                    return Result<Usuarios>.Success(usuario);
                 }
                 return Result<Usuarios>.Failure("No se pudo agregar el usuario");
             }
@@ -126,7 +131,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 int rowsAffected = cmd.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    return new Result<Usuarios>(usuario);
+                    return Result<Usuarios>.Success(usuario);
                 }
                 return Result<Usuarios>.Failure("No se pudo actualizar el usuario");
             }
@@ -151,7 +156,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 int rowsAffected = cmd.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    return new Result<bool>(true);
+                    return Result<bool>.Success(true);
                 }
                 return Result<bool>.Failure("No se pudo eliminar el usuario");
             }

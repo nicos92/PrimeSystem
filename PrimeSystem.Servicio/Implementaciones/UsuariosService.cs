@@ -15,7 +15,7 @@ namespace PrimeSystem.Servicio.Implementaciones
             _repo = repo;
         }
 
-        public async task<Result<List<Usuarios>>> GetAll() => await _repo.GetAll();
+        public async Task<Result<List<Usuarios>>> GetAll() => await _repo.GetAll();
         public Result<Usuarios> GetById(int id) => _repo.GetById(id);
         public Result<Usuarios> Add(Usuarios usuario) => _repo.Add(usuario);
         public Result<Usuarios> Update(Usuarios usuario) => _repo.Update(usuario);

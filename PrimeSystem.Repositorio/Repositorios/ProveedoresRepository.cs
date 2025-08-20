@@ -1,12 +1,18 @@
+using PrimeSystem.Contrato.Repositorios;
+using PrimeSystem.Modelo.Entidades;
+using PrimeSystem.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.OleDb;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 namespace PrimeSystem.Repositorio.Repositorios
 {
     [SupportedOSPlatform("windows")]
-    public class ProveedoresRepository : IProveedoresRepository 
+    public class ProveedoresRepository : BaseRepositorio, IProveedoresRepository 
     {
         public Result<Proveedores> Add(Proveedores Proveedor){
 
@@ -70,10 +76,10 @@ namespace PrimeSystem.Repositorio.Repositorios
 
         public async Task<Result<List<Proveedores>>> GetAll(){
             try{
-                using OleDBConnection conn = Conexion();
+                using OleDbConnection conn = Conexion();
                 using OleDbCommand cmd = new OleDbCommand("SELECT Id_Proveedor, CUIT, Proveedor, Nombre, Telefono, Email FROM Proveedores", conn);
-                conn.OpenAsync();
-                using OleDbDataReader reader = await cmd.ExecuteReaderAsync();
+                await conn.OpenAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
                 List<Proveedores> proveedores = new List<Proveedores>();
                 while (await reader.ReadAsync())
                 {

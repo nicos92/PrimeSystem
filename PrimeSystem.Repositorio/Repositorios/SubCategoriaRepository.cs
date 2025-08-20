@@ -1,11 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.OleDb;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using PrimeSystem.Contrato.Repositorios;
+using PrimeSystem.Modelo.Entidades;
+using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.Repositorio.Repositorios
 {
-    public class SubCategoriaRepository : BaseRepositorio, ISubCategoriaRepository
+    [SupportedOSPlatform("windows")]
+    public class SubCategoriaRepository : BaseRepositorio, ISubcategoriaRepository
     {
         public async Task<Result<List<Subcategoria>>> GetAll()
         {
@@ -14,7 +21,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using OleDbConnection conn = Conexion();
                 using OleDbCommand cmd = new OleDbCommand("SELECT Id_Subcategoria, Sub_categoria, Id_Categoria FROM Subcategoria", conn);
                 await conn.OpenAsync();
-                using OleDbDataReader reader = await cmd.ExecuteReaderAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
                 List<Subcategoria> subcategorias = new List<Subcategoria>();
                 while (await reader.ReadAsync())
                 {
@@ -35,7 +42,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
             catch (Exception ex)
             {
-                return Result<List<SubCateogoria>.Failure("Error al obtener las subcategorías: " + ex.Message);
+                return Result<List<Subcategoria>>.Failure("Error al obtener las subcategorías: " + ex.Message);
             }
         }
 
