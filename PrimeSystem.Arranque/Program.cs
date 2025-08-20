@@ -41,6 +41,7 @@ static class Program
     {
         // Registrar formularios
         services.AddTransient<FormArranque>();      // Este Form estaría en PrimeSystem.Arranque
+
         services.AddTransient<FormPrincipal>();     // Este Form estaría en PrimeSystem.UI
 
         services.AddTransient<FormVentas>();        // Este Form estaría en PrimeSystem.UI.Ventas
@@ -64,5 +65,47 @@ static class Program
 
         services.AddScoped<IArticulosRepository, ArticulosRepository>();
         services.AddScoped<IArticulosService, ArticulosService>();
+        
+        services.AddScoped<ICategoriasRepository, CategoriasRepository>();
+        services.AddScoped<ICategoriasService, CategoriasService>();
+
+        services.AddScoped<IClientesRepository, ClientesRepository>();
+        services.AddScoped<IClientesService, ClientesService>();
+
+        services.AddScoped<IHComprasDetalleRepository, HComprasDetalleRepository>();
+        services.AddScoped<IHComprasDetalleService, HComprasDetalleService>();
+
+        services.AddScoped<IHComprasRepository, HComprasRepository>();
+        services.AddScoped<IHComprasService, HComprasService>();
+
+        services.AddScoped<IProveedoresRepository, ProveedoresRepository>();
+        services.AddScoped<IProveedoresService, ProveedoresService>();
+
+        services.AddScoped<IUsuariosRepository, UsuariosRepository>();
+        services.AddScoped<IUsuariosService, UsuariosService>();
+
+        services.AddScoped<IHVentasRepository, HVentasRepository>();
+        services.AddScoped<IHVentasService, HVentasService>();
+
+        services.AddScoped<IHVentasDetalleRepository, HVentasDetalleRepository>();
+        services.AddScoped<IHVentasDetalleService, HVentasDetalleService>();
+
+        services.AddScoped<IUsuariosTipoRepository, UsuariosTipoRepository>();
+        services.AddScoped<IUsuariosTipoService, UsuariosTipoService>();
+
+        services.AddScoped<ISubcategoriaRepository, SubCategoriaRepository>();
+        services.AddScoped<ISubcategoriaService, SubcategoriaService>();
+
+        services.AddScoped<IStockRepository, StockRepository>();
+        services.AddScoped<IStockService, StockService>();
+
+        services.AddScoped<IHMovimientosRepository, HMovimientosRepository>();
+        services.AddScoped<IHMovimientosService, HMovimientosService>();
+
+        services.AddScoped<IInOutVariosRepository, InOutVariosRepository>();
+        services.AddScoped<IInOutVariosService, InOutVariosService>();
+
+
+
     }
 }
