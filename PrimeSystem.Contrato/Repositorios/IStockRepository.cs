@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IStockRepository
     {
-        Result<List<Stock>> GetAll();
+        Task<Result<List<Stock>>> GetAll();
         Result<Stock> GetById(int id);
         Result<Stock> Add(Stock stock);
         Result<Stock> Update(Stock stock);
