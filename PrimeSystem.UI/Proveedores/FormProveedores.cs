@@ -15,7 +15,7 @@ namespace PrimeSystem.UI.Proveedores
     public partial class FormProveedores : Form
     {
         private Button _btnActual;
-        private IServiceProvider _serviceProvider;
+        private readonly IServiceProvider _serviceProvider;
         public FormProveedores(IServiceProvider serviceProvider)
         {
 

@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <Compile Remove="NewClass.cs" />
+    <Compile Remove="ServiceLocator.cs" />
     <Compile Remove="Usuarios\UCConsultarUsuarios.cs" />
     <Compile Remove="Usuarios\UCConsultarUsuarios.Designer.cs" />
   </ItemGroup>

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.OleDb;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Modelo.Entidades;
@@ -8,6 +11,7 @@ using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.Repositorio.Repositorios
 {
+    [SupportedOSPlatform("windows")]
     public class StockRepository : BaseRepositorio, IStockRepository
     {
         public Result<Stock> Add(Stock stock)
@@ -15,7 +19,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("INSERT INTO Stock (Cod_Articulo, Cantidad, Costo, Ganancia) VALUES (@Cod_Articulo, @Cantidad, @Costo, @Ganancia)", conn);
+                using OleDbCommand cmd = new("INSERT INTO Stock (Cod_Articulo, Cantidad, Costo, Ganancia) VALUES (@Cod_Articulo, @Cantidad, @Costo, @Ganancia)", conn);
                 cmd.Parameters.AddWithValue("@Cod_Articulo", stock.Cod_Articulo);
                 cmd.Parameters.AddWithValue("@Cantidad", stock.Cantidad);
                 cmd.Parameters.AddWithValue("@Costo", stock.Costo);
@@ -47,7 +51,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("DELETE FROM Stock WHERE Cod_Articulo = @Cod_Articulo", conn);
+                using OleDbCommand cmd = new("DELETE FROM Stock WHERE Cod_Articulo = @Cod_Articulo", conn);
                 cmd.Parameters.AddWithValue("@Cod_Articulo", id);
                 conn.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -74,14 +78,14 @@ namespace PrimeSystem.Repositorio.Repositorios
         {
             try
             {
-                List<Stock> stocks = new List<Stock>();
+                List<Stock> stocks = [];
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT Cod_Articulo, Cantidad, Costo, Ganancia FROM Stock", conn);
-                conn.Open();
-                using OleDbDataReader reader = await cmd.ExecuteReaderAsync();
+                using OleDbCommand cmd = new("SELECT Cod_Articulo, Cantidad, Costo, Ganancia FROM Stock", conn);
+                await conn.OpenAsync();
+                using  DbDataReader reader = await cmd.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
-                    Stock stock = new Stock
+                    Stock stock = new()
                     {
                         Cod_Articulo = reader.GetInt32(0),
                         Cantidad = reader.GetInt32(1),
@@ -107,13 +111,13 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT Cod_Articulo, Cantidad, Costo, Ganancia FROM Stock WHERE Cod_Articulo = @Cod_Articulo", conn);
+                using OleDbCommand cmd = new("SELECT Cod_Articulo, Cantidad, Costo, Ganancia FROM Stock WHERE Cod_Articulo = @Cod_Articulo", conn);
                 cmd.Parameters.AddWithValue("@Cod_Articulo", id);
                 conn.Open();
                 using OleDbDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    Stock stock = new Stock
+                    Stock stock = new()
                     {
                         Cod_Articulo = reader.GetInt32(0),
                         Cantidad = reader.GetInt32(1),
@@ -142,7 +146,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("UPDATE Stock SET Cantidad = @Cantidad, Costo = @Costo, Ganancia = @Ganancia WHERE Cod_Articulo = @Cod_Articulo", conn);
+                using OleDbCommand cmd = new("UPDATE Stock SET Cantidad = @Cantidad, Costo = @Costo, Ganancia = @Ganancia WHERE Cod_Articulo = @Cod_Articulo", conn);
                 cmd.Parameters.AddWithValue("@Cantidad", stock.Cantidad);
                 cmd.Parameters.AddWithValue("@Costo", stock.Costo);
                 cmd.Parameters.AddWithValue("@Ganancia", stock.Ganancia);
