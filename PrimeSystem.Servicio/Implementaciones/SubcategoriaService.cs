@@ -15,7 +15,7 @@ namespace PrimeSystem.Servicio.Implementaciones
             _repo = repo;
         }
 
-        public Result<List<Subcategoria>> GetAll() => _repo.GetAll();
+        public Task<Result<List<Subcategoria>>> GetAll() => _repo.GetAll();
         public Result<Subcategoria> GetById(int id) => _repo.GetById(id);
         public Result<Subcategoria> Add(Subcategoria subcategoria) => _repo.Add(subcategoria);
         public Result<Subcategoria> Update(Subcategoria subcategoria) => _repo.Update(subcategoria);
