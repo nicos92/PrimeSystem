@@ -19,13 +19,13 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT Id_Usuario, DNI, Nombre, Apellido, Tel, Mail, Id_Tipo FROM Usuarios", conn);
+                using OleDbCommand cmd = new("SELECT Id_Usuario, DNI, Nombre, Apellido, Tel, Mail, Id_Tipo FROM Usuarios", conn);
                 await conn.OpenAsync();
                 using DbDataReader reader = await cmd.ExecuteReaderAsync();
-                List<Usuarios> usuarios = new List<Usuarios>();
+                List<Usuarios> usuarios = [];
                 while (await reader.ReadAsync())
                 {
-                    Usuarios usuario = new Usuarios
+                    Usuarios usuario = new()
                     {
                         Id_Usuario = reader.GetInt32(0),
                         DNI = reader.IsDBNull(1) ? null : reader.GetString(1),
@@ -54,13 +54,13 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT Id_Usuario, DNI, Nombre, Apellido, Tel, Mail, Id_Tipo FROM Usuarios WHERE Id_Usuario = @Id", conn);
+                using OleDbCommand cmd = new("SELECT Id_Usuario, DNI, Nombre, Apellido, Tel, Mail, Id_Tipo FROM Usuarios WHERE Id_Usuario = @Id", conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 conn.Open();
                 using OleDbDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    Usuarios usuario = new Usuarios
+                    Usuarios usuario = new()
                     {
                         Id_Usuario = reader.GetInt32(0),
                         DNI = reader.IsDBNull(1) ? null : reader.GetString(1),
@@ -89,7 +89,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("INSERT INTO Usuarios (DNI, Nombre, Apellido, Tel, Mail, Id_Tipo) VALUES (@DNI, @Nombre, @Apellido, @Tel, @Mail, @Id_Tipo)", conn);
+                using OleDbCommand cmd = new("INSERT INTO Usuarios (DNI, Nombre, Apellido, Tel, Mail, Id_Tipo) VALUES (@DNI, @Nombre, @Apellido, @Tel, @Mail, @Id_Tipo)", conn);
                 cmd.Parameters.AddWithValue("@DNI", usuario.DNI ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Apellido", usuario.Apellido ?? (object)DBNull.Value);
@@ -119,7 +119,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("UPDATE Usuarios SET DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Tel = @Tel, Mail = @Mail, Id_Tipo = @Id_Tipo WHERE Id_Usuario = @Id", conn);
+                using OleDbCommand cmd = new("UPDATE Usuarios SET DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Tel = @Tel, Mail = @Mail, Id_Tipo = @Id_Tipo WHERE Id_Usuario = @Id", conn);
                 cmd.Parameters.AddWithValue("@DNI", usuario.DNI ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Apellido", usuario.Apellido ?? (object)DBNull.Value);
@@ -150,7 +150,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("DELETE FROM Usuarios WHERE Id_Usuario = @Id", conn);
+                using OleDbCommand cmd = new("DELETE FROM Usuarios WHERE Id_Usuario = @Id", conn);
                 cmd.Parameters.AddWithValue("@Id", id);
                 conn.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();

@@ -12,11 +12,16 @@ namespace PrimeSystem.Modelo.Entidades
         public string? CUIT { get; set; }
         public string? Proveedor { get; set; }
         public string? Nombre { get; set; }
-        public string? Telefono { get; set; }
+        public string? Tel { get; set; }
         public string? Email { get; set; }
         public Proveedores()
         {
             
+        }
+
+        public override string ToString()
+        {
+            return $"{Id_Proveedor} - {Proveedor} - {Nombre} - {CUIT} - {Tel} - {Email}";
         }
     }
 }

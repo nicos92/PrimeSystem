@@ -19,12 +19,12 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using var conn = Conexion();
-                using var cmd = new OleDbCommand("INSERT INTO Proveedores (CUIT, Proveedor, Nombre, Telefono, Email) VALUES (@CUIT, @Proveedor, @Nombre, @Telefono, @Email)", conn);
+                using var cmd = new OleDbCommand("INSERT INTO Proveedores (CUIT, Proveedor, Nombre, Tel, Email) VALUES (@CUIT, @Proveedor, @Nombre, @Telefono, @Email)", conn);
 
                 cmd.Parameters.AddWithValue("@CUIT", Proveedor.CUIT);
                 cmd.Parameters.AddWithValue("@Proveedor", Proveedor.Proveedor);
                 cmd.Parameters.AddWithValue("@Nombre", Proveedor.Nombre);
-                cmd.Parameters.AddWithValue("@Telefono", Proveedor.Telefono);
+                cmd.Parameters.AddWithValue("@Telefono", Proveedor.Tel);
                 cmd.Parameters.AddWithValue("@Email", Proveedor.Email);
                 conn.Open();
                 int inserts = cmd.ExecuteNonQuery();
@@ -77,22 +77,27 @@ namespace PrimeSystem.Repositorio.Repositorios
         public async Task<Result<List<Proveedores>>> GetAll(){
             try{
                 using OleDbConnection conn = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT Id_Proveedor, CUIT, Proveedor, Nombre, Telefono, Email FROM Proveedores", conn);
+                using OleDbCommand cmd = new("SELECT Id_Proveedor, CUIT, Proveedor, Nombre, Tel, Email FROM Proveedores", conn);
                 await conn.OpenAsync();
                 using DbDataReader reader = await cmd.ExecuteReaderAsync();
-                List<Proveedores> proveedores = new List<Proveedores>();
+                List<Proveedores> proveedores = [];
                 while (await reader.ReadAsync())
                 {
-                    Proveedores proveedor = new Proveedores
+                    Proveedores proveedor = new()
                     {
                         Id_Proveedor = reader.GetInt32(0),
                         CUIT = reader.IsDBNull(1) ? null : reader.GetString(1),
                         Proveedor = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Nombre = reader.IsDBNull(3) ? null : reader.GetString(3),
-                        Telefono = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Tel = reader.IsDBNull(4) ? null : reader.GetString(4),
                         Email = reader.IsDBNull(5) ? null : reader.GetString(5)
                     };
                     proveedores.Add(proveedor);
+                }
+                foreach (var item in proveedores)
+                {
+                Console.WriteLine(item.ToString());
+                    
                 }
                 return Result<List<Proveedores>>.Success(proveedores);
 
@@ -111,11 +116,11 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using var conn = Conexion();
-                using var cmd = new OleDbCommand("UPDATE Proveedores SET CUIT = @CUIT, Proveedor = @Proveedor, Nombre = @Nombre, Telefono = @Telefono, Email = @Email WHERE Id_Proveedor = @Id_Proveedor", conn);
+                using var cmd = new OleDbCommand("UPDATE Proveedores SET CUIT = @CUIT, Proveedor = @Proveedor, Nombre = @Nombre, Tel = @Telefono, Email = @Email WHERE Id_Proveedor = @Id_Proveedor", conn);
                 cmd.Parameters.AddWithValue("@CUIT", proveedor.CUIT);
                 cmd.Parameters.AddWithValue("@Proveedor", proveedor.Proveedor);
                 cmd.Parameters.AddWithValue("@Nombre", proveedor.Nombre);
-                cmd.Parameters.AddWithValue("@Telefono", proveedor.Telefono);
+                cmd.Parameters.AddWithValue("@Telefono", proveedor.Tel);
                 cmd.Parameters.AddWithValue("@Email", proveedor.Email);
                 cmd.Parameters.AddWithValue("@Id_Proveedor", proveedor.Id_Proveedor);
                 conn.Open();
@@ -151,13 +156,13 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    Proveedores proveedor = new Proveedores
+                    Proveedores proveedor = new()
                     {
                         Id_Proveedor = reader.GetInt32(0),
                         CUIT = reader.IsDBNull(1) ? null : reader.GetString(1),
                         Proveedor = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Nombre = reader.IsDBNull(3) ? null : reader.GetString(3),
-                        Telefono = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Tel = reader.IsDBNull(4) ? null : reader.GetString(4),
                         Email = reader.IsDBNull(5) ? null : reader.GetString(5)
                     };
                     return Result<Proveedores>.Success(proveedor);

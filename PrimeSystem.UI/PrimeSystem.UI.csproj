@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimeSystem.Servicio\PrimeSystem.Servicio.csproj" />
     <ProjectReference Include="..\PrimeSystem.Contrato\PrimeSystem.Contrato.csproj" />
+    <ProjectReference Include="..\PrimeSystem.Modelo\PrimeSystem.Modelo.csproj" />
     <ProjectReference Include="..\PrimeSystem.Utilidades\PrimeSystem.Utilidades.csproj" />
   </ItemGroup>
 
