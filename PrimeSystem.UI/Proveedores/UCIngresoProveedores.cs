@@ -22,7 +22,7 @@ namespace PrimeSystem.UI.Proveedores
         private Modelo.Entidades.Proveedores _proveedorSeleccionado;
         public UCIngresoProveedores(IProveedoresService proveedoresService)
         {
-            _proveedor = proveedoresService; 
+            _proveedor = proveedoresService;
             InitializeComponent();
         }
 
@@ -52,6 +52,11 @@ namespace PrimeSystem.UI.Proveedores
                 Tel = TxtTel.Text,
                 Email = TxtEmail.Text
             };
+        }
+
+        private void UCIngresoProveedores_Load(object sender, EventArgs e)
+        {
+            TxtCuit.Focus();
         }
     }
 }

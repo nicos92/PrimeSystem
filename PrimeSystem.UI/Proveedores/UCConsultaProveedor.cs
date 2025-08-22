@@ -35,6 +35,7 @@ namespace PrimeSystem.UI.Proveedores
             await CargarProveedores();
             BloquearBtns();
             SeleccionarProveedor();
+            TxtCuit.Focus();
 
         }
 

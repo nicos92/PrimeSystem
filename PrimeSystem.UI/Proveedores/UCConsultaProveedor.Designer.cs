@@ -325,7 +325,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
-            BtnEliminar.TabIndex = 1;
+            BtnEliminar.TabIndex = 11;
             BtnEliminar.UseVisualStyleBackColor = false;
             BtnEliminar.Click += BtnEliminar_Click;
             // 

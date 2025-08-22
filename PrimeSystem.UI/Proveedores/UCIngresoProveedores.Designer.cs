@@ -63,7 +63,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnIngresar.Name = "BtnIngresar";
             TLPForm.SetRowSpan(BtnIngresar, 2);
             BtnIngresar.Size = new Size(192, 48);
-            BtnIngresar.TabIndex = 1;
+            BtnIngresar.TabIndex = 5;
             BtnIngresar.Text = "INGRESAR";
             BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
@@ -137,7 +137,7 @@ namespace PrimeSystem.UI.Proveedores
             TxtEmail.MaxLength = 11;
             TxtEmail.Name = "TxtEmail";
             TxtEmail.Size = new Size(318, 29);
-            TxtEmail.TabIndex = 9;
+            TxtEmail.TabIndex = 4;
             // 
             // label1
             // 
@@ -204,7 +204,7 @@ namespace PrimeSystem.UI.Proveedores
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
             TxtTel.Size = new Size(318, 29);
-            TxtTel.TabIndex = 8;
+            TxtTel.TabIndex = 3;
             // 
             // TxtNombre
             // 
@@ -216,7 +216,7 @@ namespace PrimeSystem.UI.Proveedores
             TxtNombre.MaxLength = 11;
             TxtNombre.Name = "TxtNombre";
             TxtNombre.Size = new Size(318, 29);
-            TxtNombre.TabIndex = 7;
+            TxtNombre.TabIndex = 2;
             // 
             // TxtProveedor
             // 
@@ -228,7 +228,7 @@ namespace PrimeSystem.UI.Proveedores
             TxtProveedor.MaxLength = 11;
             TxtProveedor.Name = "TxtProveedor";
             TxtProveedor.Size = new Size(318, 29);
-            TxtProveedor.TabIndex = 6;
+            TxtProveedor.TabIndex = 1;
             // 
             // TxtCuit
             // 
@@ -240,7 +240,7 @@ namespace PrimeSystem.UI.Proveedores
             TxtCuit.MaxLength = 11;
             TxtCuit.Name = "TxtCuit";
             TxtCuit.Size = new Size(318, 29);
-            TxtCuit.TabIndex = 5;
+            TxtCuit.TabIndex = 0;
             // 
             // UCIngresoProveedores
             // 
@@ -252,6 +252,7 @@ namespace PrimeSystem.UI.Proveedores
             ForeColor = Color.FromArgb(236, 239, 241);
             Name = "UCIngresoProveedores";
             Size = new Size(724, 497);
+            Load += UCIngresoProveedores_Load;
             PanelForm.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             TLPForm.ResumeLayout(false);

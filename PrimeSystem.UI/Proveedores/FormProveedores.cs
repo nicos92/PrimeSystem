@@ -27,7 +27,6 @@ namespace PrimeSystem.UI.Proveedores
         private void FormProveedores_Load(object sender, EventArgs e)
         {
             ConFigBtns();
-            SeleccionarUC(typeof(UCIngresoProveedores));
 
         }
 
@@ -59,15 +58,26 @@ namespace PrimeSystem.UI.Proveedores
             {
                 return;
             }
-            btn.BackColor=AppColorsBlue.Primary;
+            btn.BackColor = AppColorsBlue.Primary;
             btn.ForeColor = AppColorsBlue.OnPrimary;
             btn.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
 
             _btnActual.BackColor = AppColorsBlue.Secondary;
             _btnActual.ForeColor = AppColorsBlue.OnSecondary;
             _btnActual.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
-            SeleccionarUC(btn.Tag as Type);
+
+            // Solución: Verificar que btn.Tag no sea nulo antes de llamar a SeleccionarUC
+            if (btn.Tag is Type tipoForm)
+            {
+                SeleccionarUC(tipoForm);
+            }
             _btnActual = btn;
+        }
+
+        private void FormProveedores_Activated(object sender, EventArgs e)
+        {
+            SeleccionarUC(typeof(UCIngresoProveedores));
+
         }
     }
 }
