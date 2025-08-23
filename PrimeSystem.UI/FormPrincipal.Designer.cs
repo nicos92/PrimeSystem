@@ -223,7 +223,7 @@ partial class FormPrincipal
         // 
         AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.FromArgb(249, 249, 251);
-        ClientSize = new Size(944, 561);
+        ClientSize = new Size(1024, 561);
         Controls.Add(PanelFondoMenu);
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
         ForeColor = Color.FromArgb(26, 28, 30);

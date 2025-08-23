@@ -34,7 +34,6 @@ static class Program
 
         var mainForm = ServiceProvider.GetRequiredService<FormArranque>();
         Application.Run(mainForm);
-        //Application.Run(new FormArranque());
     }
 
     private static void ConfigureServices(ServiceCollection services)
@@ -61,7 +60,6 @@ static class Program
         services.AddTransient<FormEstadoContable>(); // Este Form estaría en PrimeSystem.UI.EstadoContable
 
         // Registrar servicios (ejemplo)
-        // services.AddScoped<IClienteService, ClienteService>();
 
         services.AddScoped<IArticulosRepository, ArticulosRepository>();
         services.AddScoped<IArticulosService, ArticulosService>();

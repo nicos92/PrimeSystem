@@ -24,31 +24,17 @@ namespace PrimeSystem.Utilidades.Validaciones
         protected override void ValidarKeyPress(object sender, KeyPressEventArgs e)
         {
             // Solo permite dígitos, guiones y la tecla de retroceso
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '-' && e.KeyChar != (char)Keys.Back)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
-                return;
             }
 
 
 
-            // Asegura que no se inserten guiones en lugares incorrectos
-            //if (e.KeyChar == '-')
-            //{
-            //    if (_textBox.Text.Length > 0 && _textBox.Text[_textBox.SelectionStart - 1] == '-')
-            //    {
-            //        e.Handled = true; // Evita dos guiones seguidos
-            //    }
-
-            //    // Verifica si el guion está en la posición 2 o 11 (índice 1 o 10)
-            //    if (_textBox.SelectionStart != 2 && _textBox.SelectionStart != 11)
-            //    {
-            //        e.Handled = true; // Evita guiones en otras posiciones
-            //    }
-            //}
+          
         }
 
-        [GeneratedRegex(@"^\d{2}-\d{8}-\d{1}$", RegexOptions.Compiled)]
+        [GeneratedRegex(@"^(0|\d{11})$", RegexOptions.Compiled)]
         private static partial Regex CuitRegex();
     }
 }

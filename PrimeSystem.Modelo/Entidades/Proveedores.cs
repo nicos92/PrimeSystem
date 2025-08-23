@@ -14,6 +14,7 @@ namespace PrimeSystem.Modelo.Entidades
         public string? Nombre { get; set; }
         public string? Tel { get; set; }
         public string? Email { get; set; }
+        
         public Proveedores()
         {
             
@@ -21,7 +22,7 @@ namespace PrimeSystem.Modelo.Entidades
 
         public override string ToString()
         {
-            return $"{Id_Proveedor} - {Proveedor} - {Nombre} - {CUIT} - {Tel} - {Email}";
+            return $"CUIT: {CUIT}, PROVEEDOR: {Proveedor}";
         }
     }
 }

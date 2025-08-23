@@ -4,14 +4,14 @@ using System.Windows.Forms;
 namespace PrimeSystem.Utilidades.Validaciones
 {
     [SupportedOSPlatform("windows")]
-    public abstract class ValidadorTextBox
+    public abstract class ValidadorTextBox 
     {
         protected TextBox _textBox;
         protected ErrorProvider _errorProvider;
 
         public string? MensajeError { get; set; }
 
-        public ValidadorTextBox(TextBox textBox, ErrorProvider errorProvider)
+        protected ValidadorTextBox(TextBox textBox, ErrorProvider errorProvider)
         {
             _textBox = textBox;
             _errorProvider = errorProvider;
@@ -25,8 +25,8 @@ namespace PrimeSystem.Utilidades.Validaciones
         // Método abstracto para validar cada tecla presionada
         protected abstract void ValidarKeyPress(object sender, KeyPressEventArgs e);
 
-        // Evento que se dispara cada vez que el texto del TextBox cambia
-        private void TextBox_TextChanged(object sender, System.EventArgs e)
+        // Cambia la firma del método TextBox_TextChanged para aceptar sender como nullable
+        private void TextBox_TextChanged(object? sender, System.EventArgs e)
         {
             if (Validar())
             {
@@ -39,9 +39,16 @@ namespace PrimeSystem.Utilidades.Validaciones
         }
 
         // Manejador del evento KeyPress
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object? sender, KeyPressEventArgs e)
         {
+            if (sender is not TextBox)
+            {
+                return; // Asegura que sender sea un TextBox
+            }
             ValidarKeyPress(sender, e);
         }
+
+        
+       
     }
 }
