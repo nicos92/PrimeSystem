@@ -6,16 +6,11 @@ using PrimeSystem.Contrato.Repositorios;
 
 namespace PrimeSystem.Servicio.Implementaciones
 {
-    public class ClientesService : IClientesService
+    public class ClientesService(IClientesRepository repo) : IClientesService
     {
-        private readonly IClientesRepository _repo;
+        private readonly IClientesRepository _repo = repo;
 
-        public ClientesService(IClientesRepository repo)
-        {
-            _repo = repo;
-        }
-
-        public Result<List<Clientes>> GetAll() => _repo.GetAll();
+        public async Task<Result<List<Clientes>>> GetAll() => await _repo.GetAll();
         public Result<Clientes> GetById(int id) => _repo.GetById(id);
         public Result<Clientes> Add(Clientes cliente) => _repo.Add(cliente);
         public Result<Clientes> Update(Clientes cliente) => _repo.Update(cliente);

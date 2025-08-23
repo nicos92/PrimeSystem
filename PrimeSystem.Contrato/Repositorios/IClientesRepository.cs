@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface IClientesRepository
     {
-        Result<List<Clientes>> GetAll();
+        Task<Result<List<Clientes>>> GetAll();
         Result<Clientes> GetById(int id);
         Result<Clientes> Add(Clientes cliente);
         Result<Clientes> Update(Clientes cliente);

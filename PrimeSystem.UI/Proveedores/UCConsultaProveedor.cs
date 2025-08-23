@@ -73,7 +73,7 @@ namespace PrimeSystem.UI.Proveedores
         private async void UCConsultaProveedor_Load(object sender, EventArgs e)
         {
             await CargarProveedores();
-            BloquearBtns();
+            //BloquearBtns();
             SeleccionarProveedor();
             TxtCuit.Focus();
 
@@ -98,7 +98,7 @@ namespace PrimeSystem.UI.Proveedores
 
         private void ListBProveedores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BloquearBtns();
+            //BloquearBtns();
             _proveedorSeleccionado = ListBProveedores.SelectedItem as Modelo.Entidades.Proveedores;
 
             if (_proveedorSeleccionado != null)
@@ -171,7 +171,7 @@ namespace PrimeSystem.UI.Proveedores
                     indiceSeleccionado = ListBProveedores.SelectedIndex;
                     await CargarProveedores();
                     SeleccionarProveedor();
-                    BloquearBtns();
+                    //BloquearBtns();
 
                 }
                 else
@@ -217,7 +217,7 @@ namespace PrimeSystem.UI.Proveedores
                     Util.LimpiarForm(TLPForm, TxtCuit);
 
                     await CargarProveedores();
-                    BloquearBtns();
+                    //BloquearBtns();
                 }
                 else
                 {

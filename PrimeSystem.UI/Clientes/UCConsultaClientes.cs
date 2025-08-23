@@ -1,0 +1,227 @@
+﻿using PrimeSystem.Contrato.Servicios;
+using PrimeSystem.Utilidades;
+using PrimeSystem.Utilidades.Validaciones;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PrimeSystem.UI.Clientes
+{
+    public partial class UCConsultaClientes : UserControl
+    {
+        private readonly IClientesService _clienteService;
+        private Modelo.Entidades.Clientes _clienteSeleccionado;
+
+        private int indiceSeleccionado;
+
+
+        private readonly ValidadorTextBox _vTxtCuit;
+        private readonly ValidadorTextBox _vTxtEntidad;
+        private readonly ValidadorTextBox _vTxtNombre;
+        private readonly ValidadorTextBox _vTxtTel;
+        private readonly ValidadorTextBox _vTxtEmail;
+        private readonly ErrorProvider _epCuit;
+        private readonly ErrorProvider _epEntidad;
+        private readonly ErrorProvider _epNombre;
+        private readonly ErrorProvider _epTel;
+        private readonly ErrorProvider _epEmail;
+        public UCConsultaClientes(IClientesService clientesService)
+        {
+            _clienteService = clientesService;
+            indiceSeleccionado = 0;
+            InitializeComponent();
+            _clienteSeleccionado = new Modelo.Entidades.Clientes();
+
+            _epCuit = new ErrorProvider();
+            _vTxtCuit = new ValidadorCUIT(TxtCuit, _epCuit)
+            {
+                MensajeError = "El CUIT ingresado no es válido.\nIngrese 11 digitos ###########.\nSino tiene CUIT ingrese cero (0)"
+            };
+
+            _epEntidad = new ErrorProvider();
+            _vTxtEntidad = new ValidadorDireccion(TxtEntidad, _epEntidad)
+            {
+                MensajeError = "La entidad no puede estar vacío."
+            };
+
+            _epNombre = new ErrorProvider();
+            _vTxtNombre = new ValidadorNombre(TxtNombre, _epNombre)
+            {
+                MensajeError = "El nombre no puede estar vacío."
+            };
+
+            _epTel = new ErrorProvider();
+            _vTxtTel = new ValidadorEntero(TxtTel, _epTel)
+            {
+                MensajeError = "El teléfono ingresado no es válido.\nSino tiene telefono ingrese cero (0)"
+            };
+
+            _epEmail = new ErrorProvider();
+            _vTxtEmail = new ValidadorEmail(TxtEmail, _epEmail)
+            {
+                MensajeError = "El email ingresado no es válido."
+            };
+        }
+
+        private async Task CargarClientes()
+        {
+            var datos = await _clienteService.GetAll();
+
+            if (datos.IsSuccess)
+            {
+                List<Modelo.Entidades.Clientes> clientes = datos.Value;
+                ListBClientes.DataSource = clientes;
+
+            }
+            else
+            {
+                MessageBox.Show(datos.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private async void UCConsultaClientes_Load(object sender, EventArgs e)
+        {
+            await CargarClientes();
+            BloquearBtns();
+            SeleccionarProveedor();
+            TxtCuit.Focus();
+        }
+
+        private void BloquearBtns()
+        {
+
+            if (ListBClientes.SelectedItem == null)
+            {
+
+                BtnEliminar.Enabled = false;
+                BtnGuardar.Enabled = false;
+            }
+            else
+            {
+                BtnEliminar.Enabled = true;
+                BtnGuardar.Enabled = true;
+            }
+
+        }
+
+        private async void BtnGuardar_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea guardar los cambios?", "Confirmación de guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes)
+            {
+                return; // Salir si el usuario no confirma
+            }
+            CrearCliente();
+            await GuardarCliente();
+        }
+
+        private void CrearCliente()
+        {
+            _clienteSeleccionado ??= new Modelo.Entidades.Clientes();
+
+            _clienteSeleccionado.CUIT = TxtCuit.Text;
+            _clienteSeleccionado.Entidad = TxtEntidad.Text;
+            _clienteSeleccionado.Nombre = TxtNombre.Text;
+            _clienteSeleccionado.Tel = TxtTel.Text;
+            _clienteSeleccionado.Mail = TxtEmail.Text;
+
+        }
+
+        private void SeleccionarProveedor()
+        {
+            if (ListBClientes.SelectedItem != null)
+            {
+                ListBClientes.SelectedIndex = indiceSeleccionado;
+            }
+        }
+
+        private async Task GuardarCliente()
+        {
+            if (_clienteSeleccionado != null && !string.IsNullOrEmpty(_clienteSeleccionado.CUIT))
+            {
+
+
+
+                Result<Modelo.Entidades.Clientes> resultado = _clienteService.Update(_clienteSeleccionado);
+
+                if (resultado.IsSuccess)
+                {
+                    MessageBox.Show("Proveedor actualizado correctamente.\n" + resultado.Value.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    indiceSeleccionado = ListBClientes.SelectedIndex;
+                    await CargarClientes();
+                    SeleccionarProveedor();
+                    //BloquearBtns();
+
+                }
+                else
+                {
+                    MessageBox.Show(resultado.Error, "Error al actualizar proveedor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void TxtCuit_TextChanged(object sender, EventArgs e)
+        {
+            ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtCuit, _vTxtEntidad, _vTxtNombre, _vTxtTel, _vTxtEmail);
+        }
+
+        private void ListBProveedores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _clienteSeleccionado = ListBClientes.SelectedItem as Modelo.Entidades.Clientes;
+
+            if (_clienteSeleccionado != null)
+            {
+                TxtCuit.Text = _clienteSeleccionado.CUIT ?? string.Empty;
+                TxtEntidad.Text = _clienteSeleccionado.Entidad ?? string.Empty;
+                TxtNombre.Text = _clienteSeleccionado.Nombre ?? string.Empty;
+                TxtTel.Text = _clienteSeleccionado.Tel ?? string.Empty;
+                TxtEmail.Text = _clienteSeleccionado.Mail ?? string.Empty;
+            }
+            else
+            {
+                TxtCuit.Clear();
+                TxtEntidad.Clear();
+                TxtNombre.Clear();
+                TxtTel.Clear();
+                TxtEmail.Clear();
+            }
+        }
+
+        private async void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este cliente?", "Confirmación de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes)
+            {
+                return; // Salir si el usuario no confirma
+            }
+            CrearCliente();
+            await EliminarCliente();
+        }
+
+        private async Task EliminarCliente()
+        {
+           
+                var resultado = _clienteService.Delete(_clienteSeleccionado.Id_Cliente);
+                if (resultado.IsSuccess)
+                {
+                    MessageBox.Show("Cliente eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Util.LimpiarForm(TLPForm, TxtCuit);
+
+                    await CargarClientes();
+                    //BloquearBtns();
+                }
+                else
+                {
+                    MessageBox.Show(resultado.Error, "Error al eliminar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+        }
+    }
+}

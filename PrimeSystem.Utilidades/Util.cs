@@ -17,5 +17,15 @@ namespace PrimeSystem.Utilidades
             tbp.Controls.OfType<TextBox>().ToList().ForEach(t => t.Clear());
             textBox.Focus();
         }
+
+        public static void CambioColorBtnsUC(Button btnActual, Button btnNuevo)
+        {
+            btnNuevo.BackColor = AppColorsBlue.Primary;
+            btnNuevo.ForeColor = AppColorsBlue.OnPrimary;
+            btnNuevo.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
+            btnActual.BackColor = AppColorsBlue.Secondary;
+            btnActual.ForeColor = AppColorsBlue.OnSecondary;
+            btnActual.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
+        }
     }
 }
