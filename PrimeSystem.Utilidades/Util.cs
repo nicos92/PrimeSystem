@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
@@ -26,6 +27,25 @@ namespace PrimeSystem.Utilidades
             btnActual.BackColor = AppColorsBlue.Secondary;
             btnActual.ForeColor = AppColorsBlue.OnSecondary;
             btnActual.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
+        }
+
+        public static void AjustarAnchoListBox(ListBox listBox)
+        {
+            int maxWidth = 0;
+            using (Graphics g = listBox.CreateGraphics())
+            {
+                foreach (var item in listBox.Items)
+                {
+                    int itemWidth = (int)g.MeasureString(item.ToString(), listBox.Font).Width;
+                    if (itemWidth > maxWidth)
+                    {
+                        maxWidth = itemWidth;
+                    }
+                }
+            }
+
+            // Agregar un margen adicional para evitar cortes
+            listBox.Width = maxWidth + SystemInformation.VerticalScrollBarWidth + 5;
         }
     }
 }

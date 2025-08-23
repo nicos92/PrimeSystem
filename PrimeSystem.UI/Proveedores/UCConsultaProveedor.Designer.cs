@@ -31,11 +31,12 @@ namespace PrimeSystem.UI.Proveedores
         private void InitializeComponent()
         {
             PanelLista = new Panel();
+            TLPLista = new TableLayoutPanel();
             ListBProveedores = new ListBox();
             LblLista = new Label();
             panel1 = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
-            groupBox1 = new GroupBox();
+            GBFormProveedores = new GroupBox();
             TLPForm = new TableLayoutPanel();
             TxtEmail = new TextBox();
             label1 = new Label();
@@ -52,9 +53,10 @@ namespace PrimeSystem.UI.Proveedores
             BtnEliminar = new Button();
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelLista.SuspendLayout();
+            TLPLista.SuspendLayout();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
-            groupBox1.SuspendLayout();
+            GBFormProveedores.SuspendLayout();
             TLPForm.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -63,8 +65,7 @@ namespace PrimeSystem.UI.Proveedores
             // PanelLista
             // 
             PanelLista.BackColor = Color.FromArgb(218, 218, 220);
-            PanelLista.Controls.Add(ListBProveedores);
-            PanelLista.Controls.Add(LblLista);
+            PanelLista.Controls.Add(TLPLista);
             PanelLista.Dock = DockStyle.Fill;
             PanelLista.Location = new Point(3, 3);
             PanelLista.Name = "PanelLista";
@@ -72,14 +73,29 @@ namespace PrimeSystem.UI.Proveedores
             PanelLista.Size = new Size(315, 555);
             PanelLista.TabIndex = 0;
             // 
+            // TLPLista
+            // 
+            TLPLista.ColumnCount = 1;
+            TLPLista.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            TLPLista.Controls.Add(ListBProveedores, 0, 1);
+            TLPLista.Controls.Add(LblLista, 0, 0);
+            TLPLista.Dock = DockStyle.Fill;
+            TLPLista.Location = new Point(0, 16);
+            TLPLista.Name = "TLPLista";
+            TLPLista.RowCount = 2;
+            TLPLista.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            TLPLista.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            TLPLista.Size = new Size(315, 523);
+            TLPLista.TabIndex = 2;
+            // 
             // ListBProveedores
             // 
+            ListBProveedores.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             ListBProveedores.BackColor = Color.FromArgb(238, 237, 240);
-            ListBProveedores.Dock = DockStyle.Fill;
             ListBProveedores.FormattingEnabled = true;
-            ListBProveedores.Location = new Point(0, 37);
+            ListBProveedores.Location = new Point(3, 35);
             ListBProveedores.Name = "ListBProveedores";
-            ListBProveedores.Size = new Size(315, 502);
+            ListBProveedores.Size = new Size(309, 466);
             ListBProveedores.TabIndex = 0;
             ListBProveedores.SelectedIndexChanged += ListBProveedores_SelectedIndexChanged;
             // 
@@ -88,9 +104,9 @@ namespace PrimeSystem.UI.Proveedores
             LblLista.Dock = DockStyle.Top;
             LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLista.ForeColor = Color.FromArgb(7, 100, 147);
-            LblLista.Location = new Point(0, 16);
+            LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
-            LblLista.Size = new Size(315, 21);
+            LblLista.Size = new Size(309, 21);
             LblLista.TabIndex = 1;
             LblLista.Text = "Lista de Proveedores";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
@@ -109,7 +125,7 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel4.BackColor = Color.FromArgb(218, 218, 220);
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Controls.Add(groupBox1, 0, 0);
+            tableLayoutPanel4.Controls.Add(GBFormProveedores, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(0, 0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -119,18 +135,18 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel4.Size = new Size(477, 555);
             tableLayoutPanel4.TabIndex = 2;
             // 
-            // groupBox1
+            // GBFormProveedores
             // 
-            groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            groupBox1.Controls.Add(TLPForm);
-            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(3, 54);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(471, 447);
-            groupBox1.TabIndex = 12;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Formulario de Edición";
+            GBFormProveedores.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            GBFormProveedores.Controls.Add(TLPForm);
+            GBFormProveedores.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GBFormProveedores.ForeColor = Color.FromArgb(7, 100, 147);
+            GBFormProveedores.Location = new Point(3, 54);
+            GBFormProveedores.Name = "GBFormProveedores";
+            GBFormProveedores.Size = new Size(471, 447);
+            GBFormProveedores.TabIndex = 12;
+            GBFormProveedores.TabStop = false;
+            GBFormProveedores.Text = "Formulario de Edición de Proveedores";
             // 
             // TLPForm
             // 
@@ -378,9 +394,10 @@ namespace PrimeSystem.UI.Proveedores
             Size = new Size(804, 561);
             Load += UCConsultaProveedor_Load;
             PanelLista.ResumeLayout(false);
+            TLPLista.ResumeLayout(false);
             panel1.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
+            GBFormProveedores.ResumeLayout(false);
             TLPForm.ResumeLayout(false);
             TLPForm.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
@@ -410,6 +427,7 @@ namespace PrimeSystem.UI.Proveedores
         private Button BtnGuardar;
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
-        private GroupBox groupBox1;
+        private GroupBox GBFormProveedores;
+        private TableLayoutPanel TLPLista;
     }
 }

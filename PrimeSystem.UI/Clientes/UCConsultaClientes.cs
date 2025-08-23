@@ -91,6 +91,7 @@ namespace PrimeSystem.UI.Clientes
             await CargarClientes();
             BloquearBtns();
             SeleccionarProveedor();
+            Util.AjustarAnchoListBox(ListBClientes);
             TxtCuit.Focus();
         }
 
@@ -157,7 +158,7 @@ namespace PrimeSystem.UI.Clientes
                     indiceSeleccionado = ListBClientes.SelectedIndex;
                     await CargarClientes();
                     SeleccionarProveedor();
-                    //BloquearBtns();
+                    Util.AjustarAnchoListBox(ListBClientes);
 
                 }
                 else
@@ -174,10 +175,10 @@ namespace PrimeSystem.UI.Clientes
 
         private void ListBProveedores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _clienteSeleccionado = ListBClientes.SelectedItem as Modelo.Entidades.Clientes;
-
-            if (_clienteSeleccionado != null)
+            // Solución CS8601: Verificar que SelectedItem no sea null antes de hacer el cast
+            if (ListBClientes.SelectedItem is Modelo.Entidades.Clientes cliente)
             {
+                _clienteSeleccionado = cliente;
                 TxtCuit.Text = _clienteSeleccionado.CUIT ?? string.Empty;
                 TxtEntidad.Text = _clienteSeleccionado.Entidad ?? string.Empty;
                 TxtNombre.Text = _clienteSeleccionado.Nombre ?? string.Empty;
@@ -207,21 +208,23 @@ namespace PrimeSystem.UI.Clientes
 
         private async Task EliminarCliente()
         {
-           
-                var resultado = _clienteService.Delete(_clienteSeleccionado.Id_Cliente);
-                if (resultado.IsSuccess)
-                {
-                    MessageBox.Show("Cliente eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Util.LimpiarForm(TLPForm, TxtCuit);
 
-                    await CargarClientes();
-                    //BloquearBtns();
-                }
-                else
-                {
-                    MessageBox.Show(resultado.Error, "Error al eliminar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            var resultado = _clienteService.Delete(_clienteSeleccionado.Id_Cliente);
+            if (resultado.IsSuccess)
+            {
+                MessageBox.Show("Cliente eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Util.LimpiarForm(TLPForm, TxtCuit);
+
+                await CargarClientes();
+                Util.AjustarAnchoListBox(ListBClientes);
+            }
+            else
+            {
+                MessageBox.Show(resultado.Error, "Error al eliminar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
+
+        
     }
 }

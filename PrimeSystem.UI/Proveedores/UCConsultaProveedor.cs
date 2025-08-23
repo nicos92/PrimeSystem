@@ -17,7 +17,7 @@ namespace PrimeSystem.UI.Proveedores
 {
     public partial class UCConsultaProveedor : UserControl
     {
-        // TODO : Agregar cuadro de busqueda de proveedores.
+       
         private readonly IProveedoresService _proveedoresService;
         private Modelo.Entidades.Proveedores? _proveedorSeleccionado;
         private int indiceSeleccionado;
@@ -73,8 +73,10 @@ namespace PrimeSystem.UI.Proveedores
         private async void UCConsultaProveedor_Load(object sender, EventArgs e)
         {
             await CargarProveedores();
-            //BloquearBtns();
+            BloquearBtns();
             SeleccionarProveedor();
+            Util.AjustarAnchoListBox(ListBProveedores);
+
             TxtCuit.Focus();
 
         }
@@ -98,7 +100,6 @@ namespace PrimeSystem.UI.Proveedores
 
         private void ListBProveedores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //BloquearBtns();
             _proveedorSeleccionado = ListBProveedores.SelectedItem as Modelo.Entidades.Proveedores;
 
             if (_proveedorSeleccionado != null)
@@ -171,7 +172,8 @@ namespace PrimeSystem.UI.Proveedores
                     indiceSeleccionado = ListBProveedores.SelectedIndex;
                     await CargarProveedores();
                     SeleccionarProveedor();
-                    //BloquearBtns();
+                    Util.AjustarAnchoListBox(ListBProveedores);
+
 
                 }
                 else
@@ -217,7 +219,8 @@ namespace PrimeSystem.UI.Proveedores
                     Util.LimpiarForm(TLPForm, TxtCuit);
 
                     await CargarProveedores();
-                    //BloquearBtns();
+                    Util.AjustarAnchoListBox(ListBProveedores);
+
                 }
                 else
                 {

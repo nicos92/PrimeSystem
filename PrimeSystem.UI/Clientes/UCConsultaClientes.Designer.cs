@@ -30,8 +30,9 @@
         {
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelLista = new Panel();
-            ListBClientes = new ListBox();
+            TLPLista = new TableLayoutPanel();
             LblLista = new Label();
+            ListBClientes = new ListBox();
             panel1 = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
@@ -51,6 +52,7 @@
             BtnEliminar = new Button();
             tableLayoutPanel3.SuspendLayout();
             PanelLista.SuspendLayout();
+            TLPLista.SuspendLayout();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -76,39 +78,53 @@
             // 
             // PanelLista
             // 
+            PanelLista.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PanelLista.BackColor = Color.FromArgb(218, 218, 220);
-            PanelLista.Controls.Add(ListBClientes);
-            PanelLista.Controls.Add(LblLista);
-            PanelLista.Dock = DockStyle.Fill;
+            PanelLista.Controls.Add(TLPLista);
             PanelLista.Location = new Point(3, 3);
             PanelLista.Name = "PanelLista";
             PanelLista.Padding = new Padding(0, 16, 0, 16);
             PanelLista.Size = new Size(315, 555);
             PanelLista.TabIndex = 0;
             // 
-            // ListBClientes
+            // TLPLista
             // 
-            ListBClientes.BackColor = Color.FromArgb(238, 237, 240);
-            ListBClientes.Dock = DockStyle.Fill;
-            ListBClientes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ListBClientes.FormattingEnabled = true;
-            ListBClientes.Location = new Point(0, 37);
-            ListBClientes.Name = "ListBClientes";
-            ListBClientes.Size = new Size(315, 502);
-            ListBClientes.TabIndex = 0;
-            ListBClientes.SelectedIndexChanged += ListBProveedores_SelectedIndexChanged;
+            TLPLista.ColumnCount = 1;
+            TLPLista.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            TLPLista.Controls.Add(LblLista, 0, 0);
+            TLPLista.Controls.Add(ListBClientes, 0, 1);
+            TLPLista.Dock = DockStyle.Fill;
+            TLPLista.Location = new Point(0, 16);
+            TLPLista.Name = "TLPLista";
+            TLPLista.RowCount = 2;
+            TLPLista.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            TLPLista.RowStyles.Add(new RowStyle());
+            TLPLista.Size = new Size(315, 523);
+            TLPLista.TabIndex = 2;
             // 
             // LblLista
             // 
             LblLista.Dock = DockStyle.Top;
             LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLista.ForeColor = Color.FromArgb(7, 100, 147);
-            LblLista.Location = new Point(0, 16);
+            LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
-            LblLista.Size = new Size(315, 21);
+            LblLista.Size = new Size(309, 21);
             LblLista.TabIndex = 1;
             LblLista.Text = "Lista de Clientes";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // ListBClientes
+            // 
+            ListBClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            ListBClientes.BackColor = Color.FromArgb(238, 237, 240);
+            ListBClientes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ListBClientes.FormattingEnabled = true;
+            ListBClientes.Location = new Point(3, 35);
+            ListBClientes.Name = "ListBClientes";
+            ListBClientes.Size = new Size(309, 487);
+            ListBClientes.TabIndex = 0;
+            ListBClientes.SelectedIndexChanged += ListBProveedores_SelectedIndexChanged;
             // 
             // panel1
             // 
@@ -375,6 +391,7 @@
             Load += UCConsultaClientes_Load;
             tableLayoutPanel3.ResumeLayout(false);
             PanelLista.ResumeLayout(false);
+            TLPLista.ResumeLayout(false);
             panel1.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
@@ -407,5 +424,6 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Button BtnGuardar;
         private Button BtnEliminar;
+        private TableLayoutPanel TLPLista;
     }
 }

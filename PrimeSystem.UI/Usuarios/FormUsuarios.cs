@@ -52,22 +52,31 @@ namespace PrimeSystem.UI.Usuarios
             {
                 return;
             }
-            btn.BackColor = AppColorsBlue.Primary;
-            btn.ForeColor = AppColorsBlue.OnPrimary;
-            btn.FlatAppearance.BorderColor = AppColorsBlue.PrimaryContainer;
 
-            _btnActual.BackColor = AppColorsBlue.Secondary;
-            _btnActual.ForeColor = AppColorsBlue.OnSecondary;
-            _btnActual.FlatAppearance.BorderColor = AppColorsBlue.OnSecondaryContainer;
-            SeleccionarUC(btn.Tag as Type);
+            Util.CambioColorBtnsUC(_btnActual, btn);
+           
+
+            ValidarTag(btn);
             _btnActual = btn;
         }
 
         private void FormUsuarios_Load(object sender, EventArgs e)
         {
             ConFigBtns();
-            SeleccionarUC((Type) _btnActual.Tag);
+
+            ValidarTag(_btnActual);
 
         }
+
+        private void ValidarTag(Button btn)
+        {
+            if (btn.Tag is Type type)
+            {
+
+                SeleccionarUC(type);
+            }
+        }
+
+
     }
 }

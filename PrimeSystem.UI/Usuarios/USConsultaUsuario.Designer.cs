@@ -49,14 +49,16 @@ namespace PrimeSystem.UI.Usuarios
             label5 = new Label();
             CMBTipoUsuario = new ComboBox();
             PanelLista = new Panel();
-            ListBUsuarios = new ListBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
             LblLista = new Label();
+            ListBUsuarios = new ListBox();
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelMedio.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             TLPFormUsuario.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             PanelLista.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -64,9 +66,9 @@ namespace PrimeSystem.UI.Usuarios
             // 
             PanelMedio.Controls.Add(tableLayoutPanel4);
             PanelMedio.Dock = DockStyle.Fill;
-            PanelMedio.Location = new Point(292, 3);
+            PanelMedio.Location = new Point(324, 3);
             PanelMedio.Name = "PanelMedio";
-            PanelMedio.Size = new Size(429, 491);
+            PanelMedio.Size = new Size(477, 555);
             PanelMedio.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -81,7 +83,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(429, 491);
+            tableLayoutPanel4.Size = new Size(477, 555);
             tableLayoutPanel4.TabIndex = 2;
             // 
             // TLPFormUsuario
@@ -106,7 +108,7 @@ namespace PrimeSystem.UI.Usuarios
             TLPFormUsuario.Controls.Add(label5, 0, 6);
             TLPFormUsuario.Controls.Add(CMBTipoUsuario, 1, 6);
             TLPFormUsuario.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPFormUsuario.Location = new Point(3, 55);
+            TLPFormUsuario.Location = new Point(27, 87);
             TLPFormUsuario.Name = "TLPFormUsuario";
             TLPFormUsuario.RowCount = 8;
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -314,7 +316,7 @@ namespace PrimeSystem.UI.Usuarios
             CMBTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBTipoUsuario.ForeColor = Color.FromArgb(26, 28, 30);
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(99, 289);
+            CMBTipoUsuario.Location = new Point(99, 286);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
             CMBTipoUsuario.Size = new Size(267, 29);
             CMBTipoUsuario.TabIndex = 13;
@@ -322,35 +324,49 @@ namespace PrimeSystem.UI.Usuarios
             // PanelLista
             // 
             PanelLista.BackColor = Color.FromArgb(218, 218, 220);
-            PanelLista.Controls.Add(ListBUsuarios);
-            PanelLista.Controls.Add(LblLista);
+            PanelLista.Controls.Add(tableLayoutPanel1);
             PanelLista.Dock = DockStyle.Fill;
             PanelLista.Location = new Point(3, 3);
             PanelLista.Name = "PanelLista";
             PanelLista.Padding = new Padding(0, 16, 0, 16);
-            PanelLista.Size = new Size(283, 491);
+            PanelLista.Size = new Size(315, 555);
             PanelLista.TabIndex = 3;
             // 
-            // ListBUsuarios
+            // tableLayoutPanel1
             // 
-            ListBUsuarios.BackColor = Color.FromArgb(249, 249, 251);
-            ListBUsuarios.Dock = DockStyle.Fill;
-            ListBUsuarios.FormattingEnabled = true;
-            ListBUsuarios.Location = new Point(0, 37);
-            ListBUsuarios.Name = "ListBUsuarios";
-            ListBUsuarios.Size = new Size(283, 438);
-            ListBUsuarios.TabIndex = 0;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(LblLista, 0, 0);
+            tableLayoutPanel1.Controls.Add(ListBUsuarios, 0, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 16);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(315, 523);
+            tableLayoutPanel1.TabIndex = 2;
             // 
             // LblLista
             // 
             LblLista.Dock = DockStyle.Top;
             LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            LblLista.Location = new Point(0, 16);
+            LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
-            LblLista.Size = new Size(283, 21);
+            LblLista.Size = new Size(309, 21);
             LblLista.TabIndex = 1;
             LblLista.Text = "Lista de Usuarios";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // ListBUsuarios
+            // 
+            ListBUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            ListBUsuarios.BackColor = Color.FromArgb(249, 249, 251);
+            ListBUsuarios.FormattingEnabled = true;
+            ListBUsuarios.Location = new Point(3, 35);
+            ListBUsuarios.Name = "ListBUsuarios";
+            ListBUsuarios.Size = new Size(309, 466);
+            ListBUsuarios.TabIndex = 0;
             // 
             // tableLayoutPanel3
             // 
@@ -365,7 +381,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(724, 497);
+            tableLayoutPanel3.Size = new Size(804, 561);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // USConsultaUsuario
@@ -377,13 +393,14 @@ namespace PrimeSystem.UI.Usuarios
             ForeColor = Color.FromArgb(26, 28, 30);
             Margin = new Padding(4);
             Name = "USConsultaUsuario";
-            Size = new Size(724, 497);
+            Size = new Size(804, 561);
             PanelMedio.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             TLPFormUsuario.ResumeLayout(false);
             TLPFormUsuario.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             PanelLista.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -412,5 +429,6 @@ namespace PrimeSystem.UI.Usuarios
         private Label label5;
         private ComboBox CMBTipoUsuario;
         private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }

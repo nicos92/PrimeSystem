@@ -33,7 +33,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnIngresar = new Button();
             PanelForm = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
-            groupBox1 = new GroupBox();
+            GBFormProveedores = new GroupBox();
             TLPForm = new TableLayoutPanel();
             TxtEmail = new TextBox();
             label1 = new Label();
@@ -47,7 +47,7 @@ namespace PrimeSystem.UI.Proveedores
             TxtCuit = new TextBox();
             PanelForm.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
-            groupBox1.SuspendLayout();
+            GBFormProveedores.SuspendLayout();
             TLPForm.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,7 +86,7 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel4.BackColor = Color.FromArgb(218, 218, 220);
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Controls.Add(groupBox1, 0, 0);
+            tableLayoutPanel4.Controls.Add(GBFormProveedores, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(0, 0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -96,18 +96,18 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel4.Size = new Size(804, 561);
             tableLayoutPanel4.TabIndex = 1;
             // 
-            // groupBox1
+            // GBFormProveedores
             // 
-            groupBox1.Anchor = AnchorStyles.None;
-            groupBox1.Controls.Add(TLPForm);
-            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(92, 70);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(619, 420);
-            groupBox1.TabIndex = 6;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Formulario de Ingreso";
+            GBFormProveedores.Anchor = AnchorStyles.None;
+            GBFormProveedores.Controls.Add(TLPForm);
+            GBFormProveedores.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GBFormProveedores.ForeColor = Color.FromArgb(7, 100, 147);
+            GBFormProveedores.Location = new Point(92, 70);
+            GBFormProveedores.Name = "GBFormProveedores";
+            GBFormProveedores.Size = new Size(619, 420);
+            GBFormProveedores.TabIndex = 6;
+            GBFormProveedores.TabStop = false;
+            GBFormProveedores.Text = "Formulario de Ingreso de Proveedores";
             // 
             // TLPForm
             // 
@@ -276,7 +276,7 @@ namespace PrimeSystem.UI.Proveedores
             Load += UCIngresoProveedores_Load;
             PanelForm.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
+            GBFormProveedores.ResumeLayout(false);
             TLPForm.ResumeLayout(false);
             TLPForm.PerformLayout();
             ResumeLayout(false);
@@ -297,6 +297,6 @@ namespace PrimeSystem.UI.Proveedores
         private TextBox TxtProveedor;
         private Button BtnIngresar;
         private TableLayoutPanel tableLayoutPanel4;
-        private GroupBox groupBox1;
+        private GroupBox GBFormProveedores;
     }
 }

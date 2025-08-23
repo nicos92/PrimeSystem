@@ -78,7 +78,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnOpcionEditar.Name = "BtnOpcionEditar";
             BtnOpcionEditar.Size = new Size(362, 64);
             BtnOpcionEditar.TabIndex = 1;
-            BtnOpcionEditar.Text = "Editar";
+            BtnOpcionEditar.Text = "Editar Proveedor";
             BtnOpcionEditar.TextAlign = ContentAlignment.MiddleRight;
             BtnOpcionEditar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnOpcionEditar.UseVisualStyleBackColor = false;
@@ -99,7 +99,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
             BtnOpcionIngresar.Size = new Size(362, 64);
             BtnOpcionIngresar.TabIndex = 0;
-            BtnOpcionIngresar.Text = "Ingresar";
+            BtnOpcionIngresar.Text = "Ingresar Proveedor";
             BtnOpcionIngresar.TextAlign = ContentAlignment.MiddleRight;
             BtnOpcionIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnOpcionIngresar.UseVisualStyleBackColor = false;
