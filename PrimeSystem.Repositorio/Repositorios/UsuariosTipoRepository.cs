@@ -14,7 +14,7 @@ namespace PrimeSystem.Repositorio.Repositorios
     [SupportedOSPlatform("windows")]
     public class UsuariosTipoRepository : BaseRepositorio, IUsuariosTipoRepository
     {
-        public Result<Usuarios_Tipo> Add(Usuarios_Tipo tipo)
+        public Result<UsuariosTipo> Add(UsuariosTipo tipo)
         {
             try
             {
@@ -24,15 +24,15 @@ namespace PrimeSystem.Repositorio.Repositorios
                 cmd.Parameters.AddWithValue("@Descripcion", tipo.Descripcion ?? (object)DBNull.Value);
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                return result > 0 ? Result<Usuarios_Tipo>.Success(tipo) : Result<Usuarios_Tipo>.Failure("Error al agregar el tipo de usuario.");
+                return result > 0 ? Result<UsuariosTipo>.Success(tipo) : Result<UsuariosTipo>.Failure("Error al agregar el tipo de usuario.");
             }
             catch (OleDbException ex)
             {
-                return Result<Usuarios_Tipo>.Failure($"Error de base de datos al insertar el tipo de usuario: {ex.Message}");
+                return Result<UsuariosTipo>.Failure($"Error de base de datos al insertar el tipo de usuario: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return Result<Usuarios_Tipo>.Failure($"Error inesperado al insertar el tipo de usuario: {ex.Message}");
+                return Result<UsuariosTipo>.Failure($"Error inesperado al insertar el tipo de usuario: {ex.Message}");
             }
         }
 
@@ -59,7 +59,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public async Task<Result<List<Usuarios_Tipo>>> GetAll()
+        public async Task<Result<List<UsuariosTipo>>> GetAll()
         {
             try
             {
@@ -67,30 +67,30 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using OleDbCommand cmd = new OleDbCommand("SELECT Id_Usuario_Tipo, Tipo, Descripcion FROM Usuarios_Tipo", conn);
                 await conn.OpenAsync();
                 using DbDataReader reader = await cmd.ExecuteReaderAsync();
-                List<Usuarios_Tipo> tipos = new List<Usuarios_Tipo>();
+                List<UsuariosTipo> tipos = new List<UsuariosTipo>();
                 while (await reader.ReadAsync())
                 {
-                    tipos.Add(new Usuarios_Tipo
+                    tipos.Add(new UsuariosTipo
                     {
                         Id_Usuario_Tipo = reader.GetInt32(0),
                         Tipo = reader.GetInt32(1),
                         Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2)
                     });
                 }
-                return Result<List<Usuarios_Tipo>>.Success(tipos);
+                return Result<List<UsuariosTipo>>.Success(tipos);
             }
             catch (OleDbException ex)
             {
-                return Result<List<Usuarios_Tipo>>.Failure($"Error de base de datos al obtener los tipos de usuario: {ex.Message}");
+                return Result<List<UsuariosTipo>>.Failure($"Error de base de datos al obtener los tipos de usuario: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return Result<List<Usuarios_Tipo>>.Failure($"Error inesperado al obtener los tipos de usuario: {ex.Message}");
+                return Result<List<UsuariosTipo>>.Failure($"Error inesperado al obtener los tipos de usuario: {ex.Message}");
             }
 
         }
 
-        public Result<Usuarios_Tipo> GetById(int id)
+        public Result<UsuariosTipo> GetById(int id)
         {
             try
             {
@@ -101,26 +101,26 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using OleDbDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    return Result<Usuarios_Tipo>.Success(new Usuarios_Tipo
+                    return Result<UsuariosTipo>.Success(new UsuariosTipo
                     {
                         Id_Usuario_Tipo = reader.GetInt32(0),
                         Tipo = reader.GetInt32(1),
                         Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2)
                     });
                 }
-                return Result<Usuarios_Tipo>.Failure("Tipo de usuario no encontrado.");
+                return Result<UsuariosTipo>.Failure("Tipo de usuario no encontrado.");
             }
             catch (OleDbException ex)
             {
-                return Result<Usuarios_Tipo>.Failure($"Error de base de datos al obtener el tipo de usuario: {ex.Message}");
+                return Result<UsuariosTipo>.Failure($"Error de base de datos al obtener el tipo de usuario: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return Result<Usuarios_Tipo>.Failure($"Error inesperado al obtener el tipo de usuario: {ex.Message}");
+                return Result<UsuariosTipo>.Failure($"Error inesperado al obtener el tipo de usuario: {ex.Message}");
             }
         }
         
-        public Result<Usuarios_Tipo> Update(Usuarios_Tipo tipo)
+        public Result<UsuariosTipo> Update(UsuariosTipo tipo)
         {
             try
             {
@@ -131,15 +131,15 @@ namespace PrimeSystem.Repositorio.Repositorios
                 cmd.Parameters.AddWithValue("@Id", tipo.Id_Usuario_Tipo);
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                return result > 0 ? Result<Usuarios_Tipo>.Success(tipo) : Result<Usuarios_Tipo>.Failure("Error al actualizar el tipo de usuario.");
+                return result > 0 ? Result<UsuariosTipo>.Success(tipo) : Result<UsuariosTipo>.Failure("Error al actualizar el tipo de usuario.");
             }
             catch (OleDbException ex)
             {
-                return Result<Usuarios_Tipo>.Failure($"Error de base de datos al actualizar el tipo de usuario: {ex.Message}");
+                return Result<UsuariosTipo>.Failure($"Error de base de datos al actualizar el tipo de usuario: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return Result<Usuarios_Tipo>.Failure($"Error inesperado al actualizar el tipo de usuario: {ex.Message}");
+                return Result<UsuariosTipo>.Failure($"Error inesperado al actualizar el tipo de usuario: {ex.Message}");
             }
         }
 

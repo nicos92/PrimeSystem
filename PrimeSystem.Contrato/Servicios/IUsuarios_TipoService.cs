@@ -6,10 +6,10 @@ namespace PrimeSystem.Contrato.Servicios
 {
     public interface IUsuariosTipoService
     {
-        Task<Result<List<Usuarios_Tipo>>> GetAll();
-        Result<Usuarios_Tipo> GetById(int id);
-        Result<Usuarios_Tipo> Add(Usuarios_Tipo tipo);
-        Result<Usuarios_Tipo> Update(Usuarios_Tipo tipo);
+        Task<Result<List<UsuariosTipo>>> GetAll();
+        Result<UsuariosTipo> GetById(int id);
+        Result<UsuariosTipo> Add(UsuariosTipo tipo);
+        Result<UsuariosTipo> Update(UsuariosTipo tipo);
         Result<bool> Delete(int id);
     }
 }

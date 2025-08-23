@@ -14,9 +14,13 @@ namespace PrimeSystem.Modelo.Entidades
         public string? Apellido { get; set; }
         public string? Tel { get; set; }
         public string? Mail { get; set; }
-        public int Id_Tipo { get; set; }
+        public int? Id_Tipo { get; set; }
 
         public Usuarios() { }
+        public override string ToString()
+        {
+            return $"DNI: {DNI}, Apellido: {Apellido}, Nombre:{Nombre}";
+        }
     }
 
 }

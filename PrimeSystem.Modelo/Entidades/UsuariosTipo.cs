@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Modelo.Entidades
 {
-    public class Usuarios_Tipo
+    public class UsuariosTipo
     {
         public int Id_Usuario_Tipo { get; set; }
         public int Tipo { get; set; }
         public string? Descripcion { get; set; }
 
-        public Usuarios_Tipo() { }
+        public UsuariosTipo() { }
+
+        public override string ToString()
+        {
+            return $"Tipo: {Tipo}, Descripcion: {Descripcion}";
+        }
     }
 
 }

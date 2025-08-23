@@ -12,7 +12,7 @@ namespace PrimeSystem.Utilidades.Validaciones
         public ValidadorCUIT(TextBox textBox, ErrorProvider errorProvider)
             : base(textBox, errorProvider)
         {
-            MensajeError = "El CUIT debe tener el formato ##-########-#.";
+            MensajeError = "El CUIT debe tener el formato 12345678901.";
         }
 
         public override bool Validar()

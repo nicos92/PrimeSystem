@@ -15,10 +15,10 @@ namespace PrimeSystem.Servicio.Implementaciones
             _repo = repo;
         }
 
-        public async Task<Result<List<Usuarios_Tipo>>> GetAll() => await _repo.GetAll();
-        public Result<Usuarios_Tipo> GetById(int id) => _repo.GetById(id);
-        public Result<Usuarios_Tipo> Add(Usuarios_Tipo tipo) => _repo.Add(tipo);
-        public Result<Usuarios_Tipo> Update(Usuarios_Tipo tipo) => _repo.Update(tipo);
+        public async Task<Result<List<UsuariosTipo>>> GetAll() => await _repo.GetAll();
+        public Result<UsuariosTipo> GetById(int id) => _repo.GetById(id);
+        public Result<UsuariosTipo> Add(UsuariosTipo tipo) => _repo.Add(tipo);
+        public Result<UsuariosTipo> Update(UsuariosTipo tipo) => _repo.Update(tipo);
         public Result<bool> Delete(int id) => _repo.Delete(id);
     }
 }
