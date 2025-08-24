@@ -142,7 +142,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtEmail.Font = new Font("Segoe UI", 12F);
             TxtEmail.ForeColor = Color.FromArgb(26, 28, 30);
             TxtEmail.Location = new Point(103, 233);
-            TxtEmail.MaxLength = 11;
+            TxtEmail.MaxLength = 255;
             TxtEmail.Name = "TxtEmail";
             TxtEmail.Size = new Size(442, 29);
             TxtEmail.TabIndex = 9;
@@ -201,7 +201,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtApellido.Font = new Font("Segoe UI", 12F);
             TxtApellido.ForeColor = Color.FromArgb(26, 28, 30);
             TxtApellido.Location = new Point(103, 131);
-            TxtApellido.MaxLength = 11;
+            TxtApellido.MaxLength = 50;
             TxtApellido.Name = "TxtApellido";
             TxtApellido.Size = new Size(442, 29);
             TxtApellido.TabIndex = 7;
@@ -214,7 +214,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtNombre.Font = new Font("Segoe UI", 12F);
             TxtNombre.ForeColor = Color.FromArgb(26, 28, 30);
             TxtNombre.Location = new Point(103, 80);
-            TxtNombre.MaxLength = 11;
+            TxtNombre.MaxLength = 50;
             TxtNombre.Name = "TxtNombre";
             TxtNombre.Size = new Size(442, 29);
             TxtNombre.TabIndex = 6;
@@ -227,7 +227,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtDni.Font = new Font("Segoe UI", 12F);
             TxtDni.ForeColor = Color.FromArgb(26, 28, 30);
             TxtDni.Location = new Point(103, 25);
-            TxtDni.MaxLength = 11;
+            TxtDni.MaxLength = 8;
             TxtDni.Name = "TxtDni";
             TxtDni.Size = new Size(442, 29);
             TxtDni.TabIndex = 5;

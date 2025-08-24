@@ -32,6 +32,7 @@ namespace PrimeSystem.UI.Usuarios
         {
             PanelMedio = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
+            GBFormUsuarios = new GroupBox();
             TLPFormUsuario = new TableLayoutPanel();
             TxtEmail = new TextBox();
             label1 = new Label();
@@ -55,6 +56,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelMedio.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            GBFormUsuarios.SuspendLayout();
             TLPFormUsuario.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             PanelLista.SuspendLayout();
@@ -76,7 +78,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel4.BackColor = Color.FromArgb(218, 218, 220);
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel4.Controls.Add(TLPFormUsuario, 0, 0);
+            tableLayoutPanel4.Controls.Add(GBFormUsuarios, 0, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(0, 0);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -86,9 +88,21 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel4.Size = new Size(477, 555);
             tableLayoutPanel4.TabIndex = 2;
             // 
+            // GBFormUsuarios
+            // 
+            GBFormUsuarios.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            GBFormUsuarios.Controls.Add(TLPFormUsuario);
+            GBFormUsuarios.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GBFormUsuarios.ForeColor = Color.FromArgb(7, 100, 147);
+            GBFormUsuarios.Location = new Point(3, 47);
+            GBFormUsuarios.Name = "GBFormUsuarios";
+            GBFormUsuarios.Size = new Size(471, 461);
+            GBFormUsuarios.TabIndex = 14;
+            GBFormUsuarios.TabStop = false;
+            GBFormUsuarios.Text = "Formulario de edición de Usuario";
+            // 
             // TLPFormUsuario
             // 
-            TLPFormUsuario.Anchor = AnchorStyles.None;
             TLPFormUsuario.BackColor = Color.FromArgb(249, 249, 251);
             TLPFormUsuario.ColumnCount = 3;
             TLPFormUsuario.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22.83105F));
@@ -107,8 +121,9 @@ namespace PrimeSystem.UI.Usuarios
             TLPFormUsuario.Controls.Add(label2, 0, 3);
             TLPFormUsuario.Controls.Add(label5, 0, 6);
             TLPFormUsuario.Controls.Add(CMBTipoUsuario, 1, 6);
+            TLPFormUsuario.Dock = DockStyle.Fill;
             TLPFormUsuario.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPFormUsuario.Location = new Point(27, 87);
+            TLPFormUsuario.Location = new Point(3, 25);
             TLPFormUsuario.Name = "TLPFormUsuario";
             TLPFormUsuario.RowCount = 8;
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -129,7 +144,7 @@ namespace PrimeSystem.UI.Usuarios
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            TLPFormUsuario.Size = new Size(423, 381);
+            TLPFormUsuario.Size = new Size(465, 433);
             TLPFormUsuario.TabIndex = 0;
             // 
             // TxtEmail
@@ -138,18 +153,19 @@ namespace PrimeSystem.UI.Usuarios
             TxtEmail.BackColor = Color.FromArgb(238, 237, 240);
             TxtEmail.Font = new Font("Segoe UI", 12F);
             TxtEmail.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtEmail.Location = new Point(99, 235);
-            TxtEmail.MaxLength = 11;
+            TxtEmail.Location = new Point(108, 269);
+            TxtEmail.MaxLength = 255;
             TxtEmail.Name = "TxtEmail";
-            TxtEmail.Size = new Size(267, 29);
+            TxtEmail.Size = new Size(294, 29);
             TxtEmail.TabIndex = 9;
+            TxtEmail.TextChanged += TxtDni_TextChanged;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(42, 239);
+            label1.Location = new Point(51, 273);
             label1.Name = "label1";
             label1.Size = new Size(51, 21);
             label1.TabIndex = 1;
@@ -160,7 +176,7 @@ namespace PrimeSystem.UI.Usuarios
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(59, 188);
+            label3.Location = new Point(68, 215);
             label3.Name = "label3";
             label3.Size = new Size(34, 21);
             label3.TabIndex = 3;
@@ -171,7 +187,7 @@ namespace PrimeSystem.UI.Usuarios
             LblCuit.Anchor = AnchorStyles.Right;
             LblCuit.AutoSize = true;
             LblCuit.Font = new Font("Segoe UI", 12F);
-            LblCuit.Location = new Point(53, 35);
+            LblCuit.Location = new Point(62, 41);
             LblCuit.Name = "LblCuit";
             LblCuit.Size = new Size(40, 21);
             LblCuit.TabIndex = 0;
@@ -183,11 +199,12 @@ namespace PrimeSystem.UI.Usuarios
             TxtTel.BackColor = Color.FromArgb(238, 237, 240);
             TxtTel.Font = new Font("Segoe UI", 12F);
             TxtTel.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtTel.Location = new Point(99, 184);
+            TxtTel.Location = new Point(108, 211);
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
-            TxtTel.Size = new Size(267, 29);
+            TxtTel.Size = new Size(294, 29);
             TxtTel.TabIndex = 8;
+            TxtTel.TextChanged += TxtDni_TextChanged;
             // 
             // TxtApellido
             // 
@@ -195,11 +212,12 @@ namespace PrimeSystem.UI.Usuarios
             TxtApellido.BackColor = Color.FromArgb(238, 237, 240);
             TxtApellido.Font = new Font("Segoe UI", 12F);
             TxtApellido.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtApellido.Location = new Point(99, 133);
-            TxtApellido.MaxLength = 11;
+            TxtApellido.Location = new Point(108, 153);
+            TxtApellido.MaxLength = 50;
             TxtApellido.Name = "TxtApellido";
-            TxtApellido.Size = new Size(267, 29);
+            TxtApellido.Size = new Size(294, 29);
             TxtApellido.TabIndex = 7;
+            TxtApellido.TextChanged += TxtDni_TextChanged;
             // 
             // TxtNombre
             // 
@@ -207,11 +225,12 @@ namespace PrimeSystem.UI.Usuarios
             TxtNombre.BackColor = Color.FromArgb(238, 237, 240);
             TxtNombre.Font = new Font("Segoe UI", 12F);
             TxtNombre.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtNombre.Location = new Point(99, 82);
-            TxtNombre.MaxLength = 11;
+            TxtNombre.Location = new Point(108, 95);
+            TxtNombre.MaxLength = 50;
             TxtNombre.Name = "TxtNombre";
-            TxtNombre.Size = new Size(267, 29);
+            TxtNombre.Size = new Size(294, 29);
             TxtNombre.TabIndex = 6;
+            TxtNombre.TextChanged += TxtDni_TextChanged;
             // 
             // TxtDni
             // 
@@ -219,11 +238,12 @@ namespace PrimeSystem.UI.Usuarios
             TxtDni.BackColor = Color.FromArgb(238, 237, 240);
             TxtDni.Font = new Font("Segoe UI", 12F);
             TxtDni.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtDni.Location = new Point(99, 31);
-            TxtDni.MaxLength = 11;
+            TxtDni.Location = new Point(108, 37);
+            TxtDni.MaxLength = 8;
             TxtDni.Name = "TxtDni";
-            TxtDni.Size = new Size(267, 29);
+            TxtDni.Size = new Size(294, 29);
             TxtDni.TabIndex = 5;
+            TxtDni.TextChanged += TxtDni_TextChanged;
             // 
             // tableLayoutPanel2
             // 
@@ -233,11 +253,11 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel2.Controls.Add(BtnGuardar, 0, 0);
             tableLayoutPanel2.Controls.Add(BtnEliminar, 1, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(99, 329);
+            tableLayoutPanel2.Location = new Point(108, 374);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(267, 49);
+            tableLayoutPanel2.Size = new Size(294, 56);
             tableLayoutPanel2.TabIndex = 11;
             // 
             // BtnGuardar
@@ -250,15 +270,16 @@ namespace PrimeSystem.UI.Usuarios
             BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnGuardar.Image = Properties.Resources.guardar;
             BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
-            BtnGuardar.Location = new Point(0, 0);
+            BtnGuardar.Location = new Point(7, 4);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
             BtnGuardar.Size = new Size(133, 48);
-            BtnGuardar.TabIndex = 10;
+            BtnGuardar.TabIndex = 11;
             BtnGuardar.Text = "Guardar";
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
             BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
+            BtnGuardar.Click += BtnGuardar_Click;
             // 
             // BtnEliminar
             // 
@@ -269,19 +290,20 @@ namespace PrimeSystem.UI.Usuarios
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnEliminar.Image = Properties.Resources.trash;
-            BtnEliminar.Location = new Point(176, 0);
+            BtnEliminar.Location = new Point(196, 4);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
-            BtnEliminar.TabIndex = 1;
+            BtnEliminar.TabIndex = 12;
             BtnEliminar.UseVisualStyleBackColor = false;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // label4
             // 
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(22, 86);
+            label4.Location = new Point(31, 99);
             label4.Name = "label4";
             label4.Size = new Size(71, 21);
             label4.TabIndex = 4;
@@ -292,7 +314,7 @@ namespace PrimeSystem.UI.Usuarios
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(23, 137);
+            label2.Location = new Point(32, 157);
             label2.Name = "label2";
             label2.Size = new Size(70, 21);
             label2.TabIndex = 2;
@@ -303,7 +325,7 @@ namespace PrimeSystem.UI.Usuarios
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(50, 290);
+            label5.Location = new Point(59, 331);
             label5.Name = "label5";
             label5.Size = new Size(43, 21);
             label5.TabIndex = 12;
@@ -316,10 +338,10 @@ namespace PrimeSystem.UI.Usuarios
             CMBTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBTipoUsuario.ForeColor = Color.FromArgb(26, 28, 30);
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(99, 286);
+            CMBTipoUsuario.Location = new Point(108, 327);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
-            CMBTipoUsuario.Size = new Size(267, 29);
-            CMBTipoUsuario.TabIndex = 13;
+            CMBTipoUsuario.Size = new Size(294, 29);
+            CMBTipoUsuario.TabIndex = 10;
             // 
             // PanelLista
             // 
@@ -351,6 +373,7 @@ namespace PrimeSystem.UI.Usuarios
             // 
             LblLista.Dock = DockStyle.Top;
             LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LblLista.ForeColor = Color.FromArgb(7, 100, 147);
             LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
             LblLista.Size = new Size(309, 21);
@@ -361,12 +384,13 @@ namespace PrimeSystem.UI.Usuarios
             // ListBUsuarios
             // 
             ListBUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            ListBUsuarios.BackColor = Color.FromArgb(249, 249, 251);
+            ListBUsuarios.BackColor = Color.FromArgb(238, 237, 240);
             ListBUsuarios.FormattingEnabled = true;
             ListBUsuarios.Location = new Point(3, 35);
             ListBUsuarios.Name = "ListBUsuarios";
             ListBUsuarios.Size = new Size(309, 466);
             ListBUsuarios.TabIndex = 0;
+            ListBUsuarios.SelectedIndexChanged += ListBUsuarios_SelectedIndexChanged;
             // 
             // tableLayoutPanel3
             // 
@@ -394,8 +418,10 @@ namespace PrimeSystem.UI.Usuarios
             Margin = new Padding(4);
             Name = "USConsultaUsuario";
             Size = new Size(804, 561);
+            Load += USConsultaUsuario_Load;
             PanelMedio.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
+            GBFormUsuarios.ResumeLayout(false);
             TLPFormUsuario.ResumeLayout(false);
             TLPFormUsuario.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
@@ -430,5 +456,6 @@ namespace PrimeSystem.UI.Usuarios
         private ComboBox CMBTipoUsuario;
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel1;
+        private GroupBox GBFormUsuarios;
     }
 }

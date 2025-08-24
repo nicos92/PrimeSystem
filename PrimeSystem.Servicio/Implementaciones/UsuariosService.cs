@@ -6,14 +6,9 @@ using PrimeSystem.Contrato.Repositorios;
 
 namespace PrimeSystem.Servicio.Implementaciones
 {
-    public class UsuariosService : IUsuariosService
+    public class UsuariosService(IUsuariosRepository repo) : IUsuariosService
     {
-        private readonly IUsuariosRepository _repo;
-
-        public UsuariosService(IUsuariosRepository repo)
-        {
-            _repo = repo;
-        }
+        private readonly IUsuariosRepository _repo = repo;
 
         public async Task<Result<List<Usuarios>>> GetAll() => await _repo.GetAll();
         public Result<Usuarios> GetById(int id) => _repo.GetById(id);

@@ -92,6 +92,8 @@ namespace PrimeSystem.UI.Clientes
             BloquearBtns();
             SeleccionarProveedor();
             Util.AjustarAnchoListBox(ListBClientes);
+            Util.ValcularListBoxVacio(ListBClientes, LblLista, "Clientes");
+
             TxtCuit.Focus();
         }
 
@@ -159,6 +161,8 @@ namespace PrimeSystem.UI.Clientes
                     await CargarClientes();
                     SeleccionarProveedor();
                     Util.AjustarAnchoListBox(ListBClientes);
+                    Util.ValcularListBoxVacio(ListBClientes, LblLista, "Clientes");
+
 
                 }
                 else
@@ -217,6 +221,8 @@ namespace PrimeSystem.UI.Clientes
 
                 await CargarClientes();
                 Util.AjustarAnchoListBox(ListBClientes);
+                Util.ValcularListBoxVacio(ListBClientes, LblLista, "Clientes");
+
             }
             else
             {
@@ -225,6 +231,6 @@ namespace PrimeSystem.UI.Clientes
 
         }
 
-        
+
     }
 }

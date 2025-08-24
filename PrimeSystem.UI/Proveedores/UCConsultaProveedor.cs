@@ -17,7 +17,7 @@ namespace PrimeSystem.UI.Proveedores
 {
     public partial class UCConsultaProveedor : UserControl
     {
-       
+
         private readonly IProveedoresService _proveedoresService;
         private Modelo.Entidades.Proveedores? _proveedorSeleccionado;
         private int indiceSeleccionado;
@@ -68,7 +68,7 @@ namespace PrimeSystem.UI.Proveedores
             };
         }
 
-      
+
 
         private async void UCConsultaProveedor_Load(object sender, EventArgs e)
         {
@@ -76,6 +76,8 @@ namespace PrimeSystem.UI.Proveedores
             BloquearBtns();
             SeleccionarProveedor();
             Util.AjustarAnchoListBox(ListBProveedores);
+            Util.ValcularListBoxVacio(ListBProveedores, LblLista, "Proveedores");
+
 
             TxtCuit.Focus();
 
@@ -173,6 +175,8 @@ namespace PrimeSystem.UI.Proveedores
                     await CargarProveedores();
                     SeleccionarProveedor();
                     Util.AjustarAnchoListBox(ListBProveedores);
+                    Util.ValcularListBoxVacio(ListBProveedores, LblLista, "Proveedores");
+
 
 
                 }
@@ -210,28 +214,29 @@ namespace PrimeSystem.UI.Proveedores
 
         private async Task EliminarProveedor()
         {
-            if (_proveedorSeleccionado != null && !string.IsNullOrEmpty(_proveedorSeleccionado.CUIT))
+
+            var resultado = _proveedoresService.Delete(_proveedorSeleccionado.Id_Proveedor);
+            if (resultado.IsSuccess)
             {
-                var resultado = _proveedoresService.Delete(_proveedorSeleccionado.Id_Proveedor);
-                if (resultado.IsSuccess)
-                {
-                    MessageBox.Show("Proveedor eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Util.LimpiarForm(TLPForm, TxtCuit);
+                MessageBox.Show("Proveedor eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Util.LimpiarForm(TLPForm, TxtCuit);
 
-                    await CargarProveedores();
-                    Util.AjustarAnchoListBox(ListBProveedores);
+                await CargarProveedores();
+                Util.AjustarAnchoListBox(ListBProveedores);
+                Util.ValcularListBoxVacio(ListBProveedores, LblLista, "Proveedores");
 
-                }
-                else
-                {
-                    MessageBox.Show(resultado.Error, "Error al eliminar proveedor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
             }
+            else
+            {
+                MessageBox.Show(resultado.Error, "Error al eliminar proveedor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
-            ValidadorMultiple.ValidacionMultiple([BtnGuardar, BtnEliminar],_vTxtCuit, _vTxtProveedor, _vTxtNombre, _vTxtTel, _vTxtEmail );
+            ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtCuit, _vTxtProveedor, _vTxtNombre, _vTxtTel, _vTxtEmail);
         }
     }
 }

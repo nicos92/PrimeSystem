@@ -45,7 +45,19 @@ namespace PrimeSystem.Utilidades
             }
 
             // Agregar un margen adicional para evitar cortes
+            maxWidth = maxWidth < 128 ? 128 : maxWidth; // Ancho mínimo de 100 píxeles
             listBox.Width = maxWidth + SystemInformation.VerticalScrollBarWidth + 5;
+        }
+
+        public static void ValcularListBoxVacio(ListBox listbox, Label label, string modulo)
+        {
+            if (listbox.Items.Count <= 0)
+            {
+                label.Text = $"Lista de {modulo} Vacia";
+                return;
+            }
+            label.Text = $"Lista de {modulo}";
+
         }
     }
 }

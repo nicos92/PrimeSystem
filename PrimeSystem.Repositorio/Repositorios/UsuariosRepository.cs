@@ -28,11 +28,11 @@ namespace PrimeSystem.Repositorio.Repositorios
                     Usuarios usuario = new()
                     {
                         Id_Usuario = reader.GetInt32(0),
-                        DNI = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        Nombre = reader.IsDBNull(2) ? null : reader.GetString(2),
-                        Apellido = reader.IsDBNull(3) ? null : reader.GetString(3),
-                        Tel = reader.IsDBNull(4) ? null : reader.GetString(4),
-                        Mail = reader.IsDBNull(5) ? null : reader.GetString(5),
+                        DNI =  reader.GetString(1),
+                        Nombre = reader.GetString(2),
+                        Apellido = reader.GetString(3),
+                        Tel = reader.GetString(4),
+                        Mail =  reader.GetString(5),
                         Id_Tipo = reader.GetInt32(6)
                     };
                     usuarios.Add(usuario);
@@ -102,7 +102,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 {
                     return Result<Usuarios>.Success(usuario);
                 }
-                return Result<Usuarios>.Failure("No se pudo agregar el usuario");
+                return Result<Usuarios>.Failure("repositorio: No se pudo agregar el usuario");
             }
             catch (OleDbException ex)
             {
