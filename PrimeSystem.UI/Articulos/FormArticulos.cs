@@ -42,8 +42,8 @@ namespace PrimeSystem.UI.Articulos
 
         private void ConFigBtns()
         {
-            BtnOpcionIngresar.Tag = typeof(UCIngresoUsuarios);
-            BtnOpcionEditar.Tag = typeof(USConsultaUsuario);
+            BtnOpcionIngresar.Tag = typeof(UCIngresoArticulos);
+            BtnOpcionEditar.Tag = typeof(UCConsultaArticulos);
         }
 
         private void ValidarTag(Button btn)
