@@ -32,8 +32,11 @@ namespace PrimeSystem.UI.Proveedores
         {
             PanelLista = new Panel();
             TLPLista = new TableLayoutPanel();
-            ListBProveedores = new ListBox();
             LblLista = new Label();
+            ListBProveedores = new DataGridView();
+            CUIT = new DataGridViewTextBoxColumn();
+            Proveedor = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
             GBFormProveedores = new GroupBox();
@@ -54,6 +57,7 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelLista.SuspendLayout();
             TLPLista.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ListBProveedores).BeginInit();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             GBFormProveedores.SuspendLayout();
@@ -77,8 +81,8 @@ namespace PrimeSystem.UI.Proveedores
             // 
             TLPLista.ColumnCount = 1;
             TLPLista.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            TLPLista.Controls.Add(ListBProveedores, 0, 1);
             TLPLista.Controls.Add(LblLista, 0, 0);
+            TLPLista.Controls.Add(ListBProveedores, 0, 1);
             TLPLista.Dock = DockStyle.Fill;
             TLPLista.Location = new Point(0, 16);
             TLPLista.Name = "TLPLista";
@@ -88,21 +92,10 @@ namespace PrimeSystem.UI.Proveedores
             TLPLista.Size = new Size(315, 523);
             TLPLista.TabIndex = 2;
             // 
-            // ListBProveedores
-            // 
-            ListBProveedores.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            ListBProveedores.BackColor = Color.FromArgb(238, 237, 240);
-            ListBProveedores.FormattingEnabled = true;
-            ListBProveedores.Location = new Point(3, 35);
-            ListBProveedores.Name = "ListBProveedores";
-            ListBProveedores.Size = new Size(309, 466);
-            ListBProveedores.TabIndex = 0;
-            ListBProveedores.SelectedIndexChanged += ListBProveedores_SelectedIndexChanged;
-            // 
             // LblLista
             // 
             LblLista.Dock = DockStyle.Top;
-            LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LblLista.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLista.ForeColor = Color.FromArgb(7, 100, 147);
             LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
@@ -110,6 +103,49 @@ namespace PrimeSystem.UI.Proveedores
             LblLista.TabIndex = 1;
             LblLista.Text = "Lista de Proveedores";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // ListBProveedores
+            // 
+            ListBProveedores.AllowUserToAddRows = false;
+            ListBProveedores.AllowUserToDeleteRows = false;
+            ListBProveedores.AllowUserToResizeColumns = false;
+            ListBProveedores.AllowUserToResizeRows = false;
+            ListBProveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ListBProveedores.Columns.AddRange(new DataGridViewColumn[] { CUIT, Proveedor, Nombre });
+            ListBProveedores.Dock = DockStyle.Fill;
+            ListBProveedores.Location = new Point(3, 35);
+            ListBProveedores.Name = "ListBProveedores";
+            ListBProveedores.ReadOnly = true;
+            ListBProveedores.RowHeadersVisible = false;
+            ListBProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ListBProveedores.Size = new Size(309, 485);
+            ListBProveedores.TabIndex = 2;
+            ListBProveedores.SelectionChanged += ListBProveedores_SelectionChanged;
+            // 
+            // CUIT
+            // 
+            CUIT.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            CUIT.DataPropertyName = "CUIT";
+            CUIT.HeaderText = "CUIT";
+            CUIT.Name = "CUIT";
+            CUIT.ReadOnly = true;
+            CUIT.Width = 68;
+            // 
+            // Proveedor
+            // 
+            Proveedor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Proveedor.DataPropertyName = "Proveedor";
+            Proveedor.HeaderText = "Proveedor";
+            Proveedor.Name = "Proveedor";
+            Proveedor.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
+            Nombre.HeaderText = "Nombre";
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
             // 
             // panel1
             // 
@@ -139,7 +175,7 @@ namespace PrimeSystem.UI.Proveedores
             // 
             GBFormProveedores.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             GBFormProveedores.Controls.Add(TLPForm);
-            GBFormProveedores.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GBFormProveedores.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             GBFormProveedores.ForeColor = Color.FromArgb(7, 100, 147);
             GBFormProveedores.Location = new Point(3, 54);
             GBFormProveedores.Name = "GBFormProveedores";
@@ -168,7 +204,7 @@ namespace PrimeSystem.UI.Proveedores
             TLPForm.Controls.Add(tableLayoutPanel2, 1, 6);
             TLPForm.Dock = DockStyle.Fill;
             TLPForm.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPForm.Location = new Point(3, 25);
+            TLPForm.Location = new Point(3, 29);
             TLPForm.Name = "TLPForm";
             TLPForm.RowCount = 8;
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -189,7 +225,7 @@ namespace PrimeSystem.UI.Proveedores
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            TLPForm.Size = new Size(465, 419);
+            TLPForm.Size = new Size(465, 415);
             TLPForm.TabIndex = 0;
             // 
             // TxtEmail
@@ -325,7 +361,7 @@ namespace PrimeSystem.UI.Proveedores
             tableLayoutPanel2.RowCount = 1;
             TLPForm.SetRowSpan(tableLayoutPanel2, 2);
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(294, 111);
+            tableLayoutPanel2.Size = new Size(294, 107);
             tableLayoutPanel2.TabIndex = 11;
             // 
             // BtnGuardar
@@ -338,7 +374,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnGuardar.Image = Properties.Resources.guardar;
             BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
-            BtnGuardar.Location = new Point(8, 23);
+            BtnGuardar.Location = new Point(8, 21);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
             BtnGuardar.Size = new Size(131, 64);
@@ -347,6 +383,7 @@ namespace PrimeSystem.UI.Proveedores
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
             BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
+            BtnGuardar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnGuardar.Click += BtnGuardar_Click;
             // 
             // BtnEliminar
@@ -358,12 +395,13 @@ namespace PrimeSystem.UI.Proveedores
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnEliminar.Image = Properties.Resources.trash;
-            BtnEliminar.Location = new Point(188, 23);
+            BtnEliminar.Location = new Point(188, 21);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(64, 64);
             BtnEliminar.TabIndex = 11;
             BtnEliminar.UseVisualStyleBackColor = false;
+            BtnEliminar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnEliminar.Click += BtnEliminar_Click;
             // 
             // tableLayoutPanel3
@@ -395,6 +433,7 @@ namespace PrimeSystem.UI.Proveedores
             Load += UCConsultaProveedor_Load;
             PanelLista.ResumeLayout(false);
             TLPLista.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ListBProveedores).EndInit();
             panel1.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             GBFormProveedores.ResumeLayout(false);
@@ -408,7 +447,6 @@ namespace PrimeSystem.UI.Proveedores
         #endregion
 
         private Panel PanelLista;
-        private ListBox ListBProveedores;
         private Label LblLista;
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel4;
@@ -429,5 +467,9 @@ namespace PrimeSystem.UI.Proveedores
         private TableLayoutPanel tableLayoutPanel3;
         private GroupBox GBFormProveedores;
         private TableLayoutPanel TLPLista;
+        private DataGridView ListBProveedores;
+        private DataGridViewTextBoxColumn CUIT;
+        private DataGridViewTextBoxColumn Proveedor;
+        private DataGridViewTextBoxColumn Nombre;
     }
 }

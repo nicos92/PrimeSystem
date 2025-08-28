@@ -1,4 +1,6 @@
-﻿namespace PrimeSystem.UI.Clientes
+﻿using PrimeSystem.Utilidades;
+
+namespace PrimeSystem.UI.Clientes
 {
     partial class UCIgresoCliente
     {
@@ -77,7 +79,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.None;
             groupBox1.Controls.Add(TLPForm);
-            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
             groupBox1.Location = new Point(92, 70);
             groupBox1.Name = "groupBox1";
@@ -106,7 +108,7 @@
             TLPForm.Controls.Add(BtnIngresar, 1, 6);
             TLPForm.Dock = DockStyle.Fill;
             TLPForm.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPForm.Location = new Point(3, 25);
+            TLPForm.Location = new Point(3, 29);
             TLPForm.Name = "TLPForm";
             TLPForm.RowCount = 8;
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -117,7 +119,7 @@
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 13.5135136F));
-            TLPForm.Size = new Size(613, 392);
+            TLPForm.Size = new Size(613, 388);
             TLPForm.TabIndex = 0;
             // 
             // TxtEmail
@@ -126,7 +128,7 @@
             TxtEmail.BackColor = Color.FromArgb(238, 237, 240);
             TxtEmail.Font = new Font("Segoe UI", 12F);
             TxtEmail.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtEmail.Location = new Point(125, 240);
+            TxtEmail.Location = new Point(125, 239);
             TxtEmail.MaxLength = 255;
             TxtEmail.Name = "TxtEmail";
             TxtEmail.Size = new Size(361, 29);
@@ -138,7 +140,7 @@
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(68, 244);
+            label1.Location = new Point(68, 243);
             label1.Name = "label1";
             label1.Size = new Size(51, 21);
             label1.TabIndex = 1;
@@ -149,7 +151,7 @@
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(85, 192);
+            label3.Location = new Point(85, 191);
             label3.Name = "label3";
             label3.Size = new Size(34, 21);
             label3.TabIndex = 3;
@@ -160,7 +162,7 @@
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(48, 140);
+            label4.Location = new Point(48, 139);
             label4.Name = "label4";
             label4.Size = new Size(71, 21);
             label4.TabIndex = 4;
@@ -171,7 +173,7 @@
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(54, 88);
+            label2.Location = new Point(54, 87);
             label2.Name = "label2";
             label2.Size = new Size(65, 21);
             label2.TabIndex = 2;
@@ -182,7 +184,7 @@
             LblCuit.Anchor = AnchorStyles.Right;
             LblCuit.AutoSize = true;
             LblCuit.Font = new Font("Segoe UI", 12F);
-            LblCuit.Location = new Point(73, 36);
+            LblCuit.Location = new Point(73, 35);
             LblCuit.Name = "LblCuit";
             LblCuit.Size = new Size(46, 21);
             LblCuit.TabIndex = 0;
@@ -194,7 +196,7 @@
             TxtTel.BackColor = Color.FromArgb(238, 237, 240);
             TxtTel.Font = new Font("Segoe UI", 12F);
             TxtTel.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtTel.Location = new Point(125, 188);
+            TxtTel.Location = new Point(125, 187);
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
             TxtTel.Size = new Size(361, 29);
@@ -207,7 +209,7 @@
             TxtNombre.BackColor = Color.FromArgb(238, 237, 240);
             TxtNombre.Font = new Font("Segoe UI", 12F);
             TxtNombre.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtNombre.Location = new Point(125, 136);
+            TxtNombre.Location = new Point(125, 135);
             TxtNombre.MaxLength = 50;
             TxtNombre.Name = "TxtNombre";
             TxtNombre.Size = new Size(361, 29);
@@ -220,7 +222,7 @@
             TxtEntidad.BackColor = Color.FromArgb(238, 237, 240);
             TxtEntidad.Font = new Font("Segoe UI", 12F);
             TxtEntidad.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtEntidad.Location = new Point(125, 84);
+            TxtEntidad.Location = new Point(125, 83);
             TxtEntidad.MaxLength = 50;
             TxtEntidad.Name = "TxtEntidad";
             TxtEntidad.Size = new Size(361, 29);
@@ -233,7 +235,7 @@
             TxtCuit.BackColor = Color.FromArgb(238, 237, 240);
             TxtCuit.Font = new Font("Segoe UI", 12F);
             TxtCuit.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtCuit.Location = new Point(125, 32);
+            TxtCuit.Location = new Point(125, 31);
             TxtCuit.MaxLength = 11;
             TxtCuit.Name = "TxtCuit";
             TxtCuit.Size = new Size(361, 29);
@@ -243,14 +245,14 @@
             // BtnIngresar
             // 
             BtnIngresar.Anchor = AnchorStyles.None;
-            BtnIngresar.BackColor = Color.FromArgb(7, 100, 147);
+            BtnIngresar.BackColor = AppColorsBlue.Secondary;
             BtnIngresar.Enabled = false;
             BtnIngresar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
             BtnIngresar.FlatStyle = FlatStyle.Flat;
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnIngresar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnIngresar.Image = Properties.Resources.ingresar;
-            BtnIngresar.Location = new Point(209, 304);
+            BtnIngresar.Location = new Point(209, 302);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
             TLPForm.SetRowSpan(BtnIngresar, 2);
@@ -259,6 +261,7 @@
             BtnIngresar.Text = "INGRESAR";
             BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
+            BtnIngresar.EnabledChanged += BtnIngresar_EnabledChanged;
             BtnIngresar.Click += BtnIngresar_Click;
             // 
             // UCIgresoCliente

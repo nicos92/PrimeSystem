@@ -75,8 +75,9 @@ namespace PrimeSystem.UI.Clientes
 
             if (datos.IsSuccess)
             {
-                List<Modelo.Entidades.Clientes> clientes = datos.Value;
-                ListBClientes.DataSource = clientes;
+
+                ListBClientes.AutoGenerateColumns = false;
+                ListBClientes.DataSource = datos.Value.OrderBy(c => c.Entidad).ToList();
 
             }
             else
@@ -89,30 +90,15 @@ namespace PrimeSystem.UI.Clientes
         private async void UCConsultaClientes_Load(object sender, EventArgs e)
         {
             await CargarClientes();
-            BloquearBtns();
-            SeleccionarProveedor();
-            Util.AjustarAnchoListBox(ListBClientes);
-            Util.ValcularListBoxVacio(ListBClientes, LblLista, "Clientes");
+            ConfigBtns();
+            Util.BloquearBtns(ListBClientes, TLPForm);
 
+
+            Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes");
             TxtCuit.Focus();
         }
 
-        private void BloquearBtns()
-        {
-
-            if (ListBClientes.SelectedItem == null)
-            {
-
-                BtnEliminar.Enabled = false;
-                BtnGuardar.Enabled = false;
-            }
-            else
-            {
-                BtnEliminar.Enabled = true;
-                BtnGuardar.Enabled = true;
-            }
-
-        }
+     
 
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -127,7 +113,7 @@ namespace PrimeSystem.UI.Clientes
 
         private void CrearCliente()
         {
-            _clienteSeleccionado ??= new Modelo.Entidades.Clientes();
+
 
             _clienteSeleccionado.CUIT = TxtCuit.Text;
             _clienteSeleccionado.Entidad = TxtEntidad.Text;
@@ -137,13 +123,7 @@ namespace PrimeSystem.UI.Clientes
 
         }
 
-        private void SeleccionarProveedor()
-        {
-            if (ListBClientes.SelectedItem != null)
-            {
-                ListBClientes.SelectedIndex = indiceSeleccionado;
-            }
-        }
+
 
         private async Task GuardarCliente()
         {
@@ -157,11 +137,12 @@ namespace PrimeSystem.UI.Clientes
                 if (resultado.IsSuccess)
                 {
                     MessageBox.Show("Proveedor actualizado correctamente.\n" + resultado.Value.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    indiceSeleccionado = ListBClientes.SelectedIndex;
+                    string valor = _clienteSeleccionado.CUIT;
                     await CargarClientes();
-                    SeleccionarProveedor();
-                    Util.AjustarAnchoListBox(ListBClientes);
-                    Util.ValcularListBoxVacio(ListBClientes, LblLista, "Clientes");
+                    //SeleccionarClientes();
+                    Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes");
+                    Util.SeleccionarFilaDGV(ListBClientes, valor, ListBClientes.Columns[0].HeaderText, ref indiceSeleccionado);
+                    CargarSeleccionado();
 
 
                 }
@@ -174,13 +155,16 @@ namespace PrimeSystem.UI.Clientes
 
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
+            
             ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtCuit, _vTxtEntidad, _vTxtNombre, _vTxtTel, _vTxtEmail);
+
         }
 
-        private void ListBProveedores_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void CargarSeleccionado()
         {
-            // Solución CS8601: Verificar que SelectedItem no sea null antes de hacer el cast
-            if (ListBClientes.SelectedItem is Modelo.Entidades.Clientes cliente)
+            if (ListBClientes.Rows[indiceSeleccionado].DataBoundItem is Modelo.Entidades.Clientes cliente)
             {
                 _clienteSeleccionado = cliente;
                 TxtCuit.Text = _clienteSeleccionado.CUIT ?? string.Empty;
@@ -217,11 +201,14 @@ namespace PrimeSystem.UI.Clientes
             if (resultado.IsSuccess)
             {
                 MessageBox.Show("Cliente eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Util.LimpiarForm(TLPForm, TxtCuit);
 
                 await CargarClientes();
-                Util.AjustarAnchoListBox(ListBClientes);
-                Util.ValcularListBoxVacio(ListBClientes, LblLista, "Clientes");
+                if (Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes"))
+                {
+                    Util.LimpiarForm(TLPForm, TxtCuit);
+                    Util.BloquearBtns(ListBClientes, TLPForm);
+
+                }
 
             }
             else
@@ -232,5 +219,28 @@ namespace PrimeSystem.UI.Clientes
         }
 
 
+
+        private void ListBClientes_SelectionChanged(object sender, EventArgs e)
+        {
+            indiceSeleccionado = ListBClientes.CurrentRow?.Index ?? -1;
+            CargarSeleccionado();
+        }
+
+        private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
+        {
+            if( sender is Button btn)
+            {
+                if(btn.Tag is Color color)
+                {
+                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+                }
+            }
+        }
+
+        private void ConfigBtns()
+        {
+            BtnGuardar.Tag = AppColorsBlue.Tertiary;
+            BtnEliminar.Tag = AppColorsBlue.Error;
+        }
     }
 }

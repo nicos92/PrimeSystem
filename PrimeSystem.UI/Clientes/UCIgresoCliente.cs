@@ -108,6 +108,23 @@ namespace PrimeSystem.UI.Clientes
         private void UCIgresoCliente_Load(object sender, EventArgs e)
         {
             TxtCuit.Focus();
+            ConfigBtns();
+        }
+
+        private void ConfigBtns()
+        {
+            BtnIngresar.Tag = AppColorsBlue.Primary;
+        }
+
+        private void BtnIngresar_EnabledChanged(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                if (btn.Tag is Color color)
+                {
+                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+                }
+            }
         }
     }
 }

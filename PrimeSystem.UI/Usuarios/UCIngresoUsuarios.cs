@@ -71,6 +71,7 @@ namespace PrimeSystem.UI.Usuarios
         private async void UCIngresoUsuarios_Load(object sender, EventArgs e)
         {
             TxtDni.Focus();
+            ConfigBtns();
             await CargarTiposUsuarios();
         }
 
@@ -82,6 +83,8 @@ namespace PrimeSystem.UI.Usuarios
             if (tiposUsuarios.IsSuccess && tiposUsuarios.Value != null)
             {
                 CMBTipoUsuario.DataSource = tiposUsuarios.Value;
+                CMBTipoUsuario.DisplayMember = "Descripcion";
+                CMBTipoUsuario.ValueMember = "Tipo";
 
             }
             else
@@ -97,7 +100,7 @@ namespace PrimeSystem.UI.Usuarios
 
         private void CrearUsuario()
         {
-            if (CMBTipoUsuario.SelectedItem is not Modelo.Entidades.UsuariosTipo tipoUsuario)
+            if (CMBTipoUsuario.SelectedValue is not int tipoUsuario)
             {
                 MessageBox.Show("El tipo de usuario seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -110,7 +113,7 @@ namespace PrimeSystem.UI.Usuarios
                 Nombre = TxtNombre.Text,
                 Tel = TxtTel.Text,
                 Mail = TxtEmail.Text,
-                Id_Tipo = tipoUsuario.Id_Usuario_Tipo
+                Id_Tipo = tipoUsuario
             };
         }
 
@@ -132,6 +135,22 @@ namespace PrimeSystem.UI.Usuarios
             else
             {
                 MessageBox.Show($"{resultado.Error}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ConfigBtns()
+        {
+            BtnIngresar.Tag = AppColorsBlue.Primary;
+        }
+
+        private void BtnIngresar_EnabledChanged(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                if (btn.Tag is Color color)
+                {
+                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+                }
             }
         }
     }

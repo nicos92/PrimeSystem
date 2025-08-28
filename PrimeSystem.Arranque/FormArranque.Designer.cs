@@ -30,6 +30,7 @@ partial class FormArranque
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormArranque));
         LblBienvenido = new Label();
         PanelPrincipal = new Panel();
         ProgressBar = new ProgressBar();
@@ -44,7 +45,7 @@ partial class FormArranque
         LblBienvenido.Anchor = AnchorStyles.None;
         LblBienvenido.AutoSize = true;
         LblBienvenido.Font = new Font("Segoe UI", 72F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        LblBienvenido.ForeColor = AppColorsBlue.OnPrimary;
+        LblBienvenido.ForeColor = Color.FromArgb(255, 255, 255);
         LblBienvenido.Location = new Point(21, 44);
         LblBienvenido.Name = "LblBienvenido";
         LblBienvenido.Size = new Size(739, 256);
@@ -54,7 +55,7 @@ partial class FormArranque
         // 
         // PanelPrincipal
         // 
-        PanelPrincipal.BackColor = AppColorsBlue.Primary;
+        PanelPrincipal.BackColor = Color.FromArgb(7, 100, 147);
         PanelPrincipal.Controls.Add(ProgressBar);
         PanelPrincipal.Controls.Add(LblCargando);
         PanelPrincipal.Controls.Add(LblBienvenido);
@@ -66,19 +67,19 @@ partial class FormArranque
         // 
         // ProgressBar
         // 
+        ProgressBar.BackColor = Color.FromArgb(203, 230, 255);
         ProgressBar.Dock = DockStyle.Top;
         ProgressBar.Location = new Point(0, 0);
         ProgressBar.Name = "ProgressBar";
         ProgressBar.Size = new Size(796, 23);
         ProgressBar.TabIndex = 2;
-        ProgressBar.BackColor = AppColorsBlue.PrimaryContainer;
         // 
         // LblCargando
         // 
         LblCargando.Anchor = AnchorStyles.None;
         LblCargando.AutoSize = true;
         LblCargando.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        LblCargando.ForeColor = AppColorsBlue.Secondary;
+        LblCargando.ForeColor = Color.FromArgb(83, 96, 108);
         LblCargando.Location = new Point(107, 407);
         LblCargando.Name = "LblCargando";
         LblCargando.Size = new Size(166, 45);
@@ -88,7 +89,7 @@ partial class FormArranque
         // 
         // panel1
         // 
-        panel1.BackColor = AppColorsBlue.InversePrimary;
+        panel1.BackColor = Color.FromArgb(142, 205, 255);
         panel1.Controls.Add(PanelPrincipal);
         panel1.Dock = DockStyle.Fill;
         panel1.Location = new Point(0, 0);
@@ -100,12 +101,13 @@ partial class FormArranque
         // FormArranque
         // 
         AutoScaleMode = AutoScaleMode.None;
-        BackColor = AppColorsBlue.Background;
+        BackColor = Color.FromArgb(249, 249, 251);
         ClientSize = new Size(800, 500);
         Controls.Add(panel1);
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-        ForeColor = AppColorsBlue.OnBackground;
+        ForeColor = Color.FromArgb(26, 28, 30);
         FormBorderStyle = FormBorderStyle.None;
+        Icon = (Icon)resources.GetObject("$this.Icon");
         Name = "FormArranque";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Bienvenido";

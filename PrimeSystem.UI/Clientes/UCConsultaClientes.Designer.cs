@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelLista = new Panel();
             TLPLista = new TableLayoutPanel();
             LblLista = new Label();
-            ListBClientes = new ListBox();
+            ListBClientes = new DataGridView();
+            CUIT = new DataGridViewTextBoxColumn();
+            Entidad = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
@@ -53,6 +58,7 @@
             tableLayoutPanel3.SuspendLayout();
             PanelLista.SuspendLayout();
             TLPLista.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ListBClientes).BeginInit();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -105,7 +111,7 @@
             // LblLista
             // 
             LblLista.Dock = DockStyle.Top;
-            LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LblLista.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLista.ForeColor = Color.FromArgb(7, 100, 147);
             LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
@@ -116,15 +122,65 @@
             // 
             // ListBClientes
             // 
-            ListBClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            ListBClientes.BackColor = Color.FromArgb(238, 237, 240);
-            ListBClientes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ListBClientes.FormattingEnabled = true;
+            ListBClientes.AllowUserToAddRows = false;
+            ListBClientes.AllowUserToDeleteRows = false;
+            ListBClientes.AllowUserToResizeColumns = false;
+            ListBClientes.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ListBClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            ListBClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ListBClientes.Columns.AddRange(new DataGridViewColumn[] { CUIT, Entidad, Nombre });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            ListBClientes.DefaultCellStyle = dataGridViewCellStyle2;
+            ListBClientes.Dock = DockStyle.Fill;
             ListBClientes.Location = new Point(3, 35);
             ListBClientes.Name = "ListBClientes";
-            ListBClientes.Size = new Size(309, 487);
-            ListBClientes.TabIndex = 0;
-            ListBClientes.SelectedIndexChanged += ListBProveedores_SelectedIndexChanged;
+            ListBClientes.ReadOnly = true;
+            ListBClientes.RowHeadersVisible = false;
+            ListBClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ListBClientes.Size = new Size(309, 485);
+            ListBClientes.TabIndex = 2;
+            ListBClientes.SelectionChanged += ListBClientes_SelectionChanged;
+            // 
+            // CUIT
+            // 
+            CUIT.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            CUIT.DataPropertyName = "CUIT";
+            CUIT.HeaderText = "CUIT";
+            CUIT.MaxInputLength = 11;
+            CUIT.Name = "CUIT";
+            CUIT.ReadOnly = true;
+            CUIT.Width = 68;
+            // 
+            // Entidad
+            // 
+            Entidad.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Entidad.DataPropertyName = "Entidad";
+            Entidad.HeaderText = "Entidad";
+            Entidad.MaxInputLength = 50;
+            Entidad.Name = "Entidad";
+            Entidad.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Nombre.DataPropertyName = "Nombre";
+            Nombre.HeaderText = "Nombre";
+            Nombre.MaxInputLength = 50;
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
             // 
             // panel1
             // 
@@ -154,7 +210,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(TLPForm);
-            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
             groupBox1.Location = new Point(3, 45);
             groupBox1.Name = "groupBox1";
@@ -183,7 +239,7 @@
             TLPForm.Controls.Add(tableLayoutPanel2, 1, 6);
             TLPForm.Dock = DockStyle.Fill;
             TLPForm.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPForm.Location = new Point(3, 25);
+            TLPForm.Location = new Point(3, 29);
             TLPForm.Name = "TLPForm";
             TLPForm.RowCount = 8;
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -204,7 +260,7 @@
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            TLPForm.Size = new Size(465, 436);
+            TLPForm.Size = new Size(465, 432);
             TLPForm.TabIndex = 0;
             // 
             // TxtEmail
@@ -340,7 +396,7 @@
             tableLayoutPanel2.RowCount = 1;
             TLPForm.SetRowSpan(tableLayoutPanel2, 2);
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(294, 117);
+            tableLayoutPanel2.Size = new Size(294, 113);
             tableLayoutPanel2.TabIndex = 11;
             // 
             // BtnGuardar
@@ -353,7 +409,7 @@
             BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnGuardar.Image = Properties.Resources.guardar;
             BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
-            BtnGuardar.Location = new Point(8, 26);
+            BtnGuardar.Location = new Point(8, 24);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
             BtnGuardar.Size = new Size(131, 64);
@@ -362,6 +418,7 @@
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
             BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
+            BtnGuardar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnGuardar.Click += BtnGuardar_Click;
             // 
             // BtnEliminar
@@ -373,12 +430,13 @@
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnEliminar.Image = Properties.Resources.trash;
-            BtnEliminar.Location = new Point(188, 26);
+            BtnEliminar.Location = new Point(188, 24);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(64, 64);
             BtnEliminar.TabIndex = 11;
             BtnEliminar.UseVisualStyleBackColor = false;
+            BtnEliminar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnEliminar.Click += BtnEliminar_Click;
             // 
             // UCConsultaClientes
@@ -392,6 +450,7 @@
             tableLayoutPanel3.ResumeLayout(false);
             PanelLista.ResumeLayout(false);
             TLPLista.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ListBClientes).EndInit();
             panel1.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
@@ -405,7 +464,6 @@
 
         private TableLayoutPanel tableLayoutPanel3;
         private Panel PanelLista;
-        private ListBox ListBClientes;
         private Label LblLista;
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel4;
@@ -425,5 +483,9 @@
         private Button BtnGuardar;
         private Button BtnEliminar;
         private TableLayoutPanel TLPLista;
+        private DataGridView ListBClientes;
+        private DataGridViewTextBoxColumn CUIT;
+        private DataGridViewTextBoxColumn Entidad;
+        private DataGridViewTextBoxColumn Nombre;
     }
 }

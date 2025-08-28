@@ -32,6 +32,7 @@ public partial class FormPrincipal : Form
     {
         ConfigurarBtnsMenu();
         SeleccionarForm(typeof(FormVentas));
+        CargarPermisos();
         //try
         //{
 
@@ -64,6 +65,54 @@ public partial class FormPrincipal : Form
 
     }
 
+    private void CargarPermisos()
+    {
+        
+        string rolUsuario = "admin"; // Aquí deberías obtener el rol del usuario actual
+        switch (rolUsuario)
+        {
+            case "admin":
+                CargarAdmin(); break;
+            case "compras":
+                CargarCompras();
+                break;
+            case "ventas":
+                CargarVentas();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void CargarAdmin()
+    {
+        BtnModClientes.Visible = true;
+        BtnModUsuarios.Visible = true;
+        BtnModProveedores.Visible = true;
+        BtnModEstadoContable.Visible = true;
+        BtnModVentas.Visible = true;
+        BtnModCompras.Visible = true;
+    }
+
+    private void CargarVentas()
+    {
+        BtnModClientes.Visible = true;
+        BtnModUsuarios.Visible = false;
+        BtnModProveedores.Visible = false;
+        BtnModEstadoContable.Visible = false;
+        BtnModVentas.Visible = true;
+        BtnModCompras.Visible = false;
+    }
+
+    private void CargarCompras()
+    {
+        BtnModClientes.Visible = false;
+        BtnModUsuarios.Visible = false;
+        BtnModProveedores.Visible = true;
+        BtnModEstadoContable.Visible = false;
+        BtnModVentas.Visible = false;
+        BtnModCompras.Visible = true;
+    }
     private void ConfigurarBtnsMenu()
     {
         BtnModVentas.Tag = typeof(FormVentas);

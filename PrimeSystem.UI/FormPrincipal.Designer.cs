@@ -30,6 +30,7 @@ partial class FormPrincipal
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
         PanelMenu = new Panel();
         BtnModEstadoContable = new Button();
         BtnModProveedores = new Button();
@@ -227,6 +228,7 @@ partial class FormPrincipal
         Controls.Add(PanelFondoMenu);
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
         ForeColor = Color.FromArgb(26, 28, 30);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         IsMdiContainer = true;
         MinimumSize = new Size(960, 600);
         Name = "FormPrincipal";

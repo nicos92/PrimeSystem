@@ -19,7 +19,7 @@ namespace PrimeSystem.UI.Usuarios
         private readonly IUsuariosTipoService _usuariosTipoService;
 
         private Modelo.Entidades.Usuarios _usuarioSeleccionado;
-        private int indiceSeleccionado;
+        public int indiceSeleccionado;
         private readonly ValidadorTextBox _vTxtDni;
         private readonly ValidadorTextBox _vTxtApellido;
         private readonly ValidadorTextBox _vTxtNombre;
@@ -71,12 +71,16 @@ namespace PrimeSystem.UI.Usuarios
         private async void USConsultaUsuario_Load(object sender, EventArgs e)
         {
             TxtDni.Focus();
-            await CargarTiposUsuarios();
-            await CargarUsuarios();
-            BloquearBtns();
-            Util.AjustarAnchoListBox(ListBUsuarios);
-            Util.ValcularListBoxVacio(ListBUsuarios, LblLista, "Usuarios");
 
+            await Task.WhenAll(
+                CargarTiposUsuarios(),
+                CargarUsuarios()
+            );
+            ConfigBtns();
+
+            Util.BloquearBtns(ListBUsuarios, TLPFormUsuario);
+            Util.CalcularDGVVacio(ListBUsuarios, LblLista, "Usuarios");
+            CargarPermisos();
         }
 
         private async Task CargarTiposUsuarios()
@@ -87,6 +91,8 @@ namespace PrimeSystem.UI.Usuarios
             if (tiposUsuarios.IsSuccess && tiposUsuarios.Value != null)
             {
                 CMBTipoUsuario.DataSource = tiposUsuarios.Value;
+                CMBTipoUsuario.DisplayMember = "Descripcion";
+                CMBTipoUsuario.ValueMember = "Tipo";
 
             }
             else
@@ -102,7 +108,7 @@ namespace PrimeSystem.UI.Usuarios
 
         private void CrearUsuario()
         {
-            if (CMBTipoUsuario.SelectedItem is not Modelo.Entidades.UsuariosTipo tipoUsuario)
+            if (CMBTipoUsuario.SelectedValue is not int tipoUsuario)
             {
                 MessageBox.Show("El tipo de usuario seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -115,7 +121,9 @@ namespace PrimeSystem.UI.Usuarios
             _usuarioSeleccionado.Nombre = TxtNombre.Text;
             _usuarioSeleccionado.Tel = TxtTel.Text;
             _usuarioSeleccionado.Mail = TxtEmail.Text;
-            _usuarioSeleccionado.Id_Tipo = tipoUsuario.Id_Usuario_Tipo;
+            _usuarioSeleccionado.Id_Tipo = tipoUsuario;
+
+
         }
 
         private async void BtnGuardar_Click(object sender, EventArgs e)
@@ -141,11 +149,13 @@ namespace PrimeSystem.UI.Usuarios
                 if (resultado.IsSuccess)
                 {
                     MessageBox.Show("Proveedor actualizado correctamente.\n" + resultado.Value.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    indiceSeleccionado = ListBUsuarios.SelectedIndex;
+
+                    string valor = _usuarioSeleccionado.DNI;
                     await CargarUsuarios();
-                    SeleccionarProveedor();
-                    Util.AjustarAnchoListBox(ListBUsuarios);
-                    Util.ValcularListBoxVacio(ListBUsuarios, LblLista, "Usuarios");
+                    Util.CalcularDGVVacio(ListBUsuarios, LblLista, "Usuarios");
+
+                    Util.SeleccionarFilaDGV(ListBUsuarios, valor, ListBUsuarios.Columns[0].HeaderText, ref indiceSeleccionado);
+                    CargarDormularioEdicion();
 
 
                 }
@@ -162,8 +172,9 @@ namespace PrimeSystem.UI.Usuarios
 
             if (datos.IsSuccess)
             {
-                List<Modelo.Entidades.Usuarios> proveedores = datos.Value;
-                ListBUsuarios.DataSource = proveedores;
+
+                ListBUsuarios.AutoGenerateColumns = false; // Desactivar la generación automática de columnas
+                ListBUsuarios.DataSource = datos.Value.OrderBy(u => u.Apellido).ToList();
 
             }
             else
@@ -172,54 +183,47 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
-        private void SeleccionarProveedor()
+
+        private void CargarPermisos()
         {
-            if (ListBUsuarios.SelectedItem != null)
+
+            string rolUsuario = "admin"; // Aquí deberías obtener el rol del usuario actual
+            switch (rolUsuario)
             {
-                ListBUsuarios.SelectedIndex = indiceSeleccionado;
+                case "admin":
+                    CargarAdmin();
+                    break;
+                case "compras":
+                    //CargarCompras();
+                    break;
+                case "ventas":
+                    //CargarVentas();
+                    break;
+                case "visitante":
+                    CargarVisitante();
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void ListBUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        private void CargarVisitante()
         {
-            _usuarioSeleccionado = ListBUsuarios.SelectedItem as Modelo.Entidades.Usuarios;
+            BtnEliminar.Visible = false;
+            BtnGuardar.Visible = false;
+        }
 
-            if (_usuarioSeleccionado != null)
-            {
-                TxtDni.Text = _usuarioSeleccionado.DNI ?? string.Empty;
-                TxtApellido.Text = _usuarioSeleccionado.Apellido ?? string.Empty;
-                TxtNombre.Text = _usuarioSeleccionado.Nombre ?? string.Empty;
-                TxtTel.Text = _usuarioSeleccionado.Tel ?? string.Empty;
-                TxtEmail.Text = _usuarioSeleccionado.Mail ?? string.Empty;
-            }
-            else
-            {
-                TxtDni.Clear();
-                TxtApellido.Clear();
-                TxtNombre.Clear();
-                TxtTel.Clear();
-                TxtEmail.Clear();
-            }
+        private void CargarAdmin()
+        {
+            BtnEliminar.Visible = true;
+            BtnGuardar.Visible = true;
         }
 
 
 
-        private void BloquearBtns()
-        {
 
-            if (ListBUsuarios.SelectedItem == null)
-            {
 
-                BtnEliminar.Enabled = false;
-                BtnGuardar.Enabled = false;
-            }
-            else
-            {
-                BtnEliminar.Enabled = true;
-                BtnGuardar.Enabled = true;
-            }
 
-        }
 
         private async void BtnEliminar_Click(object sender, EventArgs e)
         {
@@ -239,11 +243,16 @@ namespace PrimeSystem.UI.Usuarios
             if (resultado.IsSuccess)
             {
                 MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Util.LimpiarForm(TLPFormUsuario, TxtDni);
 
                 await CargarUsuarios();
-                Util.AjustarAnchoListBox(ListBUsuarios);
-                Util.ValcularListBoxVacio(ListBUsuarios, LblLista, "Usuarios");
+
+                if (Util.CalcularDGVVacio(ListBUsuarios, LblLista, "Usuarios"))
+                {
+                    Util.LimpiarForm(TLPFormUsuario, TxtDni);
+
+                    Util.BloquearBtns(ListBUsuarios, TLPFormUsuario);
+
+                }
 
 
             }
@@ -253,5 +262,55 @@ namespace PrimeSystem.UI.Usuarios
             }
 
         }
+
+
+        private void ListBUsuarios_SelectionChanged(object sender, EventArgs e)
+        {
+            indiceSeleccionado = ListBUsuarios.CurrentRow?.Index ?? -1; // Obtener el índice de la fila seleccionada o -1 si no hay selección
+            CargarDormularioEdicion();
+        }
+
+        private void CargarDormularioEdicion()
+        {
+
+            if (ListBUsuarios.Rows[indiceSeleccionado].DataBoundItem is Modelo.Entidades.Usuarios usuario)
+            {
+                _usuarioSeleccionado = usuario;
+
+                TxtDni.Text = _usuarioSeleccionado.DNI ?? string.Empty;
+                TxtApellido.Text = _usuarioSeleccionado.Apellido ?? string.Empty;
+                TxtNombre.Text = _usuarioSeleccionado.Nombre ?? string.Empty;
+                TxtTel.Text = _usuarioSeleccionado.Tel ?? string.Empty;
+                TxtEmail.Text = _usuarioSeleccionado.Mail ?? string.Empty;
+                CMBTipoUsuario.SelectedValue = _usuarioSeleccionado.Id_Tipo;
+
+            }
+            else
+            {
+                TxtDni.Clear();
+                TxtApellido.Clear();
+                TxtNombre.Clear();
+                TxtTel.Clear();
+                TxtEmail.Clear();
+            }
+        }
+
+        private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                if (btn.Tag is Color color)
+                {
+                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+                }
+            }
+        }
+        private void ConfigBtns()
+        {
+            BtnGuardar.Tag = AppColorsBlue.Tertiary;
+            BtnEliminar.Tag = AppColorsBlue.Error;
+        }
     }
+
+
 }

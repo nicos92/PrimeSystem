@@ -59,5 +59,62 @@ namespace PrimeSystem.Utilidades
             label.Text = $"Lista de {modulo}";
 
         }
+
+        /// <summary>
+        /// Cambia el texto del label que indica si la lista esta vacia
+        /// </summary>
+        /// <param name="DGV">data grid view para calcular si esta vacio</param>
+        /// <param name="label">label que cambio respecto al data grid view vacio o no</param>
+        /// <param name="modulo">modulo donde se encuentra el data grid view</param>
+        public static bool CalcularDGVVacio(DataGridView DGV, Label label, string modulo)
+        {
+            if (DGV.RowCount <= 0)
+            {
+                label.Text = $"Lista de {modulo} Vacia";
+                return true;
+            }
+            label.Text = $"Lista de {modulo}";
+            return false;
+        }
+
+
+        public static void SeleccionarFilaDGV(DataGridView dataGridView1, string valorBuscado, string nombreColumna, ref int indice)
+        {
+
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[nombreColumna].Value?.ToString() == valorBuscado)
+                {
+                    dataGridView1.ClearSelection();
+                    row.Selected = true;
+                    dataGridView1.FirstDisplayedScrollingRowIndex = row.Index;
+                    indice = row.Index; // Guardar el índice de la fila seleccionada    
+                    break;
+                }
+            }
+
+        }
+
+        public static void BloquearBtns(DataGridView list, TableLayoutPanel tlp)
+        {
+
+            if (list.Rows.Count <= 0)
+            {
+
+
+
+                tlp.Enabled = false;
+
+
+            }
+            else
+            {
+
+                tlp.Enabled = true;
+
+            }
+
+        }
     }
 }

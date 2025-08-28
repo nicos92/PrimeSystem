@@ -52,7 +52,10 @@ namespace PrimeSystem.UI.Usuarios
             PanelLista = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             LblLista = new Label();
-            ListBUsuarios = new ListBox();
+            ListBUsuarios = new DataGridView();
+            DNI = new DataGridViewTextBoxColumn();
+            ColumnApellido = new DataGridViewTextBoxColumn();
+            ColumnNombre = new DataGridViewTextBoxColumn();
             tableLayoutPanel3 = new TableLayoutPanel();
             PanelMedio.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -61,6 +64,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel2.SuspendLayout();
             PanelLista.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ListBUsuarios).BeginInit();
             tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -92,7 +96,7 @@ namespace PrimeSystem.UI.Usuarios
             // 
             GBFormUsuarios.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             GBFormUsuarios.Controls.Add(TLPFormUsuario);
-            GBFormUsuarios.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GBFormUsuarios.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             GBFormUsuarios.ForeColor = Color.FromArgb(7, 100, 147);
             GBFormUsuarios.Location = new Point(3, 47);
             GBFormUsuarios.Name = "GBFormUsuarios";
@@ -123,7 +127,7 @@ namespace PrimeSystem.UI.Usuarios
             TLPFormUsuario.Controls.Add(CMBTipoUsuario, 1, 6);
             TLPFormUsuario.Dock = DockStyle.Fill;
             TLPFormUsuario.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPFormUsuario.Location = new Point(3, 25);
+            TLPFormUsuario.Location = new Point(3, 29);
             TLPFormUsuario.Name = "TLPFormUsuario";
             TLPFormUsuario.RowCount = 8;
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Percent, 5.40540552F));
@@ -144,7 +148,7 @@ namespace PrimeSystem.UI.Usuarios
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPFormUsuario.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            TLPFormUsuario.Size = new Size(465, 433);
+            TLPFormUsuario.Size = new Size(465, 429);
             TLPFormUsuario.TabIndex = 0;
             // 
             // TxtEmail
@@ -153,7 +157,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtEmail.BackColor = Color.FromArgb(238, 237, 240);
             TxtEmail.Font = new Font("Segoe UI", 12F);
             TxtEmail.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtEmail.Location = new Point(108, 269);
+            TxtEmail.Location = new Point(108, 265);
             TxtEmail.MaxLength = 255;
             TxtEmail.Name = "TxtEmail";
             TxtEmail.Size = new Size(294, 29);
@@ -165,7 +169,7 @@ namespace PrimeSystem.UI.Usuarios
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(51, 273);
+            label1.Location = new Point(51, 269);
             label1.Name = "label1";
             label1.Size = new Size(51, 21);
             label1.TabIndex = 1;
@@ -176,7 +180,7 @@ namespace PrimeSystem.UI.Usuarios
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(68, 215);
+            label3.Location = new Point(68, 212);
             label3.Name = "label3";
             label3.Size = new Size(34, 21);
             label3.TabIndex = 3;
@@ -199,7 +203,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtTel.BackColor = Color.FromArgb(238, 237, 240);
             TxtTel.Font = new Font("Segoe UI", 12F);
             TxtTel.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtTel.Location = new Point(108, 211);
+            TxtTel.Location = new Point(108, 208);
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
             TxtTel.Size = new Size(294, 29);
@@ -212,7 +216,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtApellido.BackColor = Color.FromArgb(238, 237, 240);
             TxtApellido.Font = new Font("Segoe UI", 12F);
             TxtApellido.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtApellido.Location = new Point(108, 153);
+            TxtApellido.Location = new Point(108, 151);
             TxtApellido.MaxLength = 50;
             TxtApellido.Name = "TxtApellido";
             TxtApellido.Size = new Size(294, 29);
@@ -225,7 +229,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtNombre.BackColor = Color.FromArgb(238, 237, 240);
             TxtNombre.Font = new Font("Segoe UI", 12F);
             TxtNombre.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtNombre.Location = new Point(108, 95);
+            TxtNombre.Location = new Point(108, 94);
             TxtNombre.MaxLength = 50;
             TxtNombre.Name = "TxtNombre";
             TxtNombre.Size = new Size(294, 29);
@@ -253,11 +257,11 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel2.Controls.Add(BtnGuardar, 0, 0);
             tableLayoutPanel2.Controls.Add(BtnEliminar, 1, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(108, 374);
+            tableLayoutPanel2.Location = new Point(108, 368);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(294, 56);
+            tableLayoutPanel2.Size = new Size(294, 58);
             tableLayoutPanel2.TabIndex = 11;
             // 
             // BtnGuardar
@@ -270,7 +274,7 @@ namespace PrimeSystem.UI.Usuarios
             BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnGuardar.Image = Properties.Resources.guardar;
             BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
-            BtnGuardar.Location = new Point(7, 4);
+            BtnGuardar.Location = new Point(7, 5);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
             BtnGuardar.Size = new Size(133, 48);
@@ -279,6 +283,7 @@ namespace PrimeSystem.UI.Usuarios
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
             BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
+            BtnGuardar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnGuardar.Click += BtnGuardar_Click;
             // 
             // BtnEliminar
@@ -290,12 +295,13 @@ namespace PrimeSystem.UI.Usuarios
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnEliminar.Image = Properties.Resources.trash;
-            BtnEliminar.Location = new Point(196, 4);
+            BtnEliminar.Location = new Point(196, 5);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
             BtnEliminar.TabIndex = 12;
             BtnEliminar.UseVisualStyleBackColor = false;
+            BtnEliminar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnEliminar.Click += BtnEliminar_Click;
             // 
             // label4
@@ -303,7 +309,7 @@ namespace PrimeSystem.UI.Usuarios
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(31, 99);
+            label4.Location = new Point(31, 98);
             label4.Name = "label4";
             label4.Size = new Size(71, 21);
             label4.TabIndex = 4;
@@ -314,7 +320,7 @@ namespace PrimeSystem.UI.Usuarios
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(32, 157);
+            label2.Location = new Point(32, 155);
             label2.Name = "label2";
             label2.Size = new Size(70, 21);
             label2.TabIndex = 2;
@@ -325,7 +331,7 @@ namespace PrimeSystem.UI.Usuarios
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(59, 331);
+            label5.Location = new Point(59, 326);
             label5.Name = "label5";
             label5.Size = new Size(43, 21);
             label5.TabIndex = 12;
@@ -336,9 +342,10 @@ namespace PrimeSystem.UI.Usuarios
             CMBTipoUsuario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBTipoUsuario.BackColor = Color.FromArgb(238, 237, 240);
             CMBTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
+            CMBTipoUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CMBTipoUsuario.ForeColor = Color.FromArgb(26, 28, 30);
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(108, 327);
+            CMBTipoUsuario.Location = new Point(108, 322);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
             CMBTipoUsuario.Size = new Size(294, 29);
             CMBTipoUsuario.TabIndex = 10;
@@ -372,7 +379,7 @@ namespace PrimeSystem.UI.Usuarios
             // LblLista
             // 
             LblLista.Dock = DockStyle.Top;
-            LblLista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LblLista.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblLista.ForeColor = Color.FromArgb(7, 100, 147);
             LblLista.Location = new Point(3, 0);
             LblLista.Name = "LblLista";
@@ -383,14 +390,50 @@ namespace PrimeSystem.UI.Usuarios
             // 
             // ListBUsuarios
             // 
-            ListBUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            ListBUsuarios.BackColor = Color.FromArgb(238, 237, 240);
-            ListBUsuarios.FormattingEnabled = true;
+            ListBUsuarios.AllowUserToAddRows = false;
+            ListBUsuarios.AllowUserToDeleteRows = false;
+            ListBUsuarios.AllowUserToResizeColumns = false;
+            ListBUsuarios.AllowUserToResizeRows = false;
+            ListBUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ListBUsuarios.Columns.AddRange(new DataGridViewColumn[] { DNI, ColumnApellido, ColumnNombre });
+            ListBUsuarios.Dock = DockStyle.Fill;
             ListBUsuarios.Location = new Point(3, 35);
+            ListBUsuarios.MultiSelect = false;
             ListBUsuarios.Name = "ListBUsuarios";
-            ListBUsuarios.Size = new Size(309, 466);
-            ListBUsuarios.TabIndex = 0;
-            ListBUsuarios.SelectedIndexChanged += ListBUsuarios_SelectedIndexChanged;
+            ListBUsuarios.ReadOnly = true;
+            ListBUsuarios.RowHeadersVisible = false;
+            ListBUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ListBUsuarios.Size = new Size(309, 485);
+            ListBUsuarios.TabIndex = 2;
+            ListBUsuarios.SelectionChanged += ListBUsuarios_SelectionChanged;
+            // 
+            // DNI
+            // 
+            DNI.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            DNI.DataPropertyName = "DNI";
+            DNI.HeaderText = "DNI";
+            DNI.MaxInputLength = 8;
+            DNI.Name = "DNI";
+            DNI.ReadOnly = true;
+            DNI.Width = 62;
+            // 
+            // ColumnApellido
+            // 
+            ColumnApellido.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColumnApellido.DataPropertyName = "Apellido";
+            ColumnApellido.HeaderText = "Apellido";
+            ColumnApellido.MaxInputLength = 50;
+            ColumnApellido.Name = "ColumnApellido";
+            ColumnApellido.ReadOnly = true;
+            // 
+            // ColumnNombre
+            // 
+            ColumnNombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColumnNombre.DataPropertyName = "Nombre";
+            ColumnNombre.HeaderText = "Nombre";
+            ColumnNombre.MaxInputLength = 50;
+            ColumnNombre.Name = "ColumnNombre";
+            ColumnNombre.ReadOnly = true;
             // 
             // tableLayoutPanel3
             // 
@@ -427,6 +470,7 @@ namespace PrimeSystem.UI.Usuarios
             tableLayoutPanel2.ResumeLayout(false);
             PanelLista.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ListBUsuarios).EndInit();
             tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -450,12 +494,15 @@ namespace PrimeSystem.UI.Usuarios
         private Button BtnGuardar;
         private Button BtnEliminar;
         private Panel PanelLista;
-        private ListBox ListBUsuarios;
         private Label LblLista;
         private Label label5;
         private ComboBox CMBTipoUsuario;
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel1;
         private GroupBox GBFormUsuarios;
+        private DataGridView ListBUsuarios;
+        private DataGridViewTextBoxColumn DNI;
+        private DataGridViewTextBoxColumn ColumnApellido;
+        private DataGridViewTextBoxColumn ColumnNombre;
     }
 }

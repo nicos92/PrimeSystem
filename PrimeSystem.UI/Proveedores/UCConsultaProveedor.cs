@@ -19,7 +19,7 @@ namespace PrimeSystem.UI.Proveedores
     {
 
         private readonly IProveedoresService _proveedoresService;
-        private Modelo.Entidades.Proveedores? _proveedorSeleccionado;
+        private Modelo.Entidades.Proveedores _proveedorSeleccionado;
         private int indiceSeleccionado;
 
         private readonly ValidadorTextBox _vTxtCuit;
@@ -36,6 +36,7 @@ namespace PrimeSystem.UI.Proveedores
         {
             _proveedoresService = proveedoresService;
             indiceSeleccionado = 0;
+            _proveedorSeleccionado = new Modelo.Entidades.Proveedores();
             InitializeComponent();
             _epCuit = new ErrorProvider();
             _vTxtCuit = new ValidadorCUIT(TxtCuit, _epCuit)
@@ -73,10 +74,9 @@ namespace PrimeSystem.UI.Proveedores
         private async void UCConsultaProveedor_Load(object sender, EventArgs e)
         {
             await CargarProveedores();
-            BloquearBtns();
-            SeleccionarProveedor();
-            Util.AjustarAnchoListBox(ListBProveedores);
-            Util.ValcularListBoxVacio(ListBProveedores, LblLista, "Proveedores");
+            ConfigBtns();
+            Util.BloquearBtns(ListBProveedores, TLPForm);
+            Util.CalcularDGVVacio(ListBProveedores, LblLista, "Proveedores");
 
 
             TxtCuit.Focus();
@@ -89,8 +89,8 @@ namespace PrimeSystem.UI.Proveedores
 
             if (datos.IsSuccess)
             {
-                List<Modelo.Entidades.Proveedores> proveedores = datos.Value;
-                ListBProveedores.DataSource = proveedores;
+                ListBProveedores.AutoGenerateColumns = false;
+                ListBProveedores.DataSource = datos.Value.OrderBy(p => p.Proveedor).ToList();
 
             }
             else
@@ -100,52 +100,9 @@ namespace PrimeSystem.UI.Proveedores
 
         }
 
-        private void ListBProveedores_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _proveedorSeleccionado = ListBProveedores.SelectedItem as Modelo.Entidades.Proveedores;
+       
 
-            if (_proveedorSeleccionado != null)
-            {
-                TxtCuit.Text = _proveedorSeleccionado.CUIT ?? string.Empty;
-                TxtProveedor.Text = _proveedorSeleccionado.Proveedor ?? string.Empty;
-                TxtNombre.Text = _proveedorSeleccionado.Nombre ?? string.Empty;
-                TxtTel.Text = _proveedorSeleccionado.Tel ?? string.Empty;
-                TxtEmail.Text = _proveedorSeleccionado.Email ?? string.Empty;
-            }
-            else
-            {
-                TxtCuit.Clear();
-                TxtProveedor.Clear();
-                TxtNombre.Clear();
-                TxtTel.Clear();
-                TxtEmail.Clear();
-            }
-        }
-
-        private void SeleccionarProveedor()
-        {
-            if (ListBProveedores.SelectedItem != null)
-            {
-                ListBProveedores.SelectedIndex = indiceSeleccionado;
-            }
-        }
-
-        private void BloquearBtns()
-        {
-
-            if (ListBProveedores.SelectedItem == null)
-            {
-
-                BtnEliminar.Enabled = false;
-                BtnGuardar.Enabled = false;
-            }
-            else
-            {
-                BtnEliminar.Enabled = true;
-                BtnGuardar.Enabled = true;
-            }
-
-        }
+     
 
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -171,11 +128,13 @@ namespace PrimeSystem.UI.Proveedores
                 if (resultado.IsSuccess)
                 {
                     MessageBox.Show("Proveedor actualizado correctamente.\n" + resultado.Value.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    indiceSeleccionado = ListBProveedores.SelectedIndex;
+                    string valor = _proveedorSeleccionado.CUIT;
                     await CargarProveedores();
-                    SeleccionarProveedor();
-                    Util.AjustarAnchoListBox(ListBProveedores);
-                    Util.ValcularListBoxVacio(ListBProveedores, LblLista, "Proveedores");
+
+                    //Util.AjustarAnchoListBox(ListBProveedores);
+                    Util.CalcularDGVVacio(ListBProveedores, LblLista, "Proveedores");
+                    Util.SeleccionarFilaDGV(ListBProveedores, valor, ListBProveedores.Columns[0].HeaderText, ref indiceSeleccionado);
+                    CargarSeleccionado();
 
 
 
@@ -187,9 +146,30 @@ namespace PrimeSystem.UI.Proveedores
             }
         }
 
+        private void CargarSeleccionado()
+        {
+            if (ListBProveedores.Rows[indiceSeleccionado].DataBoundItem is Modelo.Entidades.Proveedores proveedor)
+            {
+                _proveedorSeleccionado = proveedor;
+                TxtCuit.Text = _proveedorSeleccionado.CUIT ?? string.Empty;
+                TxtProveedor.Text = _proveedorSeleccionado.Proveedor ?? string.Empty;
+                TxtNombre.Text = _proveedorSeleccionado.Nombre ?? string.Empty;
+                TxtTel.Text = _proveedorSeleccionado.Tel ?? string.Empty;
+                TxtEmail.Text = _proveedorSeleccionado.Email ?? string.Empty;
+            }
+            else
+            {
+                TxtCuit.Clear();
+                TxtProveedor.Clear();
+                TxtNombre.Clear();
+                TxtTel.Clear();
+                TxtEmail.Clear();
+            }
+        }
+
         private void CrearProveedor()
         {
-            _proveedorSeleccionado ??= new Modelo.Entidades.Proveedores();
+
 
             _proveedorSeleccionado.CUIT = TxtCuit.Text;
             _proveedorSeleccionado.Proveedor = TxtProveedor.Text;
@@ -219,11 +199,15 @@ namespace PrimeSystem.UI.Proveedores
             if (resultado.IsSuccess)
             {
                 MessageBox.Show("Proveedor eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Util.LimpiarForm(TLPForm, TxtCuit);
 
+                //Util.LimpiarForm(TLPForm, TxtCuit);
                 await CargarProveedores();
-                Util.AjustarAnchoListBox(ListBProveedores);
-                Util.ValcularListBoxVacio(ListBProveedores, LblLista, "Proveedores");
+                //Util.AjustarAnchoListBox(ListBProveedores);
+                if(Util.CalcularDGVVacio(ListBProveedores, LblLista, "Proveedores")) {
+                    Util.LimpiarForm(TLPForm, TxtCuit);
+                    Util.BloquearBtns(ListBProveedores, TLPForm);
+                }
+
 
 
             }
@@ -237,6 +221,27 @@ namespace PrimeSystem.UI.Proveedores
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtCuit, _vTxtProveedor, _vTxtNombre, _vTxtTel, _vTxtEmail);
+        }
+
+        private void ListBProveedores_SelectionChanged(object sender, EventArgs e)
+        {
+            indiceSeleccionado = ListBProveedores.CurrentRow?.Index ?? -1;
+            CargarSeleccionado();
+        }
+        private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                if (btn.Tag is Color color)
+                {
+                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+                }
+            }
+        }
+        private void ConfigBtns()
+        {
+            BtnGuardar.Tag = AppColorsBlue.Tertiary;
+            BtnEliminar.Tag = AppColorsBlue.Error;
         }
     }
 }

@@ -101,12 +101,29 @@ namespace PrimeSystem.UI.Proveedores
 
         private void UCIngresoProveedores_Load(object sender, EventArgs e)
         {
+            ConfigBtns();
             TxtCuit.Focus();
         }
 
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnIngresar], _vTxtCuit, _vTxtProveedor, _vTxtNombre, _vTxtTel, _vTxtEmail);
+        }
+
+        private void ConfigBtns()
+        {
+            BtnIngresar.Tag = AppColorsBlue.Primary;
+        }
+
+        private void BtnIngresar_EnabledChanged(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                if (btn.Tag is Color color)
+                {
+                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+                }
+            }
         }
     }
 }

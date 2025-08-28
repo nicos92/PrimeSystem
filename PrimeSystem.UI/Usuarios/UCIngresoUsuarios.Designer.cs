@@ -80,7 +80,7 @@ namespace PrimeSystem.UI.Usuarios
             // 
             groupBox1.Anchor = AnchorStyles.None;
             groupBox1.Controls.Add(TLPForm);
-            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
             groupBox1.Location = new Point(85, 72);
             groupBox1.Name = "groupBox1";
@@ -111,7 +111,7 @@ namespace PrimeSystem.UI.Usuarios
             TLPForm.Controls.Add(BtnIngresar, 1, 7);
             TLPForm.Dock = DockStyle.Fill;
             TLPForm.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPForm.Location = new Point(3, 25);
+            TLPForm.Location = new Point(3, 29);
             TLPForm.Name = "TLPForm";
             TLPForm.RowCount = 8;
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 3.14960623F));
@@ -132,7 +132,7 @@ namespace PrimeSystem.UI.Usuarios
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            TLPForm.Size = new Size(627, 389);
+            TLPForm.Size = new Size(627, 385);
             TLPForm.TabIndex = 0;
             // 
             // TxtEmail
@@ -141,7 +141,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtEmail.BackColor = Color.FromArgb(238, 237, 240);
             TxtEmail.Font = new Font("Segoe UI", 12F);
             TxtEmail.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtEmail.Location = new Point(103, 233);
+            TxtEmail.Location = new Point(103, 229);
             TxtEmail.MaxLength = 255;
             TxtEmail.Name = "TxtEmail";
             TxtEmail.Size = new Size(442, 29);
@@ -153,7 +153,7 @@ namespace PrimeSystem.UI.Usuarios
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(46, 237);
+            label1.Location = new Point(46, 233);
             label1.Name = "label1";
             label1.Size = new Size(51, 21);
             label1.TabIndex = 1;
@@ -164,7 +164,7 @@ namespace PrimeSystem.UI.Usuarios
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(63, 186);
+            label3.Location = new Point(63, 183);
             label3.Name = "label3";
             label3.Size = new Size(34, 21);
             label3.TabIndex = 3;
@@ -187,7 +187,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtTel.BackColor = Color.FromArgb(238, 237, 240);
             TxtTel.Font = new Font("Segoe UI", 12F);
             TxtTel.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtTel.Location = new Point(103, 182);
+            TxtTel.Location = new Point(103, 179);
             TxtTel.MaxLength = 11;
             TxtTel.Name = "TxtTel";
             TxtTel.Size = new Size(442, 29);
@@ -200,7 +200,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtApellido.BackColor = Color.FromArgb(238, 237, 240);
             TxtApellido.Font = new Font("Segoe UI", 12F);
             TxtApellido.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtApellido.Location = new Point(103, 131);
+            TxtApellido.Location = new Point(103, 129);
             TxtApellido.MaxLength = 50;
             TxtApellido.Name = "TxtApellido";
             TxtApellido.Size = new Size(442, 29);
@@ -213,7 +213,7 @@ namespace PrimeSystem.UI.Usuarios
             TxtNombre.BackColor = Color.FromArgb(238, 237, 240);
             TxtNombre.Font = new Font("Segoe UI", 12F);
             TxtNombre.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtNombre.Location = new Point(103, 80);
+            TxtNombre.Location = new Point(103, 79);
             TxtNombre.MaxLength = 50;
             TxtNombre.Name = "TxtNombre";
             TxtNombre.Size = new Size(442, 29);
@@ -238,7 +238,7 @@ namespace PrimeSystem.UI.Usuarios
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(26, 84);
+            label4.Location = new Point(26, 83);
             label4.Name = "label4";
             label4.Size = new Size(71, 21);
             label4.TabIndex = 4;
@@ -249,7 +249,7 @@ namespace PrimeSystem.UI.Usuarios
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(27, 135);
+            label2.Location = new Point(27, 133);
             label2.Name = "label2";
             label2.Size = new Size(70, 21);
             label2.TabIndex = 2;
@@ -260,7 +260,7 @@ namespace PrimeSystem.UI.Usuarios
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(54, 284);
+            label5.Location = new Point(54, 280);
             label5.Name = "label5";
             label5.Size = new Size(43, 21);
             label5.TabIndex = 12;
@@ -270,8 +270,9 @@ namespace PrimeSystem.UI.Usuarios
             // 
             CMBTipoUsuario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
+            CMBTipoUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(103, 283);
+            CMBTipoUsuario.Location = new Point(103, 276);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
             CMBTipoUsuario.Size = new Size(442, 29);
             CMBTipoUsuario.TabIndex = 13;
@@ -279,14 +280,14 @@ namespace PrimeSystem.UI.Usuarios
             // BtnIngresar
             // 
             BtnIngresar.Anchor = AnchorStyles.None;
-            BtnIngresar.BackColor = Color.FromArgb(7, 100, 147);
+            BtnIngresar.BackColor = Color.FromArgb(83, 96, 108);
             BtnIngresar.Enabled = false;
             BtnIngresar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
             BtnIngresar.FlatStyle = FlatStyle.Flat;
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnIngresar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnIngresar.Image = Properties.Resources.ingresar;
-            BtnIngresar.Location = new Point(228, 328);
+            BtnIngresar.Location = new Point(228, 324);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(192, 48);
@@ -294,6 +295,7 @@ namespace PrimeSystem.UI.Usuarios
             BtnIngresar.Text = "INGRESAR";
             BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
+            BtnIngresar.EnabledChanged += BtnIngresar_EnabledChanged;
             BtnIngresar.Click += BtnIngresar_Click;
             // 
             // UCIngresoUsuarios
