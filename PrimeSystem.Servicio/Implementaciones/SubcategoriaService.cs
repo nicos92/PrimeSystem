@@ -20,5 +20,10 @@ namespace PrimeSystem.Servicio.Implementaciones
         public Result<Subcategoria> Add(Subcategoria subcategoria) => _repo.Add(subcategoria);
         public Result<Subcategoria> Update(Subcategoria subcategoria) => _repo.Update(subcategoria);
         public Result<bool> Delete(int id) => _repo.Delete(id);
+
+        public async Task<Result<List<Subcategoria>>> GetAllxCategoria(int idcategoria)
+        {
+            return await _repo.GetAllxCategoria(idcategoria);
+        }
     }
 }

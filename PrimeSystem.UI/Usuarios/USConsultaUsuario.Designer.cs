@@ -338,7 +338,7 @@ namespace PrimeSystem.UI.Usuarios
             CMBTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBTipoUsuario.ForeColor = Color.FromArgb(26, 28, 30);
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(108, 327);
+            CMBTipoUsuario.Location = new Point(108, 330);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
             CMBTipoUsuario.Size = new Size(294, 29);
             CMBTipoUsuario.TabIndex = 10;

@@ -11,17 +11,17 @@ namespace PrimeSystem.Repositorio.Repositorios
     [SupportedOSPlatform("windows")]
     public class CategoriasRepository : BaseRepositorio, ICategoriasRepository
     {
-        public Result<List<Categorias>> GetAll()
+        public async Task<Result<List<Categorias>>> GetAll()
         {
             try
             {
                 var categorias = new List<Categorias>();
                 using (OleDbConnection conexion = Conexion())
                 {
-                    conexion.Open();
+                    await conexion.OpenAsync();
                     using var cmd = new OleDbCommand("SELECT Id_Categoria, Categoria FROM Categorias", conexion);
-                    using var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using var reader = await cmd.ExecuteReaderAsync();
+                    while (await reader.ReadAsync())
                     {
                         categorias.Add(new Categorias
                         {
@@ -31,10 +31,13 @@ namespace PrimeSystem.Repositorio.Repositorios
                     }
                 }
                 return Result<List<Categorias>>.Success(categorias);
+            }catch(OleDbException ix)
+            {
+                return Result<List<Categorias>>.Failure($"Error de base de dtos al obtener categorías: {ix.Message}");
             }
             catch (Exception ex)
             {
-                return Result<List<Categorias>>.Failure($"Error al obtener categorías: {ex.Message}");
+                return Result<List<Categorias>>.Failure($"Error inesperado al obtener categorías: {ex.Message}");
             }
         }
 
@@ -142,5 +145,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 return Result<bool>.Failure($"Error al eliminar categoría: {ex.Message}");
             }
         }
+
+       
     }
 }

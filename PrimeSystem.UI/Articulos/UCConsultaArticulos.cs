@@ -21,5 +21,10 @@ namespace PrimeSystem.UI.Articulos
         {
 
         }
+
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -36,6 +36,9 @@
             tableLayoutPanel4 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
             TLPForm = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            BtnGuardar = new Button();
+            BtnEliminar = new Button();
             label1 = new Label();
             label3 = new Label();
             LblCuit = new Label();
@@ -50,9 +53,6 @@
             CMBSubcategoria = new ComboBox();
             CMBCategoria = new ComboBox();
             label6 = new Label();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            BtnGuardar = new Button();
-            BtnEliminar = new Button();
             tableLayoutPanel3.SuspendLayout();
             PanelLista.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -194,6 +194,58 @@
             TLPForm.Size = new Size(465, 389);
             TLPForm.TabIndex = 0;
             // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(BtnGuardar, 0, 0);
+            tableLayoutPanel2.Controls.Add(BtnEliminar, 1, 0);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(113, 327);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(313, 48);
+            tableLayoutPanel2.TabIndex = 18;
+            // 
+            // BtnGuardar
+            // 
+            BtnGuardar.BackColor = Color.FromArgb(101, 89, 119);
+            BtnGuardar.Dock = DockStyle.Fill;
+            BtnGuardar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnGuardar.FlatStyle = FlatStyle.Flat;
+            BtnGuardar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnGuardar.Image = Properties.Resources.guardar;
+            BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
+            BtnGuardar.Location = new Point(0, 0);
+            BtnGuardar.Margin = new Padding(0);
+            BtnGuardar.Name = "BtnGuardar";
+            BtnGuardar.Size = new Size(156, 48);
+            BtnGuardar.TabIndex = 11;
+            BtnGuardar.Text = "Guardar";
+            BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
+            BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            BtnGuardar.UseVisualStyleBackColor = false;
+            BtnGuardar.Click += BtnGuardar_Click;
+            // 
+            // BtnEliminar
+            // 
+            BtnEliminar.Anchor = AnchorStyles.None;
+            BtnEliminar.BackColor = Color.FromArgb(186, 26, 26);
+            BtnEliminar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnEliminar.FlatStyle = FlatStyle.Flat;
+            BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnEliminar.Image = Properties.Resources.trash;
+            BtnEliminar.Location = new Point(210, 0);
+            BtnEliminar.Margin = new Padding(0);
+            BtnEliminar.Name = "BtnEliminar";
+            BtnEliminar.Size = new Size(48, 48);
+            BtnEliminar.TabIndex = 12;
+            BtnEliminar.UseVisualStyleBackColor = false;
+            // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Right;
@@ -316,7 +368,7 @@
             CMBProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBProveedor.FormattingEnabled = true;
-            CMBProveedor.Location = new Point(113, 287);
+            CMBProveedor.Location = new Point(113, 290);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(313, 29);
             CMBProveedor.TabIndex = 13;
@@ -326,7 +378,7 @@
             CMBSubcategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBSubcategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBSubcategoria.FormattingEnabled = true;
-            CMBSubcategoria.Location = new Point(113, 242);
+            CMBSubcategoria.Location = new Point(113, 245);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(313, 29);
             CMBSubcategoria.TabIndex = 15;
@@ -336,7 +388,7 @@
             CMBCategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBCategoria.FormattingEnabled = true;
-            CMBCategoria.Location = new Point(113, 197);
+            CMBCategoria.Location = new Point(113, 200);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(313, 29);
             CMBCategoria.TabIndex = 16;
@@ -352,57 +404,6 @@
             label6.TabIndex = 17;
             label6.Text = "Proveedor:";
             // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(BtnGuardar, 0, 0);
-            tableLayoutPanel2.Controls.Add(BtnEliminar, 1, 0);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(113, 327);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(313, 48);
-            tableLayoutPanel2.TabIndex = 18;
-            // 
-            // BtnGuardar
-            // 
-            BtnGuardar.BackColor = Color.FromArgb(101, 89, 119);
-            BtnGuardar.Dock = DockStyle.Fill;
-            BtnGuardar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
-            BtnGuardar.FlatStyle = FlatStyle.Flat;
-            BtnGuardar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnGuardar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnGuardar.Image = Properties.Resources.guardar;
-            BtnGuardar.ImageAlign = ContentAlignment.MiddleRight;
-            BtnGuardar.Location = new Point(0, 0);
-            BtnGuardar.Margin = new Padding(0);
-            BtnGuardar.Name = "BtnGuardar";
-            BtnGuardar.Size = new Size(156, 48);
-            BtnGuardar.TabIndex = 11;
-            BtnGuardar.Text = "Guardar";
-            BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
-            BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            BtnGuardar.UseVisualStyleBackColor = false;
-            // 
-            // BtnEliminar
-            // 
-            BtnEliminar.Anchor = AnchorStyles.None;
-            BtnEliminar.BackColor = Color.FromArgb(186, 26, 26);
-            BtnEliminar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
-            BtnEliminar.FlatStyle = FlatStyle.Flat;
-            BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnEliminar.Image = Properties.Resources.trash;
-            BtnEliminar.Location = new Point(210, 0);
-            BtnEliminar.Margin = new Padding(0);
-            BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(48, 48);
-            BtnEliminar.TabIndex = 12;
-            BtnEliminar.UseVisualStyleBackColor = false;
-            // 
             // UCConsultaArticulos
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -410,7 +411,7 @@
             Controls.Add(tableLayoutPanel3);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = Color.FromArgb(26, 28, 30);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "UCConsultaArticulos";
             Size = new Size(804, 561);
             tableLayoutPanel3.ResumeLayout(false);

@@ -31,6 +31,7 @@ partial class FormPrincipal
     private void InitializeComponent()
     {
         PanelMenu = new Panel();
+        BtnArticulos = new Button();
         BtnModEstadoContable = new Button();
         BtnModProveedores = new Button();
         BtnModUsuarios = new Button();
@@ -51,6 +52,7 @@ partial class FormPrincipal
         // 
         PanelMenu.AutoScroll = true;
         PanelMenu.BackColor = Color.FromArgb(7, 100, 147);
+        PanelMenu.Controls.Add(BtnArticulos);
         PanelMenu.Controls.Add(BtnModEstadoContable);
         PanelMenu.Controls.Add(BtnModProveedores);
         PanelMenu.Controls.Add(BtnModUsuarios);
@@ -64,6 +66,24 @@ partial class FormPrincipal
         PanelMenu.Name = "PanelMenu";
         PanelMenu.Size = new Size(219, 561);
         PanelMenu.TabIndex = 0;
+        // 
+        // BtnArticulos
+        // 
+        BtnArticulos.Dock = DockStyle.Top;
+        BtnArticulos.FlatAppearance.BorderSize = 0;
+        BtnArticulos.FlatStyle = FlatStyle.Flat;
+        BtnArticulos.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnArticulos.Image = Properties.Resources.charts;
+        BtnArticulos.ImageAlign = ContentAlignment.MiddleLeft;
+        BtnArticulos.Location = new Point(0, 448);
+        BtnArticulos.Name = "BtnArticulos";
+        BtnArticulos.Size = new Size(219, 64);
+        BtnArticulos.TabIndex = 8;
+        BtnArticulos.Text = "Articulos";
+        BtnArticulos.TextAlign = ContentAlignment.MiddleLeft;
+        BtnArticulos.TextImageRelation = TextImageRelation.ImageBeforeText;
+        BtnArticulos.UseVisualStyleBackColor = true;
+        BtnArticulos.Click += ElejirModulo;
         // 
         // BtnModEstadoContable
         // 
@@ -254,4 +274,5 @@ partial class FormPrincipal
     private Panel panel1;
     private Label LblApp;
     private Panel panel2;
+    private Button BtnArticulos;
 }
