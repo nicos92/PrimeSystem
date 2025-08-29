@@ -11,5 +11,6 @@ namespace PrimeSystem.Contrato.Servicios
         Result<Articulos> Add(Articulos articulo);
         Result<Articulos> Update(Articulos articulo);
         Result<bool> Delete(int id);
+        Task<Result<int>> GetMaxCodArt();
     }
 }

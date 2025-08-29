@@ -40,5 +40,10 @@ namespace PrimeSystem.Servicio.Implementaciones
         {
             return _repo.Delete(id);
         }
+
+        public async Task<Result<int>> GetMaxCodArt()
+        {
+            return await  _repo.GetMaxCodArt();
+        }
     }
 }

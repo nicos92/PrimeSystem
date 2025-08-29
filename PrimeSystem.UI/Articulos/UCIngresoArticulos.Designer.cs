@@ -162,7 +162,6 @@
             TxtGanancia.Name = "TxtGanancia";
             TxtGanancia.Size = new Size(418, 29);
             TxtGanancia.TabIndex = 8;
-            TxtGanancia.TextAlign = HorizontalAlignment.Right;
             TxtGanancia.TextChanged += TxtDescripcion_TextChanged;
             // 
             // TxtCosto
@@ -176,7 +175,6 @@
             TxtCosto.Name = "TxtCosto";
             TxtCosto.Size = new Size(418, 29);
             TxtCosto.TabIndex = 7;
-            TxtCosto.TextAlign = HorizontalAlignment.Right;
             TxtCosto.TextChanged += TxtDescripcion_TextChanged;
             // 
             // TxtCantidad
@@ -190,7 +188,6 @@
             TxtCantidad.Name = "TxtCantidad";
             TxtCantidad.Size = new Size(418, 29);
             TxtCantidad.TabIndex = 6;
-            TxtCantidad.TextAlign = HorizontalAlignment.Right;
             TxtCantidad.TextChanged += TxtDescripcion_TextChanged;
             // 
             // TxtDescripcion
@@ -246,13 +243,14 @@
             BtnIngresar.Text = "INGRESAR";
             BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
+            BtnIngresar.Click += BtnIngresar_Click;
             // 
             // CMBProveedor
             // 
             CMBProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBProveedor.FormattingEnabled = true;
-            CMBProveedor.Location = new Point(113, 200);
+            CMBProveedor.Location = new Point(113, 197);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(418, 29);
             CMBProveedor.TabIndex = 13;
@@ -262,7 +260,7 @@
             CMBSubcategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBSubcategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBSubcategoria.FormattingEnabled = true;
-            CMBSubcategoria.Location = new Point(113, 287);
+            CMBSubcategoria.Location = new Point(113, 290);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(418, 29);
             CMBSubcategoria.TabIndex = 15;
@@ -272,7 +270,7 @@
             CMBCategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBCategoria.FormattingEnabled = true;
-            CMBCategoria.Location = new Point(113, 242);
+            CMBCategoria.Location = new Point(113, 245);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(418, 29);
             CMBCategoria.TabIndex = 16;

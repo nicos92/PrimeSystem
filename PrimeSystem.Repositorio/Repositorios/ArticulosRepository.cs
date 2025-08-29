@@ -133,6 +133,32 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
+        public async Task<Result<int>> GetMaxCodArt()
+        {
+            try
+            {
+                using var conn = Conexion();
+                using var cmd = new OleDbCommand("SELECT MAX(Cod_Articulo) FROM Articulos", conn);
+                await conn.OpenAsync();
+                using var reader = await cmd.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
+                {
+                    int max = Convert.ToInt32(reader.GetString(0));
+                    return Result<int>.Success(max);
+                }
+                return Result<int>.Failure($"No se pude obtener el ultimo codigo de los articulos");
+            }
+            catch (OleDbException ex)
+            {
+
+                return Result<int>.Failure($"Error en la base de datos al obtener  el ultimo codigo de los articulos: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return Result<int>.Failure("Error inesperado al obtener el ultimo codigo de los articulos" + ex.Message);
+            }
+        }
+
         public Result<Articulos> Update(Articulos articulo)
         {
             try

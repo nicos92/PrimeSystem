@@ -19,8 +19,10 @@ namespace PrimeSystem.UI.Articulos
         private ICategoriasService _categoriasService;
         private ISubcategoriaService _subcategoriasService;
         private IProveedoresService _proveedoresService;
+        private IStockService _stockService;
 
         private Modelo.Entidades.Articulos _articuloSeleccionado;
+        private Modelo.Entidades.Stock _stockSeleccionado;
 
         private readonly ValidadorTextBox _vTxtDescripcion;
         private readonly ValidadorTextBox _vTxtCantidad;
@@ -31,14 +33,16 @@ namespace PrimeSystem.UI.Articulos
         private readonly ErrorProvider _epTxtCantidad;
         private readonly ErrorProvider _epTxtCosto;
         private readonly ErrorProvider _epTxtGanancia;
-        public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService)
+        public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService)
         {
             _articulosService = articulosService;
             _categoriasService = categoriasService;
             _subcategoriasService = subcategoriaService;
             _proveedoresService = proveedoresService;
+            _stockService = stockService;
             _articuloSeleccionado = new Modelo.Entidades.Articulos();
             InitializeComponent();
+            _stockSeleccionado = new Modelo.Entidades.Stock();
 
             _epTxtDescipcion = new ErrorProvider();
             _vTxtDescripcion = new ValidadorDireccion(TxtDescripcion, _epTxtDescipcion)
@@ -71,39 +75,44 @@ namespace PrimeSystem.UI.Articulos
             ValidadorMultiple.ValidacionMultiple([BtnIngresar], _vTxtDescripcion, _vTxtCantidad, _vTxtCosto, _vTxtGanancia);
         }
 
-        private void CrearArticulo()
+        private bool CrearArticulo()
         {
+            if (CMBProveedor.SelectedItem is not Modelo.Entidades.Proveedores proveedor)
+            {
+                MessageBox.Show("El tipo de Proveedor seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             if (CMBCategoria.SelectedItem is not Modelo.Entidades.Categorias categoria)
             {
                 MessageBox.Show("El tipo de Categoria seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
 
-            if (CMBCategoria.SelectedItem is not Modelo.Entidades.Subcategoria subcategoria)
+            if (CMBSubcategoria.SelectedItem is not Modelo.Entidades.Subcategoria subcategoria)
             {
-                MessageBox.Show("El tipo de Categoria seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (CMBCategoria.SelectedItem is not Modelo.Entidades.Proveedores proveedor)
-            {
-                MessageBox.Show("El tipo de Categoria seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show("El tipo de Sub-Categoria seleccionado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
 
 
             _articuloSeleccionado.Art_Desc = TxtDescripcion.Text;
+            _articuloSeleccionado.Id_Proveedor = proveedor.Id_Proveedor;
             _articuloSeleccionado.Cod_Categoria = categoria.Id_categoria;
             _articuloSeleccionado.Cod_Subcat = subcategoria.Id_Subcategoria;
-            _articuloSeleccionado.Id_Proveedor = proveedor.Id_Proveedor;
 
-            /* TODO: 
-             * obtener el ultimo codigo de articulo.
-             * usar el codigo para ingresar el articulo.
-             * ingresar el articulo.
-             * ingresar el stock
-             */
+            return true;
+
+        }
+
+        private void CrearStock(int codArticulo)
+        {
+           _stockSeleccionado.Cod_Articulo = codArticulo;
+            _stockSeleccionado.Cantidad = Convert.ToInt32(TxtCantidad.Text);
+            _stockSeleccionado.Costo = Convert.ToInt32(TxtCosto.Text);
+            _stockSeleccionado.Ganancia = Convert.ToInt32(TxtGanancia.Text);
+
 
         }
 
@@ -172,18 +181,54 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
-        private void CMBProveedor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private async void CMBCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CMBCategoria.SelectedItem is Categorias categoria)
             {
-            int id = categoria.Id_categoria;
-            await CargarSubCategorias(id);
+                int id = categoria.Id_categoria;
+                await CargarSubCategorias(id);
             }
         }
+
+        private async void BtnIngresar_Click(object sender, EventArgs e)
+        {
+            /* TODO: 
+             * obtener el ultimo codigo de articulo.
+             * usar el codigo para ingresar el articulo.
+             * ingresar el articulo.
+             * ingresar el stock
+             */
+
+            if (!CrearArticulo())
+            {
+                MessageBox.Show("Articulo no creado", "articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            Result<int> ultimoCodigo = await _articulosService.GetMaxCodArt();
+
+            if (ultimoCodigo.Value is int codigo)
+            {
+                _articuloSeleccionado.Cod_Articulo = (codigo + 1 ).ToString();
+                var resultIngreso = _articulosService.Add(_articuloSeleccionado);
+
+                if (resultIngreso.IsSuccess)
+                {
+
+                    CrearStock(codigo);
+                    var resultStock = _stockService.Add(_stockSeleccionado);
+                    if (resultStock.IsSuccess)
+                    {
+                        MessageBox.Show("Ingreso de Articulo correcto", "Ingreso Articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("codigo no encontrado");
+            }
+            }
     }
 }
