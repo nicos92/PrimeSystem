@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             PanelMedio = new Panel();
-            tableLayoutPanel4 = new TableLayoutPanel();
+            TLPMedio = new TableLayoutPanel();
             groupBox1 = new GroupBox();
             TLPForm = new TableLayoutPanel();
             label3 = new Label();
@@ -47,34 +47,37 @@
             label6 = new Label();
             label5 = new Label();
             label1 = new Label();
+            ProgressBar = new ProgressBar();
             PanelMedio.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
+            TLPMedio.SuspendLayout();
             groupBox1.SuspendLayout();
             TLPForm.SuspendLayout();
             SuspendLayout();
             // 
             // PanelMedio
             // 
-            PanelMedio.Controls.Add(tableLayoutPanel4);
+            PanelMedio.Controls.Add(TLPMedio);
             PanelMedio.Dock = DockStyle.Fill;
             PanelMedio.Location = new Point(0, 0);
             PanelMedio.Name = "PanelMedio";
             PanelMedio.Size = new Size(804, 561);
             PanelMedio.TabIndex = 4;
             // 
-            // tableLayoutPanel4
+            // TLPMedio
             // 
-            tableLayoutPanel4.BackColor = Color.FromArgb(218, 218, 220);
-            tableLayoutPanel4.ColumnCount = 1;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Controls.Add(groupBox1, 0, 0);
-            tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(0, 0);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 1;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(804, 561);
-            tableLayoutPanel4.TabIndex = 2;
+            TLPMedio.BackColor = Color.FromArgb(218, 218, 220);
+            TLPMedio.ColumnCount = 1;
+            TLPMedio.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            TLPMedio.Controls.Add(groupBox1, 0, 1);
+            TLPMedio.Controls.Add(ProgressBar, 0, 0);
+            TLPMedio.Dock = DockStyle.Fill;
+            TLPMedio.Location = new Point(0, 0);
+            TLPMedio.Name = "TLPMedio";
+            TLPMedio.RowCount = 2;
+            TLPMedio.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+            TLPMedio.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            TLPMedio.Size = new Size(804, 561);
+            TLPMedio.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -82,7 +85,7 @@
             groupBox1.Controls.Add(TLPForm);
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(85, 72);
+            groupBox1.Location = new Point(85, 80);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(633, 417);
             groupBox1.TabIndex = 15;
@@ -250,7 +253,7 @@
             CMBProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBProveedor.FormattingEnabled = true;
-            CMBProveedor.Location = new Point(113, 197);
+            CMBProveedor.Location = new Point(113, 200);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(418, 29);
             CMBProveedor.TabIndex = 13;
@@ -260,7 +263,7 @@
             CMBSubcategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBSubcategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBSubcategoria.FormattingEnabled = true;
-            CMBSubcategoria.Location = new Point(113, 290);
+            CMBSubcategoria.Location = new Point(113, 287);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(418, 29);
             CMBSubcategoria.TabIndex = 15;
@@ -270,7 +273,7 @@
             CMBCategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBCategoria.FormattingEnabled = true;
-            CMBCategoria.Location = new Point(113, 245);
+            CMBCategoria.Location = new Point(113, 242);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(418, 29);
             CMBCategoria.TabIndex = 16;
@@ -309,6 +312,15 @@
             label1.TabIndex = 1;
             label1.Text = "Categoria:";
             // 
+            // ProgressBar
+            // 
+            ProgressBar.Dock = DockStyle.Fill;
+            ProgressBar.Location = new Point(0, 0);
+            ProgressBar.Margin = new Padding(0);
+            ProgressBar.Name = "ProgressBar";
+            ProgressBar.Size = new Size(804, 16);
+            ProgressBar.TabIndex = 16;
+            // 
             // UCIngresoArticulos
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -321,7 +333,7 @@
             Size = new Size(804, 561);
             Load += UCIngresoArticulos_Load;
             PanelMedio.ResumeLayout(false);
-            tableLayoutPanel4.ResumeLayout(false);
+            TLPMedio.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             TLPForm.ResumeLayout(false);
             TLPForm.PerformLayout();
@@ -331,7 +343,7 @@
         #endregion
 
         private Panel PanelMedio;
-        private TableLayoutPanel tableLayoutPanel4;
+        private TableLayoutPanel TLPMedio;
         private GroupBox groupBox1;
         private TableLayoutPanel TLPForm;
         private Label label1;
@@ -349,5 +361,6 @@
         private ComboBox CMBSubcategoria;
         private ComboBox CMBCategoria;
         private Label label6;
+        private ProgressBar ProgressBar;
     }
 }

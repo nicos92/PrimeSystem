@@ -76,5 +76,10 @@ namespace PrimeSystem.UI.Articulos
 
             ValidarTag(_btnActual);
         }
+
+        private void FormArticulos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

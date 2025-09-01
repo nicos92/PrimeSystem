@@ -122,6 +122,7 @@
             Margin = new Padding(4);
             Name = "FormArticulos";
             Text = "FormArticulos";
+            FormClosing += FormArticulos_FormClosing;
             Load += FormArticulos_Load;
             PanelOpcion.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);

@@ -33,6 +33,10 @@ namespace PrimeSystem.UI.Articulos
         private readonly ErrorProvider _epTxtCantidad;
         private readonly ErrorProvider _epTxtCosto;
         private readonly ErrorProvider _epTxtGanancia;
+
+
+        private List<Modelo.Entidades.Categorias> ListaCategorias;
+        private List<Modelo.Entidades.Proveedores> ListaProveedores;
         public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService)
         {
             _articulosService = articulosService;
@@ -41,7 +45,12 @@ namespace PrimeSystem.UI.Articulos
             _proveedoresService = proveedoresService;
             _stockService = stockService;
             _articuloSeleccionado = new Modelo.Entidades.Articulos();
+
+            ListaCategorias = new List<Modelo.Entidades.Categorias>();
+            ListaProveedores = new List<Modelo.Entidades.Proveedores>();
             InitializeComponent();
+
+
             _stockSeleccionado = new Modelo.Entidades.Stock();
 
             _epTxtDescipcion = new ErrorProvider();
@@ -106,9 +115,8 @@ namespace PrimeSystem.UI.Articulos
 
         }
 
-        private void CrearStock(int codArticulo)
+        private void CrearStock()
         {
-           _stockSeleccionado.Cod_Articulo = codArticulo;
             _stockSeleccionado.Cantidad = Convert.ToInt32(TxtCantidad.Text);
             _stockSeleccionado.Costo = Convert.ToInt32(TxtCosto.Text);
             _stockSeleccionado.Ganancia = Convert.ToInt32(TxtGanancia.Text);
@@ -116,7 +124,16 @@ namespace PrimeSystem.UI.Articulos
 
         }
 
-        private async void UCIngresoArticulos_Load(object sender, EventArgs e)
+        private void UCIngresoArticulos_Load(object sender, EventArgs e)
+        {
+
+           
+
+            var taskHelper = new TareasLargas(PanelMedio, ProgressBar, CargaInicial, CargarCMB);
+            taskHelper.Iniciar();
+        }
+
+        private async Task CargaInicial()
         {
             await Task.WhenAll(
 
@@ -126,22 +143,38 @@ namespace PrimeSystem.UI.Articulos
              );
         }
 
+        private void CargarCMB()
+        {
+
+            
+                CMBProveedor.DataSource = ListaProveedores;
+                CMBProveedor.DisplayMember = "Proveedor";
+                CMBProveedor.ValueMember = "Id_Proveedor";
+                CMBCategoria.DataSource = ListaCategorias;
+                CMBCategoria.DisplayMember = "Categoria";
+                CMBCategoria.ValueMember = "Id_Categoria";
+            
+            
+        }
         private async Task CargarProveedores()
         {
             var datos = await _proveedoresService.GetAll();
 
+
             if (datos.IsSuccess)
             {
-                List<Modelo.Entidades.Proveedores> proveedores = datos.Value;
-                CMBProveedor.DataSource = proveedores;
-                CMBProveedor.DisplayMember = "Proveedor";
-                CMBProveedor.ValueMember = "Id_Proveedor";
+                ListaProveedores = datos.Value;
+                
 
             }
             else
             {
                 MessageBox.Show(datos.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
+
 
         }
 
@@ -167,21 +200,20 @@ namespace PrimeSystem.UI.Articulos
         {
             var datos = await _categoriasService.GetAll();
 
+
             if (datos.IsSuccess)
             {
-                List<Categorias> categorias = datos.Value;
-                CMBCategoria.DataSource = categorias;
-                CMBCategoria.DisplayMember = "Categoria";
-                CMBCategoria.ValueMember = "Id_Categoria";
+                ListaCategorias = datos.Value;
 
             }
             else
             {
                 MessageBox.Show(datos.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
-      
+
 
         private async void CMBCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -192,7 +224,20 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
-        private async void BtnIngresar_Click(object sender, EventArgs e)
+        private void BtnIngresar_Click(object sender, EventArgs e)
+        {
+            if (!CrearArticulo())
+            {
+                MessageBox.Show("Articulo no creado", "articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            CrearStock();
+
+            TareasLargas tarea = new TareasLargas(PanelMedio, ProgressBar, InsertarArticuloStock, () => { Util.LimpiarForm(TLPForm, TxtDescripcion); });
+            tarea.Iniciar();
+        }
+
+        public async Task InsertarArticuloStock()
         {
             /* TODO: 
              * obtener el ultimo codigo de articulo.
@@ -201,26 +246,22 @@ namespace PrimeSystem.UI.Articulos
              * ingresar el stock
              */
 
-            if (!CrearArticulo())
-            {
-                MessageBox.Show("Articulo no creado", "articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            
             Result<int> ultimoCodigo = await _articulosService.GetMaxCodArt();
 
             if (ultimoCodigo.Value is int codigo)
             {
-                _articuloSeleccionado.Cod_Articulo = (codigo + 1 ).ToString();
+                _articuloSeleccionado.Cod_Articulo = (codigo + 1).ToString();
                 var resultIngreso = _articulosService.Add(_articuloSeleccionado);
 
                 if (resultIngreso.IsSuccess)
                 {
-
-                    CrearStock(codigo);
+                    _stockSeleccionado.Cod_Articulo = Convert.ToInt32(_articuloSeleccionado.Cod_Articulo);
                     var resultStock = _stockService.Add(_stockSeleccionado);
                     if (resultStock.IsSuccess)
                     {
                         MessageBox.Show("Ingreso de Articulo correcto", "Ingreso Articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
                     }
                 }
 
@@ -229,6 +270,6 @@ namespace PrimeSystem.UI.Articulos
             {
                 MessageBox.Show("codigo no encontrado");
             }
-            }
+        }
     }
 }
