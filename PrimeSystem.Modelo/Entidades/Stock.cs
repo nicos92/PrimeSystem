@@ -8,10 +8,10 @@ namespace PrimeSystem.Modelo.Entidades
 {
     public class Stock
     {
-        public int Cod_Articulo { get; set; }
+        public string? Cod_Articulo { get; set; }
         public int Cantidad { get; set; }
-        public decimal Costo { get; set; }
-        public decimal Ganancia { get; set; }
+        public double Costo { get; set; }
+        public double Ganancia { get; set; }
         public Stock()
         {
             

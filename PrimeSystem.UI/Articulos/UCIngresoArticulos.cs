@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,9 +117,10 @@ namespace PrimeSystem.UI.Articulos
 
         private void CrearStock()
         {
+            // TODO: comprobar los tipos de datos entre la base de datos y windows forms
             _stockSeleccionado.Cantidad = Convert.ToInt32(TxtCantidad.Text);
-            _stockSeleccionado.Costo = Convert.ToInt32(TxtCosto.Text);
-            _stockSeleccionado.Ganancia = Convert.ToInt32(TxtGanancia.Text);
+            _stockSeleccionado.Costo = Convert.ToDouble(TxtCosto.Text, CultureInfo.InvariantCulture);
+            _stockSeleccionado.Ganancia = Convert.ToDouble(TxtGanancia.Text);
 
 
         }
@@ -255,7 +257,7 @@ namespace PrimeSystem.UI.Articulos
 
                 if (resultIngreso.IsSuccess)
                 {
-                    _stockSeleccionado.Cod_Articulo = Convert.ToInt32(_articuloSeleccionado.Cod_Articulo);
+                    _stockSeleccionado.Cod_Articulo = _articuloSeleccionado.Cod_Articulo;
                     var resultStock = _stockService.Add(_stockSeleccionado);
                     if (resultStock.IsSuccess)
                     {

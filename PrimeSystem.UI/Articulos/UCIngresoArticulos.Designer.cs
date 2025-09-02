@@ -253,7 +253,7 @@
             CMBProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBProveedor.FormattingEnabled = true;
-            CMBProveedor.Location = new Point(113, 200);
+            CMBProveedor.Location = new Point(113, 197);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(418, 29);
             CMBProveedor.TabIndex = 13;
@@ -263,7 +263,7 @@
             CMBSubcategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBSubcategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBSubcategoria.FormattingEnabled = true;
-            CMBSubcategoria.Location = new Point(113, 287);
+            CMBSubcategoria.Location = new Point(113, 290);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(418, 29);
             CMBSubcategoria.TabIndex = 15;
@@ -273,7 +273,7 @@
             CMBCategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBCategoria.FormattingEnabled = true;
-            CMBCategoria.Location = new Point(113, 242);
+            CMBCategoria.Location = new Point(113, 245);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(418, 29);
             CMBCategoria.TabIndex = 16;

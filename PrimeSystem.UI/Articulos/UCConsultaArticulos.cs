@@ -313,7 +313,7 @@ namespace PrimeSystem.UI.Articulos
 
             if (resultIngreso.IsSuccess)
             {
-                _stockSeleccionado.Cod_Articulo = Convert.ToInt32(_articuloSeleccionado.Cod_Articulo);
+                _stockSeleccionado.Cod_Articulo = _articuloSeleccionado.Cod_Articulo;
                 var resultStock = _stockService.Update(_stockSeleccionado);
                 if (resultStock.IsSuccess)
                 {
@@ -345,9 +345,14 @@ namespace PrimeSystem.UI.Articulos
             if (ListBArticulos.Rows[_indiceSeleccionado].DataBoundItem is Modelo.Entidades.Articulos articulo)
             {
                 _articuloSeleccionado = articulo;
-                int codigo = Convert.ToInt32(_articuloSeleccionado.Cod_Articulo);
-                
-               _stockSeleccionado = ListaStock.First(s=>s.Cod_Articulo == codigo);
+                string? codigo =_articuloSeleccionado.Cod_Articulo;
+
+
+                foreach (var item in ListaStock)
+                {
+                    Console.WriteLine(  "iem: " + item);
+                }
+               _stockSeleccionado = ListaStock.First(s => s.Cod_Articulo == codigo);
                 TxtDescripcion.Text = _articuloSeleccionado.Art_Desc ?? string.Empty;
                 TxtCantidad.Text = _stockSeleccionado.Cantidad.ToString();
                 TxtCosto.Text = _stockSeleccionado.Costo.ToString();
