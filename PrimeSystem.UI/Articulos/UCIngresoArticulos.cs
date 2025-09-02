@@ -76,7 +76,6 @@ namespace PrimeSystem.UI.Articulos
             {
                 MensajeError = "Número ingresado no valido"
             };
-            _proveedoresService = proveedoresService;
         }
 
         private void TxtDescripcion_TextChanged(object sender, EventArgs e)

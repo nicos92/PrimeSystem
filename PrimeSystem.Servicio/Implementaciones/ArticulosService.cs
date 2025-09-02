@@ -31,9 +31,9 @@ namespace PrimeSystem.Servicio.Implementaciones
             return _repo.Add(articulo);
         }
 
-        public Result<Articulos> Update(Articulos articulo)
+        public async Task<Result<Articulos>> Update(Articulos articulo)
         {
-            return _repo.Update(articulo);
+            return await _repo.Update(articulo);
         }
 
         public Result<bool> Delete(int id)

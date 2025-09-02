@@ -248,7 +248,7 @@ partial class FormPrincipal
         Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
         ForeColor = Color.FromArgb(26, 28, 30);
         IsMdiContainer = true;
-        MinimumSize = new Size(960, 600);
+        MinimumSize = new Size(1040, 600);
         Name = "FormPrincipal";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Prime System";

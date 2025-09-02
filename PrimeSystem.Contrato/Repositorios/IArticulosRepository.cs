@@ -9,7 +9,7 @@ namespace PrimeSystem.Contrato.Repositorios
         Task<Result<List<Articulos>>> GetAll();
         Result<Articulos> GetById(int id);
         Result<Articulos> Add(Articulos articulo);
-        Result<Articulos> Update(Articulos articulo);
+        Task<Result<Articulos>> Update(Articulos articulo);
         Result<bool> Delete(int id);
         Task<Result<int>> GetMaxCodArt();
     }

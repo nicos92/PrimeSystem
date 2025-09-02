@@ -32,6 +32,9 @@
             PanelLista = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             LblLista = new Label();
+            ListBArticulos = new DataGridView();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Descripcion = new DataGridViewTextBoxColumn();
             PanelMedio = new Panel();
             tableLayoutPanel4 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
@@ -39,7 +42,6 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             BtnGuardar = new Button();
             BtnEliminar = new Button();
-            label1 = new Label();
             label3 = new Label();
             LblCuit = new Label();
             TxtGanancia = new TextBox();
@@ -49,13 +51,16 @@
             label4 = new Label();
             label2 = new Label();
             label5 = new Label();
+            label1 = new Label();
+            label6 = new Label();
             CMBProveedor = new ComboBox();
             CMBSubcategoria = new ComboBox();
             CMBCategoria = new ComboBox();
-            label6 = new Label();
+            ProgressBar = new ProgressBar();
             tableLayoutPanel3.SuspendLayout();
             PanelLista.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ListBArticulos).BeginInit();
             PanelMedio.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -69,12 +74,14 @@
             tableLayoutPanel3.ColumnCount = 2;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanel3.Controls.Add(PanelLista, 0, 0);
-            tableLayoutPanel3.Controls.Add(PanelMedio, 1, 0);
+            tableLayoutPanel3.Controls.Add(PanelLista, 0, 1);
+            tableLayoutPanel3.Controls.Add(PanelMedio, 1, 1);
+            tableLayoutPanel3.Controls.Add(ProgressBar, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(0, 0);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.Size = new Size(804, 561);
             tableLayoutPanel3.TabIndex = 3;
@@ -84,10 +91,10 @@
             PanelLista.BackColor = Color.FromArgb(218, 218, 220);
             PanelLista.Controls.Add(tableLayoutPanel1);
             PanelLista.Dock = DockStyle.Fill;
-            PanelLista.Location = new Point(3, 3);
+            PanelLista.Location = new Point(3, 19);
             PanelLista.Name = "PanelLista";
             PanelLista.Padding = new Padding(0, 16, 0, 16);
-            PanelLista.Size = new Size(315, 555);
+            PanelLista.Size = new Size(315, 539);
             PanelLista.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -95,13 +102,14 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(LblLista, 0, 0);
+            tableLayoutPanel1.Controls.Add(ListBArticulos, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 16);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(315, 523);
+            tableLayoutPanel1.Size = new Size(315, 507);
             tableLayoutPanel1.TabIndex = 2;
             // 
             // LblLista
@@ -115,15 +123,49 @@
             LblLista.TabIndex = 1;
             LblLista.Text = "Lista de Articulos";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
-            LblLista.Click += LblLista_Click;
+            // 
+            // ListBArticulos
+            // 
+            ListBArticulos.AllowUserToAddRows = false;
+            ListBArticulos.AllowUserToDeleteRows = false;
+            ListBArticulos.AllowUserToResizeColumns = false;
+            ListBArticulos.AllowUserToResizeRows = false;
+            ListBArticulos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ListBArticulos.Columns.AddRange(new DataGridViewColumn[] { Cantidad, Descripcion });
+            ListBArticulos.Dock = DockStyle.Fill;
+            ListBArticulos.Location = new Point(3, 35);
+            ListBArticulos.Name = "ListBArticulos";
+            ListBArticulos.ReadOnly = true;
+            ListBArticulos.RowHeadersVisible = false;
+            ListBArticulos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ListBArticulos.Size = new Size(309, 469);
+            ListBArticulos.TabIndex = 2;
+            ListBArticulos.SelectionChanged += ListBArticulos_SelectedIndexChanged;
+            // 
+            // Cantidad
+            // 
+            Cantidad.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Cantidad.DataPropertyName = "Cod_Articulo";
+            Cantidad.HeaderText = "CÓDIGO";
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.Width = 95;
+            // 
+            // Descripcion
+            // 
+            Descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Descripcion.DataPropertyName = "Art_Desc";
+            Descripcion.HeaderText = "DESCRIPCIÓN";
+            Descripcion.Name = "Descripcion";
+            Descripcion.ReadOnly = true;
             // 
             // PanelMedio
             // 
             PanelMedio.Controls.Add(tableLayoutPanel4);
             PanelMedio.Dock = DockStyle.Fill;
-            PanelMedio.Location = new Point(324, 3);
+            PanelMedio.Location = new Point(324, 19);
             PanelMedio.Name = "PanelMedio";
-            PanelMedio.Size = new Size(477, 555);
+            PanelMedio.Size = new Size(477, 539);
             PanelMedio.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -138,7 +180,7 @@
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(477, 555);
+            tableLayoutPanel4.Size = new Size(477, 539);
             tableLayoutPanel4.TabIndex = 2;
             // 
             // groupBox1
@@ -147,7 +189,7 @@
             groupBox1.Controls.Add(TLPForm);
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(3, 69);
+            groupBox1.Location = new Point(3, 61);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(471, 417);
             groupBox1.TabIndex = 16;
@@ -162,7 +204,6 @@
             TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.60215F));
             TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7.52688169F));
             TLPForm.Controls.Add(tableLayoutPanel2, 1, 8);
-            TLPForm.Controls.Add(label1, 0, 5);
             TLPForm.Controls.Add(label3, 0, 4);
             TLPForm.Controls.Add(LblCuit, 0, 1);
             TLPForm.Controls.Add(TxtGanancia, 1, 4);
@@ -171,11 +212,12 @@
             TLPForm.Controls.Add(TxtDescripcion, 1, 1);
             TLPForm.Controls.Add(label4, 0, 2);
             TLPForm.Controls.Add(label2, 0, 3);
-            TLPForm.Controls.Add(label5, 0, 6);
-            TLPForm.Controls.Add(CMBProveedor, 1, 7);
-            TLPForm.Controls.Add(CMBSubcategoria, 1, 6);
-            TLPForm.Controls.Add(CMBCategoria, 1, 5);
-            TLPForm.Controls.Add(label6, 0, 7);
+            TLPForm.Controls.Add(label5, 0, 7);
+            TLPForm.Controls.Add(label1, 0, 6);
+            TLPForm.Controls.Add(label6, 0, 5);
+            TLPForm.Controls.Add(CMBProveedor, 1, 5);
+            TLPForm.Controls.Add(CMBSubcategoria, 1, 7);
+            TLPForm.Controls.Add(CMBCategoria, 1, 6);
             TLPForm.Dock = DockStyle.Fill;
             TLPForm.ForeColor = Color.FromArgb(26, 28, 30);
             TLPForm.Location = new Point(3, 25);
@@ -228,6 +270,7 @@
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
             BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             BtnGuardar.UseVisualStyleBackColor = false;
+            BtnGuardar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnGuardar.Click += BtnGuardar_Click;
             // 
             // BtnEliminar
@@ -245,17 +288,7 @@
             BtnEliminar.Size = new Size(48, 48);
             BtnEliminar.TabIndex = 12;
             BtnEliminar.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(27, 201);
-            label1.Name = "label1";
-            label1.Size = new Size(80, 21);
-            label1.TabIndex = 1;
-            label1.Text = "Categoria:";
+            BtnEliminar.EnabledChanged += BtnGuardar_EnabledChanged;
             // 
             // label3
             // 
@@ -290,7 +323,7 @@
             TxtGanancia.Name = "TxtGanancia";
             TxtGanancia.Size = new Size(313, 29);
             TxtGanancia.TabIndex = 8;
-            TxtGanancia.TextAlign = HorizontalAlignment.Right;
+            TxtGanancia.TextChanged += TxtDescripcion_TextChanged;
             // 
             // TxtCosto
             // 
@@ -303,7 +336,7 @@
             TxtCosto.Name = "TxtCosto";
             TxtCosto.Size = new Size(313, 29);
             TxtCosto.TabIndex = 7;
-            TxtCosto.TextAlign = HorizontalAlignment.Right;
+            TxtCosto.TextChanged += TxtDescripcion_TextChanged;
             // 
             // TxtCantidad
             // 
@@ -316,7 +349,7 @@
             TxtCantidad.Name = "TxtCantidad";
             TxtCantidad.Size = new Size(313, 29);
             TxtCantidad.TabIndex = 6;
-            TxtCantidad.TextAlign = HorizontalAlignment.Right;
+            TxtCantidad.TextChanged += TxtDescripcion_TextChanged;
             // 
             // TxtDescripcion
             // 
@@ -329,6 +362,7 @@
             TxtDescripcion.Name = "TxtDescripcion";
             TxtDescripcion.Size = new Size(313, 29);
             TxtDescripcion.TabIndex = 5;
+            TxtDescripcion.TextChanged += TxtDescripcion_TextChanged;
             // 
             // label4
             // 
@@ -357,18 +391,40 @@
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(3, 246);
+            label5.Location = new Point(3, 291);
             label5.Name = "label5";
             label5.Size = new Size(104, 21);
             label5.TabIndex = 12;
             label5.Text = "Subcategoria:";
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(27, 246);
+            label1.Name = "label1";
+            label1.Size = new Size(80, 21);
+            label1.TabIndex = 1;
+            label1.Text = "Categoria:";
+            // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.Right;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 12F);
+            label6.Location = new Point(22, 201);
+            label6.Name = "label6";
+            label6.Size = new Size(85, 21);
+            label6.TabIndex = 17;
+            label6.Text = "Proveedor:";
             // 
             // CMBProveedor
             // 
             CMBProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBProveedor.FormattingEnabled = true;
-            CMBProveedor.Location = new Point(113, 290);
+            CMBProveedor.Location = new Point(113, 200);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(313, 29);
             CMBProveedor.TabIndex = 13;
@@ -378,7 +434,7 @@
             CMBSubcategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBSubcategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBSubcategoria.FormattingEnabled = true;
-            CMBSubcategoria.Location = new Point(113, 245);
+            CMBSubcategoria.Location = new Point(113, 290);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(313, 29);
             CMBSubcategoria.TabIndex = 15;
@@ -388,21 +444,21 @@
             CMBCategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
             CMBCategoria.FormattingEnabled = true;
-            CMBCategoria.Location = new Point(113, 200);
+            CMBCategoria.Location = new Point(113, 245);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(313, 29);
             CMBCategoria.TabIndex = 16;
+            CMBCategoria.SelectedIndexChanged += CMBCategoria_SelectedIndexChanged;
             // 
-            // label6
+            // ProgressBar
             // 
-            label6.Anchor = AnchorStyles.Right;
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(22, 291);
-            label6.Name = "label6";
-            label6.Size = new Size(85, 21);
-            label6.TabIndex = 17;
-            label6.Text = "Proveedor:";
+            tableLayoutPanel3.SetColumnSpan(ProgressBar, 2);
+            ProgressBar.Dock = DockStyle.Fill;
+            ProgressBar.Location = new Point(0, 0);
+            ProgressBar.Margin = new Padding(0);
+            ProgressBar.Name = "ProgressBar";
+            ProgressBar.Size = new Size(804, 16);
+            ProgressBar.TabIndex = 4;
             // 
             // UCConsultaArticulos
             // 
@@ -414,9 +470,11 @@
             Margin = new Padding(4);
             Name = "UCConsultaArticulos";
             Size = new Size(804, 561);
+            Load += UCConsultaArticulos_Load;
             tableLayoutPanel3.ResumeLayout(false);
             PanelLista.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ListBArticulos).EndInit();
             PanelMedio.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
@@ -453,5 +511,9 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Button BtnGuardar;
         private Button BtnEliminar;
+        private ProgressBar ProgressBar;
+        private DataGridView ListBArticulos;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Descripcion;
     }
 }

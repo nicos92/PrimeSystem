@@ -89,6 +89,7 @@
             BtnOpcionEditar.TextAlign = ContentAlignment.MiddleRight;
             BtnOpcionEditar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnOpcionEditar.UseVisualStyleBackColor = false;
+            BtnOpcionEditar.Click += BtnOpcionIngresar_Click;
             // 
             // BtnOpcionIngresar
             // 

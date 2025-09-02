@@ -17,5 +17,10 @@ namespace PrimeSystem.Modelo.Entidades
             
         }
 
+        public override string ToString()
+        {
+            return $"Codigo: {Cod_Articulo}, Cantidad: {Cantidad}, Costo: {Costo}, Ganancia: {Ganancia}.";
+        }
+
     }
 }
