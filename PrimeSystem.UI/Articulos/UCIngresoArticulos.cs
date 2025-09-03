@@ -20,7 +20,8 @@ namespace PrimeSystem.UI.Articulos
         private ICategoriasService _categoriasService;
         private ISubcategoriaService _subcategoriasService;
         private IProveedoresService _proveedoresService;
-        private IStockService _stockService;
+        private IArticuloStockService _articuloStockService;
+
 
         private Modelo.Entidades.Articulos _articuloSeleccionado;
         private Modelo.Entidades.Stock _stockSeleccionado;
@@ -38,13 +39,13 @@ namespace PrimeSystem.UI.Articulos
 
         private List<Modelo.Entidades.Categorias> ListaCategorias;
         private List<Modelo.Entidades.Proveedores> ListaProveedores;
-        public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService)
+        public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService, IArticuloStockService articuloStockService)
         {
             _articulosService = articulosService;
             _categoriasService = categoriasService;
             _subcategoriasService = subcategoriaService;
             _proveedoresService = proveedoresService;
-            _stockService = stockService;
+            _articuloStockService = articuloStockService;
             _articuloSeleccionado = new Modelo.Entidades.Articulos();
 
             ListaCategorias = new List<Modelo.Entidades.Categorias>();
@@ -77,6 +78,7 @@ namespace PrimeSystem.UI.Articulos
             {
                 MensajeError = "Número ingresado no valido"
             };
+            _articuloStockService = articuloStockService;
         }
 
         private void TxtDescripcion_TextChanged(object sender, EventArgs e)
@@ -118,9 +120,9 @@ namespace PrimeSystem.UI.Articulos
         private void CrearStock()
         {
             // TODO: comprobar los tipos de datos entre la base de datos y windows forms
-            _stockSeleccionado.Cantidad = Convert.ToInt32(TxtCantidad.Text);
+            _stockSeleccionado.Cantidad = Convert.ToDouble(TxtCantidad.Text);
             _stockSeleccionado.Costo = Convert.ToDouble(TxtCosto.Text, CultureInfo.InvariantCulture);
-            _stockSeleccionado.Ganancia = Convert.ToDouble(TxtGanancia.Text);
+            _stockSeleccionado.Ganancia = Convert.ToDouble(TxtGanancia.Text, CultureInfo.InvariantCulture);
 
 
         }
@@ -128,7 +130,7 @@ namespace PrimeSystem.UI.Articulos
         private void UCIngresoArticulos_Load(object sender, EventArgs e)
         {
 
-           
+
 
             var taskHelper = new TareasLargas(PanelMedio, ProgressBar, CargaInicial, CargarCMB);
             taskHelper.Iniciar();
@@ -147,15 +149,15 @@ namespace PrimeSystem.UI.Articulos
         private void CargarCMB()
         {
 
-            
-                CMBProveedor.DataSource = ListaProveedores;
-                CMBProveedor.DisplayMember = "Proveedor";
-                CMBProveedor.ValueMember = "Id_Proveedor";
-                CMBCategoria.DataSource = ListaCategorias;
-                CMBCategoria.DisplayMember = "Categoria";
-                CMBCategoria.ValueMember = "Id_Categoria";
-            
-            
+
+            CMBProveedor.DataSource = ListaProveedores;
+            CMBProveedor.DisplayMember = "Proveedor";
+            CMBProveedor.ValueMember = "Id_Proveedor";
+            CMBCategoria.DataSource = ListaCategorias;
+            CMBCategoria.DisplayMember = "Categoria";
+            CMBCategoria.ValueMember = "Id_Categoria";
+
+
         }
         private async Task CargarProveedores()
         {
@@ -165,7 +167,7 @@ namespace PrimeSystem.UI.Articulos
             if (datos.IsSuccess)
             {
                 ListaProveedores = datos.Value;
-                
+
 
             }
             else
@@ -240,37 +242,32 @@ namespace PrimeSystem.UI.Articulos
 
         public async Task InsertarArticuloStock()
         {
-            /* TODO: 
-             * obtener el ultimo codigo de articulo.
-             * usar el codigo para ingresar el articulo.
-             * ingresar el articulo.
-             * ingresar el stock
-             */
 
-            
-            Result<int> ultimoCodigo = await _articulosService.GetMaxCodArt();
+            // Obtener el último código de artículo de forma segura
+            var ultimoCodigoResult = await _articulosService.GetMaxCodArt();
 
-            if (ultimoCodigo.Value is int codigo)
+           
+            int codigo = ultimoCodigoResult.IsSuccess ? ultimoCodigoResult.Value : 100000;
+
+            // Asignar el nuevo código a los objetos
+            string nuevoCodigo = (codigo + 1).ToString();
+            _articuloSeleccionado.Cod_Articulo = nuevoCodigo;
+            _stockSeleccionado.Cod_Articulo = nuevoCodigo;
+
+            // Intentar la inserción en el servicio
+            var insercionResult = await _articuloStockService.Add(_articuloSeleccionado, _stockSeleccionado);
+
+            // Validar si la inserción fue exitosa
+            if (insercionResult.IsSuccess)
             {
-                _articuloSeleccionado.Cod_Articulo = (codigo + 1).ToString();
-                var resultIngreso = _articulosService.Add(_articuloSeleccionado);
-
-                if (resultIngreso.IsSuccess)
-                {
-                    _stockSeleccionado.Cod_Articulo = _articuloSeleccionado.Cod_Articulo;
-                    var resultStock = _stockService.Add(_stockSeleccionado);
-                    if (resultStock.IsSuccess)
-                    {
-                        MessageBox.Show("Ingreso de Articulo correcto", "Ingreso Articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
-                    }
-                }
-
+                MessageBox.Show("Ingreso correcto", "Artículo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("codigo no encontrado");
+                // En caso de error en la inserción, mostrar el mensaje de error
+                MessageBox.Show(insercionResult.Error, "Error en la inserción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
     }
 }

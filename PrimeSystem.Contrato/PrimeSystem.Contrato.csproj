@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositorios\" />
-    <Folder Include="Servicios\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PrimeSystem.Modelo\PrimeSystem.Modelo.csproj" />
     <ProjectReference Include="..\PrimeSystem.Utilidades\PrimeSystem.Utilidades.csproj" />
   </ItemGroup>

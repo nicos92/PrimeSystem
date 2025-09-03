@@ -86,10 +86,7 @@ namespace PrimeSystem.UI.Articulos
             };
         }
 
-        private void LblLista_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -143,8 +140,8 @@ namespace PrimeSystem.UI.Articulos
         private void CrearStock()
         {
             _stockSeleccionado.Cantidad = Convert.ToInt32(TxtCantidad.Text);
-            _stockSeleccionado.Costo = Convert.ToInt32(TxtCosto.Text);
-            _stockSeleccionado.Ganancia = Convert.ToInt32(TxtGanancia.Text);
+            _stockSeleccionado.Costo = Convert.ToDouble(TxtCosto.Text);
+            _stockSeleccionado.Ganancia = Convert.ToDouble(TxtGanancia.Text);
 
 
         }

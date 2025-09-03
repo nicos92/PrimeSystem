@@ -67,6 +67,8 @@ static class Program
         services.AddTransient<FormEstadoContable>(); // Este Form estaría en PrimeSystem.UI.EstadoContable
 
         // Registrar servicios (ejemplo)
+        services.AddScoped<IArticuloStockRepository, ArticuloStockRepository>();
+        services.AddScoped<IArticuloStockService, ArticuloStockService>();
 
         services.AddScoped<IArticulosRepository, ArticulosRepository>();
         services.AddScoped<IArticulosService, ArticulosService>();

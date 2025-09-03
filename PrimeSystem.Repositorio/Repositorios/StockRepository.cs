@@ -88,9 +88,9 @@ namespace PrimeSystem.Repositorio.Repositorios
                     Stock stock = new()
                     {
                         Cod_Articulo = reader.GetString(0),
-                        Cantidad = reader.GetInt32(1),
-                        Costo = reader.GetInt32(2),
-                        Ganancia = reader.GetInt16(3)
+                        Cantidad = reader.GetDouble(1),
+                        Costo = reader.GetDouble(2),
+                        Ganancia = reader.GetDouble(3)
 
                     };
                     stocks.Add(stock);
@@ -121,9 +121,9 @@ namespace PrimeSystem.Repositorio.Repositorios
                     Stock stock = new()
                     {
                         Cod_Articulo = reader.GetString(0),
-                        Cantidad = reader.GetInt32(1),
-                        Costo = reader.GetInt32(2),
-                        Ganancia = reader.GetInt32(3)
+                        Cantidad = reader.GetDouble(1),
+                        Costo = reader.GetDouble(2),
+                        Ganancia = reader.GetDouble(3)
                     };
                     return Result<Stock>.Success(stock);
                 }

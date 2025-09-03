@@ -83,14 +83,14 @@
             // 
             groupBox1.Anchor = AnchorStyles.None;
             groupBox1.Controls.Add(TLPForm);
-            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
             groupBox1.Location = new Point(85, 80);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(633, 417);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Formulario de ingreso de Articulos";
+            groupBox1.Text = "Formulario de Ingreso de Articulos";
             // 
             // TLPForm
             // 
@@ -116,7 +116,7 @@
             TLPForm.Controls.Add(label1, 0, 6);
             TLPForm.Dock = DockStyle.Fill;
             TLPForm.ForeColor = Color.FromArgb(26, 28, 30);
-            TLPForm.Location = new Point(3, 25);
+            TLPForm.Location = new Point(3, 29);
             TLPForm.Name = "TLPForm";
             TLPForm.RowCount = 10;
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 2.323359F));
@@ -129,7 +129,7 @@
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 11.6167955F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 14.0357161F));
             TLPForm.RowStyles.Add(new RowStyle(SizeType.Percent, 2.323359F));
-            TLPForm.Size = new Size(627, 389);
+            TLPForm.Size = new Size(627, 385);
             TLPForm.TabIndex = 0;
             // 
             // label3
@@ -137,18 +137,18 @@
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(30, 156);
+            label3.Location = new Point(13, 151);
             label3.Name = "label3";
-            label3.Size = new Size(77, 21);
+            label3.Size = new Size(94, 21);
             label3.TabIndex = 3;
-            label3.Text = "Ganancia:";
+            label3.Text = "Ganancia: %";
             // 
             // LblCuit
             // 
             LblCuit.Anchor = AnchorStyles.Right;
             LblCuit.AutoSize = true;
             LblCuit.Font = new Font("Segoe UI", 12F);
-            LblCuit.Location = new Point(13, 21);
+            LblCuit.Location = new Point(13, 19);
             LblCuit.Name = "LblCuit";
             LblCuit.Size = new Size(94, 21);
             LblCuit.TabIndex = 0;
@@ -160,8 +160,8 @@
             TxtGanancia.BackColor = Color.FromArgb(238, 237, 240);
             TxtGanancia.Font = new Font("Segoe UI", 12F);
             TxtGanancia.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtGanancia.Location = new Point(113, 152);
-            TxtGanancia.MaxLength = 11;
+            TxtGanancia.Location = new Point(113, 147);
+            TxtGanancia.MaxLength = 12;
             TxtGanancia.Name = "TxtGanancia";
             TxtGanancia.Size = new Size(418, 29);
             TxtGanancia.TabIndex = 8;
@@ -173,8 +173,8 @@
             TxtCosto.BackColor = Color.FromArgb(238, 237, 240);
             TxtCosto.Font = new Font("Segoe UI", 12F);
             TxtCosto.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtCosto.Location = new Point(113, 107);
-            TxtCosto.MaxLength = 50;
+            TxtCosto.Location = new Point(113, 103);
+            TxtCosto.MaxLength = 12;
             TxtCosto.Name = "TxtCosto";
             TxtCosto.Size = new Size(418, 29);
             TxtCosto.TabIndex = 7;
@@ -186,8 +186,8 @@
             TxtCantidad.BackColor = Color.FromArgb(238, 237, 240);
             TxtCantidad.Font = new Font("Segoe UI", 12F);
             TxtCantidad.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtCantidad.Location = new Point(113, 62);
-            TxtCantidad.MaxLength = 50;
+            TxtCantidad.Location = new Point(113, 59);
+            TxtCantidad.MaxLength = 12;
             TxtCantidad.Name = "TxtCantidad";
             TxtCantidad.Size = new Size(418, 29);
             TxtCantidad.TabIndex = 6;
@@ -199,8 +199,8 @@
             TxtDescripcion.BackColor = Color.FromArgb(238, 237, 240);
             TxtDescripcion.Font = new Font("Segoe UI", 12F);
             TxtDescripcion.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtDescripcion.Location = new Point(113, 17);
-            TxtDescripcion.MaxLength = 8;
+            TxtDescripcion.Location = new Point(113, 15);
+            TxtDescripcion.MaxLength = 50;
             TxtDescripcion.Name = "TxtDescripcion";
             TxtDescripcion.Size = new Size(418, 29);
             TxtDescripcion.TabIndex = 5;
@@ -211,7 +211,7 @@
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(32, 66);
+            label4.Location = new Point(32, 63);
             label4.Name = "label4";
             label4.Size = new Size(75, 21);
             label4.TabIndex = 4;
@@ -222,11 +222,11 @@
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(54, 111);
+            label2.Location = new Point(41, 107);
             label2.Name = "label2";
-            label2.Size = new Size(53, 21);
+            label2.Size = new Size(66, 21);
             label2.TabIndex = 2;
-            label2.Text = "Costo:";
+            label2.Text = "Costo: $";
             // 
             // BtnIngresar
             // 
@@ -238,7 +238,7 @@
             BtnIngresar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnIngresar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnIngresar.Image = Properties.Resources.ingresar;
-            BtnIngresar.Location = new Point(226, 327);
+            BtnIngresar.Location = new Point(226, 319);
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(192, 48);
@@ -252,8 +252,9 @@
             // 
             CMBProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
+            CMBProveedor.Font = new Font("Segoe UI", 12F);
             CMBProveedor.FormattingEnabled = true;
-            CMBProveedor.Location = new Point(113, 197);
+            CMBProveedor.Location = new Point(113, 191);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(418, 29);
             CMBProveedor.TabIndex = 13;
@@ -262,8 +263,9 @@
             // 
             CMBSubcategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBSubcategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+            CMBSubcategoria.Font = new Font("Segoe UI", 12F);
             CMBSubcategoria.FormattingEnabled = true;
-            CMBSubcategoria.Location = new Point(113, 290);
+            CMBSubcategoria.Location = new Point(113, 279);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(418, 29);
             CMBSubcategoria.TabIndex = 15;
@@ -272,8 +274,9 @@
             // 
             CMBCategoria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CMBCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
+            CMBCategoria.Font = new Font("Segoe UI", 12F);
             CMBCategoria.FormattingEnabled = true;
-            CMBCategoria.Location = new Point(113, 245);
+            CMBCategoria.Location = new Point(113, 235);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(418, 29);
             CMBCategoria.TabIndex = 16;
@@ -284,7 +287,7 @@
             label6.Anchor = AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(22, 201);
+            label6.Location = new Point(22, 195);
             label6.Name = "label6";
             label6.Size = new Size(85, 21);
             label6.TabIndex = 17;
@@ -295,7 +298,7 @@
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(3, 291);
+            label5.Location = new Point(3, 283);
             label5.Name = "label5";
             label5.Size = new Size(104, 21);
             label5.TabIndex = 12;
@@ -306,7 +309,7 @@
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(27, 246);
+            label1.Location = new Point(27, 239);
             label1.Name = "label1";
             label1.Size = new Size(80, 21);
             label1.TabIndex = 1;
