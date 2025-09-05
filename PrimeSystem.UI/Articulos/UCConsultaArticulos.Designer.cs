@@ -202,8 +202,8 @@
             TLPForm.BackColor = Color.FromArgb(249, 249, 251);
             TLPForm.ColumnCount = 3;
             TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.6559143F));
-            TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.60215F));
-            TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7.52688169F));
+            TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 69.03226F));
+            TLPForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 7.311828F));
             TLPForm.Controls.Add(tableLayoutPanel2, 1, 8);
             TLPForm.Controls.Add(label3, 0, 4);
             TLPForm.Controls.Add(LblCuit, 0, 1);
@@ -249,7 +249,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(313, 48);
+            tableLayoutPanel2.Size = new Size(315, 48);
             tableLayoutPanel2.TabIndex = 18;
             // 
             // BtnGuardar
@@ -265,7 +265,7 @@
             BtnGuardar.Location = new Point(0, 0);
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
-            BtnGuardar.Size = new Size(156, 48);
+            BtnGuardar.Size = new Size(157, 48);
             BtnGuardar.TabIndex = 11;
             BtnGuardar.Text = "Guardar";
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
@@ -283,7 +283,7 @@
             BtnEliminar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnEliminar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnEliminar.Image = Properties.Resources.trash;
-            BtnEliminar.Location = new Point(210, 0);
+            BtnEliminar.Location = new Point(212, 0);
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
@@ -323,7 +323,7 @@
             TxtGanancia.Location = new Point(113, 147);
             TxtGanancia.MaxLength = 11;
             TxtGanancia.Name = "TxtGanancia";
-            TxtGanancia.Size = new Size(313, 29);
+            TxtGanancia.Size = new Size(315, 29);
             TxtGanancia.TabIndex = 8;
             TxtGanancia.TextChanged += TxtDescripcion_TextChanged;
             // 
@@ -336,7 +336,7 @@
             TxtCosto.Location = new Point(113, 103);
             TxtCosto.MaxLength = 50;
             TxtCosto.Name = "TxtCosto";
-            TxtCosto.Size = new Size(313, 29);
+            TxtCosto.Size = new Size(315, 29);
             TxtCosto.TabIndex = 7;
             TxtCosto.TextChanged += TxtDescripcion_TextChanged;
             // 
@@ -349,7 +349,7 @@
             TxtCantidad.Location = new Point(113, 59);
             TxtCantidad.MaxLength = 50;
             TxtCantidad.Name = "TxtCantidad";
-            TxtCantidad.Size = new Size(313, 29);
+            TxtCantidad.Size = new Size(315, 29);
             TxtCantidad.TabIndex = 6;
             TxtCantidad.TextChanged += TxtDescripcion_TextChanged;
             // 
@@ -362,7 +362,7 @@
             TxtDescripcion.Location = new Point(113, 15);
             TxtDescripcion.MaxLength = 8;
             TxtDescripcion.Name = "TxtDescripcion";
-            TxtDescripcion.Size = new Size(313, 29);
+            TxtDescripcion.Size = new Size(315, 29);
             TxtDescripcion.TabIndex = 5;
             TxtDescripcion.TextChanged += TxtDescripcion_TextChanged;
             // 
@@ -429,7 +429,7 @@
             CMBProveedor.FormattingEnabled = true;
             CMBProveedor.Location = new Point(113, 191);
             CMBProveedor.Name = "CMBProveedor";
-            CMBProveedor.Size = new Size(313, 29);
+            CMBProveedor.Size = new Size(315, 29);
             CMBProveedor.TabIndex = 13;
             // 
             // CMBSubcategoria
@@ -440,7 +440,7 @@
             CMBSubcategoria.FormattingEnabled = true;
             CMBSubcategoria.Location = new Point(113, 279);
             CMBSubcategoria.Name = "CMBSubcategoria";
-            CMBSubcategoria.Size = new Size(313, 29);
+            CMBSubcategoria.Size = new Size(315, 29);
             CMBSubcategoria.TabIndex = 15;
             // 
             // CMBCategoria
@@ -451,7 +451,7 @@
             CMBCategoria.FormattingEnabled = true;
             CMBCategoria.Location = new Point(113, 235);
             CMBCategoria.Name = "CMBCategoria";
-            CMBCategoria.Size = new Size(313, 29);
+            CMBCategoria.Size = new Size(315, 29);
             CMBCategoria.TabIndex = 16;
             CMBCategoria.SelectedIndexChanged += CMBCategoria_SelectedIndexChanged;
             // 
