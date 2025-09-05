@@ -59,5 +59,28 @@ namespace PrimeSystem.Utilidades
             label.Text = $"Lista de {modulo}";
 
         }
+
+        public static void ActualizarEnLista<T>(IList<T> lista, T objetoActualizado)
+            where T : class
+        {
+            // Try to find the existing object in the list
+            var objetoExistente = lista.FirstOrDefault(item =>
+                item.GetType().GetProperty("Id_Articulo")?.GetValue(item)?.Equals(
+                    objetoActualizado.GetType().GetProperty("Id_Articulo")?.GetValue(objetoActualizado)) ?? false);
+
+            if (objetoExistente != null)
+            {
+                // Get the index of the existing object
+                var index = lista.IndexOf(objetoExistente);
+
+                // Replace it with the new, updated object
+                lista[index] = objetoActualizado;
+            }
+        }
+
+        public static void EliminarDeLista<T>(IList<T> lista, T objetoAEliminar)
+        {
+            lista.Remove(objetoAEliminar);
+        }
     }
 }

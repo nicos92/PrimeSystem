@@ -16,12 +16,12 @@ namespace PrimeSystem.UI.Articulos
 {
     public partial class UCConsultaArticulos : UserControl
     {
-        private IArticulosService _articulosService;
-        private ICategoriasService _categoriasService;
-        private ISubcategoriaService _subcategoriasService;
-        private IProveedoresService _proveedoresService;
-        private IStockService _stockService;
-        private IArticuloStockService _articuloStockService;
+        private readonly IArticulosService _articulosService;
+        private readonly ICategoriasService _categoriasService;
+        private readonly ISubcategoriaService _subcategoriasService;
+        private readonly IProveedoresService _proveedoresService;
+        private readonly IStockService _stockService;
+        private readonly IArticuloStockService _articuloStockService;
         private Modelo.Entidades.Articulos _articuloSeleccionado;
         private Modelo.Entidades.Stock _stockSeleccionado;
 
@@ -52,10 +52,10 @@ namespace PrimeSystem.UI.Articulos
             _articuloStockService = articuloStockService;
             _articuloSeleccionado = new Modelo.Entidades.Articulos();
 
-            ListaCategorias = new List<Modelo.Entidades.Categorias>();
-            ListaProveedores = new List<Modelo.Entidades.Proveedores>();
-            ListaArticulos = new List<Modelo.Entidades.Articulos>();
-            ListaStock = new List<Stock>();
+            ListaCategorias = [];
+            ListaProveedores = [];
+            ListaArticulos = [];
+            ListaStock = [];
             _indiceSeleccionado = 0;
             InitializeComponent();
 
@@ -97,9 +97,10 @@ namespace PrimeSystem.UI.Articulos
                 MessageBox.Show("Articulo no creado", "articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            CrearStock();
+            if (!CrearStock()) return;
 
-            TareasLargas tarea = new TareasLargas(PanelMedio, ProgressBar, GuardarArticuloStock, () => { Util.LimpiarForm(TLPForm, TxtDescripcion); });
+            
+            TareasLargas tarea = new(PanelMedio, ProgressBar, GuardarArticuloStock, () => { ListBArticulos.Refresh(); });
             tarea.Iniciar();
         }
 
@@ -139,11 +140,17 @@ namespace PrimeSystem.UI.Articulos
 
         }
 
-        private void CrearStock()
+        private bool CrearStock()
         {
+            if (string.IsNullOrEmpty(TxtCantidad.Text)|| string.IsNullOrEmpty(TxtCosto.Text)||string.IsNullOrEmpty(TxtGanancia.Text))
+            {
+                MessageBox.Show("Articulo Vacio no se puede eliminar", "Error Seleccion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             _stockSeleccionado.Cantidad = Convert.ToInt32(TxtCantidad.Text);
             _stockSeleccionado.Costo = Convert.ToDouble(TxtCosto.Text);
             _stockSeleccionado.Ganancia = Convert.ToDouble(TxtGanancia.Text);
+            return true;
 
 
         }
@@ -225,7 +232,9 @@ namespace PrimeSystem.UI.Articulos
         private void CargarArticulosDGV()
         {
             ListBArticulos.AutoGenerateColumns = false;
+            ListBArticulos.DataSource = null;
             ListBArticulos.DataSource = ListaArticulos;
+
         }
         private async Task CargarProveedores()
         {
@@ -299,9 +308,7 @@ namespace PrimeSystem.UI.Articulos
 
         public async Task GuardarArticuloStock()
         {
-            /* TODO: 
-             * actualizar con el servicio de iarticulostock
-             */
+           
 
 
 
@@ -310,18 +317,30 @@ namespace PrimeSystem.UI.Articulos
             if (actualizacionResult.IsSuccess)
             {
                 MessageBox.Show("Actualización correcta", "Artículo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await CargaInicial(); // Recargar los datos después de la actualización
+                ModificarDatoLista();
             }
             else
             {
                 MessageBox.Show(actualizacionResult.Error, "Error en la actualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }
 
 
        
+
+        private void ModificarDatoLista()
+        {
+            // Call the generic method for both lists
+            Util.ActualizarEnLista(ListaArticulos, _articuloSeleccionado);
+            Util.ActualizarEnLista(ListaStock, _stockSeleccionado);
+        }
+
+        
+
+
+
+
+
 
         private void ListBArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -336,18 +355,29 @@ namespace PrimeSystem.UI.Articulos
 
         private void CargarDormularioEdicion()
         {
+            if (ListBArticulos.Rows.Count == 0)
+            {
+                TxtDescripcion.Clear();
+                TxtCantidad.Clear();
+                TxtCosto.Clear();
+                TxtGanancia.Clear();
+                _articuloSeleccionado = new Modelo.Entidades.Articulos();
+                _stockSeleccionado = new Modelo.Entidades.Stock();
+                return;
+            }
 
-            if (ListBArticulos.Rows[_indiceSeleccionado].DataBoundItem is Modelo.Entidades.Articulos articulo)
+            if (_indiceSeleccionado >= 0 && _indiceSeleccionado < ListBArticulos.Rows.Count && ListBArticulos.Rows[_indiceSeleccionado].DataBoundItem is Modelo.Entidades.Articulos articulo)
             {
                 _articuloSeleccionado = articulo;
                 string? codigo = _articuloSeleccionado.Cod_Articulo;
 
 
-                foreach (var item in ListaStock)
+                _stockSeleccionado = ListaStock.FirstOrDefault(s => s.Cod_Articulo == codigo);
+                if (_stockSeleccionado == null)
                 {
-                    Console.WriteLine("iem: " + item);
+                    _stockSeleccionado = new Modelo.Entidades.Stock();
                 }
-                _stockSeleccionado = ListaStock.First(s => s.Cod_Articulo == codigo);
+
                 TxtDescripcion.Text = _articuloSeleccionado.Art_Desc ?? string.Empty;
                 TxtCantidad.Text = _stockSeleccionado.Cantidad.ToString();
                 TxtCosto.Text = _stockSeleccionado.Costo.ToString();
@@ -363,6 +393,8 @@ namespace PrimeSystem.UI.Articulos
                 TxtCantidad.Clear();
                 TxtCosto.Clear();
                 TxtGanancia.Clear();
+                _articuloSeleccionado = new Modelo.Entidades.Articulos();
+                _stockSeleccionado = new Modelo.Entidades.Stock();
             }
         }
 
@@ -385,30 +417,56 @@ namespace PrimeSystem.UI.Articulos
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este proveedor?", "Confirmación de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // Primero, verificar que haya un artículo seleccionado para eliminar.
+            if (_articuloSeleccionado == null || _articuloSeleccionado.Id_Articulo == 0)
+            {
+                MessageBox.Show("Por favor, seleccione un artículo de la lista para eliminar.", "Ningún artículo seleccionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este artículo?", "Confirmación de eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes)
             {
                 return; // Salir si el usuario no confirma
             }
-            if (!CrearArticulo())
-            {
-                MessageBox.Show("Articulo no creado", "articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            CrearStock();
 
-            TareasLargas tarea = new TareasLargas(PanelMedio, ProgressBar, EliminarArticuloStock, () => { });
+            // Desactivar el manejador de eventos para evitar que se ejecute durante la actualización.
+            ListBArticulos.SelectionChanged -= ListBArticulos_SelectedIndexChanged;
+
+            // La tarea ahora llama a un nuevo método para volver a enlazar y suscribir el evento.
+            TareasLargas tarea = new(PanelMedio, ProgressBar, EliminarArticuloStock, RebindGridAndResubscribe);
             tarea.Iniciar();
+        }
+
+        private void RebindGridAndResubscribe()
+        {
+            CargarArticulosDGV();
+            // Volver a suscribir el manejador de eventos.
+            ListBArticulos.SelectionChanged += ListBArticulos_SelectedIndexChanged;
+
+            // Actualizar manualmente el estado de la selección y el formulario.
+            _indiceSeleccionado = ListBArticulos.CurrentRow?.Index ?? -1;
+            CargarDormularioEdicion();
         }
 
         private async Task EliminarArticuloStock()
         {
-
+            
             var resultado = await _articuloStockService.Delete(_articuloSeleccionado, _stockSeleccionado);
             if (resultado.IsSuccess)
             {
                 MessageBox.Show("Articulo eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await CargaInicial(); // Recargar los datos después de la eliminación
+
+
+              
+                
+
+                // Call the generic method to delete from both lists
+                Util.EliminarDeLista(ListaArticulos, _articuloSeleccionado);
+                Util.EliminarDeLista(ListaStock, _stockSeleccionado);
+
+               
+
 
 
             }
@@ -418,6 +476,8 @@ namespace PrimeSystem.UI.Articulos
             }
 
         }
+
+      
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn)

@@ -16,15 +16,15 @@ namespace PrimeSystem.UI.Articulos
 {
     public partial class UCIngresoArticulos : UserControl
     {
-        private IArticulosService _articulosService;
-        private ICategoriasService _categoriasService;
-        private ISubcategoriaService _subcategoriasService;
-        private IProveedoresService _proveedoresService;
-        private IArticuloStockService _articuloStockService;
+        private readonly IArticulosService _articulosService;
+        private readonly ICategoriasService _categoriasService;
+        private readonly ISubcategoriaService _subcategoriasService;
+        private readonly IProveedoresService _proveedoresService;
+        private readonly IArticuloStockService _articuloStockService;
 
 
-        private Modelo.Entidades.Articulos _articuloSeleccionado;
-        private Modelo.Entidades.Stock _stockSeleccionado;
+        private readonly Modelo.Entidades.Articulos _articuloSeleccionado;
+        private readonly Modelo.Entidades.Stock _stockSeleccionado;
 
         private readonly ValidadorTextBox _vTxtDescripcion;
         private readonly ValidadorTextBox _vTxtCantidad;
@@ -39,7 +39,7 @@ namespace PrimeSystem.UI.Articulos
 
         private List<Modelo.Entidades.Categorias> ListaCategorias;
         private List<Modelo.Entidades.Proveedores> ListaProveedores;
-        public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService, IArticuloStockService articuloStockService)
+        public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IArticuloStockService articuloStockService)
         {
             _articulosService = articulosService;
             _categoriasService = categoriasService;
@@ -48,8 +48,8 @@ namespace PrimeSystem.UI.Articulos
             _articuloStockService = articuloStockService;
             _articuloSeleccionado = new Modelo.Entidades.Articulos();
 
-            ListaCategorias = new List<Modelo.Entidades.Categorias>();
-            ListaProveedores = new List<Modelo.Entidades.Proveedores>();
+            ListaCategorias = [];
+            ListaProveedores = [];
             InitializeComponent();
 
 
@@ -236,7 +236,7 @@ namespace PrimeSystem.UI.Articulos
             }
             CrearStock();
 
-            TareasLargas tarea = new TareasLargas(PanelMedio, ProgressBar, InsertarArticuloStock, () => { Util.LimpiarForm(TLPForm, TxtDescripcion); });
+            TareasLargas tarea = new(PanelMedio, ProgressBar, InsertarArticuloStock, () => { Util.LimpiarForm(TLPForm, TxtDescripcion); });
             tarea.Iniciar();
         }
 
