@@ -99,8 +99,8 @@ namespace PrimeSystem.UI.Articulos
             }
             if (!CrearStock()) return;
 
-            
-            TareasLargas tarea = new(PanelMedio, ProgressBar, GuardarArticuloStock, () => { ListBArticulos.Refresh(); });
+
+            TareasLargas tarea = new(PanelMedio, ProgressBar, GuardarArticuloStock, () => { ModificarDatoLista(); ListBArticulos.Refresh(); });
             tarea.Iniciar();
         }
 
@@ -142,7 +142,7 @@ namespace PrimeSystem.UI.Articulos
 
         private bool CrearStock()
         {
-            if (string.IsNullOrEmpty(TxtCantidad.Text)|| string.IsNullOrEmpty(TxtCosto.Text)||string.IsNullOrEmpty(TxtGanancia.Text))
+            if (string.IsNullOrEmpty(TxtCantidad.Text) || string.IsNullOrEmpty(TxtCosto.Text) || string.IsNullOrEmpty(TxtGanancia.Text))
             {
                 MessageBox.Show("Articulo Vacio no se puede eliminar", "Error Seleccion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -216,10 +216,10 @@ namespace PrimeSystem.UI.Articulos
         {
 
 
-            CMBProveedor.DataSource = ListaProveedores;
+            CMBProveedor.DataSource = ListaProveedores ?? [];
             CMBProveedor.DisplayMember = "Proveedor";
             CMBProveedor.ValueMember = "Id_Proveedor";
-            CMBCategoria.DataSource = ListaCategorias;
+            CMBCategoria.DataSource = ListaCategorias ?? [];
             CMBCategoria.DisplayMember = "Categoria";
             CMBCategoria.ValueMember = "Id_Categoria";
             CargarArticulosDGV();
@@ -231,9 +231,32 @@ namespace PrimeSystem.UI.Articulos
 
         private void CargarArticulosDGV()
         {
-            ListBArticulos.AutoGenerateColumns = false;
-            ListBArticulos.DataSource = null;
-            ListBArticulos.DataSource = ListaArticulos;
+            try
+            {
+                // Suspender la actualización para evitar flickering
+                ListBArticulos.SuspendLayout();
+
+                // Guardar la posición actual del scroll
+                int firstDisplayedScrollingRowIndex = ListBArticulos.FirstDisplayedScrollingRowIndex;
+
+                ListBArticulos.AutoGenerateColumns = false;
+                ListBArticulos.DataSource = null;
+                ListBArticulos.DataSource = ListaArticulos ?? [];
+
+                // Restaurar la posición del scroll si es posible
+                if (firstDisplayedScrollingRowIndex >= 0 && firstDisplayedScrollingRowIndex < ListBArticulos.Rows.Count)
+                {
+                    ListBArticulos.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar DataGridView: {ex.Message}");
+            }
+            finally
+            {
+                ListBArticulos.ResumeLayout();
+            }
 
         }
         private async Task CargarProveedores()
@@ -308,7 +331,7 @@ namespace PrimeSystem.UI.Articulos
 
         public async Task GuardarArticuloStock()
         {
-           
+
 
 
 
@@ -317,7 +340,7 @@ namespace PrimeSystem.UI.Articulos
             if (actualizacionResult.IsSuccess)
             {
                 MessageBox.Show("Actualización correcta", "Artículo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ModificarDatoLista();
+                
             }
             else
             {
@@ -326,16 +349,19 @@ namespace PrimeSystem.UI.Articulos
         }
 
 
-       
+
 
         private void ModificarDatoLista()
         {
             // Call the generic method for both lists
             Util.ActualizarEnLista(ListaArticulos, _articuloSeleccionado);
             Util.ActualizarEnLista(ListaStock, _stockSeleccionado);
+
+            // Actualizar el DataGridView después de modificar
+            CargarArticulosDGV();
         }
 
-        
+
 
 
 
@@ -344,74 +370,97 @@ namespace PrimeSystem.UI.Articulos
 
         private void ListBArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-
-            _indiceSeleccionado = ListBArticulos.CurrentRow?.Index ?? -1; // Obtener el índice de la fila seleccionada o -1 si no hay selección
-            CargarDormularioEdicion();
 
 
-            
-        }
-
-        private void CargarDormularioEdicion()
-        {
-            if (ListBArticulos.Rows.Count == 0)
+            // Verificar que hay filas y que hay una selección válida
+            if (ListBArticulos.Rows.Count == 0 || ListBArticulos.SelectedRows.Count == 0)
             {
-                TxtDescripcion.Clear();
-                TxtCantidad.Clear();
-                TxtCosto.Clear();
-                TxtGanancia.Clear();
-                _articuloSeleccionado = new Modelo.Entidades.Articulos();
-                _stockSeleccionado = new Modelo.Entidades.Stock();
+                LimpiarFormulario();
                 return;
             }
 
-            if (_indiceSeleccionado >= 0 && _indiceSeleccionado < ListBArticulos.Rows.Count && ListBArticulos.Rows[_indiceSeleccionado].DataBoundItem is Modelo.Entidades.Articulos articulo)
+            // Obtener el índice de forma segura
+            _indiceSeleccionado = ListBArticulos.CurrentRow?.Index ?? -1;
+
+            if (_indiceSeleccionado >= 0 && _indiceSeleccionado < ListBArticulos.Rows.Count)
             {
-                _articuloSeleccionado = articulo;
-                string? codigo = _articuloSeleccionado.Cod_Articulo;
-
-
-                _stockSeleccionado = ListaStock.FirstOrDefault(s => s.Cod_Articulo == codigo);
-                if (_stockSeleccionado == null)
-                {
-                    _stockSeleccionado = new Modelo.Entidades.Stock();
-                }
-
-                TxtDescripcion.Text = _articuloSeleccionado.Art_Desc ?? string.Empty;
-                TxtCantidad.Text = _stockSeleccionado.Cantidad.ToString();
-                TxtCosto.Text = _stockSeleccionado.Costo.ToString();
-                TxtGanancia.Text = _stockSeleccionado.Ganancia.ToString();
-
-                CMBCategoria.SelectedValue = _articuloSeleccionado.Cod_Categoria;
-                CMBProveedor.SelectedValue = _articuloSeleccionado.Id_Proveedor;
-                CMBSubcategoria.SelectedValue = _articuloSeleccionado.Cod_Subcat;
+                CargarFormularioEdicion();
             }
             else
             {
-                TxtDescripcion.Clear();
-                TxtCantidad.Clear();
-                TxtCosto.Clear();
-                TxtGanancia.Clear();
-                _articuloSeleccionado = new Modelo.Entidades.Articulos();
-                _stockSeleccionado = new Modelo.Entidades.Stock();
+                LimpiarFormulario();
             }
+
+
+
+        }
+
+        private void LimpiarFormulario()
+        {
+            TxtDescripcion.Clear();
+            TxtCantidad.Clear();
+            TxtCosto.Clear();
+            TxtGanancia.Clear();
+            _articuloSeleccionado = new Modelo.Entidades.Articulos();
+            _stockSeleccionado = new Modelo.Entidades.Stock();
+        }
+
+        private void CargarFormularioEdicion()
+        {
+            if (ListBArticulos.Rows.Count == 0 || _indiceSeleccionado < 0 || _indiceSeleccionado >= ListBArticulos.Rows.Count)
+            {
+                LimpiarFormulario();
+                return;
+            }
+
+            var row = ListBArticulos.Rows[_indiceSeleccionado];
+
+           
+
+                if (row.DataBoundItem is Modelo.Entidades.Articulos articulo) // aca sale el error System.IndexOutOfRangeException: 'El índice 0 no tiene un valor.'
+                {
+                    _articuloSeleccionado = articulo;
+                    string? codigo = _articuloSeleccionado.Cod_Articulo;
+
+                    _stockSeleccionado = ListaStock.FirstOrDefault(s => s.Cod_Articulo == codigo) ?? new Modelo.Entidades.Stock();
+
+                    // Cargar datos en los controles
+                    TxtDescripcion.Text = _articuloSeleccionado.Art_Desc ?? string.Empty;
+                    TxtCantidad.Text = _stockSeleccionado.Cantidad.ToString();
+                    TxtCosto.Text = _stockSeleccionado.Costo.ToString();
+                    TxtGanancia.Text = _stockSeleccionado.Ganancia.ToString();
+
+                    // Cargar combos de forma segura
+                    CargarCombosSeleccion();
+                }
+                else
+                {
+                    LimpiarFormulario();
+                }
+            
+        }
+
+        private void CargarCombosSeleccion()
+        {
+            // Cargar selecciones de forma segura
+            if (CMBCategoria.Items.Count > 0)
+                CMBCategoria.SelectedValue = _articuloSeleccionado.Cod_Categoria;
+
+            if (CMBProveedor.Items.Count > 0)
+                CMBProveedor.SelectedValue = _articuloSeleccionado.Id_Proveedor;
+
+            if (CMBSubcategoria.Items.Count > 0)
+                CMBSubcategoria.SelectedValue = _articuloSeleccionado.Cod_Subcat;
         }
 
         private void BloquearBtns()
         {
 
-            if (ListBArticulos.SelectedRows == null)
-            {
+            // Verificar si hay filas seleccionadas y si la lista no está vacía
+            bool haySeleccion = ListBArticulos.SelectedRows.Count > 0 && ListaArticulos.Count > 0;
 
-                BtnEliminar.Enabled = false;
-                BtnGuardar.Enabled = false;
-            }
-            else
-            {
-                BtnEliminar.Enabled = true;
-                BtnGuardar.Enabled = true;
-            }
+            BtnEliminar.Enabled = haySeleccion;
+            BtnGuardar.Enabled = haySeleccion;
 
         }
 
@@ -430,42 +479,46 @@ namespace PrimeSystem.UI.Articulos
                 return; // Salir si el usuario no confirma
             }
 
-            // Desactivar el manejador de eventos para evitar que se ejecute durante la actualización.
-            ListBArticulos.SelectionChanged -= ListBArticulos_SelectedIndexChanged;
+
 
             // La tarea ahora llama a un nuevo método para volver a enlazar y suscribir el evento.
-            TareasLargas tarea = new(PanelMedio, ProgressBar, EliminarArticuloStock, RebindGridAndResubscribe);
+            TareasLargas tarea = new(PanelMedio, ProgressBar, EliminarArticuloStock, ()=>
+            {
+                // Limpiar el formulario después de eliminar
+                LimpiarFormulario(); ActualizarDataGridView();
+            });
             tarea.Iniciar();
         }
 
-        private void RebindGridAndResubscribe()
+        private void ActualizarDataGridView()
         {
+            // Forzar la actualización completa del DataGridView
             CargarArticulosDGV();
-            // Volver a suscribir el manejador de eventos.
-            ListBArticulos.SelectionChanged += ListBArticulos_SelectedIndexChanged;
 
-            // Actualizar manualmente el estado de la selección y el formulario.
-            _indiceSeleccionado = ListBArticulos.CurrentRow?.Index ?? -1;
-            CargarDormularioEdicion();
+            // Limpiar selección
+            ListBArticulos.ClearSelection();
+
+            // Actualizar estado de botones
+            //BloquearBtns();
         }
+
 
         private async Task EliminarArticuloStock()
         {
-            
+
             var resultado = await _articuloStockService.Delete(_articuloSeleccionado, _stockSeleccionado);
             if (resultado.IsSuccess)
             {
                 MessageBox.Show("Articulo eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-              
-                
+
+
 
                 // Call the generic method to delete from both lists
                 Util.EliminarDeLista(ListaArticulos, _articuloSeleccionado);
                 Util.EliminarDeLista(ListaStock, _stockSeleccionado);
 
-               
 
 
 
@@ -477,21 +530,29 @@ namespace PrimeSystem.UI.Articulos
 
         }
 
-      
+
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
-            if (sender is Button btn)
+            if (sender is Button btn && btn.Tag is Color color)
             {
-                if (btn.Tag is Color color)
-                {
-                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
-                }
+
+                btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+
             }
         }
         private void ConfigBtns()
         {
             BtnGuardar.Tag = AppColorsBlue.Tertiary;
             BtnEliminar.Tag = AppColorsBlue.Error;
+        }
+
+        private void ListBArticulos_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            // Evitar que se muestre el diálogo de error por defecto
+            e.ThrowException = false;
+
+            // Opcional: registrar el error o mostrar un mensaje personalizado
+            Console.WriteLine($"Error en DataGridView: {e.Exception.Message }");
         }
     }
 }

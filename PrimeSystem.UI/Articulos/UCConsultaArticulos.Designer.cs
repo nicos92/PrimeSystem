@@ -140,6 +140,7 @@
             ListBArticulos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ListBArticulos.Size = new Size(309, 469);
             ListBArticulos.TabIndex = 2;
+            ListBArticulos.DataError += ListBArticulos_DataError;
             ListBArticulos.SelectionChanged += ListBArticulos_SelectedIndexChanged;
             // 
             // Cantidad
