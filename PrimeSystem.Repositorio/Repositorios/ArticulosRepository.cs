@@ -133,14 +133,46 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public Result<Articulos> Update(Articulos articulo)
+        public async Task<Result<int>> GetMaxCodArt()
+        {
+            try
+            {
+                using var conn = Conexion();
+                using var cmd = new OleDbCommand("SELECT MAX(Cod_Articulo) FROM Articulos", conn);
+                await conn.OpenAsync();
+                using var reader = await cmd.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
+                {
+                    int max = Convert.ToInt32(reader.GetString(0));
+                    return Result<int>.Success(max);
+                }
+                return Result<int>.Failure($"No se pude obtener el ultimo codigo de los articulos");
+            }
+            catch (OleDbException ex)
+            {
+
+                return Result<int>.Failure($"Error en la base de datos al obtener  el ultimo codigo de los articulos: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return Result<int>.Failure("Error inesperado al obtener el ultimo codigo de los articulos" + ex.Message);
+            }
+        }
+
+        public async Task<Result<Articulos>> Update(Articulos articulo)
         {
             try
             {
                 using var conn = Conexion();
                 using var cmd = new OleDbCommand("UPDATE articulos set Cod_Articulo=@Cod_Articulo, Art_Desc=@Art_Desc, Cod_Categoria=@Cod_Categoria, Cod_Subcat=@Cod_Sucat, Id_Proveedor = @Id_Proveedor WHERE Id_Articulo = @Id_Articulo", conn);
-                conn.Open();
-                if (cmd.ExecuteNonQuery() > 0)
+                cmd.Parameters.AddWithValue("@Cod_Articulo", articulo.Cod_Articulo);
+                cmd.Parameters.AddWithValue("@Art_Desc", articulo.Art_Desc);
+                cmd.Parameters.AddWithValue("@Cod_Categoria", articulo.Cod_Categoria);
+                cmd.Parameters.AddWithValue("@Cod_Sucat", articulo.Cod_Subcat);
+                cmd.Parameters.AddWithValue("@Id_Proveedor", articulo.Id_Proveedor);
+                cmd.Parameters.AddWithValue("@Id_Articulo", articulo.Id_Articulo);
+                await conn.OpenAsync();
+                if (await cmd.ExecuteNonQueryAsync() > 0)
                 {
                     return Result<Articulos>.Success(articulo);
                 }

@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 namespace PrimeSystem.Repositorio
 {
+    [SupportedOSPlatform("windows")]
     public abstract class BaseRepositorio
     {
         private readonly string cadenaConexion;
 
         protected BaseRepositorio()
         {
-            cadenaConexion = cadenaConexion = ConfigurationManager.ConnectionStrings["msaccess"].ConnectionString;
+            cadenaConexion = ConfigurationManager.ConnectionStrings["msaccess"].ConnectionString;
         }
-        [SupportedOSPlatform("windows")]
+        
         protected OleDbConnection Conexion()
         {
             return new OleDbConnection(cadenaConexion);

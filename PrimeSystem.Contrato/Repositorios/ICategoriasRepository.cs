@@ -6,7 +6,7 @@ namespace PrimeSystem.Contrato.Repositorios
 {
     public interface ICategoriasRepository
     {
-        Result<List<Categorias>> GetAll();
+        Task<Result<List<Categorias>>> GetAll();
         Result<Categorias> GetById(int id);
         Result<Categorias> Add(Categorias categoria);
         Result<Categorias> Update(Categorias categoria);

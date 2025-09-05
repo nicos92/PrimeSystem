@@ -98,7 +98,7 @@ namespace PrimeSystem.UI.Clientes
             TxtCuit.Focus();
         }
 
-     
+
 
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -139,7 +139,6 @@ namespace PrimeSystem.UI.Clientes
                     MessageBox.Show("Proveedor actualizado correctamente.\n" + resultado.Value.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     string valor = _clienteSeleccionado.CUIT;
                     await CargarClientes();
-                    //SeleccionarClientes();
                     Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes");
                     Util.SeleccionarFilaDGV(ListBClientes, valor, ListBClientes.Columns[0].HeaderText, ref indiceSeleccionado);
                     CargarSeleccionado();
@@ -155,7 +154,7 @@ namespace PrimeSystem.UI.Clientes
 
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
-            
+
             ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtCuit, _vTxtEntidad, _vTxtNombre, _vTxtTel, _vTxtEmail);
 
         }
@@ -228,12 +227,11 @@ namespace PrimeSystem.UI.Clientes
 
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
-            if( sender is Button btn)
+            if (sender is Button btn && btn.Tag is Color color)
             {
-                if(btn.Tag is Color color)
-                {
-                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
-                }
+
+                btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+
             }
         }
 

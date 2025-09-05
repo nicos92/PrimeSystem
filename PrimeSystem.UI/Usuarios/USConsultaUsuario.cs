@@ -19,7 +19,7 @@ namespace PrimeSystem.UI.Usuarios
         private readonly IUsuariosTipoService _usuariosTipoService;
 
         private Modelo.Entidades.Usuarios _usuarioSeleccionado;
-        public int indiceSeleccionado;
+        private int indiceSeleccionado;
         private readonly ValidadorTextBox _vTxtDni;
         private readonly ValidadorTextBox _vTxtApellido;
         private readonly ValidadorTextBox _vTxtNombre;
@@ -194,10 +194,8 @@ namespace PrimeSystem.UI.Usuarios
                     CargarAdmin();
                     break;
                 case "compras":
-                    //CargarCompras();
                     break;
                 case "ventas":
-                    //CargarVentas();
                     break;
                 case "visitante":
                     CargarVisitante();
@@ -297,13 +295,9 @@ namespace PrimeSystem.UI.Usuarios
 
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
-            if (sender is Button btn)
-            {
-                if (btn.Tag is Color color)
-                {
-                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
-                }
-            }
+            if (sender is Button btn && btn.Tag is Color color) btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+
+
         }
         private void ConfigBtns()
         {

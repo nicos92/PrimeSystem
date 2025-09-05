@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -16,21 +16,21 @@
             </div>
             <div class="contenedor-titulo">
                 <h1 class="titulo">Ticket de compra</h1>
-                <h2 class="subtitulo">Lunes, 18 de agosto de 2025 a las 13:43hs</h2>
+                <h2 class="subtitulo">{{fecha_hora}}</h2>
             </div>
         </header>
         <hr />
         <section class="contenedor resumen-flex">
             <section class="contenedor contenedor-monto" aria-label="Resumen de monto y motivo">
-                <h3 class="monto"><span>Monto:</span> $ 1.000,00</h3>
-                <h3 class="monto"><span>Motivo:</span> Pago de servicios</h3>
+                <h3 class="monto"><span>Monto:</span> {{monto_total}}</h3>
+                <h3 class="monto"><span>Motivo:</span> {{motivo}}</h3>
             </section>
 <section class="contenedor contenedor-imp">
     <button onclick="window.print()" class="boton-imprimir">Imprimir Ticket</button>
 </section>
             <section class="contenedor contenedor-numero-operacion" aria-label="Número de operación">
                 <h3 class="titulito">Número de operación:</h3>
-                <p class="numero-operacion">123456789</p>
+                <p class="numero-operacion">{{numero_operacion}}</p>
             </section>
         </section>
         <hr />
@@ -48,278 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Producto">Servicio de internet</td>
-                        <td data-label="Cantidad">1</td>
-                        <td data-label="Precio">$500,00</td>
-                        <td data-label="Subtotal">$500,00</td>
-                        <td data-label="IVA">$50,00</td>
-                        <td data-label="Descuento">$0,00</td>
-                        <td data-label="Total">$550,00</td>
-                    </tr>
-
-                    <!-- resto de filas igual, con data-label -->
+                    {{tabla_items}}
                 </tbody>
             </table>
         </section>

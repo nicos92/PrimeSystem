@@ -100,9 +100,9 @@ namespace PrimeSystem.UI.Proveedores
 
         }
 
-       
 
-     
+
+
 
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -131,7 +131,6 @@ namespace PrimeSystem.UI.Proveedores
                     string valor = _proveedorSeleccionado.CUIT;
                     await CargarProveedores();
 
-                    //Util.AjustarAnchoListBox(ListBProveedores);
                     Util.CalcularDGVVacio(ListBProveedores, LblLista, "Proveedores");
                     Util.SeleccionarFilaDGV(ListBProveedores, valor, ListBProveedores.Columns[0].HeaderText, ref indiceSeleccionado);
                     CargarSeleccionado();
@@ -200,10 +199,9 @@ namespace PrimeSystem.UI.Proveedores
             {
                 MessageBox.Show("Proveedor eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //Util.LimpiarForm(TLPForm, TxtCuit);
                 await CargarProveedores();
-                //Util.AjustarAnchoListBox(ListBProveedores);
-                if(Util.CalcularDGVVacio(ListBProveedores, LblLista, "Proveedores")) {
+                if (Util.CalcularDGVVacio(ListBProveedores, LblLista, "Proveedores"))
+                {
                     Util.LimpiarForm(TLPForm, TxtCuit);
                     Util.BloquearBtns(ListBProveedores, TLPForm);
                 }
@@ -230,12 +228,11 @@ namespace PrimeSystem.UI.Proveedores
         }
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
-            if (sender is Button btn)
+            if (sender is Button btn && btn.Tag is Color color)
             {
-                if (btn.Tag is Color color)
-                {
-                    btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
-                }
+
+                btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
+
             }
         }
         private void ConfigBtns()

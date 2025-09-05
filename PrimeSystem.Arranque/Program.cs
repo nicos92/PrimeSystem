@@ -4,6 +4,7 @@ using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Repositorio.Repositorios;
 using PrimeSystem.Servicio.Implementaciones;
 using PrimeSystem.UI;
+using PrimeSystem.UI.Articulos;
 using PrimeSystem.UI.Clientes;
 using PrimeSystem.UI.Compras;
 using PrimeSystem.UI.EstadoContable;
@@ -43,6 +44,10 @@ static class Program
 
         services.AddTransient<FormPrincipal>();     // Este Form estaría en PrimeSystem.UI
 
+        services.AddTransient<FormArticulos>();     // Este Form estatñia en PrimeSystem.UI
+        services.AddTransient<UCIngresoArticulos>();    // Este UC se encuentra en PrimeSystem.UI
+        services.AddTransient<UCConsultaArticulos>();   // este UC se encuentra en PrimeSystem.UI
+
         services.AddTransient<FormVentas>();        // Este Form estaría en PrimeSystem.UI.Ventas
 
         services.AddTransient<FormCompras>();       // Este Form estaría en PrimeSystem.UI.Compras
@@ -62,6 +67,8 @@ static class Program
         services.AddTransient<FormEstadoContable>(); // Este Form estaría en PrimeSystem.UI.EstadoContable
 
         // Registrar servicios (ejemplo)
+        services.AddScoped<IArticuloStockRepository, ArticuloStockRepository>();
+        services.AddScoped<IArticuloStockService, ArticuloStockService>();
 
         services.AddScoped<IArticulosRepository, ArticulosRepository>();
         services.AddScoped<IArticulosService, ArticulosService>();

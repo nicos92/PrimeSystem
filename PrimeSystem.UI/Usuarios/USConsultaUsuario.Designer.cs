@@ -345,7 +345,7 @@ namespace PrimeSystem.UI.Usuarios
             CMBTipoUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CMBTipoUsuario.ForeColor = Color.FromArgb(26, 28, 30);
             CMBTipoUsuario.FormattingEnabled = true;
-            CMBTipoUsuario.Location = new Point(108, 322);
+            CMBTipoUsuario.Location = new Point(108, 327);
             CMBTipoUsuario.Name = "CMBTipoUsuario";
             CMBTipoUsuario.Size = new Size(294, 29);
             CMBTipoUsuario.TabIndex = 10;

@@ -151,6 +151,39 @@ namespace PrimeSystem.Repositorio.Repositorios
                 return Result<bool>.Failure("Error inesperado al eliminar la subcategoría: " + ex.Message);
             }
         }
+
+        public async Task<Result<List<Subcategoria>>> GetAllxCategoria(int idcategoria)
+        {
+            try
+            {
+                using OleDbConnection conn = Conexion();
+                using OleDbCommand cmd = new OleDbCommand("SELECT Id_Subcategoria, Sub_categoria, Id_Categoria FROM Subcategoria WHERE Id_Categoria = @Id_Categoria", conn);
+                cmd.Parameters.AddWithValue("@Id_Categoria", idcategoria);
+                await conn.OpenAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
+                List<Subcategoria> subcategorias = new List<Subcategoria>();
+                while (await reader.ReadAsync())
+                {
+                    Subcategoria subcategoria = new Subcategoria
+                    {
+                        Id_Subcategoria = reader.GetInt32(0),
+                        Sub_categoria = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Id_Categoria = reader.GetInt32(2)
+                    };
+                    subcategorias.Add(subcategoria);
+                }
+                return Result<List<Subcategoria>>.Success(subcategorias);
+            }
+            catch (OleDbException ex)
+            {
+                // Handle database exceptions and return an appropriate Result
+                return Result<List<Subcategoria>>.Failure("Error en la base de datos al obtener las subcategorías: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Subcategoria>>.Failure("Error al obtener las subcategorías: " + ex.Message);
+            }
+        }
     }
     
 }
