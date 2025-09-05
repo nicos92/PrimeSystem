@@ -65,9 +65,46 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public Task<Result<bool>> Delete(Articulos articulo, Stock stock)
+        public async Task<Result<bool>> Delete(Articulos articulo, Stock stock)
         {
-            throw new NotImplementedException();
+            OleDbTransaction? transaction = null;
+            try
+            {
+                OleDbConnection conn = Conexion();
+                await conn.OpenAsync();
+
+                transaction = conn.BeginTransaction();
+
+                // Eliminar Stock
+                string sqlStock = "DELETE FROM Stock WHERE Cod_Articulo = ?";
+                using (OleDbCommand cmdStock = new OleDbCommand(sqlStock, conn, transaction))
+                {
+                    cmdStock.Parameters.AddWithValue("?", stock.Cod_Articulo);
+                    await cmdStock.ExecuteNonQueryAsync();
+                }
+
+                // Eliminar Articulos
+                string sqlArticulos = "DELETE FROM Articulos WHERE Cod_Articulo = ?";
+                using (OleDbCommand cmdArticulos = new OleDbCommand(sqlArticulos, conn, transaction))
+                {
+                    cmdArticulos.Parameters.AddWithValue("?", articulo.Cod_Articulo);
+                    await cmdArticulos.ExecuteNonQueryAsync();
+                }
+
+                transaction.Commit();
+                return Result<bool>.Success(true);
+            }
+            catch (OleDbException ex)
+            {
+                transaction?.Rollback();
+                return Result<bool>.Failure($"Error OleDb al eliminar los articulos y los stocks: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                transaction?.Rollback();
+                return Result<bool>.Failure($"Error inesperado al eliminar los articulos y los stocks: {ex.Message}");
+            }
+
         }
 
         public async Task<Result<(List<Articulos> articulos, List<Stock> stock)>> GetAll()
@@ -133,9 +170,53 @@ namespace PrimeSystem.Repositorio.Repositorios
             return Result<(List<Articulos> articulos, List<Stock> stock)>.Success((listaArticulos, listaStock));
         }
 
-        public Task<Result<bool>> Update(Articulos articulos, Stock stock)
+        public async Task<Result<bool>> Update(Articulos articulos, Stock stock)
         {
-            throw new NotImplementedException();
+            OleDbTransaction? transaction = null;
+            try
+            {
+                OleDbConnection conn = Conexion();
+                await conn.OpenAsync();
+
+                transaction = conn.BeginTransaction();
+
+                // Actualizar Articulos
+                string sqlArticulos = "UPDATE Articulos SET Art_Desc = ?, Cod_Categoria = ?, Cod_Subcat = ?, Id_Proveedor = ? WHERE Cod_Articulo = ?";
+                using (OleDbCommand cmdArticulos = new OleDbCommand(sqlArticulos, conn, transaction))
+                {
+                    cmdArticulos.Parameters.AddWithValue("?", articulos.Art_Desc);
+                    cmdArticulos.Parameters.AddWithValue("?", articulos.Cod_Categoria);
+                    cmdArticulos.Parameters.AddWithValue("?", articulos.Cod_Subcat);
+                    cmdArticulos.Parameters.AddWithValue("?", articulos.Id_Proveedor);
+                    cmdArticulos.Parameters.AddWithValue("?", articulos.Cod_Articulo);
+                    await cmdArticulos.ExecuteNonQueryAsync();
+                }
+
+                // Actualizar Stock
+                string sqlStock = "UPDATE Stock SET Cantidad = ?, Costo = ?, Ganancia = ? WHERE Cod_Articulo = ?";
+                using (OleDbCommand cmdStock = new OleDbCommand(sqlStock, conn, transaction))
+                {
+                    cmdStock.Parameters.AddWithValue("?", stock.Cantidad);
+                    cmdStock.Parameters.AddWithValue("?", stock.Costo);
+                    cmdStock.Parameters.AddWithValue("?", stock.Ganancia);
+                    cmdStock.Parameters.AddWithValue("?", stock.Cod_Articulo);
+                    await cmdStock.ExecuteNonQueryAsync();
+                }
+
+                transaction.Commit();
+                return Result<bool>.Success(true);
+            }
+            catch (OleDbException ex)
+            {
+                transaction?.Rollback();
+                return Result<bool>.Failure($"Error OleDb al actualizar los articulos y los stocks: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                transaction?.Rollback();
+                return Result<bool>.Failure($"Error inesperado al actualizar los articulos y los stocks: {ex.Message}");
+            }
+
         }
     }
 }

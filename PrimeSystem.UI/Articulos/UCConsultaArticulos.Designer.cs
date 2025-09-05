@@ -185,7 +185,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = AnchorStyles.None;
+            groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(TLPForm);
             groupBox1.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
@@ -289,6 +289,7 @@
             BtnEliminar.TabIndex = 12;
             BtnEliminar.UseVisualStyleBackColor = false;
             BtnEliminar.EnabledChanged += BtnGuardar_EnabledChanged;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // label3
             // 

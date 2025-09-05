@@ -21,7 +21,7 @@ namespace PrimeSystem.UI.Articulos
         private ISubcategoriaService _subcategoriasService;
         private IProveedoresService _proveedoresService;
         private IStockService _stockService;
-
+        private IArticuloStockService _articuloStockService;
         private Modelo.Entidades.Articulos _articuloSeleccionado;
         private Modelo.Entidades.Stock _stockSeleccionado;
 
@@ -42,13 +42,14 @@ namespace PrimeSystem.UI.Articulos
         private List<Modelo.Entidades.Stock> ListaStock;
 
         private int _indiceSeleccionado;
-        public UCConsultaArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService)
+        public UCConsultaArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IStockService stockService, IArticuloStockService articuloStockService)
         {
             _articulosService = articulosService;
             _categoriasService = categoriasService;
             _subcategoriasService = subcategoriaService;
             _proveedoresService = proveedoresService;
             _stockService = stockService;
+            _articuloStockService = articuloStockService;
             _articuloSeleccionado = new Modelo.Entidades.Articulos();
 
             ListaCategorias = new List<Modelo.Entidades.Categorias>();
@@ -84,6 +85,7 @@ namespace PrimeSystem.UI.Articulos
             {
                 MensajeError = "Número ingresado no valido"
             };
+            _articuloStockService = articuloStockService;
         }
 
 
@@ -161,9 +163,9 @@ namespace PrimeSystem.UI.Articulos
             await Task.WhenAll(
 
                 CargarArticulos(),
+                CargarStocks(),
                 CargarCategorias(),
-                CargarProveedores(),
-                CargarStocks()
+                CargarProveedores()
              );
         }
 
@@ -174,6 +176,7 @@ namespace PrimeSystem.UI.Articulos
 
             if (datos.IsSuccess)
             {
+                ListaStock.Clear();
                 ListaStock = datos.Value;
 
 
@@ -191,6 +194,7 @@ namespace PrimeSystem.UI.Articulos
 
             if (datos.IsSuccess)
             {
+                ListaArticulos.Clear();
                 ListaArticulos = datos.Value;
 
 
@@ -251,8 +255,7 @@ namespace PrimeSystem.UI.Articulos
 
             if (datos.IsSuccess)
             {
-                List<Subcategoria> subcategorias = datos.Value;
-                CMBSubcategoria.DataSource = subcategorias;
+                CMBSubcategoria.DataSource = datos.Value;
                 CMBSubcategoria.DisplayMember = "Sub_categoria";
                 CMBSubcategoria.ValueMember = "Id_Subcategoria";
 
@@ -270,6 +273,7 @@ namespace PrimeSystem.UI.Articulos
 
             if (datos.IsSuccess)
             {
+                ListaCategorias.Clear();
                 ListaCategorias = datos.Value;
 
             }
@@ -296,27 +300,21 @@ namespace PrimeSystem.UI.Articulos
         public async Task GuardarArticuloStock()
         {
             /* TODO: 
-             * 
-             * 
-             * Guardar el articulo.
-             * Guardar el stock
+             * actualizar con el servicio de iarticulostock
              */
 
 
 
+            var actualizacionResult = await _articuloStockService.Update(_articuloSeleccionado, _stockSeleccionado);
 
-
-            var resultIngreso = await _articulosService.Update(_articuloSeleccionado);
-
-            if (resultIngreso.IsSuccess)
+            if (actualizacionResult.IsSuccess)
             {
-                _stockSeleccionado.Cod_Articulo = _articuloSeleccionado.Cod_Articulo;
-                var resultStock = _stockService.Update(_stockSeleccionado);
-                if (resultStock.IsSuccess)
-                {
-                    MessageBox.Show("Modificación de Articulo correcto", "Modificación Articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
+                MessageBox.Show("Actualización correcta", "Artículo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await CargaInicial(); // Recargar los datos después de la actualización
+            }
+            else
+            {
+                MessageBox.Show(actualizacionResult.Error, "Error en la actualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -327,7 +325,7 @@ namespace PrimeSystem.UI.Articulos
 
         private void ListBArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO: reasignar los textbox al objeto correspondiente
+            
 
             _indiceSeleccionado = ListBArticulos.CurrentRow?.Index ?? -1; // Obtener el índice de la fila seleccionada o -1 si no hay selección
             CargarDormularioEdicion();
@@ -342,14 +340,14 @@ namespace PrimeSystem.UI.Articulos
             if (ListBArticulos.Rows[_indiceSeleccionado].DataBoundItem is Modelo.Entidades.Articulos articulo)
             {
                 _articuloSeleccionado = articulo;
-                string? codigo =_articuloSeleccionado.Cod_Articulo;
+                string? codigo = _articuloSeleccionado.Cod_Articulo;
 
 
                 foreach (var item in ListaStock)
                 {
-                    Console.WriteLine(  "iem: " + item);
+                    Console.WriteLine("iem: " + item);
                 }
-               _stockSeleccionado = ListaStock.First(s => s.Cod_Articulo == codigo);
+                _stockSeleccionado = ListaStock.First(s => s.Cod_Articulo == codigo);
                 TxtDescripcion.Text = _articuloSeleccionado.Art_Desc ?? string.Empty;
                 TxtCantidad.Text = _stockSeleccionado.Cantidad.ToString();
                 TxtCosto.Text = _stockSeleccionado.Costo.ToString();
@@ -357,7 +355,7 @@ namespace PrimeSystem.UI.Articulos
 
                 CMBCategoria.SelectedValue = _articuloSeleccionado.Cod_Categoria;
                 CMBProveedor.SelectedValue = _articuloSeleccionado.Id_Proveedor;
-                CMBSubcategoria.SelectedValue= _articuloSeleccionado.Cod_Subcat;
+                CMBSubcategoria.SelectedValue = _articuloSeleccionado.Cod_Subcat;
             }
             else
             {
@@ -385,33 +383,38 @@ namespace PrimeSystem.UI.Articulos
 
         }
 
-        private async void BtnEliminar_Click(object sender, EventArgs e)
+        private void BtnEliminar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este proveedor?", "Confirmación de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes)
             {
                 return; // Salir si el usuario no confirma
             }
-            CrearArticulo();
-            await EliminarProveedor();
+            if (!CrearArticulo())
+            {
+                MessageBox.Show("Articulo no creado", "articulo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            CrearStock();
+
+            TareasLargas tarea = new TareasLargas(PanelMedio, ProgressBar, EliminarArticuloStock, () => { });
+            tarea.Iniciar();
         }
 
-        private async Task EliminarProveedor()
+        private async Task EliminarArticuloStock()
         {
 
-            var resultado = _articulosService.Delete(_articuloSeleccionado.Id_Articulo);
+            var resultado = await _articuloStockService.Delete(_articuloSeleccionado, _stockSeleccionado);
             if (resultado.IsSuccess)
             {
-                MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Util.LimpiarForm(TLPForm, TxtDescripcion);
-
-                await CargarArticulos();
+                MessageBox.Show("Articulo eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await CargaInicial(); // Recargar los datos después de la eliminación
 
 
             }
             else
             {
-                MessageBox.Show(resultado.Error, "Error al eliminar Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resultado.Error, "Error al eliminar Articulo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
