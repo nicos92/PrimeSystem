@@ -266,7 +266,7 @@
             BtnGuardar.Margin = new Padding(0);
             BtnGuardar.Name = "BtnGuardar";
             BtnGuardar.Size = new Size(157, 48);
-            BtnGuardar.TabIndex = 11;
+            BtnGuardar.TabIndex = 12;
             BtnGuardar.Text = "Guardar";
             BtnGuardar.TextAlign = ContentAlignment.MiddleRight;
             BtnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -287,7 +287,7 @@
             BtnEliminar.Margin = new Padding(0);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(48, 48);
-            BtnEliminar.TabIndex = 12;
+            BtnEliminar.TabIndex = 13;
             BtnEliminar.UseVisualStyleBackColor = false;
             BtnEliminar.EnabledChanged += BtnGuardar_EnabledChanged;
             BtnEliminar.Click += BtnEliminar_Click;
@@ -430,7 +430,7 @@
             CMBProveedor.Location = new Point(113, 191);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(315, 29);
-            CMBProveedor.TabIndex = 13;
+            CMBProveedor.TabIndex = 9;
             // 
             // CMBSubcategoria
             // 
@@ -441,7 +441,7 @@
             CMBSubcategoria.Location = new Point(113, 279);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(315, 29);
-            CMBSubcategoria.TabIndex = 15;
+            CMBSubcategoria.TabIndex = 11;
             // 
             // CMBCategoria
             // 
@@ -452,7 +452,7 @@
             CMBCategoria.Location = new Point(113, 235);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(315, 29);
-            CMBCategoria.TabIndex = 16;
+            CMBCategoria.TabIndex = 10;
             CMBCategoria.SelectedIndexChanged += CMBCategoria_SelectedIndexChanged;
             // 
             // ProgressBar

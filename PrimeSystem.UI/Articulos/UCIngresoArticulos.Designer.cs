@@ -242,7 +242,7 @@
             BtnIngresar.Margin = new Padding(0);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(192, 48);
-            BtnIngresar.TabIndex = 14;
+            BtnIngresar.TabIndex = 12;
             BtnIngresar.Text = "INGRESAR";
             BtnIngresar.TextImageRelation = TextImageRelation.TextBeforeImage;
             BtnIngresar.UseVisualStyleBackColor = false;
@@ -257,7 +257,7 @@
             CMBProveedor.Location = new Point(113, 191);
             CMBProveedor.Name = "CMBProveedor";
             CMBProveedor.Size = new Size(418, 29);
-            CMBProveedor.TabIndex = 13;
+            CMBProveedor.TabIndex = 9;
             // 
             // CMBSubcategoria
             // 
@@ -268,7 +268,7 @@
             CMBSubcategoria.Location = new Point(113, 279);
             CMBSubcategoria.Name = "CMBSubcategoria";
             CMBSubcategoria.Size = new Size(418, 29);
-            CMBSubcategoria.TabIndex = 15;
+            CMBSubcategoria.TabIndex = 11;
             // 
             // CMBCategoria
             // 
@@ -279,7 +279,7 @@
             CMBCategoria.Location = new Point(113, 235);
             CMBCategoria.Name = "CMBCategoria";
             CMBCategoria.Size = new Size(418, 29);
-            CMBCategoria.TabIndex = 16;
+            CMBCategoria.TabIndex = 10;
             CMBCategoria.SelectedIndexChanged += CMBCategoria_SelectedIndexChanged;
             // 
             // label6
