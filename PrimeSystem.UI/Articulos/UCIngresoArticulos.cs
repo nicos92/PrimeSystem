@@ -203,6 +203,7 @@ namespace PrimeSystem.UI.Articulos
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
+            // TODO: consultar si se pueden ingresar articulos sin proveedor
             if (!CrearArticulo())
             {
                 MessageBox.Show("Artículo no creado", "Artículo", MessageBoxButtons.OK, MessageBoxIcon.Information);

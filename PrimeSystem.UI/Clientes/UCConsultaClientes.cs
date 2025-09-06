@@ -139,7 +139,6 @@ namespace PrimeSystem.UI.Clientes
                     MessageBox.Show("Proveedor actualizado correctamente.\n" + resultado.Value.ToString(), "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     string valor = _clienteSeleccionado.CUIT;
                     await CargarClientes();
-                    Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes");
                     Util.SeleccionarFilaDGV(ListBClientes, valor, ListBClientes.Columns[0].HeaderText, ref indiceSeleccionado);
                     CargarSeleccionado();
 

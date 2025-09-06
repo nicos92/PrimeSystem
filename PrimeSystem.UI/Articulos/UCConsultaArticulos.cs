@@ -180,6 +180,12 @@ namespace PrimeSystem.UI.Articulos
                 {
                     LimpiarFormulario();
                     ActualizarDataGridView();
+                    if (Util.CalcularDGVVacio(ListBArticulos, LblLista, "Articulos"))
+                    {
+                        Util.LimpiarForm(TLPForm, TxtDescripcion);
+                        Util.BloquearBtns(ListBArticulos, TLPForm);
+
+                    }
                 });
             tarea.Iniciar();
         }
@@ -269,6 +275,12 @@ namespace PrimeSystem.UI.Articulos
             CMBCategoria.ValueMember = "Id_Categoria";
 
             CargarArticulosDataGridView();
+            if (Util.CalcularDGVVacio(ListBArticulos, LblLista, "Articulos"))
+            {
+                Util.LimpiarForm(TLPForm, TxtDescripcion);
+                Util.BloquearBtns(ListBArticulos, TLPForm);
+
+            }
         }
 
         private async Task CargarArticulos()
