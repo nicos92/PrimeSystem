@@ -113,6 +113,9 @@ namespace PrimeSystem.UI.Articulos
 
        
 
+        /// <summary>
+        /// Configura las propiedades iniciales de los botones en el formulario.
+        /// </summary>
         private void ConfigurarBotones()
         {
             BtnGuardar.Tag = AppColorsBlue.Tertiary;
@@ -123,6 +126,11 @@ namespace PrimeSystem.UI.Articulos
 
         #region Eventos de UI
 
+        /// <summary>
+        /// Maneja el evento de carga del control de usuario. Inicia la carga de datos iniciales.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void UCConsultaArticulos_Load(object sender, EventArgs e)
         {
             var taskHelper = new TareasLargas(
@@ -133,6 +141,11 @@ namespace PrimeSystem.UI.Articulos
             taskHelper.Iniciar();
         }
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón Guardar. Valida el formulario y guarda los datos del artículo y stock.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             if (!ValidarFormulario())
@@ -160,6 +173,11 @@ namespace PrimeSystem.UI.Articulos
             tarea.Iniciar();
         }
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón Eliminar. Elimina el artículo y stock seleccionados.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
             if (!ValidarSeleccionParaEliminar())
@@ -190,6 +208,11 @@ namespace PrimeSystem.UI.Articulos
             tarea.Iniciar();
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de selección en la lista de artículos. Carga los datos del artículo seleccionado en el formulario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void ListBArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!HaySeleccionValida())
@@ -210,6 +233,11 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de texto en el cuadro de texto de descripción. Valida el formulario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void TxtDescripcion_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple(
@@ -220,6 +248,11 @@ namespace PrimeSystem.UI.Articulos
                 _validadorGanancia);
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de selección en el ComboBox de categorías. Carga las subcategorías correspondientes.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private async void CMBCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CMBCategoria.SelectedItem is Categorias categoria)
@@ -228,6 +261,11 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Maneja los errores de datos en el DataGridView.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void ListBArticulos_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.ThrowException = false;
@@ -242,6 +280,11 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de estado de habilitación del botón Guardar. Cambia el color de fondo del botón.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn && btn.Tag is Color color)
@@ -254,6 +297,9 @@ namespace PrimeSystem.UI.Articulos
 
         #region Métodos de Carga de Datos
 
+        /// <summary>
+        /// Realiza la carga inicial de datos de forma asíncrona.
+        /// </summary>
         private async Task CargaInicial()
         {
             await Task.WhenAll(
@@ -264,6 +310,9 @@ namespace PrimeSystem.UI.Articulos
             );
         }
 
+        /// <summary>
+        /// Carga los ComboBoxes y el DataGridView con los datos iniciales.
+        /// </summary>
         private void CargarCombosYDataGrid()
         {
             CMBProveedor.DataSource = _listaProveedores ?? [];
@@ -283,6 +332,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Carga la lista de artículos desde el servicio de forma asíncrona.
+        /// </summary>
         private async Task CargarArticulos()
         {
             var resultado = await _articulosService.GetAll();
@@ -297,6 +349,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Carga la lista de stocks desde el servicio de forma asíncrona.
+        /// </summary>
         private async Task CargarStocks()
         {
             var resultado = await _stockService.GetAll();
@@ -311,6 +366,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Carga la lista de categorías desde el servicio de forma asíncrona.
+        /// </summary>
         private async Task CargarCategorias()
         {
             var resultado = await _categoriasService.GetAll();
@@ -325,6 +383,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Carga la lista de proveedores desde el servicio de forma asíncrona.
+        /// </summary>
         private async Task CargarProveedores()
         {
             var resultado = await _proveedoresService.GetAll();
@@ -339,6 +400,10 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Carga las subcategorías de una categoría específica de forma asíncrona.
+        /// </summary>
+        /// <param name="idCategoria">El ID de la categoría.</param>
         private async Task CargarSubCategorias(int idCategoria)
         {
             var resultado = await _subcategoriasService.GetAllxCategoria(idCategoria);
@@ -359,6 +424,10 @@ namespace PrimeSystem.UI.Articulos
 
         #region Métodos de Formulario y Validación
 
+        /// <summary>
+        /// Valida los campos del formulario.
+        /// </summary>
+        /// <returns>True si el formulario es válido, de lo contrario False.</returns>
         private bool ValidarFormulario()
         {
             return _validadorDescripcion.Validar() &&
@@ -367,11 +436,19 @@ namespace PrimeSystem.UI.Articulos
                    _validadorGanancia.Validar();
         }
 
+        /// <summary>
+        /// Valida si hay un artículo seleccionado para eliminar.
+        /// </summary>
+        /// <returns>True si hay un artículo seleccionado, de lo contrario False.</returns>
         private bool ValidarSeleccionParaEliminar()
         {
             return _articuloSeleccionado != null && _articuloSeleccionado.Id_Articulo != 0;
         }
 
+        /// <summary>
+        /// Muestra un cuadro de diálogo de confirmación de eliminación.
+        /// </summary>
+        /// <returns>True si el usuario confirma la eliminación, de lo contrario False.</returns>
         private static bool ConfirmarEliminacion()
         {
             var resultado = MessageBox.Show(
@@ -383,6 +460,10 @@ namespace PrimeSystem.UI.Articulos
             return resultado == DialogResult.Yes;
         }
 
+        /// <summary>
+        /// Crea o actualiza un objeto de artículo a partir de los datos del formulario.
+        /// </summary>
+        /// <returns>True si el objeto se creó o actualizó correctamente, de lo contrario False.</returns>
         private bool CrearArticuloDesdeFormulario()
         {
             if (CMBProveedor.SelectedItem is not Modelo.Entidades.Proveedores proveedor)
@@ -411,6 +492,10 @@ namespace PrimeSystem.UI.Articulos
             return true;
         }
 
+        /// <summary>
+        /// Crea o actualiza un objeto de stock a partir de los datos del formulario.
+        /// </summary>
+        /// <returns>True si el objeto se creó o actualizó correctamente, de lo contrario False.</returns>
         private bool CrearStockDesdeFormulario()
         {
             if (string.IsNullOrEmpty(TxtCantidad.Text) ||
@@ -428,6 +513,9 @@ namespace PrimeSystem.UI.Articulos
             return true;
         }
 
+        /// <summary>
+        /// Carga los datos del artículo seleccionado en el formulario para su edición.
+        /// </summary>
         private void CargarFormularioEdicion()
         {
             if (!HaySeleccionValida() ||
@@ -463,6 +551,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Carga los ComboBoxes con los valores seleccionados del artículo.
+        /// </summary>
         private void CargarCombosSeleccion()
         {
             if (CMBCategoria.Items.Count > 0)
@@ -475,6 +566,9 @@ namespace PrimeSystem.UI.Articulos
                 CMBSubcategoria.SelectedValue = _articuloSeleccionado.Cod_Subcat;
         }
 
+        /// <summary>
+        /// Limpia los campos del formulario y restablece los objetos de artículo y stock seleccionados.
+        /// </summary>
         private void LimpiarFormulario()
         {
             TxtDescripcion.Clear();
@@ -486,6 +580,10 @@ namespace PrimeSystem.UI.Articulos
             _stockSeleccionado = new Stock();
         }
 
+        /// <summary>
+        /// Verifica si hay una selección válida en la lista de artículos.
+        /// </summary>
+        /// <returns>True si hay una selección válida, de lo contrario False.</returns>
         private bool HaySeleccionValida()
         {
             return ListBArticulos.Rows.Count > 0 && ListBArticulos.SelectedRows.Count > 0;
@@ -495,6 +593,9 @@ namespace PrimeSystem.UI.Articulos
 
         #region Métodos de Operaciones de Datos
 
+        /// <summary>
+        /// Guarda los cambios en el artículo y el stock de forma asíncrona.
+        /// </summary>
         private async Task GuardarArticuloStock()
         {
             var resultado = await _articuloStockService.Update(_articuloSeleccionado, _stockSeleccionado);
@@ -509,6 +610,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Elimina el artículo y el stock seleccionados de forma asíncrona.
+        /// </summary>
         private async Task EliminarArticuloStock()
         {
             var resultado = await _articuloStockService.Delete(_articuloSeleccionado, _stockSeleccionado);
@@ -524,6 +628,9 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Actualiza las listas de artículos y stock.
+        /// </summary>
         private void ActualizarListas()
         {
             Util.ActualizarEnLista(_listaArticulos, _articuloSeleccionado);
@@ -531,6 +638,9 @@ namespace PrimeSystem.UI.Articulos
             CargarArticulosDataGridView();
         }
 
+        /// <summary>
+        /// Elimina el artículo y el stock seleccionados de las listas.
+        /// </summary>
         private void EliminarDeListas()
         {
             Util.EliminarDeLista(_listaArticulos, _articuloSeleccionado);
@@ -541,6 +651,9 @@ namespace PrimeSystem.UI.Articulos
 
         #region Métodos de UI Helpers
 
+        /// <summary>
+        /// Carga los datos de los artículos en el DataGridView.
+        /// </summary>
         private void CargarArticulosDataGridView()
         {
             try
@@ -567,12 +680,21 @@ namespace PrimeSystem.UI.Articulos
             }
         }
 
+        /// <summary>
+        /// Actualiza el DataGridView y borra la selección.
+        /// </summary>
         private void ActualizarDataGridView()
         {
             CargarArticulosDataGridView();
             ListBArticulos.ClearSelection();
         }
 
+        /// <summary>
+        /// Muestra un cuadro de mensaje.
+        /// </summary>
+        /// <param name="mensaje">El mensaje a mostrar.</param>
+        /// <param name="titulo">El título del cuadro de mensaje.</param>
+        /// <param name="icono">El icono a mostrar en el cuadro de mensaje.</param>
         private static void MostrarMensaje(string mensaje, string titulo, MessageBoxIcon icono)
         {
             MessageBox.Show(mensaje, titulo, MessageBoxButtons.OK, icono);

@@ -1,4 +1,4 @@
-﻿using PrimeSystem.Contrato.Servicios;
+using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Utilidades;
 using PrimeSystem.Utilidades.Validaciones;
 using System;
@@ -31,6 +31,11 @@ namespace PrimeSystem.UI.Clientes
         private readonly ErrorProvider _epNombre;
         private readonly ErrorProvider _epTel;
         private readonly ErrorProvider _epEmail;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UCConsultaClientes"/>.
+        /// </summary>
+        /// <param name="clientesService">El servicio de clientes.</param>
         public UCConsultaClientes(IClientesService clientesService)
         {
             _clienteService = clientesService;
@@ -69,6 +74,25 @@ namespace PrimeSystem.UI.Clientes
             };
         }
 
+        /// <summary>
+        /// Maneja el evento Load del control UCConsultaClientes.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
+        private async void UCConsultaClientes_Load(object sender, EventArgs e)
+        {
+            await CargarClientes();
+            ConfigBtns();
+            Util.BloquearBtns(ListBClientes, TLPForm);
+
+
+            Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes");
+            TxtCuit.Focus();
+        }
+
+        /// <summary>
+        /// Carga los clientes.
+        /// </summary>
         private async Task CargarClientes()
         {
             var datos = await _clienteService.GetAll();
@@ -87,19 +111,11 @@ namespace PrimeSystem.UI.Clientes
 
         }
 
-        private async void UCConsultaClientes_Load(object sender, EventArgs e)
-        {
-            await CargarClientes();
-            ConfigBtns();
-            Util.BloquearBtns(ListBClientes, TLPForm);
-
-
-            Util.CalcularDGVVacio(ListBClientes, LblLista, "Clientes");
-            TxtCuit.Focus();
-        }
-
-
-
+        /// <summary>
+        /// Maneja el evento Click del control BtnGuardar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea guardar los cambios?", "Confirmación de guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -111,6 +127,9 @@ namespace PrimeSystem.UI.Clientes
             await GuardarCliente();
         }
 
+        /// <summary>
+        /// Crea el cliente.
+        /// </summary>
         private void CrearCliente()
         {
 
@@ -125,6 +144,9 @@ namespace PrimeSystem.UI.Clientes
 
 
 
+        /// <summary>
+        /// Guarda el cliente.
+        /// </summary>
         private async Task GuardarCliente()
         {
             if (_clienteSeleccionado != null && !string.IsNullOrEmpty(_clienteSeleccionado.CUIT))
@@ -151,6 +173,11 @@ namespace PrimeSystem.UI.Clientes
             }
         }
 
+        /// <summary>
+        /// Maneja el evento TextChanged del control TxtCuit.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
 
@@ -160,6 +187,9 @@ namespace PrimeSystem.UI.Clientes
 
 
 
+        /// <summary>
+        /// Carga el cliente seleccionado.
+        /// </summary>
         private void CargarSeleccionado()
         {
             if (ListBClientes.Rows[indiceSeleccionado].DataBoundItem is Modelo.Entidades.Clientes cliente)
@@ -181,6 +211,11 @@ namespace PrimeSystem.UI.Clientes
             }
         }
 
+        /// <summary>
+        /// Maneja el evento Click del control BtnEliminar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private async void BtnEliminar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este cliente?", "Confirmación de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -192,6 +227,9 @@ namespace PrimeSystem.UI.Clientes
             await EliminarCliente();
         }
 
+        /// <summary>
+        /// Elimina el cliente.
+        /// </summary>
         private async Task EliminarCliente()
         {
 
@@ -218,12 +256,22 @@ namespace PrimeSystem.UI.Clientes
 
 
 
+        /// <summary>
+        /// Maneja el evento SelectionChanged del control ListBClientes.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void ListBClientes_SelectionChanged(object sender, EventArgs e)
         {
             indiceSeleccionado = ListBClientes.CurrentRow?.Index ?? -1;
             CargarSeleccionado();
         }
 
+        /// <summary>
+        /// Maneja el evento EnabledChanged del control BtnGuardar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn && btn.Tag is Color color)
@@ -234,6 +282,9 @@ namespace PrimeSystem.UI.Clientes
             }
         }
 
+        /// <summary>
+        /// Configura los botones.
+        /// </summary>
         private void ConfigBtns()
         {
             BtnGuardar.Tag = AppColorsBlue.Tertiary;

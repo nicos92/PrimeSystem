@@ -32,6 +32,10 @@ namespace PrimeSystem.UI.Proveedores
         private readonly ErrorProvider _epNombre;
         private readonly ErrorProvider _epTel;
         private readonly ErrorProvider _epEmail;
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UCConsultaProveedor"/>.
+        /// </summary>
+        /// <param name="proveedoresService">El servicio de proveedores.</param>
         public UCConsultaProveedor(IProveedoresService proveedoresService)
         {
             _proveedoresService = proveedoresService;
@@ -71,6 +75,11 @@ namespace PrimeSystem.UI.Proveedores
 
 
 
+        /// <summary>
+        /// Maneja el evento de carga del control de usuario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private async void UCConsultaProveedor_Load(object sender, EventArgs e)
         {
             await CargarProveedores();
@@ -83,6 +92,9 @@ namespace PrimeSystem.UI.Proveedores
 
         }
 
+        /// <summary>
+        /// Carga la lista de proveedores en el DataGridView.
+        /// </summary>
         private async Task CargarProveedores()
         {
             var datos = await _proveedoresService.GetAll();
@@ -104,6 +116,11 @@ namespace PrimeSystem.UI.Proveedores
 
 
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón Guardar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea guardar los cambios?", "Confirmación de guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -116,6 +133,9 @@ namespace PrimeSystem.UI.Proveedores
 
         }
 
+        /// <summary>
+        /// Guarda los cambios del proveedor seleccionado.
+        /// </summary>
         private async Task GuardarProveedor()
         {
             if (_proveedorSeleccionado != null && !string.IsNullOrEmpty(_proveedorSeleccionado.CUIT))
@@ -145,6 +165,9 @@ namespace PrimeSystem.UI.Proveedores
             }
         }
 
+        /// <summary>
+        /// Carga los datos del proveedor seleccionado en los controles del formulario.
+        /// </summary>
         private void CargarSeleccionado()
         {
             if (ListBProveedores.Rows[indiceSeleccionado].DataBoundItem is Modelo.Entidades.Proveedores proveedor)
@@ -166,6 +189,9 @@ namespace PrimeSystem.UI.Proveedores
             }
         }
 
+        /// <summary>
+        /// Crea un objeto de proveedor a partir de los datos del formulario.
+        /// </summary>
         private void CrearProveedor()
         {
 
@@ -180,6 +206,11 @@ namespace PrimeSystem.UI.Proveedores
 
 
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón Eliminar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private async void BtnEliminar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este proveedor?", "Confirmación de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -191,6 +222,9 @@ namespace PrimeSystem.UI.Proveedores
             await EliminarProveedor();
         }
 
+        /// <summary>
+        /// Elimina el proveedor seleccionado.
+        /// </summary>
         private async Task EliminarProveedor()
         {
 
@@ -216,16 +250,32 @@ namespace PrimeSystem.UI.Proveedores
 
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de texto en el cuadro de texto de CUIT.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtCuit, _vTxtProveedor, _vTxtNombre, _vTxtTel, _vTxtEmail);
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de selección en la lista de proveedores.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void ListBProveedores_SelectionChanged(object sender, EventArgs e)
         {
             indiceSeleccionado = ListBProveedores.CurrentRow?.Index ?? -1;
             CargarSeleccionado();
         }
+
+        /// <summary>
+        /// Maneja el evento de cambio de estado de habilitación del botón Guardar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn && btn.Tag is Color color)
@@ -235,6 +285,10 @@ namespace PrimeSystem.UI.Proveedores
 
             }
         }
+
+        /// <summary>
+        /// Configura los botones del formulario.
+        /// </summary>
         private void ConfigBtns()
         {
             BtnGuardar.Tag = AppColorsBlue.Tertiary;

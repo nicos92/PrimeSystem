@@ -1,4 +1,4 @@
-﻿using PrimeSystem.Contrato.Servicios;
+using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Utilidades;
 using PrimeSystem.Utilidades.Validaciones;
 using System;
@@ -28,6 +28,11 @@ namespace PrimeSystem.UI.Clientes
         private readonly ErrorProvider _epNombre;
         private readonly ErrorProvider _epTel;
         private readonly ErrorProvider _epEmail;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UCIgresoCliente"/>.
+        /// </summary>
+        /// <param name="clientesService">El servicio de clientes.</param>
         public UCIgresoCliente(IClientesService clientesService)
         {
             _clienteService = clientesService;
@@ -66,11 +71,21 @@ namespace PrimeSystem.UI.Clientes
             };
         }
 
+        /// <summary>
+        /// Maneja el evento TextChanged de los controles TxtBox.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnIngresar], _vTxtCuit, _vTxtEntidad, _vTxtNombre, _vTxtTel, _vTxtEmail);
         }
 
+        /// <summary>
+        /// Maneja el evento Click del control BtnIngresar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea ingresar el cliente?", "Confirmación de ingreso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -93,6 +108,9 @@ namespace PrimeSystem.UI.Clientes
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo objeto de cliente a partir de los datos del formulario.
+        /// </summary>
         private void CrearCliente()
         {
             _clienteSeleccionado = new Modelo.Entidades.Clientes
@@ -105,17 +123,30 @@ namespace PrimeSystem.UI.Clientes
             };
         }
 
+        /// <summary>
+        /// Maneja el evento Load del control UCIgresoCliente.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void UCIgresoCliente_Load(object sender, EventArgs e)
         {
             TxtCuit.Focus();
             ConfigBtns();
         }
 
+        /// <summary>
+        /// Configura los botones.
+        /// </summary>
         private void ConfigBtns()
         {
             BtnIngresar.Tag = AppColorsBlue.Primary;
         }
 
+        /// <summary>
+        /// Maneja el evento EnabledChanged del control BtnIngresar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void BtnIngresar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn)

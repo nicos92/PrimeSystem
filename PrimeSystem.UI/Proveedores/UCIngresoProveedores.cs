@@ -29,6 +29,11 @@ namespace PrimeSystem.UI.Proveedores
         private readonly ErrorProvider _epNombre;
         private readonly ErrorProvider _epTel;
         private readonly ErrorProvider _epEmail;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UCIngresoProveedores"/>.
+        /// </summary>
+        /// <param name="proveedoresService">El servicio de proveedores.</param>
         public UCIngresoProveedores(IProveedoresService proveedoresService)
         {
             _proveedor = proveedoresService;
@@ -66,6 +71,11 @@ namespace PrimeSystem.UI.Proveedores
             };
         }
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón Ingresar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea ingresar el proveedor?", "Confirmación de ingreso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -87,6 +97,9 @@ namespace PrimeSystem.UI.Proveedores
             }
         }
 
+        /// <summary>
+        /// Crea un objeto de proveedor a partir de los datos del formulario.
+        /// </summary>
         private void CrearProveedor()
         {
             _proveedorSeleccionado = new Modelo.Entidades.Proveedores
@@ -99,22 +112,40 @@ namespace PrimeSystem.UI.Proveedores
             };
         }
 
+        /// <summary>
+        /// Maneja el evento de carga del control de usuario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void UCIngresoProveedores_Load(object sender, EventArgs e)
         {
             ConfigBtns();
             TxtCuit.Focus();
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de texto en el cuadro de texto de CUIT.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void TxtCuit_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnIngresar], _vTxtCuit, _vTxtProveedor, _vTxtNombre, _vTxtTel, _vTxtEmail);
         }
 
+        /// <summary>
+        /// Configura los botones del formulario.
+        /// </summary>
         private void ConfigBtns()
         {
             BtnIngresar.Tag = AppColorsBlue.Primary;
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de estado de habilitación del botón Ingresar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnIngresar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn)

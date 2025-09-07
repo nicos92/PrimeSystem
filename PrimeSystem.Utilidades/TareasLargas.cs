@@ -15,6 +15,13 @@ namespace PrimeSystem.Utilidades
         private readonly Action _tareaCompletada;
 
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="TareasLargas"/>.
+        /// </summary>
+        /// <param name="panelADesactivar">El panel a desactivar durante la tarea.</param>
+        /// <param name="barraDeProgreso">La barra de progreso a mostrar.</param>
+        /// <param name="tareaDeLargaDuracion">La tarea de larga duración a ejecutar.</param>
+        /// <param name="tareaCompletada">La acción a ejecutar cuando la tarea se complete.</param>
         public TareasLargas(Panel panelADesactivar, ProgressBar barraDeProgreso, Func<Task> tareaDeLargaDuracion, Action tareaCompletada)
         {
             _panelADesactivar = panelADesactivar;
@@ -31,6 +38,9 @@ namespace PrimeSystem.Utilidades
             _tareaCompletada = tareaCompletada;
         }
 
+        /// <summary>
+        /// Inicia la tarea de larga duración.
+        /// </summary>
         public void Iniciar()
         {
             _panelADesactivar.Enabled = false;
@@ -39,6 +49,11 @@ namespace PrimeSystem.Utilidades
             RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Realiza el trabajo de la tarea de larga duración.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="DoWorkEventArgs"/> que contiene los datos del evento.</param>
         private async void HacerTrabajo(object sender, DoWorkEventArgs e)
         {
             try
@@ -51,11 +66,21 @@ namespace PrimeSystem.Utilidades
             }
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de progreso.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="ProgressChangedEventArgs"/> que contiene los datos del evento.</param>
         private void ProgresoCambiado(object sender, ProgressChangedEventArgs e)
         {
             _barraDeProgreso.Value = e.ProgressPercentage;
         }
 
+        /// <summary>
+        /// Maneja el evento de finalización del trabajo.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="RunWorkerCompletedEventArgs"/> que contiene los datos del evento.</param>
         private void TrabajoCompletado(object sender, RunWorkerCompletedEventArgs e)
         {
             _panelADesactivar.Enabled = true;
@@ -77,4 +102,3 @@ namespace PrimeSystem.Utilidades
         }
     }
 }
-

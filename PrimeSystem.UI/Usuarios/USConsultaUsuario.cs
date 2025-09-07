@@ -1,4 +1,4 @@
-﻿using PrimeSystem.Contrato.Servicios;
+using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Utilidades;
 using PrimeSystem.Utilidades.Validaciones;
 using System;
@@ -30,6 +30,12 @@ namespace PrimeSystem.UI.Usuarios
         private readonly ErrorProvider _epNombre;
         private readonly ErrorProvider _epTel;
         private readonly ErrorProvider _epEmail;
+        
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="USConsultaUsuario בו"/>.
+        /// </summary>
+        /// <param name="usuariosService">El servicio de usuarios.</param>
+        /// <param name="usuariosTipoService">El servicio de tipos de usuario.</param>
         public USConsultaUsuario(IUsuariosService usuariosService, IUsuariosTipoService usuariosTipoService)
         {
             _usuariosService = usuariosService;
@@ -68,6 +74,11 @@ namespace PrimeSystem.UI.Usuarios
             };
         }
 
+        /// <summary>
+        /// Maneja el evento Load del control USConsultaUsuario.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private async void USConsultaUsuario_Load(object sender, EventArgs e)
         {
             TxtDni.Focus();
@@ -83,6 +94,9 @@ namespace PrimeSystem.UI.Usuarios
             CargarPermisos();
         }
 
+        /// <summary>
+        /// Carga los tipos de usuario en el ComboBox.
+        /// </summary>
         private async Task CargarTiposUsuarios()
         {
             CMBTipoUsuario.Items.Clear();
@@ -101,11 +115,19 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
+        /// <summary>
+        /// Maneja el evento TextChanged del control TxtDni.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void TxtDni_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnGuardar], _vTxtDni, _vTxtApellido, _vTxtNombre, _vTxtTel, _vTxtEmail);
         }
 
+        /// <summary>
+        /// Crea un usuario a partir de los datos del formulario.
+        /// </summary>
         private void CrearUsuario()
         {
             if (CMBTipoUsuario.SelectedValue is not int tipoUsuario)
@@ -126,6 +148,11 @@ namespace PrimeSystem.UI.Usuarios
 
         }
 
+        /// <summary>
+        /// Maneja el evento Click del control BtnGuardar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private async void BtnGuardar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea guardar los cambios?", "Confirmación de guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -137,6 +164,9 @@ namespace PrimeSystem.UI.Usuarios
             await GuardarUsuario();
         }
 
+        /// <summary>
+        /// Guarda el usuario.
+        /// </summary>
         private async Task GuardarUsuario()
         {
             if (_usuarioSeleccionado != null && !string.IsNullOrEmpty(_usuarioSeleccionado.DNI))
@@ -155,7 +185,7 @@ namespace PrimeSystem.UI.Usuarios
                     Util.CalcularDGVVacio(ListBUsuarios, LblLista, "Usuarios");
 
                     Util.SeleccionarFilaDGV(ListBUsuarios, valor, ListBUsuarios.Columns[0].HeaderText, ref indiceSeleccionado);
-                    CargarDormularioEdicion();
+                    CargarFormularioEdicion();
 
 
                 }
@@ -166,6 +196,9 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
+        /// <summary>
+        /// Carga los usuarios en el DataGridView.
+        /// </summary>
         private async Task CargarUsuarios()
         {
             var datos = await _usuariosService.GetAll();
@@ -184,6 +217,9 @@ namespace PrimeSystem.UI.Usuarios
         }
 
 
+        /// <summary>
+        /// Carga los permisos para el usuario actual.
+        /// </summary>
         private void CargarPermisos()
         {
 
@@ -205,12 +241,18 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
+        /// <summary>
+        /// Carga los permisos de visitante.
+        /// </summary>
         private void CargarVisitante()
         {
             BtnEliminar.Visible = false;
             BtnGuardar.Visible = false;
         }
 
+        /// <summary>
+        /// Carga los permisos de administrador.
+        /// </summary>
         private void CargarAdmin()
         {
             BtnEliminar.Visible = true;
@@ -221,8 +263,11 @@ namespace PrimeSystem.UI.Usuarios
 
 
 
-
-
+        /// <summary>
+        /// Maneja el evento Click del control BtnEliminar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private async void BtnEliminar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea eliminar este proveedor?", "Confirmación de eliminacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -231,10 +276,13 @@ namespace PrimeSystem.UI.Usuarios
                 return; // Salir si el usuario no confirma
             }
             CrearUsuario();
-            await EliminarProveedor();
+            await EliminarUsuario();
         }
 
-        private async Task EliminarProveedor()
+        /// <summary>
+        /// Elimina el usuario.
+        /// </summary>
+        private async Task EliminarUsuario()
         {
 
             var resultado = _usuariosService.Delete(_usuarioSeleccionado.Id_Usuario);
@@ -262,13 +310,21 @@ namespace PrimeSystem.UI.Usuarios
         }
 
 
+        /// <summary>
+        /// Maneja el evento SelectionChanged del control ListBUsuarios.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void ListBUsuarios_SelectionChanged(object sender, EventArgs e)
         {
             indiceSeleccionado = ListBUsuarios.CurrentRow?.Index ?? -1; // Obtener el índice de la fila seleccionada o -1 si no hay selección
-            CargarDormularioEdicion();
+            CargarFormularioEdicion();
         }
 
-        private void CargarDormularioEdicion()
+        /// <summary>
+        /// Carga el formulario de edición.
+        /// </summary>
+        private void CargarFormularioEdicion()
         {
 
             if (ListBUsuarios.Rows[indiceSeleccionado].DataBoundItem is Modelo.Entidades.Usuarios usuario)
@@ -293,12 +349,20 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
+        /// <summary>
+        /// Maneja el evento EnabledChanged del control BtnGuardar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void BtnGuardar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn && btn.Tag is Color color) btn.BackColor = btn.Enabled ? color : AppColorsBlue.Secondary;
 
 
         }
+        /// <summary>
+        /// Configura los botones.
+        /// </summary>
         private void ConfigBtns()
         {
             BtnGuardar.Tag = AppColorsBlue.Tertiary;

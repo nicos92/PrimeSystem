@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using PrimeSystem.UI.Proveedores;
 using PrimeSystem.Utilidades;
 using System;
@@ -17,6 +17,11 @@ namespace PrimeSystem.UI.Clientes
     {
         private Button _btnActual;
         private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="FormClientes"/>.
+        /// </summary>
+        /// <param name="serviceProvider">El proveedor de servicios.</param>
         public FormClientes(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -25,6 +30,11 @@ namespace PrimeSystem.UI.Clientes
             _btnActual = BtnOpcionIngresar; // Inicializar con el botón de Ingresar
         }
 
+        /// <summary>
+        /// Maneja el evento Click del control BtnOpcionIngresar.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void BtnOpcionIngresar_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -44,12 +54,19 @@ namespace PrimeSystem.UI.Clientes
 
        
 
+        /// <summary>
+        /// Configura los botones.
+        /// </summary>
         private void ConFigBtns()
         {
             BtnOpcionIngresar.Tag = typeof(UCIgresoCliente);
             BtnOpcionEditar.Tag = typeof(UCConsultaClientes);
         }
 
+        /// <summary>
+        /// Selecciona el control de usuario.
+        /// </summary>
+        /// <param name="tipoForm">El tipo de formulario.</param>
         private void SeleccionarUC(Type tipoForm)
         {
             // Cerrar el formulario actual si existe
@@ -65,11 +82,21 @@ namespace PrimeSystem.UI.Clientes
             }
         }
 
+        /// <summary>
+        /// Maneja el evento Load del control FormClientes.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void FormClientes_Load(object sender, EventArgs e)
         {
             ConFigBtns();
         }
 
+        /// <summary>
+        /// Maneja el evento Activated del control FormClientes.
+        /// </summary>
+        /// <param name="sender">La fuente del evento.</param>
+        /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
         private void FormClientes_Activated(object sender, EventArgs e)
         {
             SeleccionarUC(typeof(UCIgresoCliente));

@@ -16,6 +16,11 @@ namespace PrimeSystem.UI.Proveedores
     {
         private Button _btnActual;
         private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="FormProveedores"/>.
+        /// </summary>
+        /// <param name="serviceProvider">El proveedor de servicios para la inyección de dependencias.</param>
         public FormProveedores(IServiceProvider serviceProvider)
         {
 
@@ -24,12 +29,21 @@ namespace PrimeSystem.UI.Proveedores
             _btnActual = BtnOpcionIngresar; // Inicializar con el botón de Ingresar
         }
 
+        /// <summary>
+        /// Maneja el evento de carga del formulario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void FormProveedores_Load(object sender, EventArgs e)
         {
             ConFigBtns();
 
         }
 
+        /// <summary>
+        /// Selecciona y muestra un control de usuario en el panel principal.
+        /// </summary>
+        /// <param name="tipoForm">El tipo de control de usuario a mostrar.</param>
         private void SeleccionarUC(Type tipoForm)
         {
             // Cerrar el formulario actual si existe
@@ -45,12 +59,20 @@ namespace PrimeSystem.UI.Proveedores
             }
         }
 
+        /// <summary>
+        /// Configura los tags de los botones de opción.
+        /// </summary>
         private void ConFigBtns()
         {
             BtnOpcionIngresar.Tag = typeof(UCIngresoProveedores);
             BtnOpcionEditar.Tag = typeof(UCConsultaProveedor);
         }
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón de opción de ingresar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnOpcionIngresar_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -70,6 +92,11 @@ namespace PrimeSystem.UI.Proveedores
 
         
 
+        /// <summary>
+        /// Maneja el evento de activación del formulario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void FormProveedores_Activated(object sender, EventArgs e)
         {
             SeleccionarUC(typeof(UCIngresoProveedores));

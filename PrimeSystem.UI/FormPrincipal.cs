@@ -20,6 +20,12 @@ public partial class FormPrincipal : Form
     private readonly IServiceProvider _serviceProvider;
     private readonly IArticulosService _articulosService;
     private Button _btnActivo;
+
+    /// <summary>
+    /// Inicializa una nueva instancia de la clase <see cref="FormPrincipal"/>.
+    /// </summary>
+    /// <param name="serviceProvider">El proveedor de servicios.</param>
+    /// <param name="articulosService">El servicio de artÃ­culos.</param>
     public FormPrincipal(IServiceProvider serviceProvider,IArticulosService articulosService)
     {
         _serviceProvider = serviceProvider;
@@ -29,6 +35,11 @@ public partial class FormPrincipal : Form
         _btnActivo = BtnModVentas;
     }
 
+    /// <summary>
+    /// Maneja el evento Load del formulario principal.
+    /// </summary>
+    /// <param name="sender">La fuente del evento.</param>
+    /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
     private void FormPrincipal_Load(object sender, EventArgs e)
     {
         ConfigurarBtnsMenu();
@@ -55,21 +66,24 @@ public partial class FormPrincipal : Form
         //}
         //catch (ArgumentNullException ex)
         //{ 
-        //    MessageBox.Show($"Error al cargar artículos: {ex.Message}", "Error UI",
+        //    MessageBox.Show($"Error al cargar artculos: {ex.Message}", "Error UI",
         //        MessageBoxButtons.OK, MessageBoxIcon.Error);
         //}
         //catch (Exception ex)
         //{
-        //    MessageBox.Show($"Error al cargar artículos: {ex.Message}", "Error UI",
+        //    MessageBox.Show($"Error al cargar artculos: {ex.Message}", "Error UI",
         //        MessageBoxButtons.OK, MessageBoxIcon.Error);
         //}
 
     }
 
+    /// <summary>
+    /// Carga los permisos segÃºn el rol del usuario.
+    /// </summary>
     private void CargarPermisos()
     {
         
-        string rolUsuario = "admin"; // Aquí deberías obtener el rol del usuario actual
+        string rolUsuario = "admin"; // Aqu deberas obtener el rol del usuario actual
         switch (rolUsuario)
         {
             case "admin":
@@ -85,6 +99,9 @@ public partial class FormPrincipal : Form
         }
     }
 
+    /// <summary>
+    /// Carga los permisos para el rol de administrador.
+    /// </summary>
     private void CargarAdmin()
     {
         BtnModClientes.Visible = true;
@@ -95,6 +112,9 @@ public partial class FormPrincipal : Form
         BtnModCompras.Visible = true;
     }
 
+    /// <summary>
+    /// Carga los permisos para el rol de ventas.
+    /// </summary>
     private void CargarVentas()
     {
         BtnModClientes.Visible = true;
@@ -105,6 +125,9 @@ public partial class FormPrincipal : Form
         BtnModCompras.Visible = false;
     }
 
+    /// <summary>
+    /// Carga los permisos para el rol de compras.
+    /// </summary>
     private void CargarCompras()
     {
         BtnModClientes.Visible = false;
@@ -114,6 +137,10 @@ public partial class FormPrincipal : Form
         BtnModVentas.Visible = false;
         BtnModCompras.Visible = true;
     }
+
+    /// <summary>
+    /// Configura los botones del menÃº.
+    /// </summary>
     private void ConfigurarBtnsMenu()
     {
         BtnModVentas.Tag = typeof(FormVentas);
@@ -125,6 +152,10 @@ public partial class FormPrincipal : Form
         BtnArticulos.Tag = typeof(FormArticulos);
     }
 
+    /// <summary>
+    /// Selecciona y muestra un formulario en el contenedor MDI.
+    /// </summary>
+    /// <param name="tipoForm">El tipo de formulario a mostrar.</param>
     private void SeleccionarForm(Type tipoForm)
     { 
         // Cerrar el formulario actual si existe
@@ -133,7 +164,7 @@ public partial class FormPrincipal : Form
             f.Close();
         }
 
-        // Crear el formulario usando el tipo proporcionado en el Tag del botón
+        // Crear el formulario usando el tipo proporcionado en el Tag del botn
         if (tipoForm != null && typeof(Form).IsAssignableFrom(tipoForm))
         {
             Form form = (Form)_serviceProvider.GetRequiredService(tipoForm);
@@ -144,6 +175,11 @@ public partial class FormPrincipal : Form
         }
     }
 
+    /// <summary>
+    /// Elige el mÃ³dulo a mostrar.
+    /// </summary>
+    /// <param name="sender">La fuente del evento.</param>
+    /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
     private void ElejirModulo(object sender, EventArgs e)
     {
 
@@ -160,7 +196,7 @@ public partial class FormPrincipal : Form
             btn.ForeColor = AppColorsBlue.PrimaryContainer;
             _btnActivo = btn;
 
-            // Obtener el tipo del formulario desde el Tag del botón
+            // Obtener el tipo del formulario desde el Tag del botn
             if (btn.Tag is Type tipoForm)
             {
                 SeleccionarForm(tipoForm);

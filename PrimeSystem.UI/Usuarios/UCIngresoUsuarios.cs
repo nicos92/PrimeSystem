@@ -30,6 +30,12 @@ namespace PrimeSystem.UI.Usuarios
         private readonly ErrorProvider _epNombre;
         private readonly ErrorProvider _epTel;
         private readonly ErrorProvider _epEmail;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UCIngresoUsuarios"/>.
+        /// </summary>
+        /// <param name="usuariosService">El servicio de usuarios.</param>
+        /// <param name="usuariosTipoService">El servicio de tipos de usuario.</param>
         public UCIngresoUsuarios(IUsuariosService usuariosService, IUsuariosTipoService usuariosTipoService)
         {
             _usuariosService = usuariosService;
@@ -68,6 +74,11 @@ namespace PrimeSystem.UI.Usuarios
             };
         }
 
+        /// <summary>
+        /// Maneja el evento de carga del control de usuario.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private async void UCIngresoUsuarios_Load(object sender, EventArgs e)
         {
             TxtDni.Focus();
@@ -75,6 +86,9 @@ namespace PrimeSystem.UI.Usuarios
             await CargarTiposUsuarios();
         }
 
+        /// <summary>
+        /// Carga los tipos de usuario en el ComboBox.
+        /// </summary>
         private async Task CargarTiposUsuarios()
         {
             CMBTipoUsuario.Items.Clear();
@@ -93,11 +107,19 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de texto en el cuadro de texto de DNI.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void TxtDni_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnIngresar], _vTxtDni, _vTxtApellido, _vTxtNombre, _vTxtTel, _vTxtEmail);
         }
 
+        /// <summary>
+        /// Crea un objeto de usuario a partir de los datos del formulario.
+        /// </summary>
         private void CrearUsuario()
         {
             if (CMBTipoUsuario.SelectedValue is not int tipoUsuario)
@@ -117,6 +139,11 @@ namespace PrimeSystem.UI.Usuarios
             };
         }
 
+        /// <summary>
+        /// Maneja el evento de clic en el botón Ingresar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Está seguro de que desea ingresar el usuario?", "Confirmación de ingreso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -138,11 +165,19 @@ namespace PrimeSystem.UI.Usuarios
             }
         }
 
+        /// <summary>
+        /// Configura los botones del formulario.
+        /// </summary>
         private void ConfigBtns()
         {
             BtnIngresar.Tag = AppColorsBlue.Primary;
         }
 
+        /// <summary>
+        /// Maneja el evento de cambio de estado de habilitación del botón Ingresar.
+        /// </summary>
+        /// <param name="sender">El objeto que generó el evento.</param>
+        /// <param name="e">Los datos del evento.</param>
         private void BtnIngresar_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is Button btn)

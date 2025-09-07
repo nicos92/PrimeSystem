@@ -43,6 +43,14 @@ namespace PrimeSystem.UI.Articulos
 
         #endregion Atributos y Propiedades
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UCIngresoArticulos"/>.
+        /// </summary>
+        /// <param name="articulosService">El servicio de artículos.</param>
+        /// <param name="categoriasService">El servicio de categorías.</param>
+        /// <param name="subcategoriaService">El servicio de subcategorías.</param>
+        /// <param name="proveedoresService">El servicio de proveedores.</param>
+        /// <param name="articuloStockService">El servicio de stock de artículos.</param>
         public UCIngresoArticulos(IArticulosService articulosService, ICategoriasService categoriasService, ISubcategoriaService subcategoriaService, IProveedoresService proveedoresService, IArticuloStockService articuloStockService)
         {
             _articulosService = articulosService;
@@ -71,11 +79,21 @@ namespace PrimeSystem.UI.Articulos
 
         #region Eventos
 
+        /// <summary>
+        /// Controla el evento TextChanged de los cuadros de texto.
+        /// </summary>
+        /// <param name="sender">El origen del evento.</param>
+        /// <param name="e">El <see cref="EventArgs"/> instancia que contiene los datos del evento.</param>
         private void TxtDescripcion_TextChanged(object sender, EventArgs e)
         {
             ValidadorMultiple.ValidacionMultiple([BtnIngresar], _vTxtDescripcion, _vTxtCantidad, _vTxtCosto, _vTxtGanancia);
         }
 
+        /// <summary>
+        /// Controla el evento SelectedIndexChanged del ComboBox de categorías.
+        /// </summary>
+        /// <param name="sender">El origen del evento.</param>
+        /// <param name="e">El <see cref="EventArgs"/> instancia que contiene los datos del evento.</param>
         private async void CMBCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CMBCategoria.SelectedItem is Categorias categoria)
@@ -86,6 +104,10 @@ namespace PrimeSystem.UI.Articulos
 
         #region Métodos Privados
 
+        /// <summary>
+        /// Crea un nuevo artículo a partir de los datos introducidos por el usuario.
+        /// </summary>
+        /// <returns>Verdadero si el artículo se creó correctamente, falso en caso contrario.</returns>
         private bool CrearArticulo()
         {
             if (CMBProveedor.SelectedItem is not Modelo.Entidades.Proveedores proveedor)
@@ -114,6 +136,9 @@ namespace PrimeSystem.UI.Articulos
             return true;
         }
 
+        /// <summary>
+        /// Crea un nuevo registro de stock a partir de los datos introducidos por el usuario.
+        /// </summary>
         private void CrearStock()
         {
             _stockSeleccionado.Cantidad = Convert.ToDouble(TxtCantidad.Text);
@@ -121,12 +146,20 @@ namespace PrimeSystem.UI.Articulos
             _stockSeleccionado.Ganancia = Convert.ToDouble(TxtGanancia.Text, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Maneja el evento Load del UserControl.
+        /// </summary>
+        /// <param name="sender">El origen del evento.</param>
+        /// <param name="e">El <see cref="EventArgs"/> instancia que contiene los datos del evento.</param>
         private void UCIngresoArticulos_Load(object sender, EventArgs e)
         {
             var taskHelper = new TareasLargas(PanelMedio, ProgressBar, CargaInicial, CargarCMB);
             taskHelper.Iniciar();
         }
 
+        /// <summary>
+        /// Realiza la carga inicial de datos de forma asíncrona.
+        /// </summary>
         private async Task CargaInicial()
         {
             await Task.WhenAll(CargarCategorias(), CargarProveedores());
@@ -201,6 +234,11 @@ namespace PrimeSystem.UI.Articulos
 
         #region Otros Metodos
 
+        /// <summary>
+        /// Controla el evento Click del botón Ingresar.
+        /// </summary>
+        /// <param name="sender">El origen del evento.</param>
+        /// <param name="e">El <see cref="EventArgs"/> instancia que contiene los datos del evento.</param>
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             // TODO: consultar si se pueden ingresar articulos sin proveedor
@@ -215,6 +253,9 @@ namespace PrimeSystem.UI.Articulos
             tarea.Iniciar();
         }
 
+        /// <summary>
+        /// Inserta un nuevo artículo y su stock en la base de datos.
+        /// </summary>
         public async Task InsertarArticuloStock()
         {
             var ultimoCodigoResult = await _articulosService.GetMaxCodArt();
