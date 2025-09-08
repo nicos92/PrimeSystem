@@ -18,7 +18,6 @@ namespace PrimeSystem.UI;
 public partial class FormPrincipal : Form
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly IArticulosService _articulosService;
     private Button _btnActivo;
 
     /// <summary>
@@ -26,10 +25,9 @@ public partial class FormPrincipal : Form
     /// </summary>
     /// <param name="serviceProvider">El proveedor de servicios.</param>
     /// <param name="articulosService">El servicio de artículos.</param>
-    public FormPrincipal(IServiceProvider serviceProvider,IArticulosService articulosService)
+    public FormPrincipal(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _articulosService = articulosService;
         InitializeComponent();
        
         _btnActivo = BtnModVentas;
@@ -45,97 +43,26 @@ public partial class FormPrincipal : Form
         ConfigurarBtnsMenu();
         SeleccionarForm(typeof(FormVentas));
         CargarPermisos();
-        //try
-        //{
-
-        //    Task.Run(() =>
-        //    {
-        //        var resultado = _articulosService.GetAll();
-        //        this.Invoke((MethodInvoker)delegate
-        //        {
-        //            if (resultado.IsSuccess)
-        //            {
-        //                dataGridView1.DataSource = resultado.Value;
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show(resultado.Error, "Error en UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            }
-        //        });
-        //    });
-        //}
-        //catch (ArgumentNullException ex)
-        //{ 
-        //    MessageBox.Show($"Error al cargar artculos: {ex.Message}", "Error UI",
-        //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //}
-        //catch (Exception ex)
-        //{
-        //    MessageBox.Show($"Error al cargar artculos: {ex.Message}", "Error UI",
-        //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //}
+        
 
     }
 
     /// <summary>
-    /// Carga los permisos según el rol del usuario.
+    /// Carga los permisos y establece la visibilidad de los botones del menú.
     /// </summary>
     private void CargarPermisos()
     {
-        
-        string rolUsuario = "admin"; // Aqu deberas obtener el rol del usuario actual
-        switch (rolUsuario)
-        {
-            case "admin":
-                CargarAdmin(); break;
-            case "compras":
-                CargarCompras();
-                break;
-            case "ventas":
-                CargarVentas();
-                break;
-            default:
-                break;
-        }
-    }
+        string rolUsuario = "admin"; // Simular rol, se obtendría de un servicio de autenticación.
+        bool isAdmin = rolUsuario == "admin";
+        bool isVentas = rolUsuario == "ventas";
+        bool isCompras = rolUsuario == "compras";
 
-    /// <summary>
-    /// Carga los permisos para el rol de administrador.
-    /// </summary>
-    private void CargarAdmin()
-    {
-        BtnModClientes.Visible = true;
-        BtnModUsuarios.Visible = true;
-        BtnModProveedores.Visible = true;
-        BtnModEstadoContable.Visible = true;
-        BtnModVentas.Visible = true;
-        BtnModCompras.Visible = true;
-    }
-
-    /// <summary>
-    /// Carga los permisos para el rol de ventas.
-    /// </summary>
-    private void CargarVentas()
-    {
-        BtnModClientes.Visible = true;
-        BtnModUsuarios.Visible = false;
-        BtnModProveedores.Visible = false;
-        BtnModEstadoContable.Visible = false;
-        BtnModVentas.Visible = true;
-        BtnModCompras.Visible = false;
-    }
-
-    /// <summary>
-    /// Carga los permisos para el rol de compras.
-    /// </summary>
-    private void CargarCompras()
-    {
-        BtnModClientes.Visible = false;
-        BtnModUsuarios.Visible = false;
-        BtnModProveedores.Visible = true;
-        BtnModEstadoContable.Visible = false;
-        BtnModVentas.Visible = false;
-        BtnModCompras.Visible = true;
+        BtnModClientes.Visible = isAdmin || isVentas;
+        BtnModUsuarios.Visible = isAdmin;
+        BtnModProveedores.Visible = isAdmin || isCompras;
+        BtnModEstadoContable.Visible = isAdmin;
+        BtnModVentas.Visible = isAdmin || isVentas;
+        BtnModCompras.Visible = isAdmin || isCompras;
     }
 
     /// <summary>
@@ -153,55 +80,60 @@ public partial class FormPrincipal : Form
     }
 
     /// <summary>
-    /// Selecciona y muestra un formulario en el contenedor MDI.
+    /// Selecciona y muestra un formulario en el contenedor principal.
     /// </summary>
-    /// <param name="tipoForm">El tipo de formulario a mostrar.</param>
-    private void SeleccionarForm(Type tipoForm)
-    { 
-        // Cerrar el formulario actual si existe
-        foreach (Form f in this.MdiChildren)
+    private void SeleccionarForm(Type formType)
+    {
+        if (formType == null || !typeof(Form).IsAssignableFrom(formType))
         {
-            f.Close();
+            MessageBox.Show("Tipo de formulario no válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
         }
 
-        // Crear el formulario usando el tipo proporcionado en el Tag del botn
-        if (tipoForm != null && typeof(Form).IsAssignableFrom(tipoForm))
+        // Cierra los formularios hijos existentes.
+        foreach (Form form in MdiChildren)
         {
-            Form form = (Form)_serviceProvider.GetRequiredService(tipoForm);
-            form.MdiParent = this;
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.Dock = DockStyle.Fill;
-            form.Show();
+            form.Close();
+            form.Dispose();
+        }
+
+        try
+        {
+            // Crea una nueva instancia del formulario usando el contenedor de servicios.
+            var newForm = (Form)_serviceProvider.GetRequiredService(formType);
+            newForm.MdiParent = this;
+            newForm.FormBorderStyle = FormBorderStyle.None;
+            newForm.Dock = DockStyle.Fill;
+            newForm.Show();
+        }
+        catch (InvalidOperationException ex)
+        {
+            MessageBox.Show($"Error al crear el formulario: {ex.Message}", "Error UI", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
     /// <summary>
-    /// Elige el módulo a mostrar.
+    /// Maneja el clic en un botón del menú para cambiar el módulo.
     /// </summary>
-    /// <param name="sender">La fuente del evento.</param>
-    /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
     private void ElejirModulo(object sender, EventArgs e)
     {
-
-        if (_btnActivo.Tag == ((Button)sender).Tag)
+        if (sender is not Button clickedButton || clickedButton == _btnActivo)
         {
             return;
         }
-        _btnActivo.BackColor = AppColorsBlue.Primary;
-        _btnActivo.ForeColor = AppColorsBlue.OnPrimary;
 
-        if (sender is Button btn)
+        // Desactivar el botón anterior y activar el nuevo.
+        Util.DesactivarBoton(_btnActivo);
+        Util.ActivarBoton(clickedButton);
+        _btnActivo = clickedButton;
+
+        // Seleccionar el formulario si el Tag es un Type.
+        if (clickedButton.Tag is Type formType)
         {
-            btn.BackColor = AppColorsBlue.OnPrimaryContainer;
-            btn.ForeColor = AppColorsBlue.PrimaryContainer;
-            _btnActivo = btn;
-
-            // Obtener el tipo del formulario desde el Tag del botn
-            if (btn.Tag is Type tipoForm)
-            {
-                SeleccionarForm(tipoForm);
-                this.Text = "Prime System - " + _btnActivo.Text;
-            }
+            SeleccionarForm(formType);
+            this.Text = "Prime System - " + clickedButton.Text;
         }
     }
+
+
 }

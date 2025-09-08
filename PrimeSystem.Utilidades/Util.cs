@@ -183,5 +183,28 @@ namespace PrimeSystem.Utilidades
         {
             lista.Remove(objetoAEliminar);
         }
+
+        /// <summary>
+        /// Aplica el estilo activo a un botón.
+        /// </summary>
+        /// <param name="btn">El botón a activar.</param>
+        public static void ActivarBoton(Button btn)
+        {
+            btn.BackColor = AppColorsBlue.OnPrimaryContainer;
+            btn.ForeColor = AppColorsBlue.PrimaryContainer;
+            btn.Font = new Font("Segoe UI", 14.25f, FontStyle.Bold);
+
+        }
+
+        /// <summary>
+        /// Restaura el estilo de un botón a su estado inactivo.
+        /// </summary>
+        /// <param name="btn">El botón a desactivar.</param>
+        public static void DesactivarBoton(Button btn)
+        {
+            btn.BackColor = AppColorsBlue.Primary;
+            btn.ForeColor = AppColorsBlue.OnPrimary;
+            btn.Font = new Font("Segoe UI", 12f, FontStyle.Bold);
+        }
     }
 }

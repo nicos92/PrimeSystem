@@ -63,6 +63,16 @@ namespace PrimeSystem.UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap applewhole {
+            get {
+                object obj = ResourceManager.GetObject("applewhole", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap charts {
             get {
                 object obj = ResourceManager.GetObject("charts", resourceCulture);

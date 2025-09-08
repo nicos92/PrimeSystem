@@ -73,8 +73,8 @@ partial class FormPrincipal
         BtnArticulos.Dock = DockStyle.Top;
         BtnArticulos.FlatAppearance.BorderSize = 0;
         BtnArticulos.FlatStyle = FlatStyle.Flat;
-        BtnArticulos.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-        BtnArticulos.Image = Properties.Resources.charts;
+        BtnArticulos.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        BtnArticulos.Image = Properties.Resources.applewhole;
         BtnArticulos.ImageAlign = ContentAlignment.MiddleLeft;
         BtnArticulos.Location = new Point(0, 448);
         BtnArticulos.Name = "BtnArticulos";
@@ -91,7 +91,7 @@ partial class FormPrincipal
         BtnModEstadoContable.Dock = DockStyle.Top;
         BtnModEstadoContable.FlatAppearance.BorderSize = 0;
         BtnModEstadoContable.FlatStyle = FlatStyle.Flat;
-        BtnModEstadoContable.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModEstadoContable.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         BtnModEstadoContable.Image = Properties.Resources.charts;
         BtnModEstadoContable.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModEstadoContable.Location = new Point(0, 384);
@@ -109,7 +109,7 @@ partial class FormPrincipal
         BtnModProveedores.Dock = DockStyle.Top;
         BtnModProveedores.FlatAppearance.BorderSize = 0;
         BtnModProveedores.FlatStyle = FlatStyle.Flat;
-        BtnModProveedores.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModProveedores.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         BtnModProveedores.Image = Properties.Resources.proveedores;
         BtnModProveedores.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModProveedores.Location = new Point(0, 320);
@@ -127,7 +127,7 @@ partial class FormPrincipal
         BtnModUsuarios.Dock = DockStyle.Top;
         BtnModUsuarios.FlatAppearance.BorderSize = 0;
         BtnModUsuarios.FlatStyle = FlatStyle.Flat;
-        BtnModUsuarios.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModUsuarios.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         BtnModUsuarios.Image = Properties.Resources.users2;
         BtnModUsuarios.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModUsuarios.Location = new Point(0, 256);
@@ -145,7 +145,7 @@ partial class FormPrincipal
         BtnModClientes.Dock = DockStyle.Top;
         BtnModClientes.FlatAppearance.BorderSize = 0;
         BtnModClientes.FlatStyle = FlatStyle.Flat;
-        BtnModClientes.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModClientes.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         BtnModClientes.Image = Properties.Resources.clientes;
         BtnModClientes.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModClientes.Location = new Point(0, 192);
@@ -163,7 +163,7 @@ partial class FormPrincipal
         BtnModCompras.Dock = DockStyle.Top;
         BtnModCompras.FlatAppearance.BorderSize = 0;
         BtnModCompras.FlatStyle = FlatStyle.Flat;
-        BtnModCompras.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModCompras.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         BtnModCompras.Image = Properties.Resources.compra;
         BtnModCompras.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModCompras.Location = new Point(0, 128);
@@ -182,7 +182,7 @@ partial class FormPrincipal
         BtnModVentas.Dock = DockStyle.Top;
         BtnModVentas.FlatAppearance.BorderSize = 0;
         BtnModVentas.FlatStyle = FlatStyle.Flat;
-        BtnModVentas.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        BtnModVentas.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         BtnModVentas.Image = Properties.Resources.venta;
         BtnModVentas.ImageAlign = ContentAlignment.MiddleLeft;
         BtnModVentas.Location = new Point(0, 64);
