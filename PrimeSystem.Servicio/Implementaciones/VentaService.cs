@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Contrato.Servicios;
+using PrimeSystem.Modelo;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
 

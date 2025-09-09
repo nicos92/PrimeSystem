@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PrimeSystem.Contrato.Servicios;
+using PrimeSystem.Modelo;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Servicio;
 using PrimeSystem.Utilidades;
@@ -20,11 +21,12 @@ namespace PrimeSystem.UI.Ventas
         private readonly IHVentasService _hVentaService;
         private readonly IHVentasDetalleService _hVentaDetalleService;
         private readonly IVentaService _ventaService;
-
+        private bool _evitarBucleEventos = false;
         private int _indiceSeleccionado;
         private bool _procesandoSeleccion = false;
-        private bool _restaurarSeleccion = false;
-        private readonly BindingList<ProductoResumen> _productosResumen = new BindingList<ProductoResumen>();
+        private string? _ultimoCodigoArticuloSeleccionado;
+        private int _ultimoIndiceSeleccionado = -1;
+        private readonly BindingList<ProductoResumen> _productosResumen = [];
 
         public FormVentas(IArticuloStockService articuloStockService,
                          IHVentasService hVentasService,
@@ -36,6 +38,7 @@ namespace PrimeSystem.UI.Ventas
             _articuloStockService = articuloStockService;
             _ventaService = ventaService;
             _indiceSeleccionado = 0;
+            _ultimoCodigoArticuloSeleccionado = "";
 
             InitializeComponent();
             KeyPreview = true;
@@ -62,12 +65,12 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
-        private double CalcularPrecioVenta(ArticuloStock articulo)
+        private static double CalcularPrecioVenta(ArticuloStock articulo)
         {
             return articulo.Costo + (articulo.Costo * (articulo.Ganancia / 100));
         }
 
-        private (int cantidad, double total) CalcularTotales(List<ArticuloStock> productos)
+        private static (int cantidad, double total) CalcularTotales(List<ArticuloStock> productos)
         {
             int cantidad = productos.Count;
             double total = productos.Sum(p => CalcularPrecioVenta(p));
@@ -89,8 +92,11 @@ namespace PrimeSystem.UI.Ventas
             DgvProductosSeleccionados.AllowUserToResizeColumns = true;
             DgvProductosSeleccionados.AutoGenerateColumns = false;
 
-           
-         
+            // Asegurar que el DataGridView puede recibir el foco y selecciones
+            DgvProductosSeleccionados.TabStop = true;
+            DgvProductosSeleccionados.Enabled = true;
+
+
 
             ConfigurarColumnasDataGridView();
         }
@@ -100,11 +106,15 @@ namespace PrimeSystem.UI.Ventas
             for (int i = 0; i < DgvProductosSeleccionados.Rows.Count; i++)
             {
                 if (DgvProductosSeleccionados.Rows[i].DataBoundItem is ProductoResumen producto &&
-                    producto.Cod_Articulo == codigoArticulo.ToString())
+                    producto.Cod_Articulo == codigoArticulo)
                 {
                     DgvProductosSeleccionados.ClearSelection();
                     DgvProductosSeleccionados.Rows[i].Selected = true;
-                    DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[i].Cells[1]; // Selecciona la columna "Nombre"
+                    DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[i].Cells[1];
+
+                    // Actualizar el seguimiento
+                    _ultimoCodigoArticuloSeleccionado = codigoArticulo;
+                    _ultimoIndiceSeleccionado = i;
                     break;
                 }
             }
@@ -172,15 +182,26 @@ namespace PrimeSystem.UI.Ventas
 
         private void CmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_evitarBucleEventos) return;
+
             if (CmbProducto.SelectedItem is ArticuloStock selectedItem)
             {
                 LblProducto.Text = selectedItem.Art_Desc;
                 LblPrecio.Text = CalcularPrecioVenta(selectedItem).ToString("C2");
+
+                // Seleccionar la fila correspondiente en el DataGridView
+                _evitarBucleEventos = true;
+                SeleccionarFilaPorCodigoArticulo(selectedItem.Cod_Articulo); // <- Quitar Convert.ToInt32
+                _evitarBucleEventos = false;
             }
             else
             {
                 LblProducto.Text = string.Empty;
                 LblPrecio.Text = string.Empty;
+                if (!_evitarBucleEventos)
+                {
+                    DgvProductosSeleccionados.ClearSelection();
+                }
             }
 
             ActualizarTotalPrecioPorCantidad();
@@ -211,10 +232,26 @@ namespace PrimeSystem.UI.Ventas
             {
                 int cantidad = (int)NumericUpDown1.Value;
                 AgregarProductosAlCarrito(producto, cantidad);
+
+                _evitarBucleEventos = true;
                 CargarDataGridView();
 
-                // Seleccionar la fila del producto agregado
+                // Después de agregar, seleccionar el producto añadido
                 SeleccionarFilaPorCodigoArticulo(producto.Cod_Articulo);
+
+                // Actualizar las variables de seguimiento
+                for (int i = 0; i < DgvProductosSeleccionados.Rows.Count; i++)
+                {
+                    if (DgvProductosSeleccionados.Rows[i].DataBoundItem is ProductoResumen prod &&
+                        prod.Cod_Articulo == producto.Cod_Articulo)
+                    {
+                        _ultimoCodigoArticuloSeleccionado = producto.Cod_Articulo;
+                        _ultimoIndiceSeleccionado = i;
+                        break;
+                    }
+                }
+
+                _evitarBucleEventos = false;
             }
             else
             {
@@ -222,7 +259,7 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
-        private void AgregarProductosAlCarrito(ArticuloStock producto, int cantidad)
+        private static void AgregarProductosAlCarrito(ArticuloStock producto, int cantidad)
         {
             for (int i = 0; i < cantidad; i++)
             {
@@ -233,11 +270,8 @@ namespace PrimeSystem.UI.Ventas
         private void CargarDataGridView()
         {
             // Guardar la selección actual antes de recargar
-            int codigoArticuloSeleccionado = -1;
-            if (DgvProductosSeleccionados.CurrentRow?.DataBoundItem is ProductoResumen productoSeleccionado)
-            {
-                codigoArticuloSeleccionado = Convert.ToInt32(productoSeleccionado.Cod_Articulo);
-            }
+            string? codigoArticuloSeleccionado = _ultimoCodigoArticuloSeleccionado;
+            int indiceSeleccionado = _ultimoIndiceSeleccionado;
 
             ListaProductos(SingleListas.Instance.ProductosSeleccionados);
 
@@ -245,18 +279,67 @@ namespace PrimeSystem.UI.Ventas
             LblCantProductos.Text = cantidad.ToString();
             LblPrecioTotal.Text = total.ToString("C2");
 
-            // Restaurar la selección si el artículo todavía existe
-            if (codigoArticuloSeleccionado != -1 &&
-                _productosResumen.Any(p => p.Cod_Articulo == codigoArticuloSeleccionado.ToString()))
+            // Restaurar la selección basada en el código o índice
+            bool seleccionRestaurada = false;
+
+            if (!string.IsNullOrEmpty(codigoArticuloSeleccionado))
             {
-                SeleccionarFilaPorCodigoArticulo(codigoArticuloSeleccionado.ToString());
+                // Primero intentar por código de artículo
+                for (int i = 0; i < DgvProductosSeleccionados.Rows.Count; i++)
+                {
+                    if (DgvProductosSeleccionados.Rows[i].DataBoundItem is ProductoResumen producto &&
+                        producto.Cod_Articulo == codigoArticuloSeleccionado)
+                    {
+                        DgvProductosSeleccionados.ClearSelection();
+                        DgvProductosSeleccionados.Rows[i].Selected = true;
+                        DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[i].Cells[1];
+
+                        SeleccionarProductoEnComboBox(codigoArticuloSeleccionado);
+                        _ultimoIndiceSeleccionado = i;
+                        seleccionRestaurada = true;
+                        break;
+                    }
+                }
             }
-            else if (DgvProductosSeleccionados.Rows.Count > 0)
+
+            if (!seleccionRestaurada && indiceSeleccionado >= 0 && DgvProductosSeleccionados.Rows.Count > 0)
             {
-                // Seleccionar la primera fila si no hay selección previa
+                // Si no se encontró por código, intentar por índice
+                int nuevoIndice = Math.Min(indiceSeleccionado, DgvProductosSeleccionados.Rows.Count - 1);
+
+                DgvProductosSeleccionados.ClearSelection();
+                DgvProductosSeleccionados.Rows[nuevoIndice].Selected = true;
+                DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[nuevoIndice].Cells[1];
+
+                if (DgvProductosSeleccionados.Rows[nuevoIndice].DataBoundItem is ProductoResumen nuevoProducto)
+                {
+                    SeleccionarProductoEnComboBox(nuevoProducto.Cod_Articulo);
+                    _ultimoCodigoArticuloSeleccionado = nuevoProducto.Cod_Articulo;
+                    _ultimoIndiceSeleccionado = nuevoIndice;
+                    seleccionRestaurada = true;
+                }
+            }
+
+            if (!seleccionRestaurada && DgvProductosSeleccionados.Rows.Count > 0)
+            {
+                // Seleccionar la primera fila como fallback
                 DgvProductosSeleccionados.ClearSelection();
                 DgvProductosSeleccionados.Rows[0].Selected = true;
                 DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[0].Cells[1];
+
+                if (DgvProductosSeleccionados.Rows[0].DataBoundItem is ProductoResumen nuevoProducto)
+                {
+                    SeleccionarProductoEnComboBox(nuevoProducto.Cod_Articulo);
+                    _ultimoCodigoArticuloSeleccionado = nuevoProducto.Cod_Articulo;
+                    _ultimoIndiceSeleccionado = 0;
+                }
+            }
+            else if (DgvProductosSeleccionados.Rows.Count == 0)
+            {
+                // Limpiar si no hay productos
+                LimpiarSeleccion();
+                _ultimoCodigoArticuloSeleccionado = null;
+                _ultimoIndiceSeleccionado = -1;
             }
         }
 
@@ -319,7 +402,7 @@ namespace PrimeSystem.UI.Ventas
                     Total = (double)(subtotal - descuento)
                 };
 
-                var result = await _ventaService.Add(hVentas, _productosResumen.ToList());
+                var result = await _ventaService.Add(hVentas, [.. _productosResumen]);
 
                 if (result.IsSuccess)
                 {
@@ -341,10 +424,28 @@ namespace PrimeSystem.UI.Ventas
         {
             SingleListas.Instance.ProductosSeleccionados.Clear();
             _productosResumen.Clear();
-            CmbProducto.SelectedIndex = -1;
+
+            LimpiarSeleccion();
             NumericUpDown1.Value = 1;
             LblCantProductos.Text = "0";
             LblPrecioTotal.Text = 0m.ToString("C2");
+
+            // Resetear las variables de seguimiento
+            _ultimoCodigoArticuloSeleccionado = null;
+            _ultimoIndiceSeleccionado = -1;
+        }
+
+        private void LimpiarSeleccion()
+        {
+            _evitarBucleEventos = true;
+
+            CmbProducto.SelectedIndex = -1;
+            DgvProductosSeleccionados.ClearSelection();
+            LblProducto.Text = string.Empty;
+            LblPrecio.Text = string.Empty;
+            ActualizarTotalPrecioPorCantidad();
+
+            _evitarBucleEventos = false;
         }
 
         private void BtnQuitar_Click(object sender, EventArgs e)
@@ -356,37 +457,77 @@ namespace PrimeSystem.UI.Ventas
         {
             if (DgvProductosSeleccionados.CurrentRow?.DataBoundItem is ProductoResumen articulo)
             {
-                var articuloQuitar = SingleListas.Instance.ProductosSeleccionados
-                    .FirstOrDefault(p => p.Cod_Articulo == articulo.Cod_Articulo);
+                // Guardar la posición actual antes de eliminar
+                int indiceActual = DgvProductosSeleccionados.CurrentRow.Index;
+                string? codigoActual = articulo.Cod_Articulo; // Cambiado a string? para permitir valores nulos
 
-                if (articuloQuitar != null)
+                if (!string.IsNullOrEmpty(codigoActual)) // Validar que el código no sea nulo o vacío
                 {
-                    SingleListas.Instance.ProductosSeleccionados.Remove(articuloQuitar);
-                    CargarDataGridView();
+                    var articuloQuitar = SingleListas.Instance.ProductosSeleccionados
+                        .FirstOrDefault(p => p.Cod_Articulo == codigoActual);
 
-                    // Intentar mantener la selección en el mismo artículo si todavía existe
-                    if (SingleListas.Instance.ProductosSeleccionados.Any(p => p.Cod_Articulo == articulo.Cod_Articulo))
+                    if (articuloQuitar != null)
                     {
-                        SeleccionarFilaPorCodigoArticulo(articulo.Cod_Articulo);
-                    }
-                    else if (DgvProductosSeleccionados.Rows.Count > 0)
-                    {
-                        // Seleccionar la primera fila si no queda el mismo artículo
-                        DgvProductosSeleccionados.ClearSelection();
-                        DgvProductosSeleccionados.Rows[0].Selected = true;
-                        DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[0].Cells[1];
+                        SingleListas.Instance.ProductosSeleccionados.Remove(articuloQuitar);
+
+                        _evitarBucleEventos = true;
+                        CargarDataGridView();
+
+                        // Después de recargar, restaurar la selección
+                        if (DgvProductosSeleccionados.Rows.Count > 0)
+                        {
+                            // Intentar mantener la misma posición si es posible
+                            int nuevoIndice = Math.Min(indiceActual, DgvProductosSeleccionados.Rows.Count - 1);
+
+                            DgvProductosSeleccionados.ClearSelection();
+                            DgvProductosSeleccionados.Rows[nuevoIndice].Selected = true;
+                            DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[nuevoIndice].Cells[1];
+
+                            // Actualizar el ComboBox con la nueva selección
+                            if (DgvProductosSeleccionados.Rows[nuevoIndice].DataBoundItem is ProductoResumen nuevoProducto)
+                            {
+                                SeleccionarProductoEnComboBox(nuevoProducto.Cod_Articulo);
+                                _ultimoCodigoArticuloSeleccionado = nuevoProducto.Cod_Articulo;
+                                _ultimoIndiceSeleccionado = nuevoIndice;
+                            }
+                        }
+                        else
+                        {
+                            // Si no hay filas, limpiar todo
+                            LimpiarSeleccion();
+                            _ultimoCodigoArticuloSeleccionado = null;
+                            _ultimoIndiceSeleccionado = -1;
+                        }
+
+                        _evitarBucleEventos = false;
                     }
                 }
             }
-            else if (DgvProductosSeleccionados.Rows.Count > 0)
+            else if (SingleListas.Instance.ProductosSeleccionados.Count > 0)
             {
-                // Si no hay fila seleccionada pero hay filas, seleccionar la primera
-                DgvProductosSeleccionados.ClearSelection();
-                DgvProductosSeleccionados.Rows[0].Selected = true;
-                DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[0].Cells[1];
+                // Si no hay fila seleccionada pero hay productos, usar la última selección recordada
+                _evitarBucleEventos = true;
+                CargarDataGridView();
+
+                if (DgvProductosSeleccionados.Rows.Count > 0)
+                {
+                    int indiceASeleccionar = _ultimoIndiceSeleccionado >= 0 ?
+                        Math.Min(_ultimoIndiceSeleccionado, DgvProductosSeleccionados.Rows.Count - 1) : 0;
+
+                    DgvProductosSeleccionados.ClearSelection();
+                    DgvProductosSeleccionados.Rows[indiceASeleccionar].Selected = true;
+                    DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[indiceASeleccionar].Cells[1];
+
+                    if (DgvProductosSeleccionados.Rows[indiceASeleccionar].DataBoundItem is ProductoResumen nuevoProducto)
+                    {
+                        SeleccionarProductoEnComboBox(nuevoProducto.Cod_Articulo);
+                        _ultimoCodigoArticuloSeleccionado = nuevoProducto.Cod_Articulo;
+                        _ultimoIndiceSeleccionado = indiceASeleccionar;
+                    }
+                }
+                _evitarBucleEventos = false;
             }
         }
-
         private void FormVentas_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -401,20 +542,45 @@ namespace PrimeSystem.UI.Ventas
                         NumericUpDown1.Focus();
                         e.Handled = true;
                     }
+                    else if (NumericUpDown1.Focused)
+                    {
+                        BtnAceptar.PerformClick();
+                        e.Handled = true;
+                    }
+                    else if (DgvProductosSeleccionados.Focused)
+                    {
+                        // Permitir quitar también desde el DataGridView con Enter
+                        QuitarUnidadSeleccionada();
+                        e.Handled = true;
+                    }
+                    break;
+                case Keys.Delete:
+                    if (DgvProductosSeleccionados.Focused)
+                    {
+                        QuitarUnidadSeleccionada();
+                        e.Handled = true;
+                    }
                     break;
             }
         }
 
         private void DgvProductosSeleccionados_SelectionChanged(object sender, EventArgs e)
         {
-            if (_procesandoSeleccion) return;
+            if (_procesandoSeleccion || _evitarBucleEventos) return;
 
             _procesandoSeleccion = true;
             try
             {
-                if (DgvProductosSeleccionados.CurrentRow != null)
+                if (DgvProductosSeleccionados.CurrentRow?.DataBoundItem is ProductoResumen productoSeleccionado)
                 {
                     _indiceSeleccionado = DgvProductosSeleccionados.CurrentRow.Index;
+                    _ultimoCodigoArticuloSeleccionado = productoSeleccionado.Cod_Articulo;
+                    _ultimoIndiceSeleccionado = _indiceSeleccionado;
+
+                    // Actualizar el ComboBox para que coincida con la selección del DataGridView
+                    _evitarBucleEventos = true;
+                    SeleccionarProductoEnComboBox(productoSeleccionado.Cod_Articulo);
+                    _evitarBucleEventos = false;
                 }
             }
             finally
@@ -423,21 +589,91 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
+        private void SeleccionarProductoEnComboBox(string codigoArticulo)
+        {
+            if (CmbProducto.Items.Count == 0 || _evitarBucleEventos) return;
+
+            bool encontrado = false;
+
+            // Buscar el artículo en el ComboBox
+            for (int i = 0; i < CmbProducto.Items.Count; i++)
+            {
+                if (CmbProducto.Items[i] is ArticuloStock articulo && articulo.Cod_Articulo == codigoArticulo)
+                {
+                    // Desvincular temporalmente el evento para evitar el bucle
+                    CmbProducto.SelectedIndexChanged -= CmbProducto_SelectedIndexChanged;
+                    CmbProducto.SelectedIndex = i;
+                    CmbProducto.SelectedIndexChanged += CmbProducto_SelectedIndexChanged;
+
+                    // Actualizar los labels
+                    LblProducto.Text = articulo.Art_Desc;
+                    LblPrecio.Text = CalcularPrecioVenta(articulo).ToString("C2");
+                    ActualizarTotalPrecioPorCantidad();
+
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (!encontrado)
+            {
+                // Si no encuentra el producto, deseleccionar el ComboBox
+                CmbProducto.SelectedIndexChanged -= CmbProducto_SelectedIndexChanged;
+                CmbProducto.SelectedIndex = -1;
+                CmbProducto.SelectedIndexChanged += CmbProducto_SelectedIndexChanged;
+
+                LblProducto.Text = string.Empty;
+                LblPrecio.Text = string.Empty;
+                ActualizarTotalPrecioPorCantidad();
+            }
+        }
+
         #region Métodos de utilidad para mensajes
-        private void MostrarMensajeAdvertencia(string mensaje)
+        private static void MostrarMensajeAdvertencia(string mensaje)
         {
             MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private void MostrarMensajeError(string mensaje)
+        private static void MostrarMensajeError(string mensaje)
         {
             MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void MostrarMensajeExito(string mensaje)
+        private static void MostrarMensajeExito(string mensaje)
         {
             MessageBox.Show(mensaje, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
+
+        private void DgvProductosSeleccionados_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Deshabilitar temporalmente los eventos
+                _evitarBucleEventos = true;
+
+                try
+                {
+                    var selectedRow = DgvProductosSeleccionados.Rows[e.RowIndex];
+                    if (selectedRow.DataBoundItem is ProductoResumen producto)
+                    {
+                        // Buscar y seleccionar el item correspondiente en el ComboBox
+                        for (int i = 0; i < CmbProducto.Items.Count; i++)
+                        {
+                            if (CmbProducto.Items[i] is ArticuloStock articulo &&
+                                articulo.Cod_Articulo == producto.Cod_Articulo)
+                            {
+                                CmbProducto.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    _evitarBucleEventos = false;
+                }
+            }
+        }
     }
 }

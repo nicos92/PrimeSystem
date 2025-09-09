@@ -261,6 +261,7 @@
             DgvProductosSeleccionados.RowHeadersVisible = false;
             DgvProductosSeleccionados.Size = new Size(474, 335);
             DgvProductosSeleccionados.TabIndex = 0;
+            DgvProductosSeleccionados.CellClick += DgvProductosSeleccionados_CellClick;
             DgvProductosSeleccionados.SelectionChanged += DgvProductosSeleccionados_SelectionChanged;
             // 
             // panel1

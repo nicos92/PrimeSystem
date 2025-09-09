@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PrimeSystem.Modelo;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
 

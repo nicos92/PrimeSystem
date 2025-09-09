@@ -7,6 +7,7 @@ using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using PrimeSystem.Contrato.Repositorios;
+using PrimeSystem.Modelo;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
 
@@ -27,7 +28,7 @@ namespace PrimeSystem.Repositorio.Repositorios
 
 
                 string sqlArticulos = "INSERT INTO H_Ventas (Cod_Usuario, fecha_hora, id_cliente, subtotal, descu, total) VALUES (?, ?, ?, ?, ?, ?)";
-                using (OleDbCommand cmdArticulos = new OleDbCommand(sqlArticulos, conn, transaction))
+                using (OleDbCommand cmdArticulos = new(sqlArticulos, conn, transaction))
                 {
 
                     cmdArticulos.Parameters.AddWithValue("?", hVentas.Cod_Usuario);
