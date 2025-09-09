@@ -112,7 +112,8 @@ static class Program
         services.AddScoped<IInOutVariosRepository, InOutVariosRepository>();
         services.AddScoped<IInOutVariosService, InOutVariosService>();
 
-
+        services.AddScoped<IVentaRepository, VentaRepository>();
+        services.AddScoped<IVentaService, VentaService>();
 
     }
 }

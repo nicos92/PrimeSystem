@@ -8,8 +8,8 @@ namespace PrimeSystem.Modelo.Entidades
 {
     public record ArticuloStock(
      int Id_Articulo,
-     string? Cod_Articulo,
-     string? Art_Desc,
+     string Cod_Articulo,
+     string Art_Desc,
      int Cod_Categoria,
      int Cod_Subcat,
      int Id_Proveedor,
