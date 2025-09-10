@@ -385,7 +385,7 @@ namespace PrimeSystem.UI.Ventas
                 string filtro = TxtBuscardor.Text.Trim().ToLowerInvariant();
 
                 var productosFiltrados = _todosLosProductos
-                    .Where(p => string.IsNullOrEmpty(filtro) || p.Art_Desc.ToLowerInvariant().Contains(filtro))
+                    .Where(p => string.IsNullOrEmpty(filtro) || p.Art_Desc.ToLowerInvariant().Contains(filtro) || p.Cod_Articulo.StartsWith(filtro))
                     .ToList();
 
                 LsvProductos.BeginUpdate();
@@ -459,17 +459,13 @@ namespace PrimeSystem.UI.Ventas
 
         private async void BtnConfirmarVenta_Click(object sender, EventArgs e)
         {
-            /* TODO: VERIFICAR POR QUE SALE ERROR DE FORMATO 
-             * AL PASAR DE LOS MIL EN ADELANTE
-             * Error: The input string ' 1.210,00' was not in a correct format.
-             */
-            DialogResult dr = MessageBox.Show("¿Estas seguro que queres finalizar la venta?", "Confirmación de venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.No) return;
             if (SingleListas.Instance.ProductosSeleccionados.Count == 0)
             {
                 MostrarMensajeAdvertencia("No hay productos seleccionados para la venta.");
                 return;
             }
+            DialogResult dr = MessageBox.Show("¿Estas seguro que queres finalizar la venta?", "Confirmación de venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
             await ProcesarVentaAsync();
         }
@@ -723,6 +719,11 @@ namespace PrimeSystem.UI.Ventas
         private void TxtBuscardor_TextChanged(object sender, EventArgs e)
         {
             FiltrarYMostrarProductos();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
