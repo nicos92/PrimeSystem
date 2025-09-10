@@ -42,10 +42,7 @@ namespace PrimeSystem.UI.Ventas
             _ultimoCodigoArticuloSeleccionado = "";
 
             InitializeComponent();
-            // NOTA: Se asume que el control ComboBox 'CmbProducto' ha sido reemplazado
-            // por un control ListView llamado 'LsvProductos' en el diseñador.
-            // También se debe conectar el evento 'SelectedIndexChanged' de 'LsvProductos'
-            // al manejador 'LsvProductos_SelectedIndexChanged'.
+            // TODO: INVESTIGAR POR QUE A VECES CARGA AL LIST VIEW Y OTRAS NO
             KeyPreview = true;
         }
 
@@ -127,6 +124,7 @@ namespace PrimeSystem.UI.Ventas
 
         private void ConfigurarColumnasDataGridView()
         {
+            // TODO: CAMBIAR EL SIMBOLO DE EUROS POR PESO
             DgvProductosSeleccionados.Columns.Clear();
 
             var columns = new[]
