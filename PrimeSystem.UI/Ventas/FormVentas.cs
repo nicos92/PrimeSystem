@@ -28,6 +28,8 @@ namespace PrimeSystem.UI.Ventas
         private int _ultimoIndiceSeleccionado = -1;
         private readonly BindingList<ProductoResumen> _productosResumen = [];
         private List<ArticuloStock> _todosLosProductos = [];
+        // Agregar en el inicio de la clase
+        private readonly CultureInfo _cultureArgentina = new CultureInfo("es-AR");
 
         public FormVentas(IArticuloStockService articuloStockService,
                          IHVentasService hVentasService,
@@ -70,6 +72,11 @@ namespace PrimeSystem.UI.Ventas
         private static double CalcularPrecioVenta(ArticuloStock articulo)
         {
             return articulo.Costo + (articulo.Costo * (articulo.Ganancia / 100));
+        }
+
+        private string FormatearPesoArgentino(double valor)
+        {
+            return valor.ToString("C", _cultureArgentina);
         }
 
         private static (int cantidad, double total) CalcularTotales(List<ArticuloStock> productos)
@@ -124,58 +131,63 @@ namespace PrimeSystem.UI.Ventas
 
         private void ConfigurarColumnasDataGridView()
         {
-            // TODO: CAMBIAR EL SIMBOLO DE EUROS POR PESO
             DgvProductosSeleccionados.Columns.Clear();
+
+            var stylePesos = new DataGridViewCellStyle
+            {
+                Format = "C",
+                FormatProvider = _cultureArgentina,
+                Alignment = DataGridViewContentAlignment.MiddleRight
+            };
 
             var columns = new[]
             {
-                new DataGridViewTextBoxColumn
-                {
-                    Name = "ProductoId",
-                    DataPropertyName = "Cod_Articulo",
-                    HeaderText = "ID",
-                    Visible = false
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    Name = "ProductoNombre",
-                    DataPropertyName = "Producto_Nombre",
-                    HeaderText = "Nombre",
-                    Width = 200
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    Name = "ProductoCantidad",
-                    DataPropertyName = "Producto_Cantidad",
-                    HeaderText = "Cantidad",
-                    Width = 80,
-                    DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight }
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    Name = "ProductoPrecioUnitario",
-                    DataPropertyName = "Producto_Precio",
-                    HeaderText = "Precio Unitario",
-                    Width = 100,
-                    DefaultCellStyle = new DataGridViewCellStyle
-                    {
-                        Format = "C2",
-                        Alignment = DataGridViewContentAlignment.MiddleRight
-                    }
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    Name = "ProductoPrecioTotal",
-                    DataPropertyName = "Producto_PrecioxCantidad",
-                    HeaderText = "Total",
-                    Width = 100,
-                    DefaultCellStyle = new DataGridViewCellStyle
-                    {
-                        Format = "C2",
-                        Alignment = DataGridViewContentAlignment.MiddleRight
-                    }
-                }
-            };
+        new DataGridViewTextBoxColumn
+        {
+            Name = "ProductoId",
+            DataPropertyName = "Cod_Articulo",
+            HeaderText = "ID",
+            Visible = false
+        },
+        new DataGridViewTextBoxColumn
+        {
+            Name = "ProductoNombre",
+            DataPropertyName = "Producto_Nombre",
+            HeaderText = "Nombre",
+            Width = 200,
+            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+
+        },
+        new DataGridViewTextBoxColumn
+        {
+            Name = "ProductoCantidad",
+            DataPropertyName = "Producto_Cantidad",
+            HeaderText = "Cantidad",
+            Width = 80,
+            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+            DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight }
+        },
+        new DataGridViewTextBoxColumn
+        {
+            Name = "ProductoPrecioUnitario",
+            DataPropertyName = "Producto_Precio",
+            HeaderText = "Precio Unitario",
+            Width = 100,
+            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+
+            DefaultCellStyle = stylePesos
+        },
+        new DataGridViewTextBoxColumn
+        {
+            Name = "ProductoPrecioTotal",
+            DataPropertyName = "Producto_PrecioxCantidad",
+            HeaderText = "Total",
+            Width = 100,
+            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+
+            DefaultCellStyle = stylePesos
+        }
+    };
 
             foreach (var column in columns)
             {
@@ -190,7 +202,7 @@ namespace PrimeSystem.UI.Ventas
             if (LsvProductos.SelectedItems.Count > 0 && LsvProductos.SelectedItems[0].Tag is ArticuloStock selectedItem)
             {
                 LblProducto.Text = selectedItem.Art_Desc;
-                LblPrecio.Text = CalcularPrecioVenta(selectedItem).ToString("C2");
+                LblPrecio.Text = FormatearPesoArgentino(CalcularPrecioVenta(selectedItem));
 
                 // Seleccionar la fila correspondiente en el DataGridView
                 _evitarBucleEventos = true;
@@ -225,7 +237,7 @@ namespace PrimeSystem.UI.Ventas
             }
 
             decimal total = precio * NumericUpDown1.Value;
-            LblPrecioCant.Text = total.ToString("C2");
+            LblPrecioCant.Text = FormatearPesoArgentino((double)total);
         }
 
         private void BtnAceptar_Click(object sender, EventArgs e)
@@ -266,7 +278,7 @@ namespace PrimeSystem.UI.Ventas
 
             var (cantidad, total) = CalcularTotales(SingleListas.Instance.ProductosSeleccionados);
             LblCantProductos.Text = cantidad.ToString();
-            LblPrecioTotal.Text = total.ToString("C2");
+            LblPrecioTotal.Text = FormatearPesoArgentino(total);
 
             if (_productosResumen.Count == 0)
             {
@@ -341,10 +353,16 @@ namespace PrimeSystem.UI.Ventas
 
         private async void FormVentas_Load(object sender, EventArgs e)
         {
-            await CargarProductosAsync();
+            // Configurar primero los controles
             ConfigurarDGV();
             ConfigurarListView();
             DgvProductosSeleccionados.DataSource = _productosResumen;
+
+            // Luego cargar productos asíncronamente
+            await CargarProductosAsync();
+
+            // Forzar un refresh visual
+            this.Refresh();
         }
 
         private void ConfigurarListView()
@@ -362,50 +380,65 @@ namespace PrimeSystem.UI.Ventas
 
         private void FiltrarYMostrarProductos()
         {
-            string filtro = TxtBuscardor.Text.Trim().ToLowerInvariant();
-
-            var productosFiltrados = _todosLosProductos
-                .Where(p => string.IsNullOrEmpty(filtro) || p.Art_Desc.ToLowerInvariant().Contains(filtro))
-                .ToList();
-
-            LsvProductos.BeginUpdate();
-            LsvProductos.Items.Clear();
-
-            ListViewItem? primerItem = null;
-
-            foreach (var articulo in productosFiltrados)
+            try
             {
-                var item = new ListViewItem(articulo.Art_Desc) { Tag = articulo };
-                LsvProductos.Items.Add(item);
-                if (primerItem == null)
+                string filtro = TxtBuscardor.Text.Trim().ToLowerInvariant();
+
+                var productosFiltrados = _todosLosProductos
+                    .Where(p => string.IsNullOrEmpty(filtro) || p.Art_Desc.ToLowerInvariant().Contains(filtro))
+                    .ToList();
+
+                LsvProductos.BeginUpdate();
+                LsvProductos.Items.Clear();
+
+                foreach (var articulo in productosFiltrados)
                 {
-                    primerItem = item;
+                    var item = new ListViewItem(articulo.Art_Desc) { Tag = articulo };
+                    LsvProductos.Items.Add(item);
                 }
-            }
 
-            if (primerItem != null)
-            {
-                primerItem.Selected = true;
-                primerItem.EnsureVisible();
-            }
-            else
-            {
-                // Si no hay resultados, limpiar los detalles del producto seleccionado
-                LsvProductos_SelectedIndexChanged(this, EventArgs.Empty);
-            }
+                // Seleccionar el primer item si existe
+                if (LsvProductos.Items.Count > 0)
+                {
+                    LsvProductos.Items[0].Selected = true;
+                    LsvProductos.Items[0].EnsureVisible();
+                }
+                else
+                {
+                    LsvProductos_SelectedIndexChanged(this, EventArgs.Empty);
+                }
 
-            LsvProductos.EndUpdate();
+                LsvProductos.EndUpdate();
+
+                // Forzar redibujado
+                LsvProductos.Refresh();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en FiltrarYMostrarProductos: {ex.Message}");
+
+            }
         }
 
         private async Task CargarProductosAsync()
         {
             try
             {
+                // Mostrar indicador de carga
+                LsvProductos.Visible = false;
+                Cursor = Cursors.WaitCursor;
+
                 var result = await _articuloStockService.GetAllArticuloStock();
                 if (result.IsSuccess)
                 {
                     _todosLosProductos = result.Value;
-                    FiltrarYMostrarProductos(); // Carga inicial con todos los productos
+
+                    // Invoke para asegurar ejecución en el hilo de UI
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        FiltrarYMostrarProductos();
+                        LsvProductos.Visible = true;
+                    });
                 }
                 else
                 {
@@ -418,10 +451,16 @@ namespace PrimeSystem.UI.Ventas
             {
                 MostrarMensajeError($"Error: {ex.Message}");
             }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private async void BtnConfirmarVenta_Click(object sender, EventArgs e)
         {
+            DialogResult dr = MessageBox.Show("¿Estas seguro que queres finalizar la venta?", "Confirmación de venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
             if (SingleListas.Instance.ProductosSeleccionados.Count == 0)
             {
                 MostrarMensajeAdvertencia("No hay productos seleccionados para la venta.");

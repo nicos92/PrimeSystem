@@ -165,9 +165,9 @@
             Lbl.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Lbl.Location = new Point(15, 68);
             Lbl.Name = "Lbl";
-            Lbl.Size = new Size(67, 17);
+            Lbl.Size = new Size(60, 17);
             Lbl.TabIndex = 6;
-            Lbl.Text = "PRECIO: $";
+            Lbl.Text = "PRECIO: ";
             // 
             // LblProducto
             // 
