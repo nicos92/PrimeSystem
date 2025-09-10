@@ -302,9 +302,9 @@
             label6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.Location = new Point(271, 17);
             label6.Name = "label6";
-            label6.Size = new Size(107, 17);
+            label6.Size = new Size(100, 17);
             label6.TabIndex = 4;
-            label6.Text = "PRECIO TOTAL: $";
+            label6.Text = "PRECIO TOTAL: ";
             // 
             // LblCantProductos
             // 

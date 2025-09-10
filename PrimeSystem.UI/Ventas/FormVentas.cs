@@ -459,6 +459,10 @@ namespace PrimeSystem.UI.Ventas
 
         private async void BtnConfirmarVenta_Click(object sender, EventArgs e)
         {
+            /* TODO: VERIFICAR POR QUE SALE ERROR DE FORMATO 
+             * AL PASAR DE LOS MIL EN ADELANTE
+             * Error: The input string ' 1.210,00' was not in a correct format.
+             */
             DialogResult dr = MessageBox.Show("¿Estas seguro que queres finalizar la venta?", "Confirmación de venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.No) return;
             if (SingleListas.Instance.ProductosSeleccionados.Count == 0)
@@ -474,7 +478,7 @@ namespace PrimeSystem.UI.Ventas
         {
             try
             {
-                decimal subtotal = Convert.ToDecimal(LblPrecioTotal.Text.Split('$')[1], CultureInfo.CurrentCulture);
+                decimal subtotal = Convert.ToDecimal(LblPrecioTotal.Text.Split('$')[1], _cultureArgentina);
                 decimal descuento = 0;
 
                 var hVentas = new HVentas
@@ -500,7 +504,7 @@ namespace PrimeSystem.UI.Ventas
             }
             catch (Exception ex)
             {
-                MostrarMensajeError($"Error: {ex.Message}");
+                MostrarMensajeError($"Error al procesar venta: {ex.Message}");
             }
         }
 
