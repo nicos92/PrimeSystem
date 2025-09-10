@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             GBForm = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -69,6 +71,7 @@
             // 
             // splitContainer1
             // 
+            splitContainer1.BackColor = Utilidades.AppColorsBlue.SurfaceDim;
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 0);
             splitContainer1.Margin = new Padding(4);
@@ -93,6 +96,7 @@
             GBForm.Controls.Add(tableLayoutPanel1);
             GBForm.Dock = DockStyle.Fill;
             GBForm.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GBForm.ForeColor = Utilidades.AppColorsBlue.Primary;
             GBForm.Location = new Point(0, 0);
             GBForm.Margin = new Padding(4);
             GBForm.Name = "GBForm";
@@ -104,6 +108,7 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.BackColor = Utilidades.AppColorsBlue.Background;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 5);
@@ -148,6 +153,7 @@
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             label5.Location = new Point(3, 11);
             label5.Name = "label5";
             label5.Size = new Size(75, 21);
@@ -157,7 +163,9 @@
             // NumericUpDown1
             // 
             NumericUpDown1.Anchor = AnchorStyles.None;
+            NumericUpDown1.BackColor = Utilidades.AppColorsBlue.SurfaceContainer;
             NumericUpDown1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            NumericUpDown1.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             NumericUpDown1.Location = new Point(84, 7);
             NumericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             NumericUpDown1.Name = "NumericUpDown1";
@@ -171,6 +179,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Size = new Size(162, 21);
@@ -180,19 +189,25 @@
             // BtnQuitar
             // 
             BtnQuitar.Anchor = AnchorStyles.None;
+            BtnQuitar.BackColor = Utilidades.AppColorsBlue.Secondary;
+            BtnQuitar.FlatAppearance.BorderColor = Utilidades.AppColorsBlue.SecondaryContainer;
+            BtnQuitar.FlatStyle = FlatStyle.Flat;
             BtnQuitar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnQuitar.ForeColor = Utilidades.AppColorsBlue.OnSecondary;
             BtnQuitar.Location = new Point(19, 486);
             BtnQuitar.Margin = new Padding(4);
             BtnQuitar.Name = "BtnQuitar";
             BtnQuitar.Size = new Size(265, 37);
             BtnQuitar.TabIndex = 5;
             BtnQuitar.Text = "QUITAR 1 UNIDAD";
-            BtnQuitar.UseVisualStyleBackColor = true;
+            BtnQuitar.UseVisualStyleBackColor = false;
             BtnQuitar.Click += BtnQuitar_Click;
             // 
             // TxtBuscardor
             // 
+            TxtBuscardor.BackColor = Utilidades.AppColorsBlue.SurfaceContainer;
             TxtBuscardor.Font = new Font("Segoe UI", 12F);
+            TxtBuscardor.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             TxtBuscardor.Location = new Point(3, 24);
             TxtBuscardor.Name = "TxtBuscardor";
             TxtBuscardor.Size = new Size(265, 29);
@@ -202,14 +217,18 @@
             // BtnAceptar
             // 
             BtnAceptar.Anchor = AnchorStyles.None;
+            BtnAceptar.BackColor = Utilidades.AppColorsBlue.Primary;
+            BtnAceptar.FlatAppearance.BorderColor = Utilidades.AppColorsBlue.PrimaryContainer;
+            BtnAceptar.FlatStyle = FlatStyle.Flat;
             BtnAceptar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnAceptar.ForeColor = Utilidades.AppColorsBlue.OnPrimary;
             BtnAceptar.Location = new Point(19, 441);
             BtnAceptar.Margin = new Padding(4);
             BtnAceptar.Name = "BtnAceptar";
             BtnAceptar.Size = new Size(265, 37);
             BtnAceptar.TabIndex = 4;
             BtnAceptar.Text = "AGREGAR";
-            BtnAceptar.UseVisualStyleBackColor = true;
+            BtnAceptar.UseVisualStyleBackColor = false;
             BtnAceptar.Click += BtnAceptar_Click;
             // 
             // groupBox1
@@ -221,6 +240,7 @@
             groupBox1.Controls.Add(Lbl);
             groupBox1.Controls.Add(LblProducto);
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.ForeColor = Utilidades.AppColorsBlue.Primary;
             groupBox1.Location = new Point(3, 287);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(298, 97);
@@ -232,6 +252,7 @@
             // 
             LblPrecioCant.AutoSize = true;
             LblPrecioCant.Font = new Font("Segoe UI", 12F);
+            LblPrecioCant.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LblPrecioCant.Location = new Point(197, 63);
             LblPrecioCant.Name = "LblPrecioCant";
             LblPrecioCant.Size = new Size(19, 21);
@@ -242,6 +263,7 @@
             // 
             LblPPC.AutoSize = true;
             LblPPC.Font = new Font("Segoe UI", 12F);
+            LblPPC.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LblPPC.Location = new Point(19, 63);
             LblPPC.Name = "LblPPC";
             LblPPC.Size = new Size(181, 21);
@@ -252,6 +274,7 @@
             // 
             LblPrecio.AutoSize = true;
             LblPrecio.Font = new Font("Segoe UI", 12F);
+            LblPrecio.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LblPrecio.Location = new Point(83, 42);
             LblPrecio.Name = "LblPrecio";
             LblPrecio.Size = new Size(19, 21);
@@ -262,6 +285,7 @@
             // 
             Lbl.AutoSize = true;
             Lbl.Font = new Font("Segoe UI", 12F);
+            Lbl.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             Lbl.Location = new Point(19, 42);
             Lbl.Name = "Lbl";
             Lbl.Size = new Size(70, 21);
@@ -272,6 +296,7 @@
             // 
             LblProducto.AutoSize = true;
             LblProducto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblProducto.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LblProducto.Location = new Point(19, 21);
             LblProducto.Name = "LblProducto";
             LblProducto.Size = new Size(92, 21);
@@ -282,6 +307,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             label2.Location = new Point(3, 56);
             label2.Name = "label2";
             label2.Size = new Size(97, 21);
@@ -290,8 +316,10 @@
             // 
             // LsvProductos
             // 
+            LsvProductos.BackColor = Utilidades.AppColorsBlue.SurfaceContainer;
             LsvProductos.Dock = DockStyle.Fill;
             LsvProductos.Font = new Font("Segoe UI", 12F);
+            LsvProductos.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LsvProductos.Location = new Point(3, 80);
             LsvProductos.Name = "LsvProductos";
             LsvProductos.Size = new Size(298, 201);
@@ -302,8 +330,26 @@
             // 
             DgvProductosSeleccionados.AllowUserToAddRows = false;
             DgvProductosSeleccionados.AllowUserToDeleteRows = false;
+            DgvProductosSeleccionados.BackgroundColor = Utilidades.AppColorsBlue.Surface;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Utilidades.AppColorsBlue.SurfaceContainerHigh;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Utilidades.AppColorsBlue.OnSurfaceVariant;
+            dataGridViewCellStyle1.SelectionBackColor = Utilidades.AppColorsBlue.PrimaryContainer;
+            dataGridViewCellStyle1.SelectionForeColor = Utilidades.AppColorsBlue.OnPrimaryContainer;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DgvProductosSeleccionados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DgvProductosSeleccionados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Utilidades.AppColorsBlue.Surface;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Utilidades.AppColorsBlue.OnSurface;
+            dataGridViewCellStyle2.SelectionBackColor = Utilidades.AppColorsBlue.PrimaryContainer;
+            dataGridViewCellStyle2.SelectionForeColor = Utilidades.AppColorsBlue.OnPrimaryContainer;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DgvProductosSeleccionados.DefaultCellStyle = dataGridViewCellStyle2;
             DgvProductosSeleccionados.Dock = DockStyle.Fill;
+            DgvProductosSeleccionados.GridColor = Utilidades.AppColorsBlue.OutlineVariant;
             DgvProductosSeleccionados.Location = new Point(0, 26);
             DgvProductosSeleccionados.Name = "DgvProductosSeleccionados";
             DgvProductosSeleccionados.ReadOnly = true;
@@ -315,6 +361,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Utilidades.AppColorsBlue.SurfaceContainerHigh;
             panel1.Controls.Add(BtnConfirmarVenta);
             panel1.Controls.Add(LblPrecioTotal);
             panel1.Controls.Add(label6);
@@ -328,18 +375,23 @@
             // 
             // BtnConfirmarVenta
             // 
+            BtnConfirmarVenta.BackColor = Utilidades.AppColorsBlue.Tertiary;
+            BtnConfirmarVenta.FlatAppearance.BorderColor = Utilidades.AppColorsBlue.TertiaryContainer;
+            BtnConfirmarVenta.FlatStyle = FlatStyle.Flat;
+            BtnConfirmarVenta.ForeColor = Utilidades.AppColorsBlue.OnTertiary;
             BtnConfirmarVenta.Location = new Point(113, 48);
             BtnConfirmarVenta.Name = "BtnConfirmarVenta";
             BtnConfirmarVenta.Size = new Size(265, 40);
             BtnConfirmarVenta.TabIndex = 7;
             BtnConfirmarVenta.Text = "CONFIRMAR VENTA";
-            BtnConfirmarVenta.UseVisualStyleBackColor = true;
+            BtnConfirmarVenta.UseVisualStyleBackColor = false;
             BtnConfirmarVenta.Click += BtnConfirmarVenta_Click;
             // 
             // LblPrecioTotal
             // 
             LblPrecioTotal.AutoSize = true;
             LblPrecioTotal.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LblPrecioTotal.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LblPrecioTotal.Location = new Point(359, 11);
             LblPrecioTotal.Name = "LblPrecioTotal";
             LblPrecioTotal.Size = new Size(23, 25);
@@ -350,6 +402,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             label6.Location = new Point(253, 17);
             label6.Name = "label6";
             label6.Size = new Size(100, 17);
@@ -361,6 +414,7 @@
             // 
             LblCantProductos.AutoSize = true;
             LblCantProductos.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LblCantProductos.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             LblCantProductos.Location = new Point(151, 11);
             LblCantProductos.Name = "LblCantProductos";
             LblCantProductos.Size = new Size(23, 25);
@@ -371,6 +425,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Utilidades.AppColorsBlue.OnBackground;
             label4.Location = new Point(28, 8);
             label4.Name = "label4";
             label4.Size = new Size(93, 34);
@@ -381,6 +436,7 @@
             // 
             label3.Dock = DockStyle.Top;
             label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Utilidades.AppColorsBlue.Primary;
             label3.Location = new Point(0, 0);
             label3.Margin = new Padding(8);
             label3.Name = "label3";
@@ -392,6 +448,7 @@
             // FormVentas
             // 
             AutoScaleMode = AutoScaleMode.None;
+            BackColor = Utilidades.AppColorsBlue.Background;
             ClientSize = new Size(804, 561);
             Controls.Add(splitContainer1);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
