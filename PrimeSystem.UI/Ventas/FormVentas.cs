@@ -447,7 +447,7 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
-        private async void BtnConfirmarVenta_Click(object sender, EventArgs e)
+        private async Task ConfirmarVentaAsync()
         {
             if (SingleListas.Instance.ProductosSeleccionados.Count == 0)
             {
@@ -458,6 +458,10 @@ namespace PrimeSystem.UI.Ventas
             if (dr == DialogResult.No) return;
 
             await ProcesarVentaAsync();
+        }
+        private async void BtnConfirmarVenta_Click(object sender, EventArgs e)
+        {
+            await ConfirmarVentaAsync();
         }
 
         private async Task ProcesarVentaAsync()
@@ -543,7 +547,7 @@ namespace PrimeSystem.UI.Ventas
                 CargarDataGridView();
             }
         }
-        private void FormVentas_KeyDown(object sender, KeyEventArgs e)
+        private async void FormVentas_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -575,6 +579,10 @@ namespace PrimeSystem.UI.Ventas
                         QuitarUnidadSeleccionada();
                         e.Handled = true;
                     }
+                    break;
+                case Keys.F12:
+                    await ConfirmarVentaAsync();
+                    e.Handled = true;
                     break;
             }
         }
