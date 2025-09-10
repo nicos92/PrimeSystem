@@ -350,6 +350,7 @@
             MinimizeBox = false;
             Name = "FormVentas";
             Text = "Producto";
+            FormClosing += FormVentas_FormClosing;
             Load += FormVentas_Load;
             KeyDown += FormVentas_KeyDown;
             splitContainer1.Panel1.ResumeLayout(false);
