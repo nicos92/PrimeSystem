@@ -45,7 +45,7 @@
             Lbl = new Label();
             LblProducto = new Label();
             label2 = new Label();
-            LsvProductos = new ListView();
+            LsvProductos = new ListBox();
             DgvProductosSeleccionados = new DataGridView();
             panel1 = new Panel();
             BtnConfirmarVenta = new Button();
@@ -296,7 +296,6 @@
             LsvProductos.Name = "LsvProductos";
             LsvProductos.Size = new Size(298, 201);
             LsvProductos.TabIndex = 2;
-            LsvProductos.UseCompatibleStateImageBehavior = false;
             LsvProductos.SelectedIndexChanged += LsvProductos_SelectedIndexChanged;
             // 
             // DgvProductosSeleccionados
@@ -449,7 +448,7 @@
         private System.Windows.Forms.Label LblPPC;
         private Button BtnQuitar;
 
-        private ListView LsvProductos;
+        private ListBox LsvProductos;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
         private Label label5;

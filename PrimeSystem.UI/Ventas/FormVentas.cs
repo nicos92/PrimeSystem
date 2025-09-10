@@ -199,7 +199,7 @@ namespace PrimeSystem.UI.Ventas
         {
             if (_evitarBucleEventos) return;
 
-            if (LsvProductos.SelectedItems.Count > 0 && LsvProductos.SelectedItems[0].Tag is ArticuloStock selectedItem)
+            if (LsvProductos.SelectedItem is ArticuloStock selectedItem)
             {
                 LblProducto.Text = selectedItem.Art_Desc;
                 LblPrecio.Text = FormatearPesoArgentino(CalcularPrecioVenta(selectedItem));
@@ -231,7 +231,7 @@ namespace PrimeSystem.UI.Ventas
         private void ActualizarTotalPrecioPorCantidad()
         {
             decimal precio = 0m;
-            if (LsvProductos.SelectedItems.Count > 0 && LsvProductos.SelectedItems[0].Tag is ArticuloStock selectedItem)
+            if (LsvProductos.SelectedItem is ArticuloStock selectedItem)
             {
                 precio = (decimal)CalcularPrecioVenta(selectedItem);
             }
@@ -242,7 +242,7 @@ namespace PrimeSystem.UI.Ventas
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-            if (LsvProductos.SelectedItems.Count > 0 && LsvProductos.SelectedItems[0].Tag is ArticuloStock producto)
+            if (LsvProductos.SelectedItem is ArticuloStock producto)
             {
                 int cantidad = (int)NumericUpDown1.Value;
                 AgregarProductosAlCarrito(producto, cantidad);
@@ -322,7 +322,7 @@ namespace PrimeSystem.UI.Ventas
 
                 if (DgvProductosSeleccionados.Rows[indiceParaSeleccionar].DataBoundItem is ProductoResumen productoSeleccionado)
                 {
-                    SeleccionarProductoEnListView(productoSeleccionado.Cod_Articulo);
+                    SeleccionarProductoEnListBox(productoSeleccionado.Cod_Articulo);
                     _ultimoCodigoArticuloSeleccionado = productoSeleccionado.Cod_Articulo;
                     _ultimoIndiceSeleccionado = indiceParaSeleccionar;
                 }
@@ -337,10 +337,7 @@ namespace PrimeSystem.UI.Ventas
         {
             _evitarBucleEventos = true;
 
-            if (LsvProductos.SelectedItems.Count > 0)
-            {
-                LsvProductos.SelectedItems[0].Selected = false;
-            }
+            LsvProductos.SelectedIndex = -1;
             DgvProductosSeleccionados.ClearSelection();
             LblProducto.Text = string.Empty;
             LblPrecio.Text = string.Empty;
@@ -355,7 +352,7 @@ namespace PrimeSystem.UI.Ventas
         {
             // Configurar primero los controles
             ConfigurarDGV();
-            ConfigurarListView();
+            ConfigurarListBox();
             DgvProductosSeleccionados.DataSource = _productosResumen;
 
             // Luego cargar productos asíncronamente
@@ -365,17 +362,12 @@ namespace PrimeSystem.UI.Ventas
             this.Refresh();
         }
 
-        private void ConfigurarListView()
+        private void ConfigurarListBox()
         {
-            // Configuración del control ListView que reemplaza al ComboBox
-            LsvProductos.View = View.Details;
-            LsvProductos.FullRowSelect = true;
-            LsvProductos.MultiSelect = false;
-            LsvProductos.GridLines = true;
-            LsvProductos.HeaderStyle = ColumnHeaderStyle.None;
-
-            LsvProductos.Columns.Clear();
-            LsvProductos.Columns.Add("Descripción", -2, HorizontalAlignment.Left);
+            // Configuración del control ListBox que reemplaza al ListView
+            LsvProductos.DisplayMember = "Art_Desc";
+            LsvProductos.ValueMember = "Cod_Articulo";
+            LsvProductos.SelectionMode = SelectionMode.One;
         }
 
         private void FiltrarYMostrarProductos()
@@ -393,15 +385,13 @@ namespace PrimeSystem.UI.Ventas
 
                 foreach (var articulo in productosFiltrados)
                 {
-                    var item = new ListViewItem(articulo.Art_Desc) { Tag = articulo };
-                    LsvProductos.Items.Add(item);
+                    LsvProductos.Items.Add(articulo);
                 }
 
                 // Seleccionar el primer item si existe
                 if (LsvProductos.Items.Count > 0)
                 {
-                    LsvProductos.Items[0].Selected = true;
-                    LsvProductos.Items[0].EnsureVisible();
+                    LsvProductos.SelectedIndex = 0;
                 }
                 else
                 {
@@ -523,10 +513,7 @@ namespace PrimeSystem.UI.Ventas
         {
             _evitarBucleEventos = true;
 
-            if (LsvProductos.SelectedItems.Count > 0)
-            {
-                LsvProductos.SelectedItems[0].Selected = false;
-            }
+            LsvProductos.SelectedIndex = -1;
             DgvProductosSeleccionados.ClearSelection();
             LblProducto.Text = string.Empty;
             LblPrecio.Text = string.Empty;
@@ -608,7 +595,7 @@ namespace PrimeSystem.UI.Ventas
                     // Actualizar el ComboBox para que coincida con la selección del DataGridView
                     // Quitar _evitarBucleEventos = true; ya que estamos en SelectionChanged
                     // y queremos que el ComboBox se actualice con las flechas del teclado
-                    SeleccionarProductoEnListView(productoSeleccionado.Cod_Articulo);
+                    SeleccionarProductoEnListBox(productoSeleccionado.Cod_Articulo);
                 }
             }
             finally
@@ -617,7 +604,7 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
-        private void SeleccionarProductoEnListView(string codigoArticulo)
+        private void SeleccionarProductoEnListBox(string codigoArticulo)
         {
             if (DgvProductosSeleccionados.Rows.Count == 0)
             {
@@ -629,40 +616,22 @@ namespace PrimeSystem.UI.Ventas
 
             if (_evitarBucleEventos && !_procesandoSeleccion) return;
 
-            ListViewItem? itemASeleccionar = null;
-            foreach (ListViewItem item in LsvProductos.Items)
-            {
-                if (item.Tag is ArticuloStock articulo && articulo.Cod_Articulo == codigoArticulo)
-                {
-                    itemASeleccionar = item;
-                    break;
-                }
-            }
+            var itemASeleccionar = LsvProductos.Items.OfType<ArticuloStock>()
+                .FirstOrDefault(a => a.Cod_Articulo == codigoArticulo);
 
             LsvProductos.SelectedIndexChanged -= LsvProductos_SelectedIndexChanged;
 
+            LsvProductos.SelectedItem = itemASeleccionar;
+
             if (itemASeleccionar != null)
             {
-                if (LsvProductos.SelectedItems.Count > 0)
-                {
-                    LsvProductos.SelectedItems[0].Selected = false;
-                }
-                itemASeleccionar.Selected = true;
-                itemASeleccionar.EnsureVisible();
-
-                if (itemASeleccionar.Tag is ArticuloStock articuloSeleccionado)
-                {
-                    LblProducto.Text = articuloSeleccionado.Art_Desc;
-                    LblPrecio.Text = CalcularPrecioVenta(articuloSeleccionado).ToString("C2");
-                    ActualizarTotalPrecioPorCantidad();
-                }
+                LblProducto.Text = itemASeleccionar.Art_Desc;
+                LblPrecio.Text = FormatearPesoArgentino(CalcularPrecioVenta(itemASeleccionar));
+                ActualizarTotalPrecioPorCantidad();
             }
             else
             {
-                if (LsvProductos.SelectedItems.Count > 0)
-                {
-                    LsvProductos.SelectedItems[0].Selected = false;
-                }
+                // Si no se encuentra el artículo (p.ej. fue quitado), limpiar los labels
                 LblProducto.Text = string.Empty;
                 LblPrecio.Text = string.Empty;
                 ActualizarTotalPrecioPorCantidad();
@@ -700,7 +669,7 @@ namespace PrimeSystem.UI.Ventas
                     var selectedRow = DgvProductosSeleccionados.Rows[e.RowIndex];
                     if (selectedRow.DataBoundItem is ProductoResumen producto)
                     {
-                        SeleccionarProductoEnListView(producto.Cod_Articulo);
+                        SeleccionarProductoEnListBox(producto.Cod_Articulo);
                     }
                 }
                 finally
