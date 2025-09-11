@@ -142,52 +142,52 @@ namespace PrimeSystem.UI.Ventas
 
             var columns = new[]
             {
-        new DataGridViewTextBoxColumn
-        {
-            Name = "ProductoId",
-            DataPropertyName = "Cod_Articulo",
-            HeaderText = "ID",
-            Visible = false
-        },
-        new DataGridViewTextBoxColumn
-        {
-            Name = "ProductoNombre",
-            DataPropertyName = "Producto_Nombre",
-            HeaderText = "Nombre",
-            Width = 200,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "ProductoId",
+                    DataPropertyName = "Cod_Articulo",
+                    HeaderText = "ID",
+                    Visible = false
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "ProductoNombre",
+                    DataPropertyName = "Producto_Nombre",
+                    HeaderText = "Producto",
+                    Width = 200,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
 
-        },
-        new DataGridViewTextBoxColumn
-        {
-            Name = "ProductoCantidad",
-            DataPropertyName = "Producto_Cantidad",
-            HeaderText = "Cantidad",
-            Width = 80,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
-            DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight }
-        },
-        new DataGridViewTextBoxColumn
-        {
-            Name = "ProductoPrecioUnitario",
-            DataPropertyName = "Producto_Precio",
-            HeaderText = "Precio Unitario",
-            Width = 100,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "ProductoCantidad",
+                    DataPropertyName = "Producto_Cantidad",
+                    HeaderText = "Cantidad",
+                    Width = 80,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                    DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight }
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "ProductoPrecioUnitario",
+                    DataPropertyName = "Producto_Precio",
+                    HeaderText = "Precio Unitario",
+                    Width = 100,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
 
-            DefaultCellStyle = stylePesos
-        },
-        new DataGridViewTextBoxColumn
-        {
-            Name = "ProductoPrecioTotal",
-            DataPropertyName = "Producto_PrecioxCantidad",
-            HeaderText = "Total",
-            Width = 100,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                    DefaultCellStyle = stylePesos
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "ProductoPrecioTotal",
+                    DataPropertyName = "Producto_PrecioxCantidad",
+                    HeaderText = "Total",
+                    Width = 100,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
 
-            DefaultCellStyle = stylePesos
-        }
-    };
+                    DefaultCellStyle = stylePesos
+                }
+            };
 
             foreach (var column in columns)
             {
@@ -545,6 +545,25 @@ namespace PrimeSystem.UI.Ventas
             {
                 SingleListas.Instance.ProductosSeleccionados.Remove(articuloQuitar);
                 CargarDataGridView();
+
+            }
+        }
+
+        private void QuitarFilaSeleccionada()
+        {
+            if (DgvProductosSeleccionados.CurrentRow?.DataBoundItem is not ProductoResumen articulo)
+            {
+                return;
+            }
+
+            var articuloQuitar = SingleListas.Instance.ProductosSeleccionados
+                .FirstOrDefault(p => p.Cod_Articulo == articulo.Cod_Articulo);
+
+            if (articuloQuitar != null)
+            {
+                SingleListas.Instance.ProductosSeleccionados.RemoveAll(p => p.Cod_Articulo == articulo.Cod_Articulo);
+                CargarDataGridView();
+
             }
         }
         private async void FormVentas_KeyDown(object sender, KeyEventArgs e)
@@ -553,6 +572,10 @@ namespace PrimeSystem.UI.Ventas
             {
                 case Keys.F8:
                     QuitarUnidadSeleccionada();
+                    e.Handled = true;
+                    break;
+                case Keys.F9:
+                    QuitarFilaSeleccionada();
                     e.Handled = true;
                     break;
                 case Keys.Enter:
@@ -566,12 +589,7 @@ namespace PrimeSystem.UI.Ventas
                         BtnAceptar.PerformClick();
                         e.Handled = true;
                     }
-                    else if (DgvProductosSeleccionados.Focused)
-                    {
-                        // Permitir quitar también desde el DataGridView con Enter
-                        QuitarUnidadSeleccionada();
-                        e.Handled = true;
-                    }
+
                     break;
                 case Keys.Delete:
                     if (DgvProductosSeleccionados.Focused)
