@@ -2,9 +2,9 @@ using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.UI.Ventas;
 using PrimeSystem.Utilidades;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using PrimeSystem.UI.Compras;
@@ -19,6 +19,7 @@ public partial class FormPrincipal : Form
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly IArticulosService _articulosService;
+    private readonly ILogger<FormPrincipal> _logger;
     private Button _btnActivo;
 
     /// <summary>
@@ -26,12 +27,14 @@ public partial class FormPrincipal : Form
     /// </summary>
     /// <param name="serviceProvider">El proveedor de servicios.</param>
     /// <param name="articulosService">El servicio de artículos.</param>
-    public FormPrincipal(IServiceProvider serviceProvider,IArticulosService articulosService)
+    /// <param name="logger">El logger para esta clase.</param>
+    public FormPrincipal(IServiceProvider serviceProvider, IArticulosService articulosService, ILogger<FormPrincipal> logger)
     {
         _serviceProvider = serviceProvider;
         _articulosService = articulosService;
+        _logger = logger;
         InitializeComponent();
-       
+
         _btnActivo = BtnModVentas;
     }
 
@@ -42,6 +45,7 @@ public partial class FormPrincipal : Form
     /// <param name="e">La instancia de <see cref="EventArgs"/> que contiene los datos del evento.</param>
     private void FormPrincipal_Load(object sender, EventArgs e)
     {
+        _logger.LogInformation("Cargando FormPrincipal y configurando menú.");
         ConfigurarBtnsMenu();
         SeleccionarForm(typeof(FormVentas));
         CargarPermisos();
@@ -82,7 +86,7 @@ public partial class FormPrincipal : Form
     /// </summary>
     private void CargarPermisos()
     {
-        
+
         string rolUsuario = "admin"; // Aqu deberas obtener el rol del usuario actual
         switch (rolUsuario)
         {
@@ -157,13 +161,13 @@ public partial class FormPrincipal : Form
     /// </summary>
     /// <param name="tipoForm">El tipo de formulario a mostrar.</param>
     private void SeleccionarForm(Type tipoForm)
-    { 
+    {
         // Cerrar el formulario actual si existe
         foreach (Form f in this.MdiChildren)
         {
             f.Close();
         }
-
+        _logger.LogInformation("Seleccionando formulario: {0}", tipoForm);
         // Crear el formulario usando el tipo proporcionado en el Tag del botn
         if (tipoForm != null && typeof(Form).IsAssignableFrom(tipoForm))
         {

@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Sinks.Map;
 using PrimeSystem.Contrato.Repositorios;
 using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Repositorio.Repositorios;
@@ -26,45 +28,88 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
 
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .Enrich.FromLogContext()
+            .WriteTo.Debug() // EnvÃ­a todos los logs a la ventana de Salida/Debug
+            .WriteTo.Map(logEvent =>
+            {
+                // Obtener el SourceContext que ILogger<T> agrega automÃ¡ticamente
+                if (logEvent.Properties.TryGetValue("SourceContext", out var sourceContext))
+                {
+                    var namespaceStr = sourceContext.ToString().Trim('"');
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.Articulos")) return "Articulos";
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.Clientes")) return "Clientes";
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.Compras")) return "Compras";
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.Proveedores")) return "Proveedores";
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.Usuarios")) return "Usuarios";
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.Ventas")) return "Ventas";
+                    if (namespaceStr.StartsWith("PrimeSystem.UI.EstadoContable")) return "EstadoContable";
+                }
+                // Clave por defecto para todo lo demÃ¡s (servicios, repositorios, arranque, etc.)
+                return "General";
+            },
+            (key, sinkConfiguration) =>
+            {
+                // Configurar un archivo de log para cada clave
+                sinkConfiguration.File($"logs\\{key.ToLower()}-.txt", rollingInterval: RollingInterval.Day);
+            })
+            .CreateLogger();
 
-        ApplicationConfiguration.Initialize();
+        try
+        {
+            Log.Information("Iniciando la aplicaciÃ³n PrimeSystem.");
 
-        var services = new ServiceCollection();
-        ConfigureServices(services);
-        ServiceProvider = services.BuildServiceProvider();
+            ApplicationConfiguration.Initialize();
 
-        var mainForm = ServiceProvider.GetRequiredService<FormArranque>();
-        Application.Run(mainForm);
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+            ServiceProvider = services.BuildServiceProvider();
+
+            var mainForm = ServiceProvider.GetRequiredService<FormArranque>();
+            Application.Run(mainForm);
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "La aplicaciÃ³n ha terminado de forma inesperada.");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
 
     private static void ConfigureServices(ServiceCollection services)
     {
+        // Registrar Serilog para inyecciÃ³n de dependencias
+        services.AddLogging(builder => builder.AddSerilog(dispose: true));
+
         // Registrar formularios
-        services.AddTransient<FormArranque>();      // Este Form estaría en PrimeSystem.Arranque
+        services.AddTransient<FormArranque>();      // Este Form estarï¿½a en PrimeSystem.Arranque
 
-        services.AddTransient<FormPrincipal>();     // Este Form estaría en PrimeSystem.UI
+        services.AddTransient<FormPrincipal>();     // Este Form estarï¿½a en PrimeSystem.UI
 
-        services.AddTransient<FormArticulos>();     // Este Form estatñia en PrimeSystem.UI
+        services.AddTransient<FormArticulos>();     // Este Form estatï¿½ia en PrimeSystem.UI
         services.AddTransient<UCIngresoArticulos>();    // Este UC se encuentra en PrimeSystem.UI
         services.AddTransient<UCConsultaArticulos>();   // este UC se encuentra en PrimeSystem.UI
 
-        services.AddTransient<FormVentas>();        // Este Form estaría en PrimeSystem.UI.Ventas
+        services.AddTransient<FormVentas>();        // Este Form estarï¿½a en PrimeSystem.UI.Ventas
 
-        services.AddTransient<FormCompras>();       // Este Form estaría en PrimeSystem.UI.Compras
+        services.AddTransient<FormCompras>();       // Este Form estarï¿½a en PrimeSystem.UI.Compras
 
-        services.AddTransient<FormClientes>();      // Este Form estaría en PrimeSystem.UI.Clientes
-        services.AddTransient<UCIgresoCliente>(); // Este UserControl estaría en PrimeSystem.UI.Clientes
-        services.AddTransient<UCConsultaClientes>(); // Este UserControl estaría en PrimeSystem.UI.Clientes
+        services.AddTransient<FormClientes>();      // Este Form estarï¿½a en PrimeSystem.UI.Clientes
+        services.AddTransient<UCIgresoCliente>(); // Este UserControl estarï¿½a en PrimeSystem.UI.Clientes
+        services.AddTransient<UCConsultaClientes>(); // Este UserControl estarï¿½a en PrimeSystem.UI.Clientes
 
-        services.AddTransient<FormUsuarios>();      // Este Form estaría en PrimeSystem.UI.Usuarios
-        services.AddTransient<USConsultaUsuario>(); // Este UserControl estaría en PrimeSystem.UI.Usuarios
-        services.AddTransient<UCIngresoUsuarios>(); // Este UserControl estaría en PrimeSystem.UI.Usuarios
+        services.AddTransient<FormUsuarios>();      // Este Form estarï¿½a en PrimeSystem.UI.Usuarios
+        services.AddTransient<USConsultaUsuario>(); // Este UserControl estarï¿½a en PrimeSystem.UI.Usuarios
+        services.AddTransient<UCIngresoUsuarios>(); // Este UserControl estarï¿½a en PrimeSystem.UI.Usuarios
 
-        services.AddTransient<FormProveedores>();  // Este Form estaría en PrimeSystem.UI.Proveedores
-        services.AddTransient<UCIngresoProveedores>(); // Este UserControl estaría en PrimeSystem.UI.Proveedores
-        services.AddTransient<UCConsultaProveedor>();   // Este UserControl estaría en PrimeSystem.UI.Proveedores
+        services.AddTransient<FormProveedores>();  // Este Form estarï¿½a en PrimeSystem.UI.Proveedores
+        services.AddTransient<UCIngresoProveedores>(); // Este UserControl estarï¿½a en PrimeSystem.UI.Proveedores
+        services.AddTransient<UCConsultaProveedor>();   // Este UserControl estarï¿½a en PrimeSystem.UI.Proveedores
 
-        services.AddTransient<FormEstadoContable>(); // Este Form estaría en PrimeSystem.UI.EstadoContable
+        services.AddTransient<FormEstadoContable>(); // Este Form estarï¿½a en PrimeSystem.UI.EstadoContable
 
         // Registrar servicios (ejemplo)
         services.AddScoped<IArticuloStockRepository, ArticuloStockRepository>();
@@ -72,7 +117,7 @@ static class Program
 
         services.AddScoped<IArticulosRepository, ArticulosRepository>();
         services.AddScoped<IArticulosService, ArticulosService>();
-        
+
         services.AddScoped<ICategoriasRepository, CategoriasRepository>();
         services.AddScoped<ICategoriasService, CategoriasService>();
 

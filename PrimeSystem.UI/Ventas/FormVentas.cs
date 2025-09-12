@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Extensions.Logging;
 using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Modelo;
 using PrimeSystem.Modelo.Entidades;
@@ -21,6 +22,7 @@ namespace PrimeSystem.UI.Ventas
         private readonly IHVentasService _hVentaService;
         private readonly IHVentasDetalleService _hVentaDetalleService;
         private readonly IVentaService _ventaService;
+        private readonly ILogger<FormVentas> _logger;
         private bool _evitarBucleEventos = false;
         private int _indiceSeleccionado;
         private bool _procesandoSeleccion = false;
@@ -34,12 +36,13 @@ namespace PrimeSystem.UI.Ventas
         public FormVentas(IArticuloStockService articuloStockService,
                          IHVentasService hVentasService,
                          IHVentasDetalleService hVentasDetalleService,
-                         IVentaService ventaService)
+                         IVentaService ventaService, ILogger<FormVentas> logger)
         {
             _hVentaService = hVentasService;
             _hVentaDetalleService = hVentasDetalleService;
             _articuloStockService = articuloStockService;
             _ventaService = ventaService;
+            _logger = logger;
             _indiceSeleccionado = 0;
             _ultimoCodigoArticuloSeleccionado = "";
 
@@ -350,6 +353,7 @@ namespace PrimeSystem.UI.Ventas
 
         private async void FormVentas_Load(object sender, EventArgs e)
         {
+            _logger.LogInformation("Cargando FormVentas.");
             // Configurar primero los controles
             ConfigurarDGV();
             ConfigurarListBox();
