@@ -51,11 +51,11 @@
             DgvProductosSeleccionados = new DataGridView();
             panel1 = new Panel();
             tableLayoutPanel3 = new TableLayoutPanel();
-            BtnConfirmarVenta = new Button();
             label3 = new Label();
             LblCantProductos = new Label();
             LblPrecioTotal = new Label();
             label6 = new Label();
+            BtnConfirmarVenta = new Button();
             LblLista = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -392,22 +392,6 @@
             tableLayoutPanel3.Size = new Size(487, 100);
             tableLayoutPanel3.TabIndex = 8;
             // 
-            // BtnConfirmarVenta
-            // 
-            BtnConfirmarVenta.Anchor = AnchorStyles.None;
-            BtnConfirmarVenta.BackColor = Color.FromArgb(101, 89, 119);
-            tableLayoutPanel3.SetColumnSpan(BtnConfirmarVenta, 2);
-            BtnConfirmarVenta.FlatAppearance.BorderColor = Color.FromArgb(235, 220, 255);
-            BtnConfirmarVenta.FlatStyle = FlatStyle.Flat;
-            BtnConfirmarVenta.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnConfirmarVenta.Location = new Point(124, 55);
-            BtnConfirmarVenta.Name = "BtnConfirmarVenta";
-            BtnConfirmarVenta.Size = new Size(236, 40);
-            BtnConfirmarVenta.TabIndex = 7;
-            BtnConfirmarVenta.Text = "CONFIRMAR VENTA (F12)";
-            BtnConfirmarVenta.UseVisualStyleBackColor = false;
-            BtnConfirmarVenta.Click += BtnConfirmarVenta_Click;
-            // 
             // label3
             // 
             label3.Anchor = AnchorStyles.Right;
@@ -456,6 +440,22 @@
             label6.TabIndex = 4;
             label6.Text = "PRECIO TOTAL: ";
             label6.Click += label6_Click;
+            // 
+            // BtnConfirmarVenta
+            // 
+            BtnConfirmarVenta.Anchor = AnchorStyles.None;
+            BtnConfirmarVenta.BackColor = Color.FromArgb(101, 89, 119);
+            tableLayoutPanel3.SetColumnSpan(BtnConfirmarVenta, 2);
+            BtnConfirmarVenta.FlatAppearance.BorderColor = Color.FromArgb(235, 220, 255);
+            BtnConfirmarVenta.FlatStyle = FlatStyle.Flat;
+            BtnConfirmarVenta.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnConfirmarVenta.Location = new Point(124, 55);
+            BtnConfirmarVenta.Name = "BtnConfirmarVenta";
+            BtnConfirmarVenta.Size = new Size(236, 40);
+            BtnConfirmarVenta.TabIndex = 7;
+            BtnConfirmarVenta.Text = "CONFIRMAR VENTA (F12)";
+            BtnConfirmarVenta.UseVisualStyleBackColor = false;
+            BtnConfirmarVenta.Click += BtnConfirmarVenta_Click;
             // 
             // LblLista
             // 

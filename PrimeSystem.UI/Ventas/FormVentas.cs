@@ -19,8 +19,6 @@ namespace PrimeSystem.UI.Ventas
     public partial class FormVentas : Form
     {
         private readonly IArticuloStockService _articuloStockService;
-        private readonly IHVentasService _hVentaService;
-        private readonly IHVentasDetalleService _hVentaDetalleService;
         private readonly IVentaService _ventaService;
         private readonly ILogger<FormVentas> _logger;
         private bool _evitarBucleEventos = false;
@@ -34,12 +32,8 @@ namespace PrimeSystem.UI.Ventas
         private readonly CultureInfo _cultureArgentina = new CultureInfo("es-AR");
 
         public FormVentas(IArticuloStockService articuloStockService,
-                         IHVentasService hVentasService,
-                         IHVentasDetalleService hVentasDetalleService,
                          IVentaService ventaService, ILogger<FormVentas> logger)
         {
-            _hVentaService = hVentasService;
-            _hVentaDetalleService = hVentasDetalleService;
             _articuloStockService = articuloStockService;
             _ventaService = ventaService;
             _logger = logger;

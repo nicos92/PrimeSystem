@@ -21,14 +21,14 @@ namespace PrimeSystem.Repositorio.Repositorios
             OleDbTransaction? transaction = null;
             try
             {
-                OleDbConnection conn = Conexion();
+                using OleDbConnection conn = Conexion();
                 await conn.OpenAsync();
 
-                transaction = conn.BeginTransaction();
+                 transaction = (OleDbTransaction)  await conn.BeginTransactionAsync(); 
 
 
                 string sqlArticulos = "INSERT INTO H_Ventas (Cod_Usuario, fecha_hora, id_cliente, subtotal, descu, total) VALUES (?, ?, ?, ?, ?, ?)";
-                using (OleDbCommand cmdArticulos = new(sqlArticulos, conn, transaction))
+                using (OleDbCommand cmdArticulos = new(sqlArticulos, conn, transaction)) 
                 {
 
                     cmdArticulos.Parameters.AddWithValue("?", hVentas.Cod_Usuario);
@@ -51,7 +51,7 @@ namespace PrimeSystem.Repositorio.Repositorios
 
                 if (id_remito == 0)
                 {
-                    transaction.Rollback();
+                    await transaction.RollbackAsync();
                     return Result<bool>.Failure("No se pudo obtener el número de remito");
                 }
 
@@ -68,27 +68,93 @@ namespace PrimeSystem.Repositorio.Repositorios
                     cmdStock.Parameters.AddWithValue("?", item.Producto_PrecioxCantidad);
 
                     await cmdStock.ExecuteNonQueryAsync();
+
+                    string cmdARt = "UPDATE Stock SET cantidad = cantidad - ? WHERE cod_articulo = ?";
+                    using OleDbCommand oleDbCommand1 = new(cmdARt, conn, transaction);
+                    oleDbCommand1.Parameters.AddWithValue("?", item.Producto_Cantidad);
+                    oleDbCommand1.Parameters.AddWithValue("?", item.Cod_Articulo);
+                    await oleDbCommand1.ExecuteNonQueryAsync();
                 }
                
 
-                transaction.Commit();
+                await transaction.CommitAsync();
                 return Result<bool>.Success(true);
             }
             catch (OleDbException ex)
             {
-                transaction?.Rollback();
+                if (transaction != null)
+                    await transaction.RollbackAsync(); 
                 return Result<bool>.Failure($"Error OleDb al insertar la venta y los detalles: {ex.Message}");
             }
             catch (Exception ex)
             {
-                transaction?.Rollback();
+                if (transaction != null)
+                    await transaction.RollbackAsync();
                 return Result<bool>.Failure($"Error inesperado al insertar la venta y los detalles: {ex.Message}");
             }
         }
 
-        public Task<Result<(List<HVentas> ventas, List<HVentasDetalle> detalles)>> GetAll()
+        public async Task<Result<(List<HVentas> ventas, List<HVentasDetalle> detalles)>> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using OleDbConnection conn = Conexion();
+                await conn.OpenAsync();
+
+                List<HVentas> ventas = [];
+                List<HVentasDetalle> detalles = [];
+
+                // Query para obtener todas las ventas (H_Ventas)
+                string sqlVentas = "SELECT id_remito, Cod_Usuario, fecha_hora, id_cliente, subtotal, descu, total FROM H_Ventas";
+                using (OleDbCommand cmdVentas = new(sqlVentas, conn))
+                {
+                    using DbDataReader reader = await cmdVentas.ExecuteReaderAsync();
+                    while (await reader.ReadAsync())
+                    {
+                        ventas.Add(new HVentas
+                        {
+                            Id_Remito = reader.GetInt32(0),
+                            Cod_Usuario = reader.GetInt32(1),
+                            Fecha_Hora = reader.GetDateTime(2),
+                            Id_Cliente = reader.GetInt32(3),
+                            Subtotal = reader.GetDouble(4),
+                            Descu = reader.GetDouble(5),
+                            Total = reader.GetDouble(6)
+                        });
+                    }
+                }
+
+                // Query para obtener todos los detalles de las ventas (H_Ventas_Detalle)
+                string sqlDetalles = "SELECT id_det_remito, id_remito, cod_art, descr, p_unit, cant, p_x_cant FROM H_Ventas_Detalle";
+                using (OleDbCommand cmdDetalles = new(sqlDetalles, conn))
+                {
+                    using DbDataReader reader = await cmdDetalles.ExecuteReaderAsync();
+                    while (await reader.ReadAsync())
+                    {
+                        detalles.Add(new HVentasDetalle
+                        {
+                            Id_Det_Remito = reader.GetInt32(0),
+                            Id_Remito = reader.GetInt32(1),
+                            Cod_Art = reader.GetString(2),
+                            Descr = reader.GetString(3),
+                            P_Unit = reader.GetDouble(4),
+                            Cant = reader.GetInt32(5),
+                            P_X_Cant = reader.GetDouble(6),
+                            
+                        });
+                    }
+                }
+
+                return Result<(List<HVentas> ventas, List<HVentasDetalle> detalles)>.Success((ventas, detalles));
+            }
+            catch (OleDbException ex)
+            {
+                return Result<(List<HVentas> ventas, List<HVentasDetalle> detalles)>.Failure($"Error OleDb al obtener las ventas: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return Result<(List<HVentas> ventas, List<HVentasDetalle> detalles)>.Failure($"Error inesperado al obtener las ventas: {ex.Message}");
+            }
         }
     }
 }
