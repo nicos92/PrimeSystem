@@ -41,7 +41,6 @@ namespace PrimeSystem.UI.Ventas
             _ultimoCodigoArticuloSeleccionado = "";
 
             InitializeComponent();
-            // TODO: INVESTIGAR POR QUE A VECES CARGA AL LIST VIEW Y OTRAS NO
             KeyPreview = true;
         }
 

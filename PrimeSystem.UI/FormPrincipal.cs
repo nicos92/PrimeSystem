@@ -47,7 +47,7 @@ public partial class FormPrincipal : Form
     {
         _logger.LogInformation("Cargando FormPrincipal y configurando menú.");
         ConfigurarBtnsMenu();
-        SeleccionarForm(typeof(FormVentas));
+        SeleccionarForm(typeof(FormVentaPrincipal));
         CargarPermisos();
         //try
         //{
@@ -147,7 +147,7 @@ public partial class FormPrincipal : Form
     /// </summary>
     private void ConfigurarBtnsMenu()
     {
-        BtnModVentas.Tag = typeof(FormVentas);
+        BtnModVentas.Tag = typeof(FormVentaPrincipal);
         BtnModCompras.Tag = typeof(FormCompras);
         BtnModClientes.Tag = typeof(FormClientes);
         BtnModUsuarios.Tag = typeof(FormUsuarios);
