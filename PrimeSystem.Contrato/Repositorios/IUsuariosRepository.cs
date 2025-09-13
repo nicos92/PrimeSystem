@@ -7,7 +7,7 @@ namespace PrimeSystem.Contrato.Repositorios
     public interface IUsuariosRepository
     {
         Task<Result<List<Usuarios>>> GetAll();
-        Result<Usuarios> GetById(int id);
+        Task<Result<Usuarios>> GetById(int id);
         Result<Usuarios> Add(Usuarios usuario);
         Result<Usuarios> Update(Usuarios usuario);
         Result<bool> Delete(int id);

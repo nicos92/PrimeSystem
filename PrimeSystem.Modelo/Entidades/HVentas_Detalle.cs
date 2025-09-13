@@ -12,9 +12,9 @@ namespace PrimeSystem.Modelo.Entidades
         public int Id_Remito { get; set; }
         public string? Cod_Art { get; set; }
         public string? Descr { get; set; }
-        public double P_Unit { get; set; }
+        public decimal P_Unit { get; set; }
         public int Cant { get; set; }
-        public double P_X_Cant { get; set; }
+        public decimal P_X_Cant { get; set; }
 
         public HVentasDetalle() { }
     }

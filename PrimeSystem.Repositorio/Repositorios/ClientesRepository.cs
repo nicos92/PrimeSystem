@@ -42,17 +42,17 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public Result<Clientes> GetById(int id)
+        public async Task<Result<Clientes>> GetById(int id)
         {
             try
             {
                 using (var conexion = Conexion())
                 {
-                    conexion.Open();
+                    await conexion.OpenAsync();
                     using var cmd = new OleDbCommand("SELECT id_cliente, CUIT, nombre, entidad, tel, mail FROM Clientes WHERE Id_Cliente = ?", conexion);
                     cmd.Parameters.AddWithValue("?", id);
-                    using var reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    using var reader = await cmd.ExecuteReaderAsync();
+                    if (await reader.ReadAsync())
                     {
                         var cliente = new Clientes
                         {

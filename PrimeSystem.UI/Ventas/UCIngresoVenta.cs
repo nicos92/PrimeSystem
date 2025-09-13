@@ -436,7 +436,7 @@ namespace PrimeSystem.UI.Ventas
                 }
                 else
                 {
-                    MostrarMensajeError("Error al cargar los productos.");
+                    MostrarMensajeError("Error al cargar los productos. " + result.Error);
                     _todosLosProductos.Clear();
                     LsvProductos.Items.Clear();
                 }
@@ -470,6 +470,7 @@ namespace PrimeSystem.UI.Ventas
 
         private async Task ProcesarVentaAsync()
         {
+            Result<bool>? result = null;
             try
             {
                 decimal subtotal = Convert.ToDecimal(LblPrecioTotal.Text.Split('$')[1], _cultureArgentina);
@@ -479,12 +480,12 @@ namespace PrimeSystem.UI.Ventas
                 {
                     Cod_Usuario = 1,
                     Id_Cliente = 1,
-                    Descu = (double)descuento,
-                    Subtotal = (double)subtotal,
-                    Total = (double)(subtotal - descuento)
+                    Descu = descuento,
+                    Subtotal = subtotal,
+                    Total = subtotal - descuento
                 };
 
-                var result = await _ventaService.Add(hVentas, [.. _productosResumen]);
+                result = await _ventaService.Add(hVentas, [.. _productosResumen]);
 
                 if (result.IsSuccess)
                 {
@@ -498,7 +499,7 @@ namespace PrimeSystem.UI.Ventas
             }
             catch (Exception ex)
             {
-                MostrarMensajeError($"Error al procesar venta: {ex.Message}");
+                MostrarMensajeError($"Error al procesar venta UI: {ex.Message} " + result?.Error);
             }
         }
 

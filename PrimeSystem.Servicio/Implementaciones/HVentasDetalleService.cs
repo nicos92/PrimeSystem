@@ -20,5 +20,6 @@ namespace PrimeSystem.Servicio.Implementaciones
         public Result<HVentasDetalle> Add(HVentasDetalle detalle) => _repo.Add(detalle);
         public Result<HVentasDetalle> Update(HVentasDetalle detalle) => _repo.Update(detalle);
         public Result<bool> Delete(int id) => _repo.Delete(id);
+        public async Task<Result<List<HVentasDetalle>>> GetByRemitoId(int idRemito) => await _repo.GetByRemitoId(idRemito);
     }
 }

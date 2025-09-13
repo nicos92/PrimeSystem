@@ -49,25 +49,25 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public Result<Usuarios> GetById(int id)
+        public async Task<Result<Usuarios>> GetById(int id)
         {
             try
             {
                 using OleDbConnection conn = Conexion();
                 using OleDbCommand cmd = new("SELECT Id_Usuario, DNI, Nombre, Apellido, Tel, Mail, Id_Tipo FROM Usuarios WHERE Id_Usuario = @Id", conn);
                 cmd.Parameters.AddWithValue("@Id", id);
-                conn.Open();
-                using OleDbDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                await conn.OpenAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
                 {
                     Usuarios usuario = new()
                     {
                         Id_Usuario = reader.GetInt32(0),
-                        DNI = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        Nombre = reader.IsDBNull(2) ? null : reader.GetString(2),
-                        Apellido = reader.IsDBNull(3) ? null : reader.GetString(3),
-                        Tel = reader.IsDBNull(4) ? null : reader.GetString(4),
-                        Mail = reader.IsDBNull(5) ? null : reader.GetString(5),
+                        DNI = reader.GetString(1),
+                        Nombre = reader.GetString(2),
+                        Apellido = reader.GetString(3),
+                        Tel = reader.GetString(4),
+                        Mail = reader.GetString(5),
                         Id_Tipo = reader.GetInt32(6)
                     };
                     return Result<Usuarios>.Success(usuario);

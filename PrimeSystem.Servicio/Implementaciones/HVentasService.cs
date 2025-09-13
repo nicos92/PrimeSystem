@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
@@ -20,5 +21,6 @@ namespace PrimeSystem.Servicio.Implementaciones
         public Result<HVentas> Add(HVentas venta) => _repo.Add(venta);
         public Result<HVentas> Update(HVentas venta) => _repo.Update(venta);
         public Result<bool> Delete(int id) => _repo.Delete(id);
+        public Result<List<HVentas>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, string cliente, int? idRemito) => _repo.GetFiltered(fechaDesde, fechaHasta, cliente, idRemito);
     }
 }

@@ -24,15 +24,14 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using OleDbConnection conn = Conexion();
                 await conn.OpenAsync();
 
-                 transaction = (OleDbTransaction)  await conn.BeginTransactionAsync(); 
+                 transaction =  (OleDbTransaction) await conn.BeginTransactionAsync(); 
 
 
-                string sqlArticulos = "INSERT INTO H_Ventas (Cod_Usuario, fecha_hora, id_cliente, subtotal, descu, total) VALUES (?, ?, ?, ?, ?, ?)";
+                string sqlArticulos = "INSERT INTO H_Ventas (Cod_Usuario,  id_cliente, subtotal, descu, total) VALUES (?, ?, ?, ?,?)";
                 using (OleDbCommand cmdArticulos = new(sqlArticulos, conn, transaction)) 
                 {
 
                     cmdArticulos.Parameters.AddWithValue("?", hVentas.Cod_Usuario);
-                    cmdArticulos.Parameters.AddWithValue("?", DateTime.Now);
                     cmdArticulos.Parameters.AddWithValue("?", hVentas.Id_Cliente);
                     cmdArticulos.Parameters.AddWithValue("?", hVentas.Subtotal);
                     cmdArticulos.Parameters.AddWithValue("?", hVentas.Descu);
@@ -82,14 +81,12 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
             catch (OleDbException ex)
             {
-                if (transaction != null)
-                    await transaction.RollbackAsync(); 
+                 transaction?.RollbackAsync(); 
                 return Result<bool>.Failure($"Error OleDb al insertar la venta y los detalles: {ex.Message}");
             }
             catch (Exception ex)
             {
-                if (transaction != null)
-                    await transaction.RollbackAsync();
+                transaction?.RollbackAsync();
                 return Result<bool>.Failure($"Error inesperado al insertar la venta y los detalles: {ex.Message}");
             }
         }
@@ -117,9 +114,9 @@ namespace PrimeSystem.Repositorio.Repositorios
                             Cod_Usuario = reader.GetInt32(1),
                             Fecha_Hora = reader.GetDateTime(2),
                             Id_Cliente = reader.GetInt32(3),
-                            Subtotal = reader.GetDouble(4),
-                            Descu = reader.GetDouble(5),
-                            Total = reader.GetDouble(6)
+                            Subtotal = reader.GetDecimal(4),
+                            Descu = reader.GetDecimal(5),
+                            Total = reader.GetDecimal(6)
                         });
                     }
                 }
@@ -137,9 +134,9 @@ namespace PrimeSystem.Repositorio.Repositorios
                             Id_Remito = reader.GetInt32(1),
                             Cod_Art = reader.GetString(2),
                             Descr = reader.GetString(3),
-                            P_Unit = reader.GetDouble(4),
+                            P_Unit = reader.GetDecimal(4),
                             Cant = reader.GetInt32(5),
-                            P_X_Cant = reader.GetDouble(6),
+                            P_X_Cant = reader.GetDecimal(6),
                             
                         });
                     }
