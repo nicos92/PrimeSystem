@@ -61,8 +61,8 @@ namespace PrimeSystem.UI.Ventas
         /// </summary>
         private void ConFigBtns()
         {
-            BtnOpcionIngresar.Tag = typeof(FormVentas);
-            BtnOpcionEditar.Tag = typeof(UCConsultaArticulos);
+            BtnOpcionIngresar.Tag = typeof(UCIngresoVenta);
+            BtnOpcionEditar.Tag = typeof(UCConsultaVentas);
         }
 
         /// <summary>

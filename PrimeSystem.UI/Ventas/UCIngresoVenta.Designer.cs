@@ -1,13 +1,13 @@
-﻿namespace PrimeSystem.UI.Ventas
+namespace PrimeSystem.UI.Ventas
 {
-    partial class FormVentas
+    partial class UCIngresoVenta
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,10 +20,10 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -75,7 +75,7 @@
             // 
             splitContainer1.BackColor = Color.FromArgb(218, 218, 220);
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Location = new Point(16, 16);
             splitContainer1.Margin = new Padding(4);
             splitContainer1.Name = "splitContainer1";
             // 
@@ -88,8 +88,8 @@
             splitContainer1.Panel2.Controls.Add(DgvProductosSeleccionados);
             splitContainer1.Panel2.Controls.Add(panel1);
             splitContainer1.Panel2.Controls.Add(LblLista);
-            splitContainer1.Size = new Size(804, 561);
-            splitContainer1.SplitterDistance = 312;
+            splitContainer1.Size = new Size(772, 529);
+            splitContainer1.SplitterDistance = 299;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 0;
             // 
@@ -103,7 +103,7 @@
             GBForm.Margin = new Padding(4);
             GBForm.Name = "GBForm";
             GBForm.Padding = new Padding(4);
-            GBForm.Size = new Size(312, 561);
+            GBForm.Size = new Size(299, 529);
             GBForm.TabIndex = 0;
             GBForm.TabStop = false;
             GBForm.Text = "Formulario de Venta";
@@ -133,7 +133,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.Size = new Size(304, 527);
+            tableLayoutPanel1.Size = new Size(291, 495);
             tableLayoutPanel1.TabIndex = 9;
             // 
             // tableLayoutPanel2
@@ -143,11 +143,11 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Controls.Add(label5, 0, 0);
             tableLayoutPanel2.Controls.Add(NumericUpDown1, 1, 0);
-            tableLayoutPanel2.Location = new Point(3, 390);
+            tableLayoutPanel2.Location = new Point(3, 358);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(298, 44);
+            tableLayoutPanel2.Size = new Size(285, 44);
             tableLayoutPanel2.TabIndex = 8;
             // 
             // label5
@@ -171,7 +171,7 @@
             NumericUpDown1.Location = new Point(84, 7);
             NumericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             NumericUpDown1.Name = "NumericUpDown1";
-            NumericUpDown1.Size = new Size(211, 29);
+            NumericUpDown1.Size = new Size(198, 29);
             NumericUpDown1.TabIndex = 3;
             NumericUpDown1.TextAlign = HorizontalAlignment.Right;
             NumericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
@@ -196,7 +196,7 @@
             BtnQuitar.FlatStyle = FlatStyle.Flat;
             BtnQuitar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             BtnQuitar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnQuitar.Location = new Point(19, 486);
+            BtnQuitar.Location = new Point(13, 454);
             BtnQuitar.Margin = new Padding(4);
             BtnQuitar.Name = "BtnQuitar";
             BtnQuitar.Size = new Size(265, 37);
@@ -224,7 +224,7 @@
             BtnAceptar.FlatStyle = FlatStyle.Flat;
             BtnAceptar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             BtnAceptar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnAceptar.Location = new Point(19, 441);
+            BtnAceptar.Location = new Point(13, 409);
             BtnAceptar.Margin = new Padding(4);
             BtnAceptar.Name = "BtnAceptar";
             BtnAceptar.Size = new Size(265, 37);
@@ -243,9 +243,9 @@
             groupBox1.Controls.Add(LblProducto);
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(3, 287);
+            groupBox1.Location = new Point(3, 255);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(298, 97);
+            groupBox1.Size = new Size(285, 97);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "Producto";
@@ -324,7 +324,7 @@
             LsvProductos.ForeColor = Color.FromArgb(26, 28, 30);
             LsvProductos.Location = new Point(3, 80);
             LsvProductos.Name = "LsvProductos";
-            LsvProductos.Size = new Size(298, 201);
+            LsvProductos.Size = new Size(285, 169);
             LsvProductos.TabIndex = 2;
             LsvProductos.SelectedIndexChanged += LsvProductos_SelectedIndexChanged;
             // 
@@ -356,7 +356,7 @@
             DgvProductosSeleccionados.Name = "DgvProductosSeleccionados";
             DgvProductosSeleccionados.ReadOnly = true;
             DgvProductosSeleccionados.RowHeadersVisible = false;
-            DgvProductosSeleccionados.Size = new Size(487, 435);
+            DgvProductosSeleccionados.Size = new Size(468, 403);
             DgvProductosSeleccionados.TabIndex = 6;
             DgvProductosSeleccionados.CellClick += DgvProductosSeleccionados_CellClick;
             DgvProductosSeleccionados.SelectionChanged += DgvProductosSeleccionados_SelectionChanged;
@@ -366,9 +366,9 @@
             panel1.BackColor = Color.FromArgb(232, 232, 234);
             panel1.Controls.Add(tableLayoutPanel3);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 461);
+            panel1.Location = new Point(0, 429);
             panel1.Name = "panel1";
-            panel1.Size = new Size(487, 100);
+            panel1.Size = new Size(468, 100);
             panel1.TabIndex = 5;
             // 
             // tableLayoutPanel3
@@ -389,7 +389,7 @@
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(487, 100);
+            tableLayoutPanel3.Size = new Size(468, 100);
             tableLayoutPanel3.TabIndex = 8;
             // 
             // label3
@@ -398,7 +398,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(26, 28, 30);
-            label3.Location = new Point(41, 16);
+            label3.Location = new Point(37, 16);
             label3.Name = "label3";
             label3.Size = new Size(77, 17);
             label3.TabIndex = 8;
@@ -410,7 +410,7 @@
             LblCantProductos.AutoSize = true;
             LblCantProductos.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblCantProductos.ForeColor = Color.FromArgb(26, 28, 30);
-            LblCantProductos.Location = new Point(124, 12);
+            LblCantProductos.Location = new Point(120, 12);
             LblCantProductos.Name = "LblCantProductos";
             LblCantProductos.Size = new Size(23, 25);
             LblCantProductos.TabIndex = 3;
@@ -422,7 +422,7 @@
             LblPrecioTotal.AutoSize = true;
             LblPrecioTotal.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LblPrecioTotal.ForeColor = Color.FromArgb(26, 28, 30);
-            LblPrecioTotal.Location = new Point(366, 12);
+            LblPrecioTotal.Location = new Point(354, 12);
             LblPrecioTotal.Name = "LblPrecioTotal";
             LblPrecioTotal.Size = new Size(23, 25);
             LblPrecioTotal.TabIndex = 5;
@@ -434,12 +434,11 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.FromArgb(26, 28, 30);
-            label6.Location = new Point(260, 16);
+            label6.Location = new Point(248, 16);
             label6.Name = "label6";
             label6.Size = new Size(100, 17);
             label6.TabIndex = 4;
             label6.Text = "PRECIO TOTAL: ";
-            label6.Click += label6_Click;
             // 
             // BtnConfirmarVenta
             // 
@@ -449,9 +448,9 @@
             BtnConfirmarVenta.FlatAppearance.BorderColor = Color.FromArgb(235, 220, 255);
             BtnConfirmarVenta.FlatStyle = FlatStyle.Flat;
             BtnConfirmarVenta.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnConfirmarVenta.Location = new Point(124, 55);
+            BtnConfirmarVenta.Location = new Point(120, 55);
             BtnConfirmarVenta.Name = "BtnConfirmarVenta";
-            BtnConfirmarVenta.Size = new Size(236, 40);
+            BtnConfirmarVenta.Size = new Size(228, 40);
             BtnConfirmarVenta.TabIndex = 7;
             BtnConfirmarVenta.Text = "CONFIRMAR VENTA (F12)";
             BtnConfirmarVenta.UseVisualStyleBackColor = false;
@@ -465,27 +464,22 @@
             LblLista.Location = new Point(0, 0);
             LblLista.Margin = new Padding(8);
             LblLista.Name = "LblLista";
-            LblLista.Size = new Size(487, 26);
+            LblLista.Size = new Size(468, 26);
             LblLista.TabIndex = 4;
             LblLista.Text = "Lista de Productos Seleccionados";
             LblLista.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // FormVentas
+            // UCIngresoVenta
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackColor = Color.FromArgb(249, 249, 251);
-            ClientSize = new Size(804, 561);
+            BackColor = Color.FromArgb(218, 218, 220);
             Controls.Add(splitContainer1);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(4);
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "FormVentas";
-            Text = "Producto";
-            FormClosing += FormVentas_FormClosing;
-            Load += FormVentas_Load;
-            KeyDown += FormVentas_KeyDown;
+            Name = "UCIngresoVenta";
+            Padding = new Padding(16);
+            Size = new Size(804, 561);
+            Load += UCIngresoVenta_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();

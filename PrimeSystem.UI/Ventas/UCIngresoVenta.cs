@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,11 +16,11 @@ using PrimeSystem.Utilidades;
 
 namespace PrimeSystem.UI.Ventas
 {
-    public partial class FormVentas : Form
+    public partial class UCIngresoVenta : UserControl
     {
         private readonly IArticuloStockService _articuloStockService;
         private readonly IVentaService _ventaService;
-        private readonly ILogger<FormVentas> _logger;
+        private readonly ILogger<UCIngresoVenta> _logger;
         private bool _evitarBucleEventos = false;
         private int _indiceSeleccionado;
         private bool _procesandoSeleccion = false;
@@ -29,10 +29,10 @@ namespace PrimeSystem.UI.Ventas
         private readonly BindingList<ProductoResumen> _productosResumen = [];
         private List<ArticuloStock> _todosLosProductos = [];
         // Agregar en el inicio de la clase
-        private readonly CultureInfo _cultureArgentina = new CultureInfo("es-AR");
+        private readonly CultureInfo _cultureArgentina = new("es-AR");
 
-        public FormVentas(IArticuloStockService articuloStockService,
-                         IVentaService ventaService, ILogger<FormVentas> logger)
+        public UCIngresoVenta(IArticuloStockService articuloStockService,
+                             IVentaService ventaService, ILogger<UCIngresoVenta> logger)
         {
             _articuloStockService = articuloStockService;
             _ventaService = ventaService;
@@ -41,7 +41,8 @@ namespace PrimeSystem.UI.Ventas
             _ultimoCodigoArticuloSeleccionado = "";
 
             InitializeComponent();
-            KeyPreview = true;
+
+            this.Disposed += UCIngresoVenta_Disposed;
         }
 
         private void ListaProductos(List<ArticuloStock> productosSeleccionados)
@@ -100,8 +101,6 @@ namespace PrimeSystem.UI.Ventas
             // Asegurar que el DataGridView puede recibir el foco y selecciones
             DgvProductosSeleccionados.TabStop = true;
             DgvProductosSeleccionados.Enabled = true;
-
-
 
             ConfigurarColumnasDataGridView();
         }
@@ -344,13 +343,21 @@ namespace PrimeSystem.UI.Ventas
         }
 
 
-        private async void FormVentas_Load(object sender, EventArgs e)
+        private async void UCIngresoVenta_Load(object sender, EventArgs e)
         {
-            _logger.LogInformation("Cargando FormVentas.");
+
+
+            _logger.LogInformation("Cargando UCIngresoVenta.");
             // Configurar primero los controles
             ConfigurarDGV();
             ConfigurarListBox();
             DgvProductosSeleccionados.DataSource = _productosResumen;
+
+            // Asegurar que el UserControl pueda recibir teclas
+            this.Focus();
+            this.Select();
+            // Establecer el foco en el primer control relevante
+            TxtBuscardor.Focus();
 
             // Luego cargar productos asíncronamente
             await CargarProductosAsync();
@@ -374,7 +381,7 @@ namespace PrimeSystem.UI.Ventas
                 string filtro = TxtBuscardor.Text.Trim().ToLowerInvariant();
 
                 var productosFiltrados = _todosLosProductos
-                    .Where(p => string.IsNullOrEmpty(filtro) || p.Art_Desc.ToLowerInvariant().Contains(filtro) || p.Cod_Articulo.StartsWith(filtro))
+                    .Where(p => string.IsNullOrEmpty(filtro) || p.Art_Desc.Contains(filtro, StringComparison.InvariantCultureIgnoreCase) || p.Cod_Articulo.StartsWith(filtro))
                     .ToList();
 
                 LsvProductos.BeginUpdate();
@@ -563,44 +570,7 @@ namespace PrimeSystem.UI.Ventas
 
             }
         }
-        private async void FormVentas_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.F8:
-                    QuitarUnidadSeleccionada();
-                    e.Handled = true;
-                    break;
-                case Keys.F9:
-                    QuitarFilaSeleccionada();
-                    e.Handled = true;
-                    break;
-                case Keys.Enter:
-                    if (TxtBuscardor.Focused || LsvProductos.Focused)
-                    {
-                        BtnAceptar.PerformClick();
-                        e.Handled = true;
-                    }
-                    else if (NumericUpDown1.Focused)
-                    {
-                        BtnAceptar.PerformClick();
-                        e.Handled = true;
-                    }
 
-                    break;
-                case Keys.Delete:
-                    if (DgvProductosSeleccionados.Focused)
-                    {
-                        QuitarUnidadSeleccionada();
-                        e.Handled = true;
-                    }
-                    break;
-                case Keys.F12:
-                    await ConfirmarVentaAsync();
-                    e.Handled = true;
-                    break;
-            }
-        }
 
         private void DgvProductosSeleccionados_SelectionChanged(object sender, EventArgs e)
         {
@@ -615,10 +585,8 @@ namespace PrimeSystem.UI.Ventas
                     _ultimoCodigoArticuloSeleccionado = productoSeleccionado.Cod_Articulo;
                     _ultimoIndiceSeleccionado = _indiceSeleccionado;
 
-                    // Actualizar el ComboBox para que coincida con la selección del DataGridView
-                    // Quitar _evitarBucleEventos = true; ya que estamos en SelectionChanged
-                    // y queremos que el ComboBox se actualice con las flechas del teclado
-                    SeleccionarProductoEnListBox(productoSeleccionado.Cod_Articulo);
+                    if (productoSeleccionado.Cod_Articulo != null)
+                        SeleccionarProductoEnListBox(productoSeleccionado.Cod_Articulo);
                 }
             }
             finally
@@ -690,7 +658,7 @@ namespace PrimeSystem.UI.Ventas
                 try
                 {
                     var selectedRow = DgvProductosSeleccionados.Rows[e.RowIndex];
-                    if (selectedRow.DataBoundItem is ProductoResumen producto)
+                    if (selectedRow.DataBoundItem is ProductoResumen producto && producto.Cod_Articulo != null)
                     {
                         SeleccionarProductoEnListBox(producto.Cod_Articulo);
                     }
@@ -702,7 +670,7 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
-        private void FormVentas_FormClosing(object sender, FormClosingEventArgs e)
+        private void UCIngresoVenta_Disposed(object sender, EventArgs e)
         {
             SingleListas.Instance.ProductoResumen.Clear();
             SingleListas.Instance.ProductosSeleccionados.Clear();
@@ -713,9 +681,48 @@ namespace PrimeSystem.UI.Ventas
             FiltrarYMostrarProductos();
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Procesa las teclas de función y otros comandos antes de que sean procesados por el control
+        /// </summary>
+        /// <param name="msg">Mensaje de ventana</param>
+        /// <param name="keyData">Tecla presionada</param>
+        /// <returns>True si la tecla fue procesada, false en caso contrario</returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            switch (keyData)
+            {
+                case Keys.F8:
+                    QuitarUnidadSeleccionada();
+                    return true;
 
+                case Keys.F9:
+                    QuitarFilaSeleccionada();
+                    return true;
+
+                case Keys.Enter:
+                    if (TxtBuscardor.Focused || LsvProductos.Focused || NumericUpDown1.Focused)
+                    {
+                        BtnAceptar.PerformClick();
+                        return true;
+                    }
+                    break;
+
+                case Keys.Delete:
+                    if (DgvProductosSeleccionados.Focused)
+                    {
+                        QuitarUnidadSeleccionada();
+                        return true;
+                    }
+                    break;
+
+                case Keys.F12:
+                    _ = ConfirmarVentaAsync(); // Usamos el operador de descarte (_) para no esperar
+                    return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
+
+
     }
 }
