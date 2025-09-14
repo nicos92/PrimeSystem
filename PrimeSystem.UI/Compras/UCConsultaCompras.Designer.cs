@@ -32,12 +32,7 @@ namespace PrimeSystem.UI.Compras
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            splitContainer1 = new SplitContainer();
             GBLista = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             DgvCompras = new DataGridView();
@@ -48,598 +43,697 @@ namespace PrimeSystem.UI.Compras
             DtpFechaHasta = new DateTimePicker();
             label3 = new Label();
             TxtProveedor = new TextBox();
-            label4 = new Label();
             TxtIdRemito = new TextBox();
+            label4 = new Label();
             BtnBuscar = new Button();
-            BtnActualizar = new Button();
             GBForm = new GroupBox();
             tableLayoutPanel3 = new TableLayoutPanel();
+            tableLayoutPanel6 = new TableLayoutPanel();
+            label14 = new Label();
+            LblTotal = new Label();
+            tableLayoutPanel5 = new TableLayoutPanel();
+            label12 = new Label();
+            LblDescuento = new Label();
+            label10 = new Label();
+            LblSubtotal = new Label();
+            groupBox1 = new GroupBox();
+            DgvDetalles = new DataGridView();
+            tableLayoutPanel7 = new TableLayoutPanel();
             label5 = new Label();
             LblIdRemito = new Label();
+            tableLayoutPanel8 = new TableLayoutPanel();
             label7 = new Label();
             LblFecha = new Label();
+            tableLayoutPanel9 = new TableLayoutPanel();
             label9 = new Label();
             LblProveedor = new Label();
+            tableLayoutPanel10 = new TableLayoutPanel();
             label11 = new Label();
             LblUsuario = new Label();
-            label13 = new Label();
-            LblSubtotal = new Label();
-            label15 = new Label();
-            LblDescuento = new Label();
-            label17 = new Label();
-            LblTotal = new Label();
             tableLayoutPanel4 = new TableLayoutPanel();
-            DgvDetalles = new DataGridView();
             BtnEliminar = new Button();
+            BtnConfirmarCompra = new Button();
             PbProgreso = new ProgressBar();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             GBLista.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvCompras).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             GBForm.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
-            tableLayoutPanel4.SuspendLayout();
+            tableLayoutPanel6.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvDetalles).BeginInit();
+            tableLayoutPanel7.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
+            tableLayoutPanel9.SuspendLayout();
+            tableLayoutPanel10.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             SuspendLayout();
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.BackColor = Color.FromArgb(218, 218, 220);
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(16, 16);
+            splitContainer1.Margin = new Padding(4);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(GBLista);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(GBForm);
+            splitContainer1.Size = new Size(772, 529);
+            splitContainer1.SplitterDistance = 418;
+            splitContainer1.SplitterWidth = 5;
+            splitContainer1.TabIndex = 0;
             // 
             // GBLista
             // 
             GBLista.Controls.Add(tableLayoutPanel1);
-            GBLista.Dock = DockStyle.Top;
-            GBLista.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            GBLista.Dock = DockStyle.Fill;
+            GBLista.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             GBLista.ForeColor = Color.FromArgb(7, 100, 147);
             GBLista.Location = new Point(0, 0);
+            GBLista.Margin = new Padding(4);
             GBLista.Name = "GBLista";
-            GBLista.Size = new Size(874, 302);
+            GBLista.Padding = new Padding(4);
+            GBLista.Size = new Size(418, 529);
             GBLista.TabIndex = 0;
             GBLista.TabStop = false;
             GBLista.Text = "Lista de Compras";
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.BackColor = Color.FromArgb(249, 249, 251);
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(DgvCompras, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(3, 25);
+            tableLayoutPanel1.Location = new Point(4, 30);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(868, 274);
-            tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(410, 495);
+            tableLayoutPanel1.TabIndex = 3;
             // 
             // DgvCompras
             // 
             DgvCompras.AllowUserToAddRows = false;
             DgvCompras.AllowUserToDeleteRows = false;
+            DgvCompras.AllowUserToResizeColumns = false;
             DgvCompras.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
-            DgvCompras.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            DgvCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            DgvCompras.BackgroundColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            DgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            DgvCompras.BackgroundColor = Color.FromArgb(249, 249, 251);
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(232, 232, 234);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(69, 71, 73);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(203, 230, 255);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(0, 75, 113);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(7, 100, 147);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            DgvCompras.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(7, 100, 147);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DgvCompras.DefaultCellStyle = dataGridViewCellStyle2;
             DgvCompras.Dock = DockStyle.Fill;
-            DgvCompras.EnableHeadersVisualStyles = false;
-            DgvCompras.GridColor = Color.FromArgb(170, 170, 172);
-            DgvCompras.Location = new Point(3, 43);
+            DgvCompras.GridColor = Color.FromArgb(190, 201, 209);
+            DgvCompras.Location = new Point(3, 147);
             DgvCompras.Name = "DgvCompras";
             DgvCompras.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            DgvCompras.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             DgvCompras.RowHeadersVisible = false;
-            DgvCompras.RowHeadersWidth = 51;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            DgvCompras.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            DgvCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvCompras.Size = new Size(862, 228);
-            DgvCompras.TabIndex = 0;
+            DgvCompras.Size = new Size(404, 345);
+            DgvCompras.TabIndex = 4;
             DgvCompras.SelectionChanged += DgvCompras_SelectionChanged;
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.ColumnCount = 11;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.ColumnCount = 5;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 8F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(DtpFechaDesde, 1, 0);
             tableLayoutPanel2.Controls.Add(label2, 3, 0);
             tableLayoutPanel2.Controls.Add(DtpFechaHasta, 4, 0);
-            tableLayoutPanel2.Controls.Add(label3, 6, 0);
-            tableLayoutPanel2.Controls.Add(TxtProveedor, 7, 0);
-            tableLayoutPanel2.Controls.Add(label4, 9, 0);
-            tableLayoutPanel2.Controls.Add(TxtIdRemito, 10, 0);
-            tableLayoutPanel2.Controls.Add(BtnBuscar, 11, 0);
-            tableLayoutPanel2.Controls.Add(BtnActualizar, 12, 0);
+            tableLayoutPanel2.Controls.Add(label3, 0, 1);
+            tableLayoutPanel2.Controls.Add(TxtProveedor, 1, 1);
+            tableLayoutPanel2.Controls.Add(TxtIdRemito, 1, 2);
+            tableLayoutPanel2.Controls.Add(label4, 0, 2);
+            tableLayoutPanel2.Controls.Add(BtnBuscar, 2, 3);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(862, 34);
-            tableLayoutPanel2.TabIndex = 1;
+            tableLayoutPanel2.RowCount = 4;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.Size = new Size(404, 138);
+            tableLayoutPanel2.TabIndex = 5;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F);
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(26, 28, 30);
-            label1.Location = new Point(11, 0);
+            label1.Location = new Point(34, 6);
             label1.Name = "label1";
-            label1.Size = new Size(56, 14);
+            label1.Size = new Size(56, 21);
             label1.TabIndex = 0;
-            label1.Text = "Desde : ";
+            label1.Text = "Desde";
             // 
             // DtpFechaDesde
             // 
             DtpFechaDesde.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            DtpFechaDesde.Font = new Font("Segoe UI", 9.75F);
+            DtpFechaDesde.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DtpFechaDesde.Format = DateTimePickerFormat.Short;
-            DtpFechaDesde.Location = new Point(73, 3);
+            DtpFechaDesde.Location = new Point(96, 3);
             DtpFechaDesde.Name = "DtpFechaDesde";
-            DtpFechaDesde.Size = new Size(114, 25);
+            DtpFechaDesde.Size = new Size(117, 29);
             DtpFechaDesde.TabIndex = 1;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F);
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(26, 28, 30);
-            label2.Location = new Point(225, 0);
+            label2.Location = new Point(227, 6);
             label2.Name = "label2";
-            label2.Size = new Size(52, 14);
+            label2.Size = new Size(55, 21);
             label2.TabIndex = 2;
-            label2.Text = "Hasta : ";
+            label2.Text = "Hasta:";
             // 
             // DtpFechaHasta
             // 
             DtpFechaHasta.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            DtpFechaHasta.Font = new Font("Segoe UI", 9.75F);
+            DtpFechaHasta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DtpFechaHasta.Format = DateTimePickerFormat.Short;
-            DtpFechaHasta.Location = new Point(283, 3);
+            DtpFechaHasta.Location = new Point(288, 3);
             DtpFechaHasta.Name = "DtpFechaHasta";
-            DtpFechaHasta.Size = new Size(114, 25);
+            DtpFechaHasta.Size = new Size(114, 29);
             DtpFechaHasta.TabIndex = 3;
             // 
             // label3
             // 
             label3.Anchor = AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F);
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(26, 28, 30);
-            label3.Location = new Point(431, 0);
+            label3.Location = new Point(3, 40);
             label3.Name = "label3";
-            label3.Size = new Size(76, 14);
+            label3.Size = new Size(87, 21);
             label3.TabIndex = 4;
-            label3.Text = "Proveedor :";
+            label3.Text = "Proveedor";
             // 
             // TxtProveedor
             // 
             TxtProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtProveedor.Font = new Font("Segoe UI", 9.75F);
-            TxtProveedor.Location = new Point(513, 3);
+            TxtProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtProveedor.Location = new Point(96, 37);
             TxtProveedor.Name = "TxtProveedor";
-            TxtProveedor.Size = new Size(114, 25);
+            TxtProveedor.Size = new Size(117, 29);
             TxtProveedor.TabIndex = 5;
+            // 
+            // TxtIdRemito
+            // 
+            TxtIdRemito.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtIdRemito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtIdRemito.Location = new Point(96, 71);
+            TxtIdRemito.Name = "TxtIdRemito";
+            TxtIdRemito.Size = new Size(117, 29);
+            TxtIdRemito.TabIndex = 7;
             // 
             // label4
             // 
             label4.Anchor = AnchorStyles.Right;
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9.75F);
+            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(26, 28, 30);
-            label4.Location = new Point(676, 0);
+            label4.Location = new Point(24, 74);
             label4.Name = "label4";
-            label4.Size = new Size(61, 14);
+            label4.Size = new Size(66, 21);
             label4.TabIndex = 6;
-            label4.Text = "Nº Rem :";
-            // 
-            // TxtIdRemito
-            // 
-            TxtIdRemito.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtIdRemito.Font = new Font("Segoe UI", 9.75F);
-            TxtIdRemito.Location = new Point(743, 3);
-            TxtIdRemito.Name = "TxtIdRemito";
-            TxtIdRemito.Size = new Size(116, 25);
-            TxtIdRemito.TabIndex = 7;
+            label4.Text = "Nº Rem";
             // 
             // BtnBuscar
             // 
-            BtnBuscar.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            BtnBuscar.BackColor = Color.FromArgb(170, 170, 172);
-            BtnBuscar.FlatAppearance.BorderSize = 0;
+            BtnBuscar.Anchor = AnchorStyles.None;
+            BtnBuscar.BackColor = Color.FromArgb(7, 100, 147);
+            tableLayoutPanel2.SetColumnSpan(BtnBuscar, 3);
+            BtnBuscar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
             BtnBuscar.FlatStyle = FlatStyle.Flat;
-            BtnBuscar.Font = new Font("Segoe UI", 9.75F);
-            BtnBuscar.ForeColor = Color.FromArgb(26, 28, 30);
-            BtnBuscar.Location = new Point(3, 17);
+            BtnBuscar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnBuscar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnBuscar.Location = new Point(245, 106);
+            BtnBuscar.Margin = new Padding(4);
             BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(64, 14);
+            BtnBuscar.Size = new Size(130, 28);
             BtnBuscar.TabIndex = 8;
-            BtnBuscar.Text = "Buscar";
+            BtnBuscar.Text = "BUSCAR";
             BtnBuscar.UseVisualStyleBackColor = false;
             BtnBuscar.Click += BtnBuscar_Click;
-            // 
-            // BtnActualizar
-            // 
-            BtnActualizar.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            BtnActualizar.BackColor = Color.FromArgb(170, 170, 172);
-            BtnActualizar.FlatAppearance.BorderSize = 0;
-            BtnActualizar.FlatStyle = FlatStyle.Flat;
-            BtnActualizar.Font = new Font("Segoe UI", 9.75F);
-            BtnActualizar.ForeColor = Color.FromArgb(26, 28, 30);
-            BtnActualizar.Location = new Point(73, 17);
-            BtnActualizar.Name = "BtnActualizar";
-            BtnActualizar.Size = new Size(114, 14);
-            BtnActualizar.TabIndex = 9;
-            BtnActualizar.Text = "Actualizar";
-            BtnActualizar.UseVisualStyleBackColor = false;
-            BtnActualizar.Click += BtnActualizar_Click;
             // 
             // GBForm
             // 
             GBForm.Controls.Add(tableLayoutPanel3);
-            GBForm.Dock = DockStyle.Top;
-            GBForm.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            GBForm.Dock = DockStyle.Fill;
+            GBForm.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             GBForm.ForeColor = Color.FromArgb(7, 100, 147);
-            GBForm.Location = new Point(0, 302);
+            GBForm.Location = new Point(0, 0);
+            GBForm.Margin = new Padding(4);
             GBForm.Name = "GBForm";
-            GBForm.Size = new Size(874, 182);
-            GBForm.TabIndex = 1;
+            GBForm.Padding = new Padding(4);
+            GBForm.Size = new Size(349, 529);
+            GBForm.TabIndex = 0;
             GBForm.TabStop = false;
-            GBForm.Text = "Detalles de la Compra";
+            GBForm.Text = "Formulario de Consulta de Compras";
             // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.ColumnCount = 6;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66667F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66667F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66667F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66667F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66667F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 16.66667F));
-            tableLayoutPanel3.Controls.Add(label5, 0, 0);
-            tableLayoutPanel3.Controls.Add(LblIdRemito, 1, 0);
-            tableLayoutPanel3.Controls.Add(label7, 2, 0);
-            tableLayoutPanel3.Controls.Add(LblFecha, 3, 0);
-            tableLayoutPanel3.Controls.Add(label9, 4, 0);
-            tableLayoutPanel3.Controls.Add(LblProveedor, 5, 0);
-            tableLayoutPanel3.Controls.Add(label11, 0, 1);
-            tableLayoutPanel3.Controls.Add(LblUsuario, 1, 1);
-            tableLayoutPanel3.Controls.Add(label13, 2, 1);
-            tableLayoutPanel3.Controls.Add(LblSubtotal, 3, 1);
-            tableLayoutPanel3.Controls.Add(label15, 4, 1);
-            tableLayoutPanel3.Controls.Add(LblDescuento, 5, 1);
-            tableLayoutPanel3.Controls.Add(label17, 0, 2);
-            tableLayoutPanel3.Controls.Add(LblTotal, 1, 2);
+            tableLayoutPanel3.BackColor = Color.FromArgb(249, 249, 251);
+            tableLayoutPanel3.ColumnCount = 1;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel6, 0, 6);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 0, 5);
+            tableLayoutPanel3.Controls.Add(groupBox1, 0, 7);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel7, 0, 0);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel8, 0, 1);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel9, 0, 2);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel10, 0, 3);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(3, 25);
+            tableLayoutPanel3.Location = new Point(4, 30);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 3;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.Size = new Size(868, 154);
-            tableLayoutPanel3.TabIndex = 0;
+            tableLayoutPanel3.RowCount = 8;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new Size(341, 495);
+            tableLayoutPanel3.TabIndex = 14;
             // 
-            // label5
+            // tableLayoutPanel6
             // 
-            label5.Anchor = AnchorStyles.Right;
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9.75F);
-            label5.ForeColor = Color.FromArgb(26, 28, 30);
-            label5.Location = new Point(80, 17);
-            label5.Name = "label5";
-            label5.Size = new Size(61, 17);
-            label5.TabIndex = 0;
-            label5.Text = "Nº Rem :";
+            tableLayoutPanel6.ColumnCount = 2;
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel6.Controls.Add(label14, 0, 0);
+            tableLayoutPanel6.Controls.Add(LblTotal, 1, 0);
+            tableLayoutPanel6.Dock = DockStyle.Fill;
+            tableLayoutPanel6.Location = new Point(3, 149);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 1;
+            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel6.Size = new Size(335, 26);
+            tableLayoutPanel6.TabIndex = 24;
             // 
-            // LblIdRemito
+            // label14
             // 
-            LblIdRemito.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            LblIdRemito.AutoSize = true;
-            LblIdRemito.Font = new Font("Segoe UI", 9.75F);
-            LblIdRemito.ForeColor = Color.FromArgb(26, 28, 30);
-            LblIdRemito.Location = new Point(147, 17);
-            LblIdRemito.Name = "LblIdRemito";
-            LblIdRemito.Size = new Size(138, 17);
-            LblIdRemito.TabIndex = 1;
-            LblIdRemito.Text = "0";
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Right;
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9.75F);
-            label7.ForeColor = Color.FromArgb(26, 28, 30);
-            label7.Location = new Point(381, 17);
-            label7.Name = "label7";
-            label7.Size = new Size(48, 17);
-            label7.TabIndex = 2;
-            label7.Text = "Fecha :";
-            // 
-            // LblFecha
-            // 
-            LblFecha.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            LblFecha.AutoSize = true;
-            LblFecha.Font = new Font("Segoe UI", 9.75F);
-            LblFecha.ForeColor = Color.FromArgb(26, 28, 30);
-            LblFecha.Location = new Point(435, 17);
-            LblFecha.Name = "LblFecha";
-            LblFecha.Size = new Size(138, 17);
-            LblFecha.TabIndex = 3;
-            LblFecha.Text = "0";
-            // 
-            // label9
-            // 
-            label9.Anchor = AnchorStyles.Right;
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9.75F);
-            label9.ForeColor = Color.FromArgb(26, 28, 30);
-            label9.Location = new Point(641, 17);
-            label9.Name = "label9";
-            label9.Size = new Size(76, 17);
-            label9.TabIndex = 4;
-            label9.Text = "Proveedor :";
-            // 
-            // LblProveedor
-            // 
-            LblProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            LblProveedor.AutoSize = true;
-            LblProveedor.Font = new Font("Segoe UI", 9.75F);
-            LblProveedor.ForeColor = Color.FromArgb(26, 28, 30);
-            LblProveedor.Location = new Point(723, 17);
-            LblProveedor.Name = "LblProveedor";
-            LblProveedor.Size = new Size(142, 17);
-            LblProveedor.TabIndex = 5;
-            LblProveedor.Text = "0";
-            // 
-            // label11
-            // 
-            label11.Anchor = AnchorStyles.Right;
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9.75F);
-            label11.ForeColor = Color.FromArgb(26, 28, 30);
-            label11.Location = new Point(81, 68);
-            label11.Name = "label11";
-            label11.Size = new Size(60, 17);
-            label11.TabIndex = 6;
-            label11.Text = "Usuario :";
-            // 
-            // LblUsuario
-            // 
-            LblUsuario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            LblUsuario.AutoSize = true;
-            LblUsuario.Font = new Font("Segoe UI", 9.75F);
-            LblUsuario.ForeColor = Color.FromArgb(26, 28, 30);
-            LblUsuario.Location = new Point(147, 68);
-            LblUsuario.Name = "LblUsuario";
-            LblUsuario.Size = new Size(138, 17);
-            LblUsuario.TabIndex = 7;
-            LblUsuario.Text = "0";
-            // 
-            // label13
-            // 
-            label13.Anchor = AnchorStyles.Right;
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 9.75F);
-            label13.ForeColor = Color.FromArgb(26, 28, 30);
-            label13.Location = new Point(366, 68);
-            label13.Name = "label13";
-            label13.Size = new Size(63, 17);
-            label13.TabIndex = 8;
-            label13.Text = "Subtotal :";
-            // 
-            // LblSubtotal
-            // 
-            LblSubtotal.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            LblSubtotal.AutoSize = true;
-            LblSubtotal.Font = new Font("Segoe UI", 9.75F);
-            LblSubtotal.ForeColor = Color.FromArgb(26, 28, 30);
-            LblSubtotal.Location = new Point(435, 68);
-            LblSubtotal.Name = "LblSubtotal";
-            LblSubtotal.Size = new Size(138, 17);
-            LblSubtotal.TabIndex = 9;
-            LblSubtotal.Text = "$0,00";
-            // 
-            // label15
-            // 
-            label15.Anchor = AnchorStyles.Right;
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 9.75F);
-            label15.ForeColor = Color.FromArgb(26, 28, 30);
-            label15.Location = new Point(641, 68);
-            label15.Name = "label15";
-            label15.Size = new Size(76, 17);
-            label15.TabIndex = 10;
-            label15.Text = "Descuento :";
-            // 
-            // LblDescuento
-            // 
-            LblDescuento.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            LblDescuento.AutoSize = true;
-            LblDescuento.Font = new Font("Segoe UI", 9.75F);
-            LblDescuento.ForeColor = Color.FromArgb(26, 28, 30);
-            LblDescuento.Location = new Point(723, 68);
-            LblDescuento.Name = "LblDescuento";
-            LblDescuento.Size = new Size(142, 17);
-            LblDescuento.TabIndex = 11;
-            LblDescuento.Text = "$0,00";
-            // 
-            // label17
-            // 
-            label17.Anchor = AnchorStyles.Right;
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 9.75F);
-            label17.ForeColor = Color.FromArgb(26, 28, 30);
-            label17.Location = new Point(98, 119);
-            label17.Name = "label17";
-            label17.Size = new Size(43, 17);
-            label17.TabIndex = 12;
-            label17.Text = "Total :";
+            label14.Anchor = AnchorStyles.Right;
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.FromArgb(26, 28, 30);
+            label14.Location = new Point(55, 2);
+            label14.Name = "label14";
+            label14.Size = new Size(109, 21);
+            label14.TabIndex = 16;
+            label14.Text = "TOTAL VENTA";
             // 
             // LblTotal
             // 
-            LblTotal.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            LblTotal.Anchor = AnchorStyles.Left;
             LblTotal.AutoSize = true;
-            LblTotal.Font = new Font("Segoe UI", 9.75F);
+            LblTotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblTotal.ForeColor = Color.FromArgb(26, 28, 30);
-            LblTotal.Location = new Point(147, 119);
+            LblTotal.Location = new Point(170, 2);
             LblTotal.Name = "LblTotal";
-            LblTotal.Size = new Size(138, 17);
-            LblTotal.TabIndex = 13;
-            LblTotal.Text = "$0,00";
+            LblTotal.Size = new Size(19, 21);
+            LblTotal.TabIndex = 17;
+            LblTotal.Text = "0";
             // 
-            // tableLayoutPanel4
+            // tableLayoutPanel5
             // 
-            tableLayoutPanel4.ColumnCount = 1;
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Controls.Add(DgvDetalles, 0, 0);
-            tableLayoutPanel4.Controls.Add(BtnEliminar, 0, 1);
-            tableLayoutPanel4.Controls.Add(PbProgreso, 0, 2);
-            tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new Point(0, 484);
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 3;
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new Size(874, 236);
-            tableLayoutPanel4.TabIndex = 2;
+            tableLayoutPanel5.ColumnCount = 4;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 26.8656712F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22.6865673F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel5.Controls.Add(label12, 2, 0);
+            tableLayoutPanel5.Controls.Add(LblDescuento, 3, 0);
+            tableLayoutPanel5.Controls.Add(label10, 0, 0);
+            tableLayoutPanel5.Controls.Add(LblSubtotal, 1, 0);
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            tableLayoutPanel5.Location = new Point(3, 119);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 1;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel5.Size = new Size(335, 24);
+            tableLayoutPanel5.TabIndex = 23;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Dock = DockStyle.Fill;
+            label12.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.ForeColor = Color.FromArgb(26, 28, 30);
+            label12.Location = new Point(169, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(78, 24);
+            label12.TabIndex = 14;
+            label12.Text = "DESCUENTO";
+            // 
+            // LblDescuento
+            // 
+            LblDescuento.Anchor = AnchorStyles.Left;
+            LblDescuento.AutoSize = true;
+            LblDescuento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblDescuento.ForeColor = Color.FromArgb(26, 28, 30);
+            LblDescuento.Location = new Point(253, 1);
+            LblDescuento.Name = "LblDescuento";
+            LblDescuento.Size = new Size(19, 21);
+            LblDescuento.TabIndex = 15;
+            LblDescuento.Text = "0";
+            // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.Right;
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.FromArgb(26, 28, 30);
+            label10.Location = new Point(10, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(77, 24);
+            label10.TabIndex = 12;
+            label10.Text = "SUBTOTAL";
+            // 
+            // LblSubtotal
+            // 
+            LblSubtotal.Anchor = AnchorStyles.Left;
+            LblSubtotal.AutoSize = true;
+            LblSubtotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblSubtotal.ForeColor = Color.FromArgb(26, 28, 30);
+            LblSubtotal.Location = new Point(93, 1);
+            LblSubtotal.Name = "LblSubtotal";
+            LblSubtotal.Size = new Size(19, 21);
+            LblSubtotal.TabIndex = 13;
+            LblSubtotal.Text = "0";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(DgvDetalles);
+            groupBox1.Dock = DockStyle.Fill;
+            groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
+            groupBox1.Location = new Point(3, 181);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(335, 311);
+            groupBox1.TabIndex = 14;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Detalles de la Compra";
             // 
             // DgvDetalles
             // 
             DgvDetalles.AllowUserToAddRows = false;
             DgvDetalles.AllowUserToDeleteRows = false;
-            DgvDetalles.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(224, 224, 224);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            DgvDetalles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            DgvDetalles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            DgvDetalles.BackgroundColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle7.ForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle7.SelectionForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            DgvDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            DgvDetalles.BackgroundColor = Color.FromArgb(249, 249, 251);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(232, 232, 234);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(69, 71, 73);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(203, 230, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(0, 75, 113);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            DgvDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DgvDetalles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle8.ForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle8.SelectionForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            DgvDetalles.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(7, 100, 147);
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            DgvDetalles.DefaultCellStyle = dataGridViewCellStyle4;
             DgvDetalles.Dock = DockStyle.Fill;
-            DgvDetalles.EnableHeadersVisualStyles = false;
-            DgvDetalles.GridColor = Color.FromArgb(170, 170, 172);
-            DgvDetalles.Location = new Point(3, 3);
+            DgvDetalles.GridColor = Color.FromArgb(190, 201, 209);
+            DgvDetalles.Location = new Point(3, 25);
             DgvDetalles.Name = "DgvDetalles";
             DgvDetalles.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9.75F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            DgvDetalles.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             DgvDetalles.RowHeadersVisible = false;
-            DgvDetalles.RowHeadersWidth = 51;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(218, 218, 220);
-            dataGridViewCellStyle10.ForeColor = Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(170, 170, 172);
-            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
-            DgvDetalles.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            DgvDetalles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvDetalles.Size = new Size(868, 170);
+            DgvDetalles.Size = new Size(329, 283);
             DgvDetalles.TabIndex = 0;
+            // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.ColumnCount = 2;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.0613117F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.93869F));
+            tableLayoutPanel7.Controls.Add(label5, 0, 0);
+            tableLayoutPanel7.Controls.Add(LblIdRemito, 1, 0);
+            tableLayoutPanel7.Dock = DockStyle.Fill;
+            tableLayoutPanel7.Location = new Point(3, 3);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 1;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel7.Size = new Size(335, 23);
+            tableLayoutPanel7.TabIndex = 6;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(26, 28, 30);
+            label5.Location = new Point(21, 1);
+            label5.Name = "label5";
+            label5.Size = new Size(66, 21);
+            label5.TabIndex = 8;
+            label5.Text = "Nº REM";
+            // 
+            // LblIdRemito
+            // 
+            LblIdRemito.Anchor = AnchorStyles.Left;
+            LblIdRemito.AutoSize = true;
+            LblIdRemito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblIdRemito.ForeColor = Color.FromArgb(26, 28, 30);
+            LblIdRemito.Location = new Point(93, 1);
+            LblIdRemito.Name = "LblIdRemito";
+            LblIdRemito.Size = new Size(19, 21);
+            LblIdRemito.TabIndex = 9;
+            LblIdRemito.Text = "0";
+            // 
+            // tableLayoutPanel8
+            // 
+            tableLayoutPanel8.ColumnCount = 2;
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.0613117F));
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.93869F));
+            tableLayoutPanel8.Controls.Add(label7, 0, 0);
+            tableLayoutPanel8.Controls.Add(LblFecha, 1, 0);
+            tableLayoutPanel8.Dock = DockStyle.Fill;
+            tableLayoutPanel8.Location = new Point(3, 32);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 1;
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel8.Size = new Size(335, 23);
+            tableLayoutPanel8.TabIndex = 7;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.FromArgb(26, 28, 30);
+            label7.Location = new Point(28, 1);
+            label7.Name = "label7";
+            label7.Size = new Size(59, 21);
+            label7.TabIndex = 10;
+            label7.Text = "FECHA";
+            // 
+            // LblFecha
+            // 
+            LblFecha.Anchor = AnchorStyles.Left;
+            LblFecha.AutoSize = true;
+            LblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblFecha.ForeColor = Color.FromArgb(26, 28, 30);
+            LblFecha.Location = new Point(93, 1);
+            LblFecha.Name = "LblFecha";
+            LblFecha.Size = new Size(19, 21);
+            LblFecha.TabIndex = 11;
+            LblFecha.Text = "0";
+            // 
+            // tableLayoutPanel9
+            // 
+            tableLayoutPanel9.ColumnCount = 2;
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.0613117F));
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.93869F));
+            tableLayoutPanel9.Controls.Add(label9, 0, 0);
+            tableLayoutPanel9.Controls.Add(LblProveedor, 1, 0);
+            tableLayoutPanel9.Dock = DockStyle.Fill;
+            tableLayoutPanel9.Location = new Point(3, 61);
+            tableLayoutPanel9.Name = "tableLayoutPanel9";
+            tableLayoutPanel9.RowCount = 1;
+            tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel9.Size = new Size(335, 23);
+            tableLayoutPanel9.TabIndex = 8;
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Right;
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.FromArgb(26, 28, 30);
+            label9.Location = new Point(9, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(78, 23);
+            label9.TabIndex = 12;
+            label9.Text = "PROVEEDOR";
+            // 
+            // LblProveedor
+            // 
+            LblProveedor.Anchor = AnchorStyles.Left;
+            LblProveedor.AutoSize = true;
+            LblProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblProveedor.ForeColor = Color.FromArgb(26, 28, 30);
+            LblProveedor.Location = new Point(93, 1);
+            LblProveedor.Name = "LblProveedor";
+            LblProveedor.Size = new Size(19, 21);
+            LblProveedor.TabIndex = 13;
+            LblProveedor.Text = "0";
+            // 
+            // tableLayoutPanel10
+            // 
+            tableLayoutPanel10.ColumnCount = 2;
+            tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.0613117F));
+            tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.93869F));
+            tableLayoutPanel10.Controls.Add(label11, 0, 0);
+            tableLayoutPanel10.Controls.Add(LblUsuario, 1, 0);
+            tableLayoutPanel10.Dock = DockStyle.Fill;
+            tableLayoutPanel10.Location = new Point(3, 90);
+            tableLayoutPanel10.Name = "tableLayoutPanel10";
+            tableLayoutPanel10.RowCount = 1;
+            tableLayoutPanel10.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel10.Size = new Size(335, 23);
+            tableLayoutPanel10.TabIndex = 9;
+            // 
+            // label11
+            // 
+            label11.Anchor = AnchorStyles.Right;
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.ForeColor = Color.FromArgb(26, 28, 30);
+            label11.Location = new Point(8, 1);
+            label11.Name = "label11";
+            label11.Size = new Size(79, 21);
+            label11.TabIndex = 14;
+            label11.Text = "USUARIO";
+            // 
+            // LblUsuario
+            // 
+            LblUsuario.Anchor = AnchorStyles.Left;
+            LblUsuario.AutoSize = true;
+            LblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblUsuario.ForeColor = Color.FromArgb(26, 28, 30);
+            LblUsuario.Location = new Point(93, 1);
+            LblUsuario.Name = "LblUsuario";
+            LblUsuario.Size = new Size(19, 21);
+            LblUsuario.TabIndex = 15;
+            LblUsuario.Text = "0";
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 2;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Controls.Add(BtnEliminar, 0, 0);
+            tableLayoutPanel4.Controls.Add(BtnConfirmarCompra, 1, 0);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(0, 0);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Size = new Size(200, 100);
+            tableLayoutPanel4.TabIndex = 0;
             // 
             // BtnEliminar
             // 
-            BtnEliminar.Anchor = AnchorStyles.Right;
-            BtnEliminar.BackColor = Color.FromArgb(170, 170, 172);
-            BtnEliminar.FlatAppearance.BorderSize = 0;
+            BtnEliminar.BackColor = Color.FromArgb(186, 26, 26);
+            BtnEliminar.Dock = DockStyle.Fill;
+            BtnEliminar.FlatAppearance.BorderColor = Color.FromArgb(245, 212, 212);
             BtnEliminar.FlatStyle = FlatStyle.Flat;
-            BtnEliminar.Font = new Font("Segoe UI", 9.75F);
-            BtnEliminar.ForeColor = Color.FromArgb(26, 28, 30);
-            BtnEliminar.Location = new Point(796, 183);
+            BtnEliminar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnEliminar.ForeColor = Color.White;
+            BtnEliminar.Location = new Point(4, 4);
+            BtnEliminar.Margin = new Padding(4);
             BtnEliminar.Name = "BtnEliminar";
-            BtnEliminar.Size = new Size(75, 26);
+            BtnEliminar.Size = new Size(92, 92);
             BtnEliminar.TabIndex = 1;
-            BtnEliminar.Text = "Eliminar";
+            BtnEliminar.Text = "ELIMINAR";
             BtnEliminar.UseVisualStyleBackColor = false;
             BtnEliminar.Click += BtnEliminar_Click;
             // 
+            // BtnConfirmarCompra
+            // 
+            BtnConfirmarCompra.BackColor = Color.FromArgb(101, 89, 119);
+            BtnConfirmarCompra.Dock = DockStyle.Fill;
+            BtnConfirmarCompra.FlatAppearance.BorderColor = Color.FromArgb(235, 220, 255);
+            BtnConfirmarCompra.FlatStyle = FlatStyle.Flat;
+            BtnConfirmarCompra.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnConfirmarCompra.ForeColor = Color.White;
+            BtnConfirmarCompra.Location = new Point(104, 4);
+            BtnConfirmarCompra.Margin = new Padding(4);
+            BtnConfirmarCompra.Name = "BtnConfirmarCompra";
+            BtnConfirmarCompra.Size = new Size(92, 92);
+            BtnConfirmarCompra.TabIndex = 2;
+            BtnConfirmarCompra.Text = "CONFIRMAR COMPRA";
+            BtnConfirmarCompra.UseVisualStyleBackColor = false;
+            BtnConfirmarCompra.Click += BtnConfirmarCompra_Click;
+            // 
             // PbProgreso
             // 
-            PbProgreso.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            PbProgreso.Location = new Point(3, 221);
+            PbProgreso.Dock = DockStyle.Fill;
+            PbProgreso.Location = new Point(3, 3);
             PbProgreso.Name = "PbProgreso";
-            PbProgreso.Size = new Size(868, 10);
-            PbProgreso.Style = ProgressBarStyle.Continuous;
-            PbProgreso.TabIndex = 2;
+            PbProgreso.Size = new Size(285, 20);
+            PbProgreso.TabIndex = 6;
             PbProgreso.Visible = false;
             // 
             // UCConsultaCompras
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(218, 218, 220);
-            Controls.Add(tableLayoutPanel4);
-            Controls.Add(GBForm);
-            Controls.Add(GBLista);
-            Font = new Font("Segoe UI", 9F);
-            ForeColor = Color.FromArgb(26, 28, 30);
+            Controls.Add(splitContainer1);
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Margin = new Padding(4);
             Name = "UCConsultaCompras";
-            Size = new Size(874, 720);
+            Padding = new Padding(16);
+            Size = new Size(804, 561);
             Load += UCConsultaCompras_Load;
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             GBLista.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvCompras).EndInit();
@@ -647,14 +741,27 @@ namespace PrimeSystem.UI.Compras
             tableLayoutPanel2.PerformLayout();
             GBForm.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
-            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel6.ResumeLayout(false);
+            tableLayoutPanel6.PerformLayout();
+            tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
+            groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvDetalles).EndInit();
+            tableLayoutPanel7.ResumeLayout(false);
+            tableLayoutPanel7.PerformLayout();
+            tableLayoutPanel8.ResumeLayout(false);
+            tableLayoutPanel8.PerformLayout();
+            tableLayoutPanel9.ResumeLayout(false);
+            tableLayoutPanel9.PerformLayout();
+            tableLayoutPanel10.ResumeLayout(false);
+            tableLayoutPanel10.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
+        private SplitContainer splitContainer1;
         private GroupBox GBLista;
         private TableLayoutPanel tableLayoutPanel1;
         private DataGridView DgvCompras;
@@ -668,26 +775,33 @@ namespace PrimeSystem.UI.Compras
         private Label label4;
         private TextBox TxtIdRemito;
         private Button BtnBuscar;
-        private Button BtnActualizar;
         private GroupBox GBForm;
         private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel6;
+        private Label label14;
+        private Label LblTotal;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Label label12;
+        private Label LblDescuento;
+        private Label label10;
+        private Label LblSubtotal;
+        private GroupBox groupBox1;
+        private DataGridView DgvDetalles;
+        private TableLayoutPanel tableLayoutPanel7;
         private Label label5;
         private Label LblIdRemito;
+        private TableLayoutPanel tableLayoutPanel8;
         private Label label7;
         private Label LblFecha;
+        private TableLayoutPanel tableLayoutPanel9;
         private Label label9;
         private Label LblProveedor;
+        private TableLayoutPanel tableLayoutPanel10;
         private Label label11;
         private Label LblUsuario;
-        private Label label13;
-        private Label LblSubtotal;
-        private Label label15;
-        private Label LblDescuento;
-        private Label label17;
-        private Label LblTotal;
         private TableLayoutPanel tableLayoutPanel4;
-        private DataGridView DgvDetalles;
         private Button BtnEliminar;
+        private Button BtnConfirmarCompra;
         private ProgressBar PbProgreso;
     }
 }

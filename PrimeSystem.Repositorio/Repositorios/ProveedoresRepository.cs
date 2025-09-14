@@ -150,7 +150,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using var conn = Conexion();
-                using var cmd = new OleDbCommand("SELECT Id_Proveedor, CUIT, Proveedor, Nombre, Telefono, Email FROM Proveedores WHERE Id_Proveedor = @Id_Proveedor", conn);
+                using var cmd = new OleDbCommand("SELECT Id_Proveedor, CUIT, Proveedor, Nombre, Tel, Email FROM Proveedores WHERE Id_Proveedor = @Id_Proveedor", conn);
                 cmd.Parameters.AddWithValue("@Id_Proveedor", id);
                 conn.Open();
                 using var reader = cmd.ExecuteReader();
@@ -159,11 +159,11 @@ namespace PrimeSystem.Repositorio.Repositorios
                     Proveedores proveedor = new()
                     {
                         Id_Proveedor = reader.GetInt32(0),
-                        CUIT = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        Proveedor = reader.IsDBNull(2) ? null : reader.GetString(2),
-                        Nombre = reader.IsDBNull(3) ? null : reader.GetString(3),
-                        Tel = reader.IsDBNull(4) ? null : reader.GetString(4),
-                        Email = reader.IsDBNull(5) ? null : reader.GetString(5)
+                        CUIT = reader.GetString(1),
+                        Proveedor = reader.GetString(2),
+                        Nombre =  reader.GetString(3),
+                        Tel = reader.GetString(4),
+                        Email =  reader.GetString(5)
                     };
                     return Result<Proveedores>.Success(proveedor);
                 }

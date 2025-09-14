@@ -13,6 +13,7 @@ namespace PrimeSystem.Contrato.Servicios
         Result<HCompras> AddWithDetails(HCompras compra, List<PrimeSystem.Modelo.ProductoResumen> productosResumen);
         Result<HCompras> Update(HCompras compra);
         Result<bool> Delete(int id);
-        Result<List<HCompras>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, string proveedor, int? idRemito);
+        Result<List<HCompras>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, int? proveedor, int? idRemito);
+        Result<bool> Confirmar(int idRemito);
     }
 }

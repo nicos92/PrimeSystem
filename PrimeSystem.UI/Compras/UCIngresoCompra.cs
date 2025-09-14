@@ -46,6 +46,7 @@ namespace PrimeSystem.UI.Compras
 
             InitializeComponent();
 
+            this.Disposed += UCIngresoCompra_Disposed;
         }
 
         private void ListaProductos(List<ArticuloStock> productosSeleccionados)
@@ -319,7 +320,7 @@ namespace PrimeSystem.UI.Compras
                 DgvProductosSeleccionados.Rows[indiceParaSeleccionar].Selected = true;
                 DgvProductosSeleccionados.CurrentCell = DgvProductosSeleccionados.Rows[indiceParaSeleccionar].Cells[1];
 
-                if (DgvProductosSeleccionados.Rows[indiceParaSeleccionar].DataBoundItem is ProductoResumen productoSeleccionado && productoSeleccionado.Cod_Articulo != null)
+                if (DgvProductosSeleccionados.Rows[indiceParaSeleccionar].DataBoundItem is ProductoResumen productoSeleccionado)
                 {
                     SeleccionarProductoEnListBox(productoSeleccionado.Cod_Articulo);
                     _ultimoCodigoArticuloSeleccionado = productoSeleccionado.Cod_Articulo;
@@ -518,8 +519,7 @@ namespace PrimeSystem.UI.Compras
                 var hCompras = new HCompras
                 {
                     Cod_Usuario = 1, // TODO: Obtener el usuario actual
-                    Id_Proveedor = (CmbProveedor.SelectedItem
-                                    as Modelo.Entidades.Proveedores).Id_Proveedor,
+                    Id_Proveedor = ((PrimeSystem.Modelo.Entidades.Proveedores)CmbProveedor.SelectedItem).Id_Proveedor,
                     Fecha_Hora = DateTime.Now,
                     Descuento = descuento,
                     Subtotal = subtotal,

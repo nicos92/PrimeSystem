@@ -7,14 +7,9 @@ using PrimeSystem.Contrato.Repositorios;
 
 namespace PrimeSystem.Servicio.Implementaciones
 {
-    public class HComprasDetalleService : IHComprasDetalleService
+    public class HComprasDetalleService(IHComprasDetalleRepository repo) : IHComprasDetalleService
     {
-        private readonly IHComprasDetalleRepository _repo;
-
-        public HComprasDetalleService(IHComprasDetalleRepository repo)
-        {
-            _repo = repo;
-        }
+        private readonly IHComprasDetalleRepository _repo = repo;
 
         public Result<List<HComprasDetalle>> GetAll() => _repo.GetAll();
         public Result<HComprasDetalle> GetById(int id) => _repo.GetById(id);

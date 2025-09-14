@@ -11,16 +11,10 @@ using PrimeSystem.Contrato.Repositorios;
 
 namespace PrimeSystem.Servicio.Implementaciones
 {
-    public class CompraService : ICompraService
+    public class CompraService(IHComprasService comprasService, IHComprasDetalleService comprasDetalleService) : ICompraService
     {
-        private readonly IHComprasService _comprasService;
-        private readonly IHComprasDetalleService _comprasDetalleService;
-
-        public CompraService(IHComprasService comprasService, IHComprasDetalleService comprasDetalleService)
-        {
-            _comprasService = comprasService;
-            _comprasDetalleService = comprasDetalleService;
-        }
+        private readonly IHComprasService _comprasService = comprasService;
+        private readonly IHComprasDetalleService _comprasDetalleService = comprasDetalleService;
 
         public async Task<Result<bool>> Add(HCompras hCompras, List<ProductoResumen> productoResumen)
         {

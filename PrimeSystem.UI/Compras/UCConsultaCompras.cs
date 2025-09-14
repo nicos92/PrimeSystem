@@ -131,6 +131,7 @@ namespace PrimeSystem.UI.Compras
 
                 if (result.IsSuccess)
                 {
+                    _compras.Clear();
                     _compras = result.Value;
                     ActualizarListaCompras();
                 }
@@ -190,7 +191,7 @@ namespace PrimeSystem.UI.Compras
 
         private async void DgvCompras_SelectionChanged(object sender, EventArgs e)
         {
-            if (DgvCompras.CurrentRow?.DataBoundItem is HCompras compra)
+            if (DgvCompras.CurrentRow != null && DgvCompras.CurrentRow?.DataBoundItem is HCompras compra && compra != null)
             {
                 _selectedCompraId = compra.Id_Remito;
                 await CargarDetallesCompraAsync(compra.Id_Remito);
@@ -277,7 +278,7 @@ namespace PrimeSystem.UI.Compras
             }
         }
 
-        private void MostrarDetallesCompra(HCompras compra)
+        private async void MostrarDetallesCompra(HCompras compra)
         {
             LblIdRemito.Text = compra.Id_Remito.ToString();
             LblFecha.Text = compra.Fecha_Hora.ToString("dd/MM/yyyy HH:mm");
@@ -285,8 +286,9 @@ namespace PrimeSystem.UI.Compras
             LblDescuento.Text = compra.Descuento.ToString("C", _cultureArgentina);
             LblTotal.Text = compra.Total.ToString("C", _cultureArgentina);
             
-            // Cargar información adicional (proveedor, usuario) de forma asíncrona
-            _ = CargarInformacionAdicionalAsync(compra);
+            
+          
+            await CargarInformacionAdicionalAsync(compra);
         }
 
         private async Task CargarInformacionAdicionalAsync(HCompras compra)
@@ -409,8 +411,13 @@ namespace PrimeSystem.UI.Compras
                 {
                     idRemito = parsedId;
                 }
+                int? idpro = null;
+                if (!string.IsNullOrEmpty(proveedor) && int.TryParse(proveedor, out int parsedPro))
+                {
+                    idpro = parsedPro;
+                }
 
-                var result = await Task.Run(() => _hComprasService.GetFiltered(fechaDesde, fechaHasta, proveedor, idRemito));
+                var result = await Task.Run(() => _hComprasService.GetFiltered(fechaDesde, fechaHasta, idpro, idRemito));
 
                 if (result.IsSuccess)
                 {
@@ -435,9 +442,55 @@ namespace PrimeSystem.UI.Compras
             }
         }
 
-        private void BtnActualizar_Click(object sender, EventArgs e)
+        private async void BtnActualizar_Click(object sender, EventArgs e)
         {
-            _ = CargarComprasAsync();
+            await CargarComprasAsync();
+        }
+
+        private async void BtnConfirmarCompra_Click(object sender, EventArgs e)
+        {
+            await ConfirmarCompraAsync();
+        }
+
+        private async Task ConfirmarCompraAsync()
+        {
+            if (_selectedCompraId <= 0)
+            {
+                MessageBox.Show("Por favor, seleccione una compra para confirmar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var dr = MessageBox.Show("¿Está seguro que desea confirmar esta compra?", "Confirmar compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Yes)
+            {
+                try
+                {
+                    PbProgreso.Visible = true;
+                    PbProgreso.Style = ProgressBarStyle.Marquee;
+
+                    var result = await Task.Run(() => _hComprasService.Confirmar(_selectedCompraId));
+
+                    if (result.IsSuccess)
+                    {
+                        MessageBox.Show("Compra confirmada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await CargarComprasAsync();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error al confirmar la compra: {result.Error}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error al confirmar compra {IdRemito}", _selectedCompraId);
+                    MessageBox.Show($"Error al confirmar la compra: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    PbProgreso.Visible = false;
+                }
+            }
         }
     }
 }

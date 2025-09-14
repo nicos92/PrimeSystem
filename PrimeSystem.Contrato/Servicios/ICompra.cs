@@ -11,7 +11,8 @@ namespace PrimeSystem.Contrato.Servicios
 {
     public interface ICompraService
     {
-        Task<Result<bool>> Add(HCompras hCompras, List<ProductoResumen> productoResumen);
+        Task<Result<bool>> Add(HCompras hCompras, List<PrimeSystem.Modelo.ProductoResumen> productoResumen);
         Task<Result<(List<HCompras> compras, List<HComprasDetalle> detalles)>> GetAll();
+   
     }
 }
