@@ -11,7 +11,7 @@ namespace PrimeSystem.Servicio.Implementaciones
         private readonly IClientesRepository _repo = repo;
 
         public async Task<Result<List<Clientes>>> GetAll() => await _repo.GetAll();
-        public Result<Clientes> GetById(int id) => _repo.GetById(id);
+        public async Task<Result<Clientes>> GetById(int id) => await _repo.GetById(id);
         public Result<Clientes> Add(Clientes cliente) => _repo.Add(cliente);
         public Result<Clientes> Update(Clientes cliente) => _repo.Update(cliente);
         public Result<bool> Delete(int id) => _repo.Delete(id);

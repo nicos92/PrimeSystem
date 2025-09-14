@@ -27,6 +27,11 @@ namespace PrimeSystem.Servicio.Implementaciones
             return await _repo.GetAll();
         }
 
+        public async Task<Result<List<ArticuloStock>>> GetAllArticuloStock()
+        {
+            return await _repo.GetAllArticuloStock();
+        }
+
         public async Task<Result<bool>> Update(Articulos articulos, Stock stock)
         {
             return await _repo.Update(articulos, stock);

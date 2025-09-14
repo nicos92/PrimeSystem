@@ -19,7 +19,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conexion = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("INSERT INTO HVentas_Detalle (Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant) VALUES (@Id_Remito, @Cod_Art, @Descr, @P_Unit, @Cant, @P_X_Cant)", conexion);
+                using OleDbCommand cmd = new OleDbCommand("INSERT INTO H_Ventas_Detalle (Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant) VALUES (@Id_Remito, @Cod_Art, @Descr, @P_Unit, @Cant, @P_X_Cant)", conexion);
                 cmd.Parameters.AddWithValue("@Id_Remito", detalle.Id_Remito);
                 cmd.Parameters.AddWithValue("@Cod_Art", detalle.Cod_Art);
                 cmd.Parameters.AddWithValue("@Descr", detalle.Descr);
@@ -52,7 +52,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conexion = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("DELETE FROM HVentas_Detalle WHERE Id_Det_Remito = @Id_Det_Remito", conexion);
+                using OleDbCommand cmd = new OleDbCommand("DELETE FROM H_Ventas_Detalle WHERE Id_Det_Remito = @Id_Det_Remito", conexion);
                 cmd.Parameters.AddWithValue("@Id_Det_Remito", id);
                 conexion.Open();
                 int resultado = cmd.ExecuteNonQuery();
@@ -80,7 +80,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conexion = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM HVentas_Detalle", conexion);
+                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM H_Ventas_Detalle", conexion);
                 await conexion.OpenAsync();
                 using DbDataReader reader = await cmd.ExecuteReaderAsync();
                 List<HVentasDetalle> detalles = [];
@@ -92,9 +92,9 @@ namespace PrimeSystem.Repositorio.Repositorios
                         Id_Remito = reader.GetInt32(1),
                         Cod_Art = reader.GetString(2),
                         Descr =  reader.GetString(3),
-                        P_Unit = reader.GetDouble(4),
+                        P_Unit = reader.GetDecimal(4),
                         Cant = reader.GetInt32(5),
-                        P_X_Cant = reader.GetDouble(6)
+                        P_X_Cant = reader.GetDecimal(6)
                     };
                     detalles.Add(detalle);
                 }
@@ -115,7 +115,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conexion = Conexion();
-                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM HVentas_Detalle WHERE Id_Det_Remito = @Id_Det_Remito", conexion);
+                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM H_Ventas_Detalle WHERE Id_Det_Remito = @Id_Det_Remito", conexion);
                 cmd.Parameters.AddWithValue("@Id_Det_Remito", id);
                 conexion.Open();
                 using OleDbDataReader reader = cmd.ExecuteReader();
@@ -127,9 +127,9 @@ namespace PrimeSystem.Repositorio.Repositorios
                         Id_Remito = reader.GetInt32(1),
                         Cod_Art = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Descr = reader.IsDBNull(3) ? null : reader.GetString(3),
-                        P_Unit = reader.GetDouble(4),
+                        P_Unit = reader.GetDecimal(4),
                         Cant = reader.GetInt32(5),
-                        P_X_Cant = reader.GetDouble(6)
+                        P_X_Cant = reader.GetDecimal(6)
                     };
                     return Result<HVentasDetalle>.Success(detalle);
                 }
@@ -153,7 +153,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             try
             {
                 using OleDbConnection conexion = Conexion();
-                using OleDbCommand cmd = new("UPDATE HVentas_Detalle SET Id_Remito = @Id_Remito, Cod_Art = @Cod_Art, Descr = @Descr, P_Unit = @P_Unit, Cant = @Cant, P_X_Cant = @P_X_Cant WHERE Id_Det_Remito = @Id_Det_Remito", conexion);
+                using OleDbCommand cmd = new("UPDATE H_Ventas_Detalle SET Id_Remito = @Id_Remito, Cod_Art = @Cod_Art, Descr = @Descr, P_Unit = @P_Unit, Cant = @Cant, P_X_Cant = @P_X_Cant WHERE Id_Det_Remito = @Id_Det_Remito", conexion);
                 cmd.Parameters.AddWithValue("@Id_Det_Remito", detalle.Id_Det_Remito);
                 cmd.Parameters.AddWithValue("@Id_Remito", detalle.Id_Remito);
                 cmd.Parameters.AddWithValue("@Cod_Art", detalle.Cod_Art);
@@ -182,7 +182,40 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-      
-
+        public async Task<Result<List<HVentasDetalle>>> GetByRemitoId(int idRemito)
+        {
+            try
+            {
+                using OleDbConnection conexion = Conexion();
+                using OleDbCommand cmd = new OleDbCommand("SELECT * FROM H_Ventas_Detalle WHERE Id_Remito = @Id_Remito", conexion);
+                cmd.Parameters.AddWithValue("@Id_Remito", idRemito);
+                await conexion.OpenAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
+                List<HVentasDetalle> detalles = [];
+                while (await reader.ReadAsync())
+                {
+                    HVentasDetalle detalle = new()
+                    {
+                        Id_Det_Remito = reader.GetInt32(0),
+                        Id_Remito = reader.GetInt32(1),
+                        Cod_Art = reader.GetString(2),
+                        Descr =  reader.GetString(3),
+                        P_Unit = reader.GetDecimal(4),
+                        Cant = reader.GetInt32(5),
+                        P_X_Cant = reader.GetDecimal(6)
+                    };
+                    detalles.Add(detalle);
+                }
+                return Result<List<HVentasDetalle>>.Success(detalles);
+            }
+            catch (OleDbException ex)
+            {
+                return Result<List<HVentasDetalle>>.Failure($"Error al obtener los detalles de la venta: {ex.Message}");
+            }
+            catch (System.Exception ex)
+            {
+                return Result<List<HVentasDetalle>>.Failure($"Error inesperado al obtener los detalles de la venta: {ex.Message}");
+            }
+        }
     }
 }

@@ -35,7 +35,24 @@ namespace PrimeSystem.Utilidades
             DoWork += HacerTrabajo;
             ProgressChanged += ProgresoCambiado;
             RunWorkerCompleted += TrabajoCompletado;
-            _tareaCompletada = tareaCompletada;
+        }
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="TareasLargas"/> para ejecutar una función que devuelve un resultado.
+        /// </summary>
+        /// <param name="panelADesactivar">El panel a desactivar durante la tarea.</param>
+        /// <param name="barraDeProgreso">La barra de progreso a mostrar.</param>
+        public TareasLargas(Panel panelADesactivar, ProgressBar barraDeProgreso)
+        {
+            _panelADesactivar = panelADesactivar;
+            _barraDeProgreso = barraDeProgreso;
+
+            WorkerReportsProgress = true;
+            WorkerSupportsCancellation = true;
+
+            DoWork += HacerTrabajo;
+            ProgressChanged += ProgresoCambiado;
+            RunWorkerCompleted += TrabajoCompletado;
         }
 
         /// <summary>
@@ -50,6 +67,19 @@ namespace PrimeSystem.Utilidades
         }
 
         /// <summary>
+        /// Inicia la tarea de larga duración con una función específica.
+        /// </summary>
+        /// <typeparam name="T">El tipo de resultado devuelto por la función.</typeparam>
+        /// <param name="funcion">La función a ejecutar.</param>
+        /// <param name="mensaje">Mensaje descriptivo de la operación (opcional).</param>
+        /// <returns>El resultado de la función ejecutada.</returns>
+        public static async Task<T> EjecutarAsync<T>(Func<T> funcion, string mensaje = "")
+        {
+            // Para operaciones simples que no requieren UI blocking
+            return await Task.Run(funcion);
+        }
+
+        /// <summary>
         /// Realiza el trabajo de la tarea de larga duración.
         /// </summary>
         /// <param name="sender">La fuente del evento.</param>
@@ -58,7 +88,10 @@ namespace PrimeSystem.Utilidades
         {
             try
             {
-                await _tareaDeLargaDuracion();
+                if (_tareaDeLargaDuracion != null)
+                {
+                    await _tareaDeLargaDuracion();
+                }
             }
             catch (Exception ex)
             {
@@ -97,7 +130,7 @@ namespace PrimeSystem.Utilidades
             else
             {
                 // Ejecuta la tarea de completado si no hubo errores
-                _tareaCompletada();
+                _tareaCompletada?.Invoke();
             }
         }
     }

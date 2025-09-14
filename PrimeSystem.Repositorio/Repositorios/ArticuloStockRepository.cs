@@ -170,6 +170,58 @@ namespace PrimeSystem.Repositorio.Repositorios
             return Result<(List<Articulos> articulos, List<Stock> stock)>.Success((listaArticulos, listaStock));
         }
 
+        public async Task<Result<List<ArticuloStock>>> GetAllArticuloStock()
+        {
+            var listaArticulos = new List<ArticuloStock>();
+
+            using (OleDbConnection conn = Conexion())
+            {
+                try
+                {
+                    await conn.OpenAsync();
+
+                    // 1. Obtener datos de la tabla Articulos
+                    string sqlArticulos = "SELECT a.Id_Articulo, a.Cod_Articulo, a.Art_Desc, a.Cod_Categoria, a.Cod_Subcat, a.Id_Proveedor, s.cantidad, s.costo, s.ganancia FROM Articulos a inner join stock s on a.cod_articulo = s.Cod_Articulo ";
+                    using (OleDbCommand cmdArticulos = new OleDbCommand(sqlArticulos, conn))
+                    {
+                        using (DbDataReader reader = await cmdArticulos.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var articulo = new ArticuloStock
+                                (
+                                   reader.GetInt32(0),
+                                     reader.GetString(1),
+                                   reader.GetString(2),
+                                    reader.GetInt32(3),
+                                    reader.GetInt32(4),
+                                    reader.GetInt32(5),
+                                    reader.GetDouble(6),
+                                    reader.GetDouble(7),
+                                    reader.GetDouble(8)
+
+                               
+
+                                );
+                                listaArticulos.Add(articulo);
+                            }
+                        }
+                    }
+
+                   
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error inesperado al obtener datos: {ex.Message}");
+
+                    return Result<List<ArticuloStock>>.Failure("No se pudieron obtener las listas");
+                }
+            }
+
+
+            return Result<List<ArticuloStock>>.Success(listaArticulos);
+        }
+
         public async Task<Result<bool>> Update(Articulos articulos, Stock stock)
         {
             OleDbTransaction? transaction = null;

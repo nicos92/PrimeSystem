@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PrimeSystem.UI.Usuarios;
+using PrimeSystem.UI.Articulos;
 using PrimeSystem.Utilidades;
 using System;
 using System.Collections.Generic;
@@ -11,24 +11,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PrimeSystem.UI.Articulos
+namespace PrimeSystem.UI.Ventas
 {
-    public partial class FormArticulos : Form
+    public partial class FormVentaPrincipal : Form
     {
-        private Button _btnActual;
-        private readonly IServiceProvider _serviceProvider;
-
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="FormArticulos"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="FormVentaPrincipal"/>.
         /// </summary>
         /// <param name="serviceProvider">El proveedor de servicios para la inyección de dependencias.</param>
-        public FormArticulos(IServiceProvider serviceProvider)
+
+        public FormVentaPrincipal(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+
             InitializeComponent();
             _btnActual = BtnOpcionIngresar; // Inicializar con el botón de Ingresar
 
         }
+
+        private Button _btnActual;
+        private readonly IServiceProvider _serviceProvider;
+
+
 
         /// <summary>
         /// Selecciona y muestra un control de usuario en el panel principal.
@@ -36,17 +40,20 @@ namespace PrimeSystem.UI.Articulos
         /// <param name="tipoForm">El tipo de control de usuario a mostrar.</param>
         private void SeleccionarUC(Type tipoForm)
         {
-            // Cerrar el formulario actual si existe
-            PanelMedio.Controls.Clear();
+            // Limpiar el panel si es un UserControl
+            if (typeof(UserControl).IsAssignableFrom(tipoForm))
+            {
+                PanelMedio.Controls.Clear();
+            }
 
-            // Crear el formulario usando el tipo proporcionado en el Tag del botón
+            // Crear el UserControl si el tipo es un UserControl
             if (tipoForm != null && typeof(UserControl).IsAssignableFrom(tipoForm))
             {
                 UserControl uc = (UserControl)_serviceProvider.GetRequiredService(tipoForm);
-
                 uc.Dock = DockStyle.Fill;
                 PanelMedio.Controls.Add(uc);
             }
+            
         }
 
         /// <summary>
@@ -54,9 +61,8 @@ namespace PrimeSystem.UI.Articulos
         /// </summary>
         private void ConFigBtns()
         {
-            BtnOpcionIngresar.Tag = typeof(UCIngresoArticulos);
-            BtnOpcionEditar.Tag = typeof(UCConsultaArticulos);
-            BtnOpcionCategorias.Tag = typeof(UCGestionCategorias);
+            BtnOpcionIngresar.Tag = typeof(UCIngresoVenta);
+            BtnOpcionEditar.Tag = typeof(UCConsultaVentas);
         }
 
         /// <summary>
@@ -67,6 +73,7 @@ namespace PrimeSystem.UI.Articulos
         {
             if (btn.Tag is Type type)
             {
+
                 SeleccionarUC(type);
             }
         }
@@ -96,7 +103,7 @@ namespace PrimeSystem.UI.Articulos
         /// </summary>
         /// <param name="sender">El objeto que generó el evento.</param>
         /// <param name="e">Los datos del evento.</param>
-        private void FormArticulos_Load(object sender, EventArgs e)
+        private void FormVentaPrincipal_Load(object sender, EventArgs e)
         {
             ConFigBtns();
 
@@ -108,7 +115,7 @@ namespace PrimeSystem.UI.Articulos
         /// </summary>
         /// <param name="sender">El objeto que generó el evento.</param>
         /// <param name="e">Los datos del evento.</param>
-        private void FormArticulos_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormVentaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
         }

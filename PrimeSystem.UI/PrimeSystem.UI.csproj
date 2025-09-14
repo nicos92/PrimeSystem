@@ -17,11 +17,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PrimeSystem.Contrato\PrimeSystem.Contrato.csproj" />
     <ProjectReference Include="..\PrimeSystem.Modelo\PrimeSystem.Modelo.csproj" />
+    <ProjectReference Include="..\PrimeSystem.Servicio\PrimeSystem.Servicio.csproj" />
     <ProjectReference Include="..\PrimeSystem.Utilidades\PrimeSystem.Utilidades.csproj" />
   </ItemGroup>
 
