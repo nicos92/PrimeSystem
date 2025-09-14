@@ -31,6 +31,7 @@
             PanelMedio = new Panel();
             PanelOpcion = new Panel();
             tableLayoutPanel2 = new TableLayoutPanel();
+            BtnOpcionCategorias = new Button();
             BtnOpcionEditar = new Button();
             BtnOpcionIngresar = new Button();
             PanelOpcion.SuspendLayout();
@@ -57,9 +58,11 @@
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.Controls.Add(BtnOpcionCategorias, 2, 0);
             tableLayoutPanel2.Controls.Add(BtnOpcionEditar, 1, 0);
             tableLayoutPanel2.Controls.Add(BtnOpcionIngresar, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
@@ -69,6 +72,27 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(724, 64);
             tableLayoutPanel2.TabIndex = 1;
+            // 
+            // BtnOpcionCategorias
+            // 
+            BtnOpcionCategorias.BackColor = Color.FromArgb(108, 117, 125);
+            BtnOpcionCategorias.Dock = DockStyle.Fill;
+            BtnOpcionCategorias.FlatAppearance.BorderColor = Color.FromArgb(80, 87, 94);
+            BtnOpcionCategorias.FlatStyle = FlatStyle.Flat;
+            BtnOpcionCategorias.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnOpcionCategorias.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnOpcionCategorias.Image = Properties.Resources.pen;
+            BtnOpcionCategorias.ImageAlign = ContentAlignment.MiddleLeft;
+            BtnOpcionCategorias.Location = new Point(482, 0);
+            BtnOpcionCategorias.Margin = new Padding(0);
+            BtnOpcionCategorias.Name = "BtnOpcionCategorias";
+            BtnOpcionCategorias.Size = new Size(242, 64);
+            BtnOpcionCategorias.TabIndex = 2;
+            BtnOpcionCategorias.Text = "Categorías";
+            BtnOpcionCategorias.TextAlign = ContentAlignment.MiddleRight;
+            BtnOpcionCategorias.TextImageRelation = TextImageRelation.TextBeforeImage;
+            BtnOpcionCategorias.UseVisualStyleBackColor = false;
+            BtnOpcionCategorias.Click += BtnOpcionIngresar_Click;
             // 
             // BtnOpcionEditar
             // 
@@ -80,10 +104,10 @@
             BtnOpcionEditar.ForeColor = Color.FromArgb(255, 255, 255);
             BtnOpcionEditar.Image = Properties.Resources.pen;
             BtnOpcionEditar.ImageAlign = ContentAlignment.MiddleLeft;
-            BtnOpcionEditar.Location = new Point(362, 0);
+            BtnOpcionEditar.Location = new Point(241, 0);
             BtnOpcionEditar.Margin = new Padding(0);
             BtnOpcionEditar.Name = "BtnOpcionEditar";
-            BtnOpcionEditar.Size = new Size(362, 64);
+            BtnOpcionEditar.Size = new Size(241, 64);
             BtnOpcionEditar.TabIndex = 1;
             BtnOpcionEditar.Text = "Editar Articulo";
             BtnOpcionEditar.TextAlign = ContentAlignment.MiddleRight;
@@ -104,7 +128,7 @@
             BtnOpcionIngresar.Location = new Point(0, 0);
             BtnOpcionIngresar.Margin = new Padding(0);
             BtnOpcionIngresar.Name = "BtnOpcionIngresar";
-            BtnOpcionIngresar.Size = new Size(362, 64);
+            BtnOpcionIngresar.Size = new Size(241, 64);
             BtnOpcionIngresar.TabIndex = 0;
             BtnOpcionIngresar.Text = "Ingresar Articulo";
             BtnOpcionIngresar.TextAlign = ContentAlignment.MiddleRight;
@@ -137,5 +161,6 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Button BtnOpcionEditar;
         private Button BtnOpcionIngresar;
+        private Button BtnOpcionCategorias;
     }
 }

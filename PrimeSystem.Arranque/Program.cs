@@ -92,6 +92,8 @@ static class Program
 
         services.AddTransient<FormPrincipal>();     // Este Form estaria en PrimeSystem.UI
 
+        services.AddTransient<UCGestionCategorias>(); // Este UC se encuentra en PrimeSystem.UI
+
         services.AddTransient<FormArticulos>();     // Este Form estatia en PrimeSystem.UI
         services.AddTransient<UCIngresoArticulos>();    // Este UC se encuentra en PrimeSystem.UI
         services.AddTransient<UCConsultaArticulos>();   // este UC se encuentra en PrimeSystem.UI

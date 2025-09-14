@@ -56,6 +56,7 @@ namespace PrimeSystem.UI.Articulos
         {
             BtnOpcionIngresar.Tag = typeof(UCIngresoArticulos);
             BtnOpcionEditar.Tag = typeof(UCConsultaArticulos);
+            BtnOpcionCategorias.Tag = typeof(UCGestionCategorias);
         }
 
         /// <summary>
@@ -66,7 +67,6 @@ namespace PrimeSystem.UI.Articulos
         {
             if (btn.Tag is Type type)
             {
-
                 SeleccionarUC(type);
             }
         }
