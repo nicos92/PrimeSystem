@@ -309,7 +309,7 @@ namespace PrimeSystem.Repositorio.Repositorios
             }
         }
 
-        public Result<List<HCompras>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, int? proveedor, int? idRemito)
+        public Result<List<HCompras>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, int? proveedor, double? idRemito)
         {
             try
             {

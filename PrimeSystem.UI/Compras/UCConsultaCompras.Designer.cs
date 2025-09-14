@@ -42,8 +42,8 @@ namespace PrimeSystem.UI.Compras
             label2 = new Label();
             DtpFechaHasta = new DateTimePicker();
             label3 = new Label();
-            TxtProveedor = new TextBox();
             TxtIdRemito = new TextBox();
+            CmbProveedor = new ComboBox();
             label4 = new Label();
             BtnBuscar = new Button();
             GBForm = new GroupBox();
@@ -185,17 +185,17 @@ namespace PrimeSystem.UI.Compras
             // 
             tableLayoutPanel2.ColumnCount = 5;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 8F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(DtpFechaDesde, 1, 0);
             tableLayoutPanel2.Controls.Add(label2, 3, 0);
             tableLayoutPanel2.Controls.Add(DtpFechaHasta, 4, 0);
             tableLayoutPanel2.Controls.Add(label3, 0, 1);
-            tableLayoutPanel2.Controls.Add(TxtProveedor, 1, 1);
             tableLayoutPanel2.Controls.Add(TxtIdRemito, 1, 2);
+            tableLayoutPanel2.Controls.Add(CmbProveedor, 1, 1);
             tableLayoutPanel2.Controls.Add(label4, 0, 2);
             tableLayoutPanel2.Controls.Add(BtnBuscar, 2, 3);
             tableLayoutPanel2.Dock = DockStyle.Fill;
@@ -228,7 +228,7 @@ namespace PrimeSystem.UI.Compras
             DtpFechaDesde.Format = DateTimePickerFormat.Short;
             DtpFechaDesde.Location = new Point(96, 3);
             DtpFechaDesde.Name = "DtpFechaDesde";
-            DtpFechaDesde.Size = new Size(117, 29);
+            DtpFechaDesde.Size = new Size(115, 29);
             DtpFechaDesde.TabIndex = 1;
             // 
             // label2
@@ -237,7 +237,7 @@ namespace PrimeSystem.UI.Compras
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(26, 28, 30);
-            label2.Location = new Point(227, 6);
+            label2.Location = new Point(225, 6);
             label2.Name = "label2";
             label2.Size = new Size(55, 21);
             label2.TabIndex = 2;
@@ -248,9 +248,9 @@ namespace PrimeSystem.UI.Compras
             DtpFechaHasta.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             DtpFechaHasta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DtpFechaHasta.Format = DateTimePickerFormat.Short;
-            DtpFechaHasta.Location = new Point(288, 3);
+            DtpFechaHasta.Location = new Point(286, 3);
             DtpFechaHasta.Name = "DtpFechaHasta";
-            DtpFechaHasta.Size = new Size(114, 29);
+            DtpFechaHasta.Size = new Size(115, 29);
             DtpFechaHasta.TabIndex = 3;
             // 
             // label3
@@ -265,23 +265,25 @@ namespace PrimeSystem.UI.Compras
             label3.TabIndex = 4;
             label3.Text = "Proveedor";
             // 
-            // TxtProveedor
-            // 
-            TxtProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxtProveedor.Location = new Point(96, 37);
-            TxtProveedor.Name = "TxtProveedor";
-            TxtProveedor.Size = new Size(117, 29);
-            TxtProveedor.TabIndex = 5;
-            // 
             // TxtIdRemito
             // 
             TxtIdRemito.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TxtIdRemito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TxtIdRemito.Location = new Point(96, 71);
+            TxtIdRemito.MaxLength = 12;
             TxtIdRemito.Name = "TxtIdRemito";
-            TxtIdRemito.Size = new Size(117, 29);
+            TxtIdRemito.Size = new Size(115, 29);
             TxtIdRemito.TabIndex = 7;
+            // 
+            // CmbProveedor
+            // 
+            CmbProveedor.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            CmbProveedor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CmbProveedor.FormattingEnabled = true;
+            CmbProveedor.Location = new Point(96, 37);
+            CmbProveedor.Name = "CmbProveedor";
+            CmbProveedor.Size = new Size(115, 29);
+            CmbProveedor.TabIndex = 5;
             // 
             // label4
             // 
@@ -304,7 +306,7 @@ namespace PrimeSystem.UI.Compras
             BtnBuscar.FlatStyle = FlatStyle.Flat;
             BtnBuscar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             BtnBuscar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnBuscar.Location = new Point(245, 106);
+            BtnBuscar.Location = new Point(244, 106);
             BtnBuscar.Margin = new Padding(4);
             BtnBuscar.Name = "BtnBuscar";
             BtnBuscar.Size = new Size(130, 28);
@@ -326,7 +328,7 @@ namespace PrimeSystem.UI.Compras
             GBForm.Size = new Size(349, 529);
             GBForm.TabIndex = 0;
             GBForm.TabStop = false;
-            GBForm.Text = "Formulario de Consulta de Compras";
+            GBForm.Text = "Detalle de Compra";
             // 
             // tableLayoutPanel3
             // 
@@ -771,7 +773,7 @@ namespace PrimeSystem.UI.Compras
         private Label label2;
         private DateTimePicker DtpFechaHasta;
         private Label label3;
-        private TextBox TxtProveedor;
+        private ComboBox CmbProveedor;
         private Label label4;
         private TextBox TxtIdRemito;
         private Button BtnBuscar;

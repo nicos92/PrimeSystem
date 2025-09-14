@@ -18,6 +18,6 @@ namespace PrimeSystem.Servicio.Implementaciones
         public Result<bool> Confirmar(int idRemito) => _repo.Confirmar(idRemito);
         public Result<HCompras> Update(HCompras compra) => _repo.Update(compra);
         public Result<bool> Delete(int id) => _repo.Delete(id);
-        public Result<List<HCompras>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, int? proveedor, int? idRemito) => _repo.GetFiltered(fechaDesde, fechaHasta, proveedor, idRemito);
+        public Result<List<HCompras>> GetFiltered(DateTime fechaDesde, DateTime fechaHasta, int? proveedor, double? idRemito) => _repo.GetFiltered(fechaDesde, fechaHasta, proveedor, idRemito);
     }
 }

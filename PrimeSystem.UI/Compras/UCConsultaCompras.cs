@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
+using PrimeSystem.Utilidades.Validaciones;
 
 namespace PrimeSystem.UI.Compras
 {
@@ -25,7 +26,11 @@ namespace PrimeSystem.UI.Compras
         private readonly CultureInfo _cultureArgentina = new("es-AR");
         private List<HCompras> _compras = [];
         private List<HComprasDetalle> _detallesCompra = [];
+        private List<Modelo.Entidades.Proveedores> _proveedores = [];
         private int _selectedCompraId = -1;
+
+        private readonly ErrorProvider _ePNRemito;
+        private readonly ValidadorEntero _validadorEntero;
 
         public UCConsultaCompras(
             IHComprasService hComprasService,
@@ -41,6 +46,10 @@ namespace PrimeSystem.UI.Compras
             _logger = logger;
 
             InitializeComponent();
+
+            _ePNRemito = new ErrorProvider();
+            _validadorEntero = new ValidadorEntero(TxtIdRemito, _ePNRemito);
+
         }
 
         private async void UCConsultaCompras_Load(object sender, EventArgs e)
@@ -48,6 +57,7 @@ namespace PrimeSystem.UI.Compras
             try
             {
                 ConfigurarControles();
+                await CargarProveedoresAsync();
                 await CargarComprasAsync();
             }
             catch (Exception ex)
@@ -81,6 +91,11 @@ namespace PrimeSystem.UI.Compras
             // Configurar fechas por defecto
             DtpFechaDesde.Value = DateTime.Today.AddDays(-30);
             DtpFechaHasta.Value = DateTime.Today;
+
+            // Configurar ComboBox de proveedores
+            CmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbProveedor.DisplayMember = "Nombre";
+            CmbProveedor.ValueMember = "Id_Proveedor";
 
             // Configurar estilos
             AplicarEstilos();
@@ -150,6 +165,39 @@ namespace PrimeSystem.UI.Compras
             finally
             {
                 PbProgreso.Visible = false;
+            }
+        }
+
+        private async Task CargarProveedoresAsync()
+        {
+            try
+            {
+                var result = await Task.Run(() => _proveedoresService.GetAll());
+
+                if (result.IsSuccess)
+                {
+                    _proveedores = result.Value;
+                    
+                    // Agregar opción "Todos" al principio
+                    var todosOption = new Modelo.Entidades.Proveedores { Id_Proveedor = 0, Nombre = "Todos" };
+                    _proveedores.Insert(0, todosOption);
+                    
+                    // Configurar el ComboBox
+                    CmbProveedor.DataSource = null;
+                    CmbProveedor.DataSource = _proveedores;
+                    CmbProveedor.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show($"Error al cargar los proveedores: {result.Error}", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al cargar los proveedores");
+                MessageBox.Show($"Error al cargar los proveedores: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -402,27 +450,30 @@ namespace PrimeSystem.UI.Compras
 
                 DateTime fechaDesde = DtpFechaDesde.Value.Date;
                 DateTime fechaHasta = DtpFechaHasta.Value.Date.AddDays(1).AddTicks(-1); // Fin del día
-                string proveedor = TxtProveedor.Text.Trim();
+                
+                // Obtener el ID del proveedor seleccionado
+                int? idProveedor = null;
+                if (CmbProveedor.SelectedItem is Modelo.Entidades.Proveedores selectedProveedor && selectedProveedor.Id_Proveedor > 0)
+                {
+                    idProveedor = selectedProveedor.Id_Proveedor;
+                }
+                
                 string idRemitoText = TxtIdRemito.Text.Trim();
                 
                 // Intentar parsear el ID de remito si se proporciona
-                int? idRemito = null;
-                if (!string.IsNullOrEmpty(idRemitoText) && int.TryParse(idRemitoText, out int parsedId))
+                double? idRemito = null;
+                if (!string.IsNullOrEmpty(idRemitoText) && double.TryParse(idRemitoText, out double parsedId))
                 {
                     idRemito = parsedId;
                 }
-                int? idpro = null;
-                if (!string.IsNullOrEmpty(proveedor) && int.TryParse(proveedor, out int parsedPro))
-                {
-                    idpro = parsedPro;
-                }
 
-                var result = await Task.Run(() => _hComprasService.GetFiltered(fechaDesde, fechaHasta, idpro, idRemito));
+                var result = await Task.Run(() => _hComprasService.GetFiltered(fechaDesde, fechaHasta, idProveedor, idRemito));
 
                 if (result.IsSuccess)
                 {
                     _compras = result.Value;
                     ActualizarListaCompras();
+                    // TODO: si la lista esta vacia, mostrar mensaje "No se encontraron compras con los filtros aplicados" y limpiar detalles
                 }
                 else
                 {

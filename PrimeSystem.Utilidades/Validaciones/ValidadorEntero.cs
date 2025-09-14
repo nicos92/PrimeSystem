@@ -15,7 +15,7 @@ namespace PrimeSystem.Utilidades.Validaciones
         public ValidadorEntero(TextBox textBox, ErrorProvider errorProvider)
             : base(textBox, errorProvider)
         {
-            MensajeError = "Ingresa un número con dos decimales exactos.";
+            MensajeError = "Ingresa solo un números.";
         }
 
         public override bool Validar()
