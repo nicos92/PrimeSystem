@@ -103,6 +103,9 @@ static class Program
         services.AddTransient<FormVentaPrincipal>(); // Este Form estaria en PrimeSystem.UI.Ventas
 
         services.AddTransient<FormCompras>();       // Este Form estaria en PrimeSystem.UI.Compras
+        services.AddTransient<FormComprasPrincipal>(); // Este Form estaria en PrimeSystem.UI.Compras
+        services.AddTransient<UCIngresoCompra>();  // Este UserControl estaria en PrimeSystem.UI.Compras
+        services.AddTransient<UCConsultaCompras>(); // Este UserControl estaria en PrimeSystem.UI.Compras
 
         services.AddTransient<FormClientes>();      // Este Form estaria en PrimeSystem.UI.Clientes
         services.AddTransient<UCIgresoCliente>(); // Este UserControl estaria en PrimeSystem.UI.Clientes
@@ -136,6 +139,7 @@ static class Program
 
         services.AddScoped<IHComprasRepository, HComprasRepository>();
         services.AddScoped<IHComprasService, HComprasService>();
+        services.AddScoped<ICompraService, CompraService>();
 
         services.AddScoped<IProveedoresRepository, ProveedoresRepository>();
         services.AddScoped<IProveedoresService, ProveedoresService>();

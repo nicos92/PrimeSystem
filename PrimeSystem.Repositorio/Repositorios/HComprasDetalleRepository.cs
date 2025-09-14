@@ -19,7 +19,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("SELECT Id_Det_Remito, Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant FROM HComprasDetalle", conexion))
+                    using (var cmd = new OleDbCommand("SELECT Id_Det_Remito, Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant FROM H_Compras_Detalle", conexion))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -55,7 +55,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("SELECT Id_Det_Remito, Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant FROM HComprasDetalle WHERE Id_Det_Remito = @id", conexion))
+                    using (var cmd = new OleDbCommand("SELECT Id_Det_Remito, Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant FROM H_Compras_Detalle WHERE Id_Det_Remito = @id", conexion))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         using (var reader = cmd.ExecuteReader())
@@ -97,7 +97,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 {
                     conexion.Open();
                     using (var cmd = new OleDbCommand(
-                        "INSERT INTO HComprasDetalle (Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant) " +
+                        "INSERT INTO H_Compras_Detalle (Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant) " +
                         "VALUES (@Id_Remito, @Cod_Art, @Descr, @P_Unit, @Cant, @P_X_Cant)", conexion))
                     {
                         cmd.Parameters.AddWithValue("@Id_Remito", detalle.Id_Remito);
@@ -137,7 +137,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 {
                     conexion.Open();
                     using (var cmd = new OleDbCommand(
-                        "UPDATE HComprasDetalle SET Id_Remito = @Id_Remito, Cod_Art = @Cod_Art, Descr = @Descr, P_Unit =  @P_Unit, Cant = @Cant, P_X_Cant = @P_X_Cant " +
+                        "UPDATE H_Compras_Detalle SET Id_Remito = @Id_Remito, Cod_Art = @Cod_Art, Descr = @Descr, P_Unit =  @P_Unit, Cant = @Cant, P_X_Cant = @P_X_Cant " +
                         "WHERE Id_Det_Remito = @Id_Det_Remito", conexion))
                     {
                         cmd.Parameters.AddWithValue("@Id_Remito", detalle.Id_Remito);
@@ -177,7 +177,7 @@ namespace PrimeSystem.Repositorio.Repositorios
                 using (var conexion = Conexion())
                 {
                     conexion.Open();
-                    using (var cmd = new OleDbCommand("DELETE FROM HComprasDetalle WHERE Id_Det_Remito = @Id_Det_Remito", conexion))
+                    using (var cmd = new OleDbCommand("DELETE FROM H_Compras_Detalle WHERE Id_Det_Remito = @Id_Det_Remito", conexion))
                     {
                         cmd.Parameters.AddWithValue("@Id_Det_Remito", id);
                         int rowsAffected = cmd.ExecuteNonQuery();
@@ -200,6 +200,47 @@ namespace PrimeSystem.Repositorio.Repositorios
             catch (Exception ex)
             {
                 return Result<bool>.Failure($"Error inesperado: {ex.Message}");
+            }
+        }
+
+        public async Task<Result<List<HComprasDetalle>>> GetByRemitoId(int idRemito)
+        {
+            try
+            {
+                var detalles = new List<HComprasDetalle>();
+                using (var conexion = Conexion())
+                {
+                    conexion.Open();
+                    using (var cmd = new OleDbCommand("SELECT Id_Det_Remito, Id_Remito, Cod_Art, Descr, P_Unit, Cant, P_X_Cant FROM H_Compras_Detalle WHERE Id_Remito = @idRemito", conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@idRemito", idRemito);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                detalles.Add(new HComprasDetalle
+                                {
+                                    Id_Det_Remito = reader.GetInt32(0),
+                                    Id_Remito = reader.GetInt32(1),
+                                    Cod_Art = reader.GetString(2),
+                                    Descr = reader.GetString(3),
+                                    P_Unit = reader.GetDouble(4),
+                                    Cant = reader.GetInt32(5),
+                                    P_X_Cant = reader.GetDouble(6)
+                                });
+                            }
+                        }
+                    }
+                }
+                return Result<List<HComprasDetalle>>.Success(detalles);
+            }
+            catch (OleDbException ex)
+            {
+                return Result<List<HComprasDetalle>>.Failure($"Error al obtener detalles de compras: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return Result<List<HComprasDetalle>>.Failure($"Error inesperado: {ex.Message}");
             }
         }
     }

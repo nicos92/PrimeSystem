@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
 using PrimeSystem.Contrato.Servicios;
@@ -20,5 +21,6 @@ namespace PrimeSystem.Servicio.Implementaciones
         public Result<Proveedores> Add(Proveedores proveedor) => _repo.Add(proveedor);
         public Result<Proveedores> Update(Proveedores proveedor) => _repo.Update(proveedor);
         public Result<bool> Delete(int id) => _repo.Delete(id);
+        public async Task<Result<List<Proveedores>>> GetByName(string name) => await _repo.GetByName(name);
     }
 }

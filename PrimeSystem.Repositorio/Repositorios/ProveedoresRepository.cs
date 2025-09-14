@@ -178,5 +178,40 @@ namespace PrimeSystem.Repositorio.Repositorios
                 return Result<Proveedores>.Failure($"Error inesperado: {ex.Message}");
             }
         }
+
+        public async Task<Result<List<Proveedores>>> GetByName(string name)
+        {
+            try
+            {
+                using OleDbConnection conn = Conexion();
+                using OleDbCommand cmd = new("SELECT Id_Proveedor, CUIT, Proveedor, Nombre, Tel, Email FROM Proveedores WHERE Nombre LIKE @name", conn);
+                cmd.Parameters.AddWithValue("@name", $"%{name}%");
+                await conn.OpenAsync();
+                using DbDataReader reader = await cmd.ExecuteReaderAsync();
+                List<Proveedores> proveedores = [];
+                while (await reader.ReadAsync())
+                {
+                    Proveedores proveedor = new()
+                    {
+                        Id_Proveedor = reader.GetInt32(0),
+                        CUIT = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Proveedor = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        Nombre = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        Tel = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Email = reader.IsDBNull(5) ? null : reader.GetString(5)
+                    };
+                    proveedores.Add(proveedor);
+                }
+                return Result<List<Proveedores>>.Success(proveedores);
+            }
+            catch (OleDbException ex)
+            {
+                return Result<List<Proveedores>>.Failure($"Error al obtener los proveedores: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return Result<List<Proveedores>>.Failure($"Error inesperado: {ex.Message}");
+            }
+        }
     }
 }

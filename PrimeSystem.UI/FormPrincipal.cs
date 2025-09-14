@@ -71,7 +71,7 @@ public partial class FormPrincipal : Form
     private void ConfigurarBtnsMenu()
     {
         BtnModVentas.Tag = typeof(FormVentaPrincipal);
-        BtnModCompras.Tag = typeof(FormCompras);
+        BtnModCompras.Tag = typeof(FormComprasPrincipal);
         BtnModClientes.Tag = typeof(FormClientes);
         BtnModUsuarios.Tag = typeof(FormUsuarios);
         BtnModProveedores.Tag = typeof(FormProveedores);
