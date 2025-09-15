@@ -36,6 +36,16 @@ namespace PrimeSystem.UI.Ventas
             GBLista = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             DgvVentas = new DataGridView();
+            tableLayoutPanel7 = new TableLayoutPanel();
+            label1 = new Label();
+            DtpFechaDesde = new DateTimePicker();
+            label3 = new Label();
+            TxtCliente = new TextBox();
+            DtpFechaHasta = new DateTimePicker();
+            label2 = new Label();
+            TxtIdRemito = new TextBox();
+            label5 = new Label();
+            BtnBuscar = new Button();
             PbProgreso = new ProgressBar();
             GBForm = new GroupBox();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -49,16 +59,6 @@ namespace PrimeSystem.UI.Ventas
             LblSubtotal = new Label();
             groupBox1 = new GroupBox();
             DgvDetalles = new DataGridView();
-            tableLayoutPanel7 = new TableLayoutPanel();
-            label1 = new Label();
-            DtpFechaDesde = new DateTimePicker();
-            label3 = new Label();
-            TxtCliente = new TextBox();
-            label5 = new Label();
-            TxtIdRemito = new TextBox();
-            BtnBuscar = new Button();
-            DtpFechaHasta = new DateTimePicker();
-            label2 = new Label();
             tableLayoutPanel8 = new TableLayoutPanel();
             label7 = new Label();
             LblIdRemito = new Label();
@@ -81,13 +81,13 @@ namespace PrimeSystem.UI.Ventas
             GBLista.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvVentas).BeginInit();
+            tableLayoutPanel7.SuspendLayout();
             GBForm.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvDetalles).BeginInit();
-            tableLayoutPanel7.SuspendLayout();
             tableLayoutPanel8.SuspendLayout();
             tableLayoutPanel9.SuspendLayout();
             tableLayoutPanel10.SuspendLayout();
@@ -111,7 +111,7 @@ namespace PrimeSystem.UI.Ventas
             // 
             splitContainer1.Panel2.Controls.Add(GBForm);
             splitContainer1.Size = new Size(772, 529);
-            splitContainer1.SplitterDistance = 299;
+            splitContainer1.SplitterDistance = 380;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 0;
             // 
@@ -125,7 +125,7 @@ namespace PrimeSystem.UI.Ventas
             GBLista.Margin = new Padding(4);
             GBLista.Name = "GBLista";
             GBLista.Padding = new Padding(4);
-            GBLista.Size = new Size(299, 529);
+            GBLista.Size = new Size(380, 529);
             GBLista.TabIndex = 0;
             GBLista.TabStop = false;
             GBLista.Text = "Lista de Ventas";
@@ -135,16 +135,17 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel1.BackColor = Color.FromArgb(249, 249, 251);
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(DgvVentas, 0, 1);
+            tableLayoutPanel1.Controls.Add(DgvVentas, 0, 2);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel7, 0, 1);
             tableLayoutPanel1.Controls.Add(PbProgreso, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(4, 30);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(291, 495);
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 29.01879F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 70.98121F));
+            tableLayoutPanel1.Size = new Size(372, 495);
             tableLayoutPanel1.TabIndex = 3;
             // 
             // DgvVentas
@@ -173,20 +174,159 @@ namespace PrimeSystem.UI.Ventas
             DgvVentas.DefaultCellStyle = dataGridViewCellStyle2;
             DgvVentas.Dock = DockStyle.Fill;
             DgvVentas.GridColor = Color.FromArgb(190, 201, 209);
-            DgvVentas.Location = new Point(3, 29);
+            DgvVentas.Location = new Point(3, 158);
             DgvVentas.Name = "DgvVentas";
             DgvVentas.ReadOnly = true;
             DgvVentas.RowHeadersVisible = false;
-            DgvVentas.Size = new Size(285, 463);
+            DgvVentas.Size = new Size(366, 334);
             DgvVentas.TabIndex = 4;
             DgvVentas.SelectionChanged += DgvVentas_SelectionChanged;
+            // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.ColumnCount = 6;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 8F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel7.Controls.Add(label1, 0, 0);
+            tableLayoutPanel7.Controls.Add(DtpFechaDesde, 1, 0);
+            tableLayoutPanel7.Controls.Add(label3, 0, 1);
+            tableLayoutPanel7.Controls.Add(TxtCliente, 1, 1);
+            tableLayoutPanel7.Controls.Add(DtpFechaHasta, 4, 0);
+            tableLayoutPanel7.Controls.Add(label2, 3, 0);
+            tableLayoutPanel7.Controls.Add(TxtIdRemito, 4, 1);
+            tableLayoutPanel7.Controls.Add(label5, 3, 1);
+            tableLayoutPanel7.Controls.Add(BtnBuscar, 3, 2);
+            tableLayoutPanel7.Dock = DockStyle.Fill;
+            tableLayoutPanel7.Location = new Point(3, 19);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 3;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle());
+            tableLayoutPanel7.RowStyles.Add(new RowStyle());
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel7.Size = new Size(366, 133);
+            tableLayoutPanel7.TabIndex = 25;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(26, 28, 30);
+            label1.Location = new Point(8, 7);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 21);
+            label1.TabIndex = 0;
+            label1.Text = "Desde";
+            // 
+            // DtpFechaDesde
+            // 
+            DtpFechaDesde.CalendarForeColor = Color.FromArgb(26, 28, 30);
+            DtpFechaDesde.CalendarMonthBackground = Color.FromArgb(238, 237, 240);
+            DtpFechaDesde.Dock = DockStyle.Fill;
+            DtpFechaDesde.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DtpFechaDesde.Format = DateTimePickerFormat.Short;
+            DtpFechaDesde.Location = new Point(70, 3);
+            DtpFechaDesde.Name = "DtpFechaDesde";
+            DtpFechaDesde.Size = new Size(105, 29);
+            DtpFechaDesde.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.FromArgb(26, 28, 30);
+            label3.Location = new Point(3, 42);
+            label3.Name = "label3";
+            label3.Size = new Size(61, 21);
+            label3.TabIndex = 4;
+            label3.Text = "Cliente";
+            // 
+            // TxtCliente
+            // 
+            TxtCliente.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtCliente.BackColor = Color.FromArgb(238, 237, 240);
+            TxtCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtCliente.ForeColor = Color.FromArgb(26, 28, 30);
+            TxtCliente.Location = new Point(70, 38);
+            TxtCliente.Name = "TxtCliente";
+            TxtCliente.Size = new Size(105, 29);
+            TxtCliente.TabIndex = 5;
+            // 
+            // DtpFechaHasta
+            // 
+            DtpFechaHasta.CalendarForeColor = Color.FromArgb(26, 28, 30);
+            DtpFechaHasta.CalendarMonthBackground = Color.FromArgb(238, 237, 240);
+            DtpFechaHasta.Dock = DockStyle.Fill;
+            DtpFechaHasta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DtpFechaHasta.Format = DateTimePickerFormat.Short;
+            DtpFechaHasta.Location = new Point(258, 3);
+            DtpFechaHasta.Name = "DtpFechaHasta";
+            DtpFechaHasta.Size = new Size(105, 29);
+            DtpFechaHasta.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(26, 28, 30);
+            label2.Location = new Point(201, 7);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 21);
+            label2.TabIndex = 2;
+            label2.Text = "Hasta";
+            // 
+            // TxtIdRemito
+            // 
+            TxtIdRemito.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TxtIdRemito.BackColor = Color.FromArgb(238, 237, 240);
+            TxtIdRemito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtIdRemito.ForeColor = Color.FromArgb(26, 28, 30);
+            TxtIdRemito.Location = new Point(258, 38);
+            TxtIdRemito.Name = "TxtIdRemito";
+            TxtIdRemito.Size = new Size(105, 29);
+            TxtIdRemito.TabIndex = 7;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.FromArgb(26, 28, 30);
+            label5.Location = new Point(189, 42);
+            label5.Name = "label5";
+            label5.Size = new Size(63, 21);
+            label5.TabIndex = 6;
+            label5.Text = "Remito";
+            // 
+            // BtnBuscar
+            // 
+            BtnBuscar.Anchor = AnchorStyles.None;
+            BtnBuscar.BackColor = Color.FromArgb(7, 100, 147);
+            tableLayoutPanel7.SetColumnSpan(BtnBuscar, 2);
+            BtnBuscar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnBuscar.FlatStyle = FlatStyle.Flat;
+            BtnBuscar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnBuscar.ForeColor = Color.White;
+            BtnBuscar.Location = new Point(212, 85);
+            BtnBuscar.Name = "BtnBuscar";
+            BtnBuscar.Size = new Size(128, 32);
+            BtnBuscar.TabIndex = 8;
+            BtnBuscar.Text = "🔍 Buscar";
+            BtnBuscar.UseVisualStyleBackColor = false;
+            BtnBuscar.Click += BtnBuscar_Click;
             // 
             // PbProgreso
             // 
             PbProgreso.Dock = DockStyle.Fill;
             PbProgreso.Location = new Point(3, 3);
             PbProgreso.Name = "PbProgreso";
-            PbProgreso.Size = new Size(285, 20);
+            PbProgreso.Size = new Size(366, 10);
             PbProgreso.TabIndex = 6;
             PbProgreso.Visible = false;
             // 
@@ -200,7 +340,7 @@ namespace PrimeSystem.UI.Ventas
             GBForm.Margin = new Padding(4);
             GBForm.Name = "GBForm";
             GBForm.Padding = new Padding(4);
-            GBForm.Size = new Size(468, 529);
+            GBForm.Size = new Size(387, 529);
             GBForm.TabIndex = 0;
             GBForm.TabStop = false;
             GBForm.Text = "Formulario de Consulta de Ventas";
@@ -213,7 +353,6 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel3.Controls.Add(tableLayoutPanel6, 0, 6);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 0, 5);
             tableLayoutPanel3.Controls.Add(groupBox1, 0, 7);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel7, 0, 0);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel8, 0, 1);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel9, 0, 2);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel10, 0, 3);
@@ -230,7 +369,7 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
             tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(460, 495);
+            tableLayoutPanel3.Size = new Size(379, 495);
             tableLayoutPanel3.TabIndex = 14;
             // 
             // tableLayoutPanel6
@@ -241,11 +380,11 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel6.Controls.Add(label14, 0, 0);
             tableLayoutPanel6.Controls.Add(LblTotal, 1, 0);
             tableLayoutPanel6.Dock = DockStyle.Fill;
-            tableLayoutPanel6.Location = new Point(3, 279);
+            tableLayoutPanel6.Location = new Point(3, 153);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
             tableLayoutPanel6.RowCount = 1;
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel6.Size = new Size(454, 26);
+            tableLayoutPanel6.Size = new Size(373, 26);
             tableLayoutPanel6.TabIndex = 24;
             // 
             // label14
@@ -254,7 +393,7 @@ namespace PrimeSystem.UI.Ventas
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label14.ForeColor = Color.FromArgb(26, 28, 30);
-            label14.Location = new Point(115, 2);
+            label14.Location = new Point(74, 2);
             label14.Name = "label14";
             label14.Size = new Size(109, 21);
             label14.TabIndex = 16;
@@ -266,7 +405,7 @@ namespace PrimeSystem.UI.Ventas
             LblTotal.AutoSize = true;
             LblTotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblTotal.ForeColor = Color.FromArgb(26, 28, 30);
-            LblTotal.Location = new Point(230, 2);
+            LblTotal.Location = new Point(189, 2);
             LblTotal.Name = "LblTotal";
             LblTotal.Size = new Size(19, 21);
             LblTotal.TabIndex = 17;
@@ -284,11 +423,11 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel5.Controls.Add(label10, 0, 0);
             tableLayoutPanel5.Controls.Add(LblSubtotal, 1, 0);
             tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(3, 249);
+            tableLayoutPanel5.Location = new Point(3, 123);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.Size = new Size(454, 24);
+            tableLayoutPanel5.Size = new Size(373, 24);
             tableLayoutPanel5.TabIndex = 23;
             // 
             // label12
@@ -297,9 +436,9 @@ namespace PrimeSystem.UI.Ventas
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.FromArgb(26, 28, 30);
-            label12.Location = new Point(237, 1);
+            label12.Location = new Point(197, 0);
             label12.Name = "label12";
-            label12.Size = new Size(99, 21);
+            label12.Size = new Size(79, 24);
             label12.TabIndex = 14;
             label12.Text = "DESCUENTO";
             // 
@@ -309,7 +448,7 @@ namespace PrimeSystem.UI.Ventas
             LblDescuento.AutoSize = true;
             LblDescuento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblDescuento.ForeColor = Color.FromArgb(26, 28, 30);
-            LblDescuento.Location = new Point(342, 1);
+            LblDescuento.Location = new Point(282, 1);
             LblDescuento.Name = "LblDescuento";
             LblDescuento.Size = new Size(19, 21);
             LblDescuento.TabIndex = 15;
@@ -321,7 +460,7 @@ namespace PrimeSystem.UI.Ventas
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label10.ForeColor = Color.FromArgb(26, 28, 30);
-            label10.Location = new Point(25, 1);
+            label10.Location = new Point(5, 1);
             label10.Name = "label10";
             label10.Size = new Size(85, 21);
             label10.TabIndex = 12;
@@ -333,7 +472,7 @@ namespace PrimeSystem.UI.Ventas
             LblSubtotal.AutoSize = true;
             LblSubtotal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblSubtotal.ForeColor = Color.FromArgb(26, 28, 30);
-            LblSubtotal.Location = new Point(116, 1);
+            LblSubtotal.Location = new Point(96, 1);
             LblSubtotal.Name = "LblSubtotal";
             LblSubtotal.Size = new Size(19, 21);
             LblSubtotal.TabIndex = 13;
@@ -345,9 +484,9 @@ namespace PrimeSystem.UI.Ventas
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(3, 311);
+            groupBox1.Location = new Point(3, 185);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(454, 213);
+            groupBox1.Size = new Size(373, 307);
             groupBox1.TabIndex = 14;
             groupBox1.TabStop = false;
             groupBox1.Text = "Detalles de la Venta";
@@ -356,6 +495,8 @@ namespace PrimeSystem.UI.Ventas
             // 
             DgvDetalles.AllowUserToAddRows = false;
             DgvDetalles.AllowUserToDeleteRows = false;
+            DgvDetalles.AllowUserToResizeColumns = false;
+            DgvDetalles.AllowUserToResizeRows = false;
             DgvDetalles.BackgroundColor = Color.FromArgb(249, 249, 251);
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(232, 232, 234);
@@ -380,148 +521,8 @@ namespace PrimeSystem.UI.Ventas
             DgvDetalles.Name = "DgvDetalles";
             DgvDetalles.ReadOnly = true;
             DgvDetalles.RowHeadersVisible = false;
-            DgvDetalles.Size = new Size(448, 185);
+            DgvDetalles.Size = new Size(367, 279);
             DgvDetalles.TabIndex = 0;
-            // 
-            // tableLayoutPanel7
-            // 
-            tableLayoutPanel7.ColumnCount = 6;
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-            tableLayoutPanel7.Controls.Add(label1, 0, 0);
-            tableLayoutPanel7.Controls.Add(DtpFechaDesde, 1, 0);
-            tableLayoutPanel7.Controls.Add(label3, 0, 1);
-            tableLayoutPanel7.Controls.Add(TxtCliente, 1, 1);
-            tableLayoutPanel7.Controls.Add(label5, 2, 1);
-            tableLayoutPanel7.Controls.Add(TxtIdRemito, 3, 1);
-            tableLayoutPanel7.Controls.Add(BtnBuscar, 4, 1);
-            tableLayoutPanel7.Controls.Add(DtpFechaHasta, 4, 0);
-            tableLayoutPanel7.Controls.Add(label2, 3, 0);
-            tableLayoutPanel7.Dock = DockStyle.Fill;
-            tableLayoutPanel7.Location = new Point(3, 3);
-            tableLayoutPanel7.Name = "tableLayoutPanel7";
-            tableLayoutPanel7.RowCount = 2;
-            tableLayoutPanel7.RowStyles.Add(new RowStyle());
-            tableLayoutPanel7.RowStyles.Add(new RowStyle());
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel7.Size = new Size(454, 120);
-            tableLayoutPanel7.TabIndex = 25;
-            // 
-            // label1
-            // 
-            label1.Anchor = AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(26, 28, 30);
-            label1.Location = new Point(16, 7);
-            label1.Name = "label1";
-            label1.Size = new Size(57, 21);
-            label1.TabIndex = 0;
-            label1.Text = "DESDE";
-            // 
-            // DtpFechaDesde
-            // 
-            DtpFechaDesde.Anchor = AnchorStyles.Left;
-            DtpFechaDesde.CalendarForeColor = Color.FromArgb(26, 28, 30);
-            DtpFechaDesde.CalendarMonthBackground = Color.FromArgb(238, 237, 240);
-            tableLayoutPanel7.SetColumnSpan(DtpFechaDesde, 2);
-            DtpFechaDesde.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DtpFechaDesde.Format = DateTimePickerFormat.Short;
-            DtpFechaDesde.Location = new Point(79, 3);
-            DtpFechaDesde.Name = "DtpFechaDesde";
-            DtpFechaDesde.Size = new Size(144, 29);
-            DtpFechaDesde.TabIndex = 1;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.FromArgb(26, 28, 30);
-            label3.Location = new Point(3, 67);
-            label3.Name = "label3";
-            label3.Size = new Size(70, 21);
-            label3.TabIndex = 4;
-            label3.Text = "CLIENTE";
-            // 
-            // TxtCliente
-            // 
-            TxtCliente.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtCliente.BackColor = Color.FromArgb(238, 237, 240);
-            TxtCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxtCliente.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtCliente.Location = new Point(79, 63);
-            TxtCliente.Name = "TxtCliente";
-            TxtCliente.Size = new Size(64, 29);
-            TxtCliente.TabIndex = 5;
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Right;
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.FromArgb(26, 28, 30);
-            label5.Location = new Point(149, 67);
-            label5.Name = "label5";
-            label5.Size = new Size(114, 21);
-            label5.TabIndex = 6;
-            label5.Text = "Nº DE REMITO";
-            // 
-            // TxtIdRemito
-            // 
-            TxtIdRemito.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TxtIdRemito.BackColor = Color.FromArgb(238, 237, 240);
-            TxtIdRemito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TxtIdRemito.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtIdRemito.Location = new Point(269, 63);
-            TxtIdRemito.Name = "TxtIdRemito";
-            TxtIdRemito.Size = new Size(64, 29);
-            TxtIdRemito.TabIndex = 7;
-            // 
-            // BtnBuscar
-            // 
-            BtnBuscar.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            BtnBuscar.BackColor = Color.FromArgb(7, 100, 147);
-            BtnBuscar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
-            BtnBuscar.FlatStyle = FlatStyle.Flat;
-            BtnBuscar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            BtnBuscar.ForeColor = Color.White;
-            BtnBuscar.Location = new Point(339, 62);
-            BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(42, 31);
-            BtnBuscar.TabIndex = 8;
-            BtnBuscar.Text = "🔍";
-            BtnBuscar.UseVisualStyleBackColor = false;
-            BtnBuscar.Click += BtnBuscar_Click;
-            // 
-            // DtpFechaHasta
-            // 
-            DtpFechaHasta.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            DtpFechaHasta.CalendarForeColor = Color.FromArgb(26, 28, 30);
-            DtpFechaHasta.CalendarMonthBackground = Color.FromArgb(238, 237, 240);
-            tableLayoutPanel7.SetColumnSpan(DtpFechaHasta, 2);
-            DtpFechaHasta.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DtpFechaHasta.Format = DateTimePickerFormat.Short;
-            DtpFechaHasta.Location = new Point(339, 3);
-            DtpFechaHasta.Name = "DtpFechaHasta";
-            DtpFechaHasta.Size = new Size(112, 29);
-            DtpFechaHasta.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.Right;
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(26, 28, 30);
-            label2.Location = new Point(272, 7);
-            label2.Name = "label2";
-            label2.Size = new Size(61, 21);
-            label2.TabIndex = 2;
-            label2.Text = "HASTA";
             // 
             // tableLayoutPanel8
             // 
@@ -531,11 +532,11 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel8.Controls.Add(label7, 0, 0);
             tableLayoutPanel8.Controls.Add(LblIdRemito, 1, 0);
             tableLayoutPanel8.Dock = DockStyle.Fill;
-            tableLayoutPanel8.Location = new Point(3, 129);
+            tableLayoutPanel8.Location = new Point(3, 3);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
             tableLayoutPanel8.RowCount = 1;
             tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel8.Size = new Size(454, 23);
+            tableLayoutPanel8.Size = new Size(373, 23);
             tableLayoutPanel8.TabIndex = 10;
             // 
             // label7
@@ -544,9 +545,9 @@ namespace PrimeSystem.UI.Ventas
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.FromArgb(26, 28, 30);
-            label7.Location = new Point(4, 1);
+            label7.Location = new Point(29, 0);
             label7.Name = "label7";
-            label7.Size = new Size(114, 21);
+            label7.Size = new Size(68, 23);
             label7.TabIndex = 16;
             label7.Text = "Nº DE REMITO";
             // 
@@ -556,7 +557,7 @@ namespace PrimeSystem.UI.Ventas
             LblIdRemito.AutoSize = true;
             LblIdRemito.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblIdRemito.ForeColor = Color.FromArgb(26, 28, 30);
-            LblIdRemito.Location = new Point(124, 1);
+            LblIdRemito.Location = new Point(103, 1);
             LblIdRemito.Name = "LblIdRemito";
             LblIdRemito.Size = new Size(19, 21);
             LblIdRemito.TabIndex = 15;
@@ -570,11 +571,11 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel9.Controls.Add(label4, 0, 0);
             tableLayoutPanel9.Controls.Add(LblFecha, 1, 0);
             tableLayoutPanel9.Dock = DockStyle.Fill;
-            tableLayoutPanel9.Location = new Point(3, 158);
+            tableLayoutPanel9.Location = new Point(3, 32);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RowCount = 1;
             tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel9.Size = new Size(454, 25);
+            tableLayoutPanel9.Size = new Size(373, 25);
             tableLayoutPanel9.TabIndex = 10;
             // 
             // label4
@@ -583,7 +584,7 @@ namespace PrimeSystem.UI.Ventas
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(26, 28, 30);
-            label4.Location = new Point(59, 2);
+            label4.Location = new Point(38, 2);
             label4.Name = "label4";
             label4.Size = new Size(59, 21);
             label4.TabIndex = 18;
@@ -595,7 +596,7 @@ namespace PrimeSystem.UI.Ventas
             LblFecha.AutoSize = true;
             LblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblFecha.ForeColor = Color.FromArgb(26, 28, 30);
-            LblFecha.Location = new Point(124, 2);
+            LblFecha.Location = new Point(103, 2);
             LblFecha.Name = "LblFecha";
             LblFecha.Size = new Size(19, 21);
             LblFecha.TabIndex = 17;
@@ -609,11 +610,11 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel10.Controls.Add(label6, 0, 0);
             tableLayoutPanel10.Controls.Add(LblCliente, 1, 0);
             tableLayoutPanel10.Dock = DockStyle.Fill;
-            tableLayoutPanel10.Location = new Point(3, 189);
+            tableLayoutPanel10.Location = new Point(3, 63);
             tableLayoutPanel10.Name = "tableLayoutPanel10";
             tableLayoutPanel10.RowCount = 1;
             tableLayoutPanel10.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel10.Size = new Size(454, 25);
+            tableLayoutPanel10.Size = new Size(373, 25);
             tableLayoutPanel10.TabIndex = 10;
             // 
             // label6
@@ -622,7 +623,7 @@ namespace PrimeSystem.UI.Ventas
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.FromArgb(26, 28, 30);
-            label6.Location = new Point(48, 2);
+            label6.Location = new Point(27, 2);
             label6.Name = "label6";
             label6.Size = new Size(70, 21);
             label6.TabIndex = 20;
@@ -634,7 +635,7 @@ namespace PrimeSystem.UI.Ventas
             LblCliente.AutoSize = true;
             LblCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblCliente.ForeColor = Color.FromArgb(26, 28, 30);
-            LblCliente.Location = new Point(124, 2);
+            LblCliente.Location = new Point(103, 2);
             LblCliente.Name = "LblCliente";
             LblCliente.Size = new Size(19, 21);
             LblCliente.TabIndex = 19;
@@ -648,11 +649,11 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel11.Controls.Add(label8, 0, 0);
             tableLayoutPanel11.Controls.Add(LblUsuario, 1, 0);
             tableLayoutPanel11.Dock = DockStyle.Fill;
-            tableLayoutPanel11.Location = new Point(3, 220);
+            tableLayoutPanel11.Location = new Point(3, 94);
             tableLayoutPanel11.Name = "tableLayoutPanel11";
             tableLayoutPanel11.RowCount = 1;
             tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel11.Size = new Size(454, 23);
+            tableLayoutPanel11.Size = new Size(373, 23);
             tableLayoutPanel11.TabIndex = 10;
             // 
             // label8
@@ -661,7 +662,7 @@ namespace PrimeSystem.UI.Ventas
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.FromArgb(26, 28, 30);
-            label8.Location = new Point(40, 1);
+            label8.Location = new Point(18, 1);
             label8.Name = "label8";
             label8.Size = new Size(79, 21);
             label8.TabIndex = 22;
@@ -673,7 +674,7 @@ namespace PrimeSystem.UI.Ventas
             LblUsuario.AutoSize = true;
             LblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblUsuario.ForeColor = Color.FromArgb(26, 28, 30);
-            LblUsuario.Location = new Point(125, 1);
+            LblUsuario.Location = new Point(103, 1);
             LblUsuario.Name = "LblUsuario";
             LblUsuario.Size = new Size(19, 21);
             LblUsuario.TabIndex = 21;
@@ -746,6 +747,8 @@ namespace PrimeSystem.UI.Ventas
             GBLista.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvVentas).EndInit();
+            tableLayoutPanel7.ResumeLayout(false);
+            tableLayoutPanel7.PerformLayout();
             GBForm.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
@@ -754,8 +757,6 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel5.PerformLayout();
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvDetalles).EndInit();
-            tableLayoutPanel7.ResumeLayout(false);
-            tableLayoutPanel7.PerformLayout();
             tableLayoutPanel8.ResumeLayout(false);
             tableLayoutPanel8.PerformLayout();
             tableLayoutPanel9.ResumeLayout(false);

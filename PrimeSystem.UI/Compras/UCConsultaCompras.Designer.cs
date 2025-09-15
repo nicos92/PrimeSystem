@@ -480,6 +480,8 @@ namespace PrimeSystem.UI.Compras
             // 
             DgvDetalles.AllowUserToAddRows = false;
             DgvDetalles.AllowUserToDeleteRows = false;
+            DgvDetalles.AllowUserToResizeColumns = false;
+            DgvDetalles.AllowUserToResizeRows = false;
             DgvDetalles.BackgroundColor = Color.FromArgb(249, 249, 251);
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(232, 232, 234);

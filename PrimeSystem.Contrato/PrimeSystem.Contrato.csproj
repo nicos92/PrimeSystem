@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Servicios\IH_ComprasService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PrimeSystem.Modelo\PrimeSystem.Modelo.csproj" />
     <ProjectReference Include="..\PrimeSystem.Utilidades\PrimeSystem.Utilidades.csproj" />
   </ItemGroup>

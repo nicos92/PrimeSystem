@@ -56,6 +56,7 @@ namespace PrimeSystem.UI.Compras
         {
             try
             {
+                ConfigDGVDetalles();
                 ConfigurarControles();
                 await CargarProveedoresAsync();
                 await CargarComprasAsync();
@@ -279,50 +280,92 @@ namespace PrimeSystem.UI.Compras
 
         private void ActualizarListaDetalles()
         {
-            DgvDetalles.DataSource = null;
-            DgvDetalles.DataSource = _detallesCompra;
+            
 
-            // Ocultar columnas innecesarias
-            var columnasOcultar = new[] { "Id_Det_Remito", "Id_Remito" };
-            foreach (var columna in columnasOcultar)
+            //DgvDetalles.DataSource = null;
+            DgvDetalles.DataSource = _detallesCompra;
+        }
+
+        private void ConfigDGVDetalles()
+        {
+            DgvDetalles.Columns.Clear();
+
+            var stylePesos = new DataGridViewCellStyle
             {
-                if (DgvDetalles.Columns.Contains(columna))
-                    DgvDetalles.Columns[columna].Visible = false;
-            }
+                Format = "C",
+                FormatProvider = _cultureArgentina,
+                Alignment = DataGridViewContentAlignment.MiddleRight
+            };
+
+            var columns = new[]
+            {
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "Id_Det_Remito",
+                    DataPropertyName = "Id_Det_Remito",
+                    HeaderText = "ID DET REMITO",
+                    Visible = false
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "Id_Remito",
+                    DataPropertyName = "Id_Remito",
+                    HeaderText = "ID REMITO",
+                    Visible = false
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "Cod_Art",
+                    DataPropertyName = "Cod_Art",
+                    HeaderText = "CODIGO",
+                    Visible = false
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "Descr",
+                    DataPropertyName = "Descr",
+                    HeaderText = "DESCRIPCION",
+                    Width = 200,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "Cant",
+                    DataPropertyName = "Cant",
+                    HeaderText = "CANTIDAD",
+                    Width = 100,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+
+                   
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "P_Unit",
+                    DataPropertyName = "P_Unit",
+                    HeaderText = "PRECIO",
+                    Width = 80,
+
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                    DefaultCellStyle = stylePesos 
+
+                },
                 
-            // Configurar columnas visibles
-            if (DgvDetalles.Columns.Contains("Cod_Art"))
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "P_X_Cant",
+                    DataPropertyName = "P_X_Cant",
+                    HeaderText = "TOTAL",
+                    Width = 100,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+
+                    DefaultCellStyle = stylePesos
+                }
+            };
+
+            foreach (var column in columns)
             {
-                DgvDetalles.Columns["Cod_Art"].HeaderText = "Código";
-                DgvDetalles.Columns["Cod_Art"].FillWeight = 15;
-            }
-                
-            if (DgvDetalles.Columns.Contains("Descr"))
-            {
-                DgvDetalles.Columns["Descr"].HeaderText = "Descripción";
-                DgvDetalles.Columns["Descr"].FillWeight = 40;
-            }
-                
-            if (DgvDetalles.Columns.Contains("P_Unit"))
-            {
-                DgvDetalles.Columns["P_Unit"].HeaderText = "Precio Unit.";
-                DgvDetalles.Columns["P_Unit"].DefaultCellStyle.Format = "C2";
-                DgvDetalles.Columns["P_Unit"].DefaultCellStyle.FormatProvider = _cultureArgentina;
-                DgvDetalles.Columns["P_Unit"].FillWeight = 15;
-            }
-                
-            if (DgvDetalles.Columns.Contains("Cant"))
-            {
-                DgvDetalles.Columns["Cant"].HeaderText = "Cantidad";
-                DgvDetalles.Columns["Cant"].FillWeight = 10;
-            }
-                
-            if (DgvDetalles.Columns.Contains("P_X_Cant"))
-            {
-                DgvDetalles.Columns["P_X_Cant"].HeaderText = "Total";
-                DgvDetalles.Columns["P_X_Cant"].DefaultCellStyle.Format = "C2";
-                DgvDetalles.Columns["P_X_Cant"].DefaultCellStyle.FormatProvider = _cultureArgentina;
-                DgvDetalles.Columns["P_X_Cant"].FillWeight = 15;
+                DgvDetalles.Columns.Add(column);
             }
         }
 

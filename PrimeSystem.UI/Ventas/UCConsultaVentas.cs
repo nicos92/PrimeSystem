@@ -45,6 +45,7 @@ namespace PrimeSystem.UI.Ventas
 
         private async void UCConsultaVentas_Load(object sender, EventArgs e)
         {
+            // TODO: CAMBIAR TEXTBOX DE CLIENTE POR UN COMBO BOX
             try
             {
                 ConfigurarControles();
