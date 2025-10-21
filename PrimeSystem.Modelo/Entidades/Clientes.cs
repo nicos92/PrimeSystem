@@ -15,6 +15,8 @@ namespace PrimeSystem.Modelo.Entidades
         public string? Tel { get; set; }
         public string? Mail { get; set; }
 
+        public string? Datos => $"{CUIT} - {Entidad}";
+
         public Clientes() { }
 
         public override string ToString()

@@ -28,26 +28,28 @@ namespace PrimeSystem.UI.Ventas
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             splitContainer1 = new SplitContainer();
             GBForm = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
+            CmbClientes = new ComboBox();
+            label4 = new Label();
+            label1 = new Label();
+            TxtBuscardor = new TextBox();
+            label2 = new Label();
+            LsvProductos = new ListBox();
+            BtnQuitar = new Button();
+            BtnAceptar = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             label5 = new Label();
             NumericUpDown1 = new NumericUpDown();
-            label1 = new Label();
-            BtnQuitar = new Button();
-            TxtBuscardor = new TextBox();
-            BtnAceptar = new Button();
             groupBox1 = new GroupBox();
             LblPrecioCant = new Label();
             LblPPC = new Label();
             LblPrecio = new Label();
             Lbl = new Label();
             LblProducto = new Label();
-            label2 = new Label();
-            LsvProductos = new ListBox();
             DgvProductosSeleccionados = new DataGridView();
             panel1 = new Panel();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -113,28 +115,132 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel1.BackColor = Color.FromArgb(249, 249, 251);
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 5);
+            tableLayoutPanel1.Controls.Add(CmbClientes, 0, 3);
+            tableLayoutPanel1.Controls.Add(label4, 0, 2);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
-            tableLayoutPanel1.Controls.Add(BtnQuitar, 0, 7);
             tableLayoutPanel1.Controls.Add(TxtBuscardor, 0, 1);
-            tableLayoutPanel1.Controls.Add(BtnAceptar, 0, 6);
-            tableLayoutPanel1.Controls.Add(groupBox1, 0, 4);
-            tableLayoutPanel1.Controls.Add(label2, 0, 2);
-            tableLayoutPanel1.Controls.Add(LsvProductos, 0, 3);
+            tableLayoutPanel1.Controls.Add(label2, 0, 4);
+            tableLayoutPanel1.Controls.Add(LsvProductos, 0, 5);
+            tableLayoutPanel1.Controls.Add(BtnQuitar, 0, 9);
+            tableLayoutPanel1.Controls.Add(BtnAceptar, 0, 8);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 7);
+            tableLayoutPanel1.Controls.Add(groupBox1, 0, 6);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(4, 30);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 8;
+            tableLayoutPanel1.RowCount = 10;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.Size = new Size(291, 495);
             tableLayoutPanel1.TabIndex = 9;
+            // 
+            // CmbClientes
+            // 
+            CmbClientes.BackColor = Color.FromArgb(238, 237, 240);
+            CmbClientes.Font = new Font("Segoe UI", 12F);
+            CmbClientes.ForeColor = Color.FromArgb(26, 28, 30);
+            CmbClientes.Location = new Point(3, 80);
+            CmbClientes.Name = "CmbClientes";
+            CmbClientes.Size = new Size(265, 29);
+            CmbClientes.TabIndex = 12;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(7, 100, 147);
+            label4.Location = new Point(3, 56);
+            label4.Name = "label4";
+            label4.Size = new Size(65, 21);
+            label4.TabIndex = 9;
+            label4.Text = "Cliente:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(7, 100, 147);
+            label1.Location = new Point(3, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(134, 21);
+            label1.TabIndex = 1;
+            label1.Text = "Buscar Producto:";
+            // 
+            // TxtBuscardor
+            // 
+            TxtBuscardor.BackColor = Color.FromArgb(238, 237, 240);
+            TxtBuscardor.Font = new Font("Segoe UI", 12F);
+            TxtBuscardor.ForeColor = Color.FromArgb(26, 28, 30);
+            TxtBuscardor.Location = new Point(3, 24);
+            TxtBuscardor.Name = "TxtBuscardor";
+            TxtBuscardor.Size = new Size(265, 29);
+            TxtBuscardor.TabIndex = 1;
+            TxtBuscardor.TextChanged += TxtBuscardor_TextChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(7, 100, 147);
+            label2.Location = new Point(3, 112);
+            label2.Name = "label2";
+            label2.Size = new Size(149, 21);
+            label2.TabIndex = 3;
+            label2.Text = "Lista de Productos:";
+            // 
+            // LsvProductos
+            // 
+            LsvProductos.BackColor = Color.FromArgb(238, 237, 240);
+            LsvProductos.Dock = DockStyle.Fill;
+            LsvProductos.Font = new Font("Segoe UI", 12F);
+            LsvProductos.ForeColor = Color.FromArgb(26, 28, 30);
+            LsvProductos.Location = new Point(3, 136);
+            LsvProductos.Name = "LsvProductos";
+            LsvProductos.Size = new Size(285, 105);
+            LsvProductos.TabIndex = 2;
+            LsvProductos.SelectedIndexChanged += LsvProductos_SelectedIndexChanged;
+            // 
+            // BtnQuitar
+            // 
+            BtnQuitar.Anchor = AnchorStyles.None;
+            BtnQuitar.BackColor = Color.FromArgb(83, 96, 108);
+            BtnQuitar.FlatAppearance.BorderColor = Color.FromArgb(214, 228, 243);
+            BtnQuitar.FlatStyle = FlatStyle.Flat;
+            BtnQuitar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnQuitar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnQuitar.Location = new Point(13, 454);
+            BtnQuitar.Margin = new Padding(4);
+            BtnQuitar.Name = "BtnQuitar";
+            BtnQuitar.Size = new Size(265, 37);
+            BtnQuitar.TabIndex = 5;
+            BtnQuitar.Text = "QUITAR 1 UNIDAD (F8)";
+            BtnQuitar.UseVisualStyleBackColor = false;
+            BtnQuitar.Click += BtnQuitar_Click;
+            // 
+            // BtnAceptar
+            // 
+            BtnAceptar.Anchor = AnchorStyles.None;
+            BtnAceptar.BackColor = Color.FromArgb(7, 100, 147);
+            BtnAceptar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnAceptar.FlatStyle = FlatStyle.Flat;
+            BtnAceptar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnAceptar.ForeColor = Color.FromArgb(255, 255, 255);
+            BtnAceptar.Location = new Point(13, 409);
+            BtnAceptar.Margin = new Padding(4);
+            BtnAceptar.Name = "BtnAceptar";
+            BtnAceptar.Size = new Size(265, 37);
+            BtnAceptar.TabIndex = 4;
+            BtnAceptar.Text = "AGREGAR";
+            BtnAceptar.UseVisualStyleBackColor = false;
+            BtnAceptar.Click += BtnAceptar_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -177,62 +283,6 @@ namespace PrimeSystem.UI.Ventas
             NumericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             NumericUpDown1.ValueChanged += NumericUpDown1_ValueChanged;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(7, 100, 147);
-            label1.Location = new Point(3, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(134, 21);
-            label1.TabIndex = 1;
-            label1.Text = "Buscar Producto:";
-            // 
-            // BtnQuitar
-            // 
-            BtnQuitar.Anchor = AnchorStyles.None;
-            BtnQuitar.BackColor = Color.FromArgb(83, 96, 108);
-            BtnQuitar.FlatAppearance.BorderColor = Color.FromArgb(214, 228, 243);
-            BtnQuitar.FlatStyle = FlatStyle.Flat;
-            BtnQuitar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            BtnQuitar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnQuitar.Location = new Point(13, 454);
-            BtnQuitar.Margin = new Padding(4);
-            BtnQuitar.Name = "BtnQuitar";
-            BtnQuitar.Size = new Size(265, 37);
-            BtnQuitar.TabIndex = 5;
-            BtnQuitar.Text = "QUITAR 1 UNIDAD (F8)";
-            BtnQuitar.UseVisualStyleBackColor = false;
-            BtnQuitar.Click += BtnQuitar_Click;
-            // 
-            // TxtBuscardor
-            // 
-            TxtBuscardor.BackColor = Color.FromArgb(238, 237, 240);
-            TxtBuscardor.Font = new Font("Segoe UI", 12F);
-            TxtBuscardor.ForeColor = Color.FromArgb(26, 28, 30);
-            TxtBuscardor.Location = new Point(3, 24);
-            TxtBuscardor.Name = "TxtBuscardor";
-            TxtBuscardor.Size = new Size(265, 29);
-            TxtBuscardor.TabIndex = 1;
-            TxtBuscardor.TextChanged += TxtBuscardor_TextChanged;
-            // 
-            // BtnAceptar
-            // 
-            BtnAceptar.Anchor = AnchorStyles.None;
-            BtnAceptar.BackColor = Color.FromArgb(7, 100, 147);
-            BtnAceptar.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
-            BtnAceptar.FlatStyle = FlatStyle.Flat;
-            BtnAceptar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            BtnAceptar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnAceptar.Location = new Point(13, 409);
-            BtnAceptar.Margin = new Padding(4);
-            BtnAceptar.Name = "BtnAceptar";
-            BtnAceptar.Size = new Size(265, 37);
-            BtnAceptar.TabIndex = 4;
-            BtnAceptar.Text = "AGREGAR";
-            BtnAceptar.UseVisualStyleBackColor = false;
-            BtnAceptar.Click += BtnAceptar_Click;
-            // 
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -243,7 +293,7 @@ namespace PrimeSystem.UI.Ventas
             groupBox1.Controls.Add(LblProducto);
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(3, 255);
+            groupBox1.Location = new Point(3, 251);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(285, 97);
             groupBox1.TabIndex = 8;
@@ -305,51 +355,28 @@ namespace PrimeSystem.UI.Ventas
             LblProducto.TabIndex = 5;
             LblProducto.Text = "PRODUCTO";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.FromArgb(7, 100, 147);
-            label2.Location = new Point(3, 56);
-            label2.Name = "label2";
-            label2.Size = new Size(149, 21);
-            label2.TabIndex = 3;
-            label2.Text = "Lista de Productos:";
-            // 
-            // LsvProductos
-            // 
-            LsvProductos.BackColor = Color.FromArgb(238, 237, 240);
-            LsvProductos.Dock = DockStyle.Fill;
-            LsvProductos.Font = new Font("Segoe UI", 12F);
-            LsvProductos.ForeColor = Color.FromArgb(26, 28, 30);
-            LsvProductos.Location = new Point(3, 80);
-            LsvProductos.Name = "LsvProductos";
-            LsvProductos.Size = new Size(285, 169);
-            LsvProductos.TabIndex = 2;
-            LsvProductos.SelectedIndexChanged += LsvProductos_SelectedIndexChanged;
-            // 
             // DgvProductosSeleccionados
             // 
             DgvProductosSeleccionados.AllowUserToAddRows = false;
             DgvProductosSeleccionados.AllowUserToDeleteRows = false;
             DgvProductosSeleccionados.BackgroundColor = Color.FromArgb(249, 249, 251);
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(232, 232, 234);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(69, 71, 73);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(203, 230, 255);
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(0, 75, 113);
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            DgvProductosSeleccionados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(232, 232, 234);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(69, 71, 73);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(203, 230, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(0, 75, 113);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            DgvProductosSeleccionados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             DgvProductosSeleccionados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(249, 249, 251);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(26, 28, 30);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(203, 230, 255);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(0, 75, 113);
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            DgvProductosSeleccionados.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(249, 249, 251);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(26, 28, 30);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(203, 230, 255);
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(0, 75, 113);
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            DgvProductosSeleccionados.DefaultCellStyle = dataGridViewCellStyle4;
             DgvProductosSeleccionados.Dock = DockStyle.Fill;
             DgvProductosSeleccionados.GridColor = Color.FromArgb(190, 201, 209);
             DgvProductosSeleccionados.Location = new Point(0, 26);
@@ -530,5 +557,7 @@ namespace PrimeSystem.UI.Ventas
         private Label label5;
         private TableLayoutPanel tableLayoutPanel3;
         private Label label3;
+        private Label label4;
+        private ComboBox CmbClientes;
     }
 }

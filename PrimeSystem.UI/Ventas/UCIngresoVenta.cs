@@ -19,6 +19,7 @@ namespace PrimeSystem.UI.Ventas
     public partial class UCIngresoVenta : UserControl
     {
         private readonly IArticuloStockService _articuloStockService;
+        private readonly IClientesService _clientesService;
         private readonly IVentaService _ventaService;
         private readonly ILogger<UCIngresoVenta> _logger;
         private bool _evitarBucleEventos = false;
@@ -32,9 +33,10 @@ namespace PrimeSystem.UI.Ventas
         private readonly CultureInfo _cultureArgentina = new("es-AR");
 
         public UCIngresoVenta(IArticuloStockService articuloStockService,
-                             IVentaService ventaService, ILogger<UCIngresoVenta> logger)
+                             IVentaService ventaService, ILogger<UCIngresoVenta> logger, IClientesService clientesService)
         {
             _articuloStockService = articuloStockService;
+            _clientesService = clientesService;
             _ventaService = ventaService;
             _logger = logger;
             _indiceSeleccionado = 0;
@@ -43,6 +45,7 @@ namespace PrimeSystem.UI.Ventas
             InitializeComponent();
 
             this.Disposed += UCIngresoVenta_Disposed;
+            _clientesService = clientesService;
         }
 
         private void ListaProductos(List<ArticuloStock> productosSeleccionados)
@@ -359,11 +362,43 @@ namespace PrimeSystem.UI.Ventas
             // Establecer el foco en el primer control relevante
             TxtBuscardor.Focus();
 
+            // Luego cargar los clientes
+            await CargarClientesAsync();
             // Luego cargar productos asíncronamente
             await CargarProductosAsync();
 
             // Forzar un refresh visual
             this.Refresh();
+        }
+
+        private async Task CargarClientesAsync()
+        {
+            var result = await _clientesService.GetAll();
+            if(result.IsSuccess)
+            {
+                var clientes = result.Value;
+                SingleListas.Instance.Clientes = clientes;
+                await CargarClientesCMB();
+            }
+            else
+            {
+                MostrarMensajeError("Error al cargar los clientes. " + result.Error);
+                SingleListas.Instance.Clientes.Clear();
+            }
+        }
+
+        private async Task CargarClientesCMB()
+        {
+            await Task.Run(() =>
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    CmbClientes.DataSource = null;
+                    CmbClientes.DataSource = SingleListas.Instance.Clientes;
+                    CmbClientes.DisplayMember = "Datos";
+                    CmbClientes.ValueMember = "Id_Cliente";
+                });
+            });
         }
 
         private void ConfigurarListBox()
@@ -479,7 +514,7 @@ namespace PrimeSystem.UI.Ventas
                 var hVentas = new HVentas
                 {
                     Cod_Usuario = 1,
-                    Id_Cliente = 1,
+                    Id_Cliente = Convert.ToInt32(CmbClientes.SelectedValue),
                     Descu = descuento,
                     Subtotal = subtotal,
                     Total = subtotal - descuento
