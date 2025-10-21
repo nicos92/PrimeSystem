@@ -74,6 +74,7 @@ namespace PrimeSystem.UI.Ventas
             BtnEliminar = new Button();
             BtnActualizar = new Button();
             tableLayoutPanel4 = new TableLayoutPanel();
+            BtnImprimir = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -191,6 +192,7 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel7.Controls.Add(BtnImprimir, 0, 2);
             tableLayoutPanel7.Controls.Add(label1, 0, 0);
             tableLayoutPanel7.Controls.Add(DtpFechaDesde, 1, 0);
             tableLayoutPanel7.Controls.Add(label3, 0, 1);
@@ -729,6 +731,23 @@ namespace PrimeSystem.UI.Ventas
             tableLayoutPanel4.Size = new Size(200, 100);
             tableLayoutPanel4.TabIndex = 0;
             // 
+            // BtnImprimir
+            // 
+            BtnImprimir.Anchor = AnchorStyles.None;
+            BtnImprimir.BackColor = Color.FromArgb(7, 100, 147);
+            tableLayoutPanel7.SetColumnSpan(BtnImprimir, 2);
+            BtnImprimir.FlatAppearance.BorderColor = Color.FromArgb(203, 230, 255);
+            BtnImprimir.FlatStyle = FlatStyle.Flat;
+            BtnImprimir.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BtnImprimir.ForeColor = Color.White;
+            BtnImprimir.Location = new Point(25, 85);
+            BtnImprimir.Name = "BtnImprimir";
+            BtnImprimir.Size = new Size(128, 32);
+            BtnImprimir.TabIndex = 9;
+            BtnImprimir.Text = "IMPRIMIR";
+            BtnImprimir.UseVisualStyleBackColor = false;
+            BtnImprimir.Click += BtnImprimir_Click;
+            // 
             // UCConsultaVentas
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -813,5 +832,6 @@ namespace PrimeSystem.UI.Ventas
         private TableLayoutPanel tableLayoutPanel9;
         private TableLayoutPanel tableLayoutPanel10;
         private TableLayoutPanel tableLayoutPanel11;
+        private Button BtnImprimir;
     }
 }

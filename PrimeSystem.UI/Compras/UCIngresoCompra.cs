@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Accessibility;
 using Microsoft.Extensions.Logging;
 using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Modelo;
@@ -31,7 +32,7 @@ namespace PrimeSystem.UI.Compras
         private List<ArticuloStock> _todosLosProductos = [];
         // Agregar en el inicio de la clase
         private readonly CultureInfo _cultureArgentina = new("es-AR");
-
+        private int _idProveedorSeleccionado;
         public UCIngresoCompra(IArticuloStockService articuloStockService,
                              ICompraService compraDetalleService,
                              IProveedoresService proveedorService,
@@ -43,6 +44,7 @@ namespace PrimeSystem.UI.Compras
             _logger = logger;
             _indiceSeleccionado = 0;
             _ultimoCodigoArticuloSeleccionado = "";
+            _idProveedorSeleccionado = 0;
 
             InitializeComponent();
 
@@ -245,15 +247,36 @@ namespace PrimeSystem.UI.Compras
             if (LsvProductos.SelectedItem is ArticuloStock producto)
             {
                 int cantidad = (int)NumericUpDown1.Value;
-                AgregarProductosAlCarrito(producto, cantidad);
+                if (SingleListas.Instance.ProductosSeleccionados.Count == 0)
+                {
+                    _idProveedorSeleccionado = producto.Id_Proveedor;
+                    LblLista.Text = "Lista de productos de " + CmbProveedor.Text;
 
-                _evitarBucleEventos = true;
-                CargarDataGridView();
 
-                // Después de agregar, seleccionar el producto añadido
-                SeleccionarFilaPorCodigoArticulo(producto.Cod_Articulo);
+                    AgregarProductosAlCarrito(producto, cantidad);
 
-                _evitarBucleEventos = false;
+                    _evitarBucleEventos = true;
+                    CargarDataGridView();
+
+                    // Después de agregar, seleccionar el producto añadido
+                    SeleccionarFilaPorCodigoArticulo(producto.Cod_Articulo);
+
+                    _evitarBucleEventos = false;
+                }
+                else
+                {
+                    if (producto.Id_Proveedor != _idProveedorSeleccionado)
+                    {
+                        MostrarMensajeError("No se pueden agregar productos de diferentes proveedores en la misma compra. Por favor, limpia el carrito antes de agregar productos de otro proveedor.");
+                        return;
+                    }
+                    AgregarProductosAlCarrito(producto, cantidad);
+                    _evitarBucleEventos = true;
+                    CargarDataGridView();
+                    // Después de agregar, seleccionar el producto añadido
+                    SeleccionarFilaPorCodigoArticulo(producto.Cod_Articulo);
+                    _evitarBucleEventos = false;
+                }
             }
             else
             {
@@ -263,6 +286,7 @@ namespace PrimeSystem.UI.Compras
 
         private static void AgregarProductosAlCarrito(ArticuloStock producto, int cantidad)
         {
+            
             for (int i = 0; i < cantidad; i++)
             {
                 SingleListas.Instance.ProductosSeleccionados.Add(producto);
@@ -361,11 +385,12 @@ namespace PrimeSystem.UI.Compras
             // Establecer el foco en el primer control relevante
             TxtBuscardor.Focus();
 
+            // Cargar proveedores
+            await CargarProveedoresAsync();
+
             // Luego cargar productos asíncronamente
             await CargarProductosAsync();
 
-            // Cargar proveedores
-            await CargarProveedoresAsync();
 
             // Forzar un refresh visual
             this.Refresh();
@@ -429,7 +454,8 @@ namespace PrimeSystem.UI.Compras
                 var result = await _articuloStockService.GetAllArticuloStock();
                 if (result.IsSuccess)
                 {
-                    _todosLosProductos = result.Value;
+                    int idproveedor = CmbProveedor.SelectedItem is Modelo.Entidades.Proveedores proveedor ? proveedor.Id_Proveedor : 0;
+                    _todosLosProductos = [.. result.Value.Where(p => p.Id_Proveedor == idproveedor)];
 
                     // Invoke para asegurar ejecución en el hilo de UI
                     this.Invoke((MethodInvoker)delegate
@@ -596,6 +622,11 @@ namespace PrimeSystem.UI.Compras
             if (articuloQuitar != null)
             {
                 SingleListas.Instance.ProductosSeleccionados.Remove(articuloQuitar);
+                if (SingleListas.Instance.ProductosSeleccionados.Count == 0)
+                {
+                    _idProveedorSeleccionado = 0;
+                    LblLista.Text = "Lista de productos";
+                }
                 CargarDataGridView();
             }
         }
@@ -766,6 +797,12 @@ namespace PrimeSystem.UI.Compras
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private async void CmbProveedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+            await CargarProductosAsync();
         }
     }
 }

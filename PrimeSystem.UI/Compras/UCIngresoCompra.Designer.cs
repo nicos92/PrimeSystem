@@ -138,6 +138,7 @@ namespace PrimeSystem.UI.Compras
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 47F));
             tableLayoutPanel1.Size = new Size(291, 495);
             tableLayoutPanel1.TabIndex = 9;
             // 
@@ -148,7 +149,8 @@ namespace PrimeSystem.UI.Compras
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Controls.Add(label5, 0, 0);
             tableLayoutPanel2.Controls.Add(NumericUpDown1, 1, 0);
-            tableLayoutPanel2.Location = new Point(3, 358);
+            tableLayoutPanel2.Location = new Point(0, 359);
+            tableLayoutPanel2.Margin = new Padding(0);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -204,7 +206,7 @@ namespace PrimeSystem.UI.Compras
             BtnQuitar.Location = new Point(13, 454);
             BtnQuitar.Margin = new Padding(4);
             BtnQuitar.Name = "BtnQuitar";
-            BtnQuitar.Size = new Size(265, 37);
+            BtnQuitar.Size = new Size(265, 34);
             BtnQuitar.TabIndex = 5;
             BtnQuitar.Text = "QUITAR 1 UNIDAD (F8)";
             BtnQuitar.UseVisualStyleBackColor = false;
@@ -229,7 +231,7 @@ namespace PrimeSystem.UI.Compras
             BtnAceptar.FlatStyle = FlatStyle.Flat;
             BtnAceptar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             BtnAceptar.ForeColor = Color.FromArgb(255, 255, 255);
-            BtnAceptar.Location = new Point(13, 409);
+            BtnAceptar.Location = new Point(13, 407);
             BtnAceptar.Margin = new Padding(4);
             BtnAceptar.Name = "BtnAceptar";
             BtnAceptar.Size = new Size(265, 37);
@@ -248,7 +250,7 @@ namespace PrimeSystem.UI.Compras
             groupBox1.Controls.Add(LblProducto);
             groupBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(7, 100, 147);
-            groupBox1.Location = new Point(3, 255);
+            groupBox1.Location = new Point(3, 259);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(285, 97);
             groupBox1.TabIndex = 8;
@@ -329,7 +331,7 @@ namespace PrimeSystem.UI.Compras
             LsvProductos.ForeColor = Color.FromArgb(26, 28, 30);
             LsvProductos.Location = new Point(3, 80);
             LsvProductos.Name = "LsvProductos";
-            LsvProductos.Size = new Size(285, 169);
+            LsvProductos.Size = new Size(285, 117);
             LsvProductos.TabIndex = 2;
             LsvProductos.SelectedIndexChanged += LsvProductos_SelectedIndexChanged;
             // 
@@ -338,9 +340,9 @@ namespace PrimeSystem.UI.Compras
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(7, 100, 147);
-            label4.Location = new Point(3, 249);
+            label4.Location = new Point(3, 200);
             label4.Name = "label4";
-            label4.Size = new Size(91, 21);
+            label4.Size = new Size(92, 21);
             label4.TabIndex = 10;
             label4.Text = "Proveedor:";
             // 
@@ -349,10 +351,11 @@ namespace PrimeSystem.UI.Compras
             CmbProveedor.BackColor = Color.FromArgb(238, 237, 240);
             CmbProveedor.Font = new Font("Segoe UI", 12F);
             CmbProveedor.ForeColor = Color.FromArgb(26, 28, 30);
-            CmbProveedor.Location = new Point(3, 273);
+            CmbProveedor.Location = new Point(3, 224);
             CmbProveedor.Name = "CmbProveedor";
             CmbProveedor.Size = new Size(265, 29);
             CmbProveedor.TabIndex = 11;
+            CmbProveedor.SelectedIndexChanged += CmbProveedor_SelectedIndexChanged;
             // 
             // DgvProductosSeleccionados
             // 

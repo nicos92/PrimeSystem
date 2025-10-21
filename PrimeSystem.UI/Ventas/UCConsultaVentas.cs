@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using PrimeSystem.Contrato.Servicios;
 using PrimeSystem.Modelo.Entidades;
 using PrimeSystem.Utilidades;
+using PrimeSystem.Utilidades.Impresion;
 
 namespace PrimeSystem.UI.Ventas
 {
@@ -26,6 +27,7 @@ namespace PrimeSystem.UI.Ventas
         private List<HVentas> _ventas = [];
         private List<HVentasDetalle> _detallesVenta = [];
         private int _selectedVentaId = -1;
+        private HVentas _ventaSeleccionada;
 
         public UCConsultaVentas(
             IHVentasService hVentasService,
@@ -39,7 +41,7 @@ namespace PrimeSystem.UI.Ventas
             _clientesService = clientesService;
             _usuariosService = usuariosService;
             _logger = logger;
-
+            _ventaSeleccionada = new HVentas();
             InitializeComponent();
         }
 
@@ -54,7 +56,7 @@ namespace PrimeSystem.UI.Ventas
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al cargar el control de consulta de ventas");
-                MessageBox.Show($"Error al cargar las ventas: {ex.Message}", "Error", 
+                MessageBox.Show($"Error al cargar las ventas: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -91,11 +93,11 @@ namespace PrimeSystem.UI.Ventas
         {
             // Aplicar colores consistentes con la aplicación
             this.BackColor = Color.FromArgb(218, 218, 220);
-            
+
             // Estilo para los GroupBox
             GBLista.ForeColor = Color.FromArgb(7, 100, 147);
             GBForm.ForeColor = Color.FromArgb(7, 100, 147);
-            
+
             // Estilo para las etiquetas
             foreach (Control control in GBForm.Controls)
             {
@@ -114,7 +116,7 @@ namespace PrimeSystem.UI.Ventas
                     }
                 }
             }
-            
+
             // Configurar formato de moneda para las etiquetas de totales
             LblSubtotal.Text = (0).ToString("C", _cultureArgentina);
             LblDescuento.Text = (0).ToString("C", _cultureArgentina);
@@ -164,14 +166,14 @@ namespace PrimeSystem.UI.Ventas
                 DgvVentas.Columns["Id_Remito"].HeaderText = "Nº Remito";
                 DgvVentas.Columns["Id_Remito"].FillWeight = 20;
             }
-            
+
             if (DgvVentas.Columns.Contains("Fecha_Hora"))
             {
                 DgvVentas.Columns["Fecha_Hora"].HeaderText = "Fecha";
                 DgvVentas.Columns["Fecha_Hora"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
                 DgvVentas.Columns["Fecha_Hora"].FillWeight = 30;
             }
-            
+
             if (DgvVentas.Columns.Contains("Total"))
             {
                 DgvVentas.Columns["Total"].HeaderText = "Total";
@@ -193,9 +195,11 @@ namespace PrimeSystem.UI.Ventas
         {
             if (DgvVentas.CurrentRow?.DataBoundItem is HVentas venta)
             {
-                _selectedVentaId = venta.Id_Remito;
-                await CargarDetallesVentaAsync(venta.Id_Remito);
-                MostrarDetallesVenta(venta);
+                _ventaSeleccionada = venta;
+                _selectedVentaId = _ventaSeleccionada.Id_Remito;
+                await CargarDetallesVentaAsync(_ventaSeleccionada.Id_Remito);
+                MostrarDetallesVenta(_ventaSeleccionada);
+                
             }
             else
             {
@@ -241,20 +245,20 @@ namespace PrimeSystem.UI.Ventas
                 if (DgvDetalles.Columns.Contains(columna))
                     DgvDetalles.Columns[columna].Visible = false;
             }
-                
+
             // Configurar columnas visibles
             if (DgvDetalles.Columns.Contains("Cod_Art"))
             {
                 DgvDetalles.Columns["Cod_Art"].HeaderText = "Código";
                 DgvDetalles.Columns["Cod_Art"].FillWeight = 15;
             }
-                
+
             if (DgvDetalles.Columns.Contains("Descr"))
             {
                 DgvDetalles.Columns["Descr"].HeaderText = "Descripción";
                 DgvDetalles.Columns["Descr"].FillWeight = 40;
             }
-                
+
             if (DgvDetalles.Columns.Contains("P_Unit"))
             {
                 DgvDetalles.Columns["P_Unit"].HeaderText = "Precio Unit.";
@@ -262,13 +266,13 @@ namespace PrimeSystem.UI.Ventas
                 DgvDetalles.Columns["P_Unit"].DefaultCellStyle.FormatProvider = _cultureArgentina;
                 DgvDetalles.Columns["P_Unit"].FillWeight = 15;
             }
-                
+
             if (DgvDetalles.Columns.Contains("Cant"))
             {
                 DgvDetalles.Columns["Cant"].HeaderText = "Cantidad";
                 DgvDetalles.Columns["Cant"].FillWeight = 10;
             }
-                
+
             if (DgvDetalles.Columns.Contains("P_X_Cant"))
             {
                 DgvDetalles.Columns["P_X_Cant"].HeaderText = "Total";
@@ -285,7 +289,7 @@ namespace PrimeSystem.UI.Ventas
             LblSubtotal.Text = venta.Subtotal.ToString("C", _cultureArgentina);
             LblDescuento.Text = venta.Descu.ToString("C", _cultureArgentina);
             LblTotal.Text = venta.Total.ToString("C", _cultureArgentina);
-            
+
             // Cargar información adicional (cliente, usuario) de forma asíncrona
             _ = CargarInformacionAdicionalAsync(venta);
         }
@@ -333,7 +337,7 @@ namespace PrimeSystem.UI.Ventas
             LblSubtotal.Text = "";
             LblDescuento.Text = "";
             LblTotal.Text = "";
-            
+
             DgvDetalles.DataSource = null;
             _detallesVenta.Clear();
         }
@@ -363,7 +367,7 @@ namespace PrimeSystem.UI.Ventas
                     {
                         MessageBox.Show("Venta eliminada correctamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
+
                         // Recargar la lista de ventas
                         await CargarVentasAsync();
                         LimpiarDetallesVenta();
@@ -403,7 +407,7 @@ namespace PrimeSystem.UI.Ventas
                 DateTime fechaHasta = DtpFechaHasta.Value.Date.AddDays(1).AddTicks(-1); // Fin del día
                 string cliente = TxtCliente.Text.Trim();
                 string idRemitoText = TxtIdRemito.Text.Trim();
-                
+
                 // Intentar parsear el ID de remito si se proporciona
                 int? idRemito = null;
                 if (!string.IsNullOrEmpty(idRemitoText) && int.TryParse(idRemitoText, out int parsedId))
@@ -436,11 +440,38 @@ namespace PrimeSystem.UI.Ventas
             }
         }
 
-     
 
-        private void BtnActualizar_Click(object sender, EventArgs e)
+
+        private async void BtnActualizar_Click(object sender, EventArgs e)
         {
-            _ = CargarVentasAsync();
+            await CargarVentasAsync();
+        }
+
+        private void BtnImprimir_Click(object sender, EventArgs e)
+        {
+            if (_ventaSeleccionada == null || _ventaSeleccionada.Id_Remito <= 0)
+            {
+                MessageBox.Show("Por favor, seleccione una venta para imprimir.", "Advertencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<ProductoVenta> productoVentas = [];
+
+            productoVentas.AddRange(_detallesVenta.Select(d => new ProductoVenta
+            {
+                Nombre = d.Descr,
+                Cantidad = d.Cant,
+                Precio = d.P_Unit,
+                Subtotal = d.P_X_Cant, // Asumiendo que P_X_Cant es el subtotal sin IVA ni descuento
+                IVA = 0, // Si tienes el valor del IVA, asignarlo aquí
+                Descuento = 0, // Si tienes el valor del descuento, asignarlo aquí
+                Total = d.P_X_Cant // Asumiendo que P_X_Cant es el total final por ítem
+            }));
+            ImpresionTicket.Imprimir( productos: productoVentas,
+                numeroOperacion:_ventaSeleccionada.Id_Remito.ToString(),
+                motivo: "Venta",
+                montoTotal: _ventaSeleccionada.Total.ToString()); 
         }
     }
 }
